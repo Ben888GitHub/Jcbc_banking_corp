@@ -26,7 +26,6 @@ export default function App() {
             justifyContent: 'center',
         },
         inputContainer: {
-            flexDirection: 'row',
             alignItems: 'center',
             borderBottomColor: 'black',
             borderBottomWidth: 1
