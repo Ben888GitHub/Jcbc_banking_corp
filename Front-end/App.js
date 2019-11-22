@@ -1,6 +1,6 @@
-import React from 'react';
+import React , { Component } from 'react';
 import { AppLoading } from 'expo';
-import { Container, Text, Header, Content, Button, Footer, FooterTab} from 'native-base';
+import { Container, Text, Header, Content, Button, Success, Footer, FooterTab, Title, Icon} from 'native-base';
 import * as Font from 'expo-font';
 import { Ionicons } from '@expo/vector-icons';
 
@@ -22,25 +22,60 @@ export default class App extends React.Component {
   }
 
   render() {
+
     if (!this.state.isReady) {
       return <AppLoading />;
     }
-
+/*
     return (
       <Success Button>
         <Text>Transfer</Text>
-      </Button>
+      </Success>
     );
+*/
+    return (
+        <Container>
+        <Header>
+
+            <Title> Mobile Banking Apps </Title>
+        </Header>
+
+        <Content>
+        <Button success onPress={() => alert("Transfer Sucess")}>
+            <Text>Transfer</Text>
+        </Button>
+
+        </Content>
+
+
+            <Footer>
+                <FooterTab>
+                    <Button>
+                    <Icon name="home" />
+                    </Button>
+                <Button>
+                    <Icon name="person" />
+                </Button>
+                <Button active>
+                    <Icon active name="appstore" />
+                </Button>
+                <Button>
+                    <Icon name="settings" />
+                </Button>
+                </FooterTab>
+            </Footer>
+        </Container>
+      );
+    
   }
 }
-
+/*
 export default class FooterTab extends React.Component {
   render() {
     return (
       <Container>
       <Header>
-      <Title> Mobile Banking Apps <Title />
-        <Header />
+        <Title> Mobile Banking Apps </Title>
         <Content />
         <Footer>
           <FooterTab>
@@ -58,7 +93,9 @@ export default class FooterTab extends React.Component {
             </Button>
           </FooterTab>
         </Footer>
+        </Header>
       </Container>
     );
   }
 }
+*/
