@@ -26,13 +26,7 @@ export default class App extends React.Component {
     if (!this.state.isReady) {
       return <AppLoading />;
     }
-/*
-    return (
-      <Success Button>
-        <Text>Transfer</Text>
-      </Success>
-    );
-*/
+
     return (
         <Container>
         <Header>
@@ -50,14 +44,14 @@ export default class App extends React.Component {
 
             <Footer>
                 <FooterTab>
-                    <Button>
+                <Button>
                     <Icon name="home" />
-                    </Button>
+                </Button>
                 <Button>
                     <Icon name="person" />
                 </Button>
                 <Button active>
-                    <Icon active name="appstore" />
+                    <Icon active name="logo-angular" />
                 </Button>
                 <Button>
                     <Icon name="settings" />
@@ -69,33 +63,3 @@ export default class App extends React.Component {
     
   }
 }
-/*
-export default class FooterTab extends React.Component {
-  render() {
-    return (
-      <Container>
-      <Header>
-        <Title> Mobile Banking Apps </Title>
-        <Content />
-        <Footer>
-          <FooterTab>
-            <Button>
-              <Icon name="Home" />
-            </Button>
-            <Button>
-              <Icon name="Account" />
-            </Button>
-            <Button active>
-              <Icon active name="Lifestyle" />
-            </Button>
-            <Button>
-              <Icon name="Services" />
-            </Button>
-          </FooterTab>
-        </Footer>
-        </Header>
-      </Container>
-    );
-  }
-}
-*/
