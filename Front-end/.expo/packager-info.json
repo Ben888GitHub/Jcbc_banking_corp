@@ -1,9 +1,9 @@
 {
   "devToolsPort": 19002,
-  "expoServerPort": 19000,
-  "packagerPort": 19001,
-  "packagerPid": 17536,
-  "expoServerNgrokUrl": null,
-  "packagerNgrokUrl": null,
-  "ngrokPid": null
+  "expoServerPort": null,
+  "packagerPort": null,
+  "packagerPid": null,
+  "expoServerNgrokUrl": "https://9u-epr.hungnguy.front-end.exp.direct",
+  "packagerNgrokUrl": "https://packager.9u-epr.hungnguy.front-end.exp.direct",
+  "ngrokPid": 14311
 }

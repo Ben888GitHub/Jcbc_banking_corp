@@ -1,0 +1,420 @@
+
+import React, { Component } from 'react';
+import { Ionicons } from '@expo/vector-icons';
+import {
+    Animated,
+    Image,
+    ScrollView,
+    StyleSheet,
+    Text,
+    View, Platform, TouchableOpacity
+} from 'react-native';
+import {
+    Container, Header, Title, Content, Footer,
+    FooterTab, Left, Right, Body, Icon, Card, CardItem, Button, Thumbnail, Toast
+} from 'native-base';
+
+import { getStatusBarHeight } from 'react-native-status-bar-height';
+
+const STATUSBAR_HEIGHT = getStatusBarHeight();
+const HEADER_MAX_HEIGHT = 300;
+const HEADER_MIN_HEIGHT = STATUSBAR_HEIGHT + 50;
+const HEADER_SCROLL_DISTANCE = HEADER_MAX_HEIGHT - HEADER_MIN_HEIGHT;
+
+
+class InitTransferScreen extends Component {
+    constructor(props) {
+        super(props);
+        this.scroller = null;
+        this.state = {
+            scrollY: new Animated.Value(0),
+            imageStatus: 'loaded',
+            booked: false
+        };
+    }
+    handleImageLoaded() {
+        this.setState({ imageStatus: "loaded" });
+    }
+    _renderScrollViewContent() {
+        const data = Array.from({ length: 30 });
+        return (
+            <View style={styles.scrollViewContent}>
+                {data.map((_, i) =>
+                    <View key={i} style={styles.row}>
+                        <Text>{i}</Text>
+                    </View>
+                )}
+
+                <TouchableOpacity onPress={() => {
+                    if (this.scroller) {
+                        this.scroller.scrollTo({ y: 0, animated: true, });
+                    }
+                }}>
+                    <Text>Scroll</Text>
+                </TouchableOpacity>
+
+            </View>
+        );
+    }
+
+    render() {
+
+        const marginNum = 15;
+        const headerHeight = this.state.scrollY.interpolate({
+            inputRange: [0, HEADER_SCROLL_DISTANCE],
+            outputRange: [HEADER_MAX_HEIGHT, HEADER_MIN_HEIGHT],
+            extrapolate: 'clamp',
+        });
+        const imageOpacity = this.state.scrollY.interpolate({
+            inputRange: [0, HEADER_SCROLL_DISTANCE * 0.5, HEADER_SCROLL_DISTANCE],
+            outputRange: [1, 1, 0],
+            extrapolate: 'clamp',
+        });
+        const textOpacity = this.state.scrollY.interpolate({
+            inputRange: [0, HEADER_SCROLL_DISTANCE * 0.5, HEADER_SCROLL_DISTANCE],
+            outputRange: [1, 1, 0],
+            extrapolate: 'clamp',
+        });
+
+        const opacityReverse = this.state.scrollY.interpolate({
+            inputRange: [0, HEADER_SCROLL_DISTANCE * 0.9, HEADER_SCROLL_DISTANCE],
+            outputRange: [0, 0, 1],
+            extrapolate: 'clamp',
+        });
+        const imageTranslate = this.state.scrollY.interpolate({
+            inputRange: [0, HEADER_SCROLL_DISTANCE],
+            outputRange: [0, -50],
+            extrapolate: 'clamp',
+        });
+        const textTranslate = this.state.scrollY.interpolate({
+            inputRange: [0, HEADER_SCROLL_DISTANCE],
+            outputRange: [-100, 0],
+            extrapolate: 'clamp',
+        });
+        const data = Array.from({ length: 30 });
+        if (this.state.imageStatus !== 'loaded') {
+            return (
+                <View >
+                    <Text>Loading</Text>
+                </View>
+            );
+        } else {
+            return (
+                <View style={styles.fill}>
+
+                    <Animated.View style={[styles.header, {
+                        height: headerHeight
+                    }]}>
+                        <Animated.Image
+                            style={[
+                                styles.backgroundImage,
+                                {
+                                    opacity: imageOpacity,
+                                    transform: [{ translateY: imageTranslate }]
+                                },
+                            ]}
+                            source={require('../assets/red.jpg')}
+                        />
+
+                        <Animated.View
+                            style={{
+                                transform: [{ translateY: textTranslate }]
+                            }}
+                        >
+                            <Header transparent>
+                                <Left>
+                                    <TouchableOpacity onPress={() => { this.props.navigation.goBack() }}>
+                                        <Ionicons style={{ marginLeft: marginNum }} name="ios-arrow-back" size={32} color="white" />
+                                    </TouchableOpacity>
+                                </Left>
+                                <Body>
+                                    <Title style={{ color: 'white' }}>Transfer</Title>
+                                </Body>
+                                <Right></Right>
+                            </Header>
+                        </Animated.View>
+
+                        <Animated.View
+                            style={{
+                                flex: 1,
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                opacity: textOpacity
+                            }}
+                        >
+
+                            <Text style={{
+                                textAlign: 'center',
+                                fontSize: 25,
+                                color: 'white',
+                                fontWeight: '700',
+                                textShadowColor: 'rgba(0, 0, 0, 0.3)',
+                                textShadowOffset: { width: -0.3, height: 0.3 },
+                                textShadowRadius: 3
+                            }}>
+                                Bank Transfer
+                            </Text>
+                        </Animated.View>
+                    </Animated.View>
+
+
+                    <View style={{
+                        backgroundColor: '#c13b3e',
+                        height: 80,
+                        marginBottom: 30
+                    }}>
+                        <View style={{
+                            flex: 1,
+                            flexDirection: 'row',
+                            alignItems: 'center',
+                            margin: marginNum
+                        }}>
+                            {/* An Icon will be here */}
+                            <View style={{
+                                margin: marginNum
+                            }}>
+                                <Text note style={{ color: 'white' }}>From account:</Text>
+                                <Text style={{ fontWeight: '700', fontSize: 16, color: 'white' }}>JCBC Saving Board</Text>
+                            </View>
+                        </View>
+                    </View>
+
+
+                    <ScrollView
+                        ref={(ref) => this.scroller = ref}
+                        style={[
+                            // styles.fill, 
+                            // { backgroundColor: 'blue' }
+                        ]}
+                        scrollEventThrottle={16}
+                        onScroll={Animated.event(
+                            [{ nativeEvent: { contentOffset: { y: this.state.scrollY } } }]
+                        )}
+                    >
+                        <View style={styles.scrollViewContent}>
+
+                            {/* <View style={{
+                                backgroundColor: '#c13b3e',
+                                height: 80,
+                                marginBottom: 30
+                            }}>
+                                <View style={{
+                                    flex: 1,
+                                    flexDirection: 'row',
+                                    alignItems: 'center',
+                                    margin: marginNum
+                                }}>
+                                    
+                                    <View style={{
+                                        margin: marginNum
+                                    }}>
+                                        <Text note style={{ color: 'white' }}>From account:</Text>
+                                        <Text style={{ fontWeight: '700', fontSize: 16, color: 'white' }}>JCBC Saving Board</Text>
+                                    </View>
+                                </View>
+                            </View> */}
+
+
+                            <View style={{
+                                margin: marginNum,
+                                flex: 1,
+                                flexDirection: 'row',
+                                alignItems: 'center',
+                                justifyContent: 'space-between'
+                            }}>
+                                <Text style={{
+                                    fontSize: 20,
+                                }}>Booking Summary</Text>
+                                <TouchableOpacity
+                                    onPress={() => { this.props.navigation.goBack() }}
+                                >
+                                    <Ionicons name='ios-create' size={30} />
+                                </TouchableOpacity>
+
+                            </View>
+
+
+
+                            {/*  //TODO: Rendering Date */}
+                            <View style={{
+                                flex: 1,
+                                flexDirection: 'row',
+                                margin: marginNum
+                            }}>
+                                <View style={{
+                                    width: '15%',
+                                    alignItems: 'center',
+                                    justifyContent: 'flex-start'
+                                }}>
+                                    <Ionicons name='ios-calendar' size={32} />
+                                </View>
+                                <View style={{
+                                    width: '85%',
+                                    justifyContent: 'center'
+                                }}>
+                                    <Text>Hung</Text>
+                                </View>
+                            </View>
+
+                            {/* Rendering Hour */}
+                            <View style={{
+                                flex: 1,
+                                flexDirection: 'row',
+                                margin: marginNum
+                            }}>
+                                <View style={{
+                                    width: '15%',
+                                    alignItems: 'center',
+                                    justifyContent: 'flex-start'
+                                }}>
+                                    <Ionicons name='md-time' size={32} />
+                                </View>
+                                <View style={{
+                                    width: '85%',
+                                    justifyContent: 'center'
+                                }}>
+                                    <Text>Evening</Text>
+                                    <Text>Hung</Text>
+                                </View>
+                            </View>
+
+                            {/* Rendering Parlour location */}
+                            <View style={{
+                                flex: 1,
+                                flexDirection: 'row',
+                                margin: marginNum
+                            }}>
+                                <View style={{
+                                    width: '15%',
+                                    alignItems: 'center',
+                                    justifyContent: 'flex-start'
+                                }}>
+                                    <Ionicons name='ios-pin' size={32} />
+                                </View>
+                                <View style={{
+                                    width: '85%',
+                                    justifyContent: 'center'
+                                }}>
+                                    <Text>Geylang Massage Centre</Text>
+                                    <Text>23 Geylang Avenue</Text>
+                                    <Text>344566 Singapore</Text>
+                                </View>
+                            </View>
+
+                            {this.state.booked === false ?
+                                (<Button onPress={() => {
+                                    Toast.show({
+                                        text: 'Massage slot booked.',
+                                        buttonText: 'Okay'
+                                    });
+                                    this.setState({ booked: true });
+                                }}
+                                    style={{
+                                        backgroundColor: 'white',
+                                        borderRadius: 15,
+                                        borderWidth: 2,
+                                        borderStyle: 'solid',
+                                        borderColor: 'black',
+                                        margin: 15,
+                                        flex: 1,
+                                        flexDirection: 'row',
+                                        alignItems: 'center',
+                                        justifyContent: 'center',
+                                        height: 70,
+                                        shadowColor: "#000",
+                                        shadowOffset: {
+                                            width: 0,
+                                            height: 2,
+                                        },
+                                        shadowOpacity: 0.25,
+                                        shadowRadius: 3.84,
+                                        elevation: 5,
+                                    }}>
+                                    <Text style={{ fontWeight: '700', fontSize: 20 }}>Confirm</Text>
+                                </Button>)
+                                : (
+                                    <View style={{
+                                        backgroundColor: 'rgba(0,0,0,0.05)',
+                                        height: 70,
+                                        flex: 1,
+                                        flexDirection: 'row',
+                                        alignItems: 'center',
+                                        justifyContent: 'center',
+                                    }}>
+                                        <Ionicons
+                                            style={{ marginRight: 8, marginLeft: marginNum }}
+                                            name="ios-checkmark-circle"
+                                            size={32} color="green" />
+                                        <Text style={{ fontWeight: '700', fontSize: 20 }}>All done.</Text>
+                                    </View>
+                                )}
+
+
+
+                            <View style={{ height: 1000 }}></View>
+
+                        </View>
+                    </ScrollView>
+
+                </View>
+            );
+        }
+
+    }
+}
+
+InitTransferScreen.navigationOptions = {
+    // title: 'Links',
+    header: null
+};
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        paddingTop: 15,
+        backgroundColor: '#fff',
+    },
+    fill: {
+        flex: 1,
+    },
+    row: {
+        height: 40,
+        margin: 16,
+        backgroundColor: '#c13b3e',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    header: {
+        // position: 'absolute',
+        top: 0,
+        left: 0,
+        right: 0,
+        backgroundColor: '#c13b3e',
+        overflow: 'hidden',
+    },
+    bar: {
+        marginTop: 28,
+        height: 32,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    title: {
+        backgroundColor: 'transparent',
+        color: 'white',
+        fontSize: 18,
+    },
+    scrollViewContent: {
+        // marginTop: HEADER_MAX_HEIGHT + 30,
+    },
+    backgroundImage: {
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        right: 0,
+        width: null,
+        height: HEADER_MAX_HEIGHT,
+        resizeMode: 'cover',
+    },
+});
+
+export default InitTransferScreen;
