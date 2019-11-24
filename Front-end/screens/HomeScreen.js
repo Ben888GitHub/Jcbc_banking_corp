@@ -36,8 +36,8 @@ export default class HomeScreen extends React.Component {
 
         return (
             <Container>
-                <Header style={{ paddingTop: 30 }}>
-                    <Title>Mobile Banking Apps</Title>
+                <Header style={{ paddingTop: 30, backgroundColor: "#B22222" }} >
+                    <Title style={{color: "white"}}>Mobile Banking Apps</Title>
                 </Header>
 
                 <Content>
@@ -54,8 +54,8 @@ export default class HomeScreen extends React.Component {
                             onPress={() => alert('Transfer Successful')}
                             style={{
                                 height: 60,
-                                backgroundColor: 'black',
-                                margin: 20
+                                backgroundColor: '#B22222',
+                                margin: 20,
                             }}>
                             <Text
                                 style={{ margin: 10, fontWeight: '700', color: 'white' }}
@@ -68,7 +68,7 @@ export default class HomeScreen extends React.Component {
                             onPress={() => navigate('Transfer')}
                             style={{
                                 height: 60,
-                                backgroundColor: 'black',
+                                backgroundColor: '#B22222',
                                 margin: 20
                             }}>
                             <Text
@@ -93,18 +93,18 @@ export default class HomeScreen extends React.Component {
 
 
                 <Footer>
-                    <FooterTab>
-                        <Button>
-                            <Icon name="home" />
+                    <FooterTab style={{backgroundColor: "#B22222"}}>
+                        <Button >
+                            <Icon style={{color:"white"}} name="home" />
                         </Button>
-                        <Button>
-                            <Icon name="person" />
+                        <Button >
+                            <Icon style={{color:"white"}} name="person" />
                         </Button>
-                        <Button active>
-                            <Icon active name="logo-angular" />
+                        <Button >
+                            <Icon style={{color:"white"}} name="logo-angular" />
                         </Button>
-                        <Button>
-                            <Icon name="settings" />
+                        <Button >
+                            <Icon style={{color:"white"}} name="settings" />
                         </Button>
                     </FooterTab>
                 </Footer>
