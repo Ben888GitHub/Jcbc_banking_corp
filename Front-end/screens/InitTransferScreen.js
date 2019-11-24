@@ -6,7 +6,7 @@ import { Header, Container, Left, Body, Title, Right, Card, CardItem } from 'nat
 import { Ionicons } from '@expo/vector-icons';
 
 import HeaderImageScrollView, { TriggeringView } from 'react-native-image-header-scroll-view';
-import tvShowContent from '../assets/tvShowContent';
+
 import { AppLoading } from 'expo';
 import { NavigationEvents } from 'react-navigation';
 import { Asset } from 'expo-asset';
