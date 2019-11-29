@@ -50,34 +50,24 @@ export default class HomeScreen extends React.Component {
                         justifyContent: 'center'
                     }}>
 
-
-                        <Button
-                            onPress={() => alert('Transfer Successful')}
-                            style={{
-                                height: 60,
-                                backgroundColor: '#B22222',
-                                margin: 20,
-                            }}>
-                            <Text
-                                style={{ margin: 10, fontWeight: '700', color: 'white' }}
-                            >
-                                Transfer
-                                </Text>
-                        </Button>
-
-                        <Button
+                        <TouchableOpacity
                             onPress={() => navigate('Transfer')}
                             style={{
-                                height: 60,
+                                height: 50,
                                 backgroundColor: '#B22222',
-                                margin: 20
+                                padding: 10
                             }}>
+                            <View>
                             <Text
-                                style={{ margin: 10, fontWeight: '700', color: 'white' }}
+                                style={{fontWeight: '700', color: 'white' }}
                             >
-                                Go to Transfer screen
+                                Transfer
+                                <Icon style={{color:"white"}} name="ios-swap"/>
                                 </Text>
-                        </Button>
+                                
+                            </View>
+                        </TouchableOpacity>
+
 
 
                     </View>
@@ -85,7 +75,6 @@ export default class HomeScreen extends React.Component {
                     {/* <Button success onPress={() => alert("Transfer Sucess")}>
                         <Text>Transfer</Text>
                     </Button>
-
                     <Button success onPress={() => navigate('Transfer')}>
                         <Text>Go to Transfer page</Text>
                     </Button> */}
