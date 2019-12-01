@@ -1,9 +1,9 @@
 {
-  "expoServerPort": null,
-  "expoServerNgrokUrl": null,
-  "packagerNgrokUrl": null,
-  "ngrokPid": null,
+  "expoServerPort": 19004,
+  "expoServerNgrokUrl": "https://9u-epr.benedict-frontenddeveloper.front-end.exp.direct",
+  "packagerNgrokUrl": "https://packager.9u-epr.benedict-frontenddeveloper.front-end.exp.direct",
+  "ngrokPid": 9194,
   "devToolsPort": 19003,
-  "packagerPort": null,
-  "packagerPid": null
+  "packagerPort": 19006,
+  "packagerPid": 9175
 }

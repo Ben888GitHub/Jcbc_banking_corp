@@ -52,6 +52,7 @@ class InitTransferScreen extends Component {
       }
 
     render() {
+        // const { navigate } = this.props.navigation; //navigation is always a props
         const TransferAlert = () => {
             Alert.alert("You Have Successfully Transferred");
           };
@@ -235,8 +236,8 @@ class InitTransferScreen extends Component {
               selectedValue={this.state.selected}
               onValueChange={val => this.onValueChange(val)}
             >
-              <Picker.Item label="To saved beneficiaries" value="Ryan" />
-              <Picker.Item label="I want to input manually" value="key1" />
+              <Picker.Item label="To saved beneficiaries" value="Ryan"  />
+              <Picker.Item label="I want to input manually" value="key1"  />
             </Picker>
           </Card>
                     <View style={[

@@ -2,7 +2,7 @@ import { createAppContainer } from "react-navigation"; // AppContainer is the co
 import { createStackNavigator } from "react-navigation-stack"; // Stack is continuous of screens
 
 import React, { useState } from "react";
-
+import InitTransferScreen2 from "./screens/InitTransferScreen2"; 
 import InitTransferScreen from "./screens/InitTransferScreen";
 import HomeScreen from "./screens/HomeScreen";
 import LoginScreen from "./screens/LoginScreen";
@@ -22,7 +22,8 @@ const AppContainer = createAppContainer(
       // Using createStackNavigator create the applications
       Login: { screen: LoginScreen }, // Login is the navigation key which define the Login by the users, screen is used for placing the Component,
       Home: { screen: HomeScreen },
-      Transfer: { screen: InitTransferScreen }
+      Transfer: { screen: InitTransferScreen },
+      Transfer2: { screen: InitTransferScreen2 }
     },
     {
       // config
