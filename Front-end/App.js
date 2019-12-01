@@ -1,50 +1,60 @@
-import { createAppContainer } from 'react-navigation';
-import { createStackNavigator } from 'react-navigation-stack';
+import { createAppContainer } from "react-navigation"; // AppContainer is the cover the entire applications navigations
+import { createStackNavigator } from "react-navigation-stack"; // Stack is continuous of screens
 
 import React, { useState } from "react";
 
-import InitTransferScreen from './screens/InitTransferScreen';
-import HomeScreen from './screens/HomeScreen';
-import LoginScreen from './screens/LoginScreen';
+import InitTransferScreen from "./screens/InitTransferScreen";
+import HomeScreen from "./screens/HomeScreen";
+import LoginScreen from "./screens/LoginScreen";
 
 import { Root } from "native-base";
 
-import { AppLoading } from 'expo';
-import * as Font from 'expo-font';
-import { Ionicons } from '@expo/vector-icons';
+import { AppLoading } from "expo";
+import * as Font from "expo-font";
+import { Ionicons } from "@expo/vector-icons";
 
+// First Step
 const AppContainer = createAppContainer(
-  createStackNavigator({
-    Login: { screen: LoginScreen },
-    Home: { screen: HomeScreen },
-    Transfer: { screen: InitTransferScreen },
-  },
+  createStackNavigator(
+    // Have two elements
     {
-      headerMode: 'none',
-      initialRouteName: 'Login'
-    })
+      // component
+      // Using createStackNavigator create the applications
+      Login: { screen: LoginScreen }, // Login is the navigation key which define the Login by the users, screen is used for placing the Component,
+      Home: { screen: HomeScreen },
+      Transfer: { screen: InitTransferScreen }
+    },
+    {
+      // config
+      headerMode: "none",
+      initialRouteName: "Login" // initialRouteName will display the first component
+    }
+  )
 );
 
 export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      isReady: false,
+      isReady: false // For loading the font
     };
-  };
+  }
 
   async componentDidMount() {
+    // Asynchronous componentDidMount
     await Font.loadAsync({
-      Museo: require('./fonts/museosanscyrl-300.ttf'),
-      MuseoBold: require('./fonts/museosanscyrl-700.ttf'),
-      MuseoSemiBold: require('./fonts/museosanscyrl-500.ttf'),
+      // Wait for the font to be successfully imported from fonts directory and it will execute all the components
+      // Wait to be loaded
+      Museo: require("./fonts/museosanscyrl-300.ttf"), // ttf is true type form
+      MuseoBold: require("./fonts/museosanscyrl-700.ttf"),
+      MuseoSemiBold: require("./fonts/museosanscyrl-500.ttf"),
       //Below are the default font of Android, don't delete them:
       Roboto: require("native-base/Fonts/Roboto.ttf"),
       Roboto_medium: require("native-base/Fonts/Roboto_medium.ttf"),
-      ...Ionicons.font,
+      ...Ionicons.font
     });
     this.setState({ isReady: true });
-  };
+  }
 
   render() {
     console.disableYellowBox = true;
@@ -58,7 +68,6 @@ export default class App extends React.Component {
       </Root>
     );
   }
-
 }
 
 // export default function App() {

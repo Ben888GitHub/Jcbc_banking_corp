@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, Image, Dimensions, StatusBar, TouchableOpacity, Button, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, Image, Dimensions, StatusBar, TouchableOpacity,ScrollView, Alert } from 'react-native';
 import * as Animatable from 'react-native-animatable';
 // import { Header } from 'react-navigation-stack';
-import { Header, Container, Left, Body, Title, Right, Card, CardItem } from 'native-base';
+import { Header, Container, Left, Body, Title, Right, Card, CardItem, Picker, Icon,  Button, Item, Input } from 'native-base';
 import { Ionicons } from '@expo/vector-icons';
 
 import HeaderImageScrollView, { TriggeringView } from 'react-native-image-header-scroll-view';
@@ -18,7 +18,7 @@ const MIN_HEIGHT = 110;
 const MAX_HEIGHT = 250;
 
 let tempData = [
-    'Alex Tjuatja', 'Ben Ryan', 'Kylæ Ang', 'Zwe Nyan', 'Hung Nguyen'
+    'Alex Tjuatja', 'Ben Ryan', 'Kylæ Ang', 'Zwe Nyan', 'Hung Nguyen', "Harry Kyaw"
 ];
 
 class InitTransferScreen extends Component {
@@ -26,11 +26,14 @@ class InitTransferScreen extends Component {
         super();
         this.scroller = null;
         this.state = {
+            selected: "Ryan",
             showNavTitle: false,
             imageStatus: false,
             isReady: false,
         };
     };
+
+    
 
     static navigationOptions = {
         headerRight: () => (
@@ -42,7 +45,17 @@ class InitTransferScreen extends Component {
         ),
     };
 
+    onValueChange(value) {
+        this.setState({
+          selected: value
+        });
+      }
+
     render() {
+        const TransferAlert = () => {
+            Alert.alert("You Have Successfully Transferred");
+          };
+        const screenWidth = Math.round(Dimensions.get("window").width);
         const marginNum = 30;
         let tempDataList = tempData.map((value, index) => {
             let widthSize = this.screenWidth * 0.4;
@@ -182,16 +195,56 @@ class InitTransferScreen extends Component {
                     <View style={styles.section}>
                         <Text style={{ fontSize: 18 }}>Balace Total: €50,000</Text>
                     </View>
-
+                    {/* */}
+                    {/* THE PICKER DROPDOWN FOR TRANSFER OPTIONS */}
+                    <Text
+            style={{
+              fontWeight: "bold",
+              marginTop: 15,
+              fontSize: 17,
+              marginLeft: 13,
+              marginBottom: 5
+            }}
+          >
+            Transfer Options
+          </Text>
+          <Card
+            style={{
+              margin: 20,
+              borderRadius: 5,
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "space-between",
+              width: 390,
+              marginLeft: 13
+            }}
+          >
+            <Picker
+              mode="dropdown"
+              iosHeader="Select Transfer Solution"
+              iosIcon={
+                <Icon
+                  name="arrow-down"
+                  // style={{ position: "absolute", right: 0 }}
+                />
+              }
+              style={{
+                width: screenWidth * 0.92,
+                fontWeight: "bold"
+              }}
+              selectedValue={this.state.selected}
+              onValueChange={val => this.onValueChange(val)}
+            >
+              <Picker.Item label="To saved beneficiaries" value="Ryan" />
+              <Picker.Item label="I want to input manually" value="key1" />
+            </Picker>
+          </Card>
                     <View style={[
                         styles.section,
                         //  styles.sectionLarge
                     ]}>
                         <Text style={styles.sectionTitle}>Send to saved beneficiaries:</Text>
-
-                    </View>
-
-                    <View>
+                        {/* THIS IS THE ScrollView for the SAVED BENEFICIARIES */}
                         <ScrollView
                             ref={(ref) => this.scroller = ref}
                             style={{
@@ -202,7 +255,60 @@ class InitTransferScreen extends Component {
                             {tempDataList}
                         </ScrollView>
                     </View>
-                    <View style={{ height: 700 }}></View>
+
+                    {/* <View>
+                        <ScrollView
+                            ref={(ref) => this.scroller = ref}
+                            style={{
+                                marginBottom: 20
+                            }}
+                            horizontal="true"
+                        >
+                            {tempDataList}
+                        </ScrollView>
+                    </View> */}
+                    {/* <View style={{ height: 700 }}></View> */}
+                    {/* ENTER AMOUNT TEXT INPUT WITH PLACEHOLDER */}
+                    <Text
+            style={{
+              fontWeight: "bold",
+              marginTop: 20,
+              fontSize: 17,
+              marginLeft: 13,
+              marginBottom: 5
+            }}
+          >
+            Amount:
+          </Text>
+          <Item
+            regular
+            style={{ borderRadius: 5.5, width: 390, marginLeft: 12 }}
+          >
+            <Input placeholder="Enter Amount" />
+          </Item>
+          {/* */}
+                    {/* THIS IS TRANSFER BUTTON */}
+                    <View style={{ alignItems: "center", padding: 15 }}>
+            <Button
+              danger
+              style={{ margin: 25, borderRadius: 10, width: 120, height: 60 }}
+            >
+              <Text
+                onPress={TransferAlert}
+                style={{
+                  fontWeight: "bold",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  marginLeft: 16,
+                  fontSize: 16,
+                  color: "#fff"
+                }}
+              >
+                {" "}
+                Transfer{" "}
+              </Text>
+            </Button>
+          </View>
 
                 </HeaderImageScrollView>
             </View >
