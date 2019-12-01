@@ -95,17 +95,22 @@ export default class HomeScreen extends React.Component {
               <Text style={{ margin: 10, fontWeight: "700", color: "white" }}>
                 Go to Transfer2 screen
               </Text>
+              </Button>
+              <Button
+              onPress={() => navigate("TransferConfirm")}
+              style={{
+                height: 60,
+                backgroundColor: "#B22222",
+                margin: 20
+              }}
+            >
+              <Text style={{ margin: 10, fontWeight: "700", color: "white" }}>
+                Go to TransferConfirm screen
+              </Text>
             </Button>
           </View>
-
-          {/* <Button success onPress={() => alert("Transfer Sucess")}>
-                        <Text>Transfer</Text>
-                    </Button>
-
-                    <Button success onPress={() => navigate('Transfer')}>
-                        <Text>Go to Transfer page</Text>
-                    </Button> */}
         </Content>
+        
 
         <Footer>
           <FooterTab style={{ backgroundColor: "#B22222" }}>
