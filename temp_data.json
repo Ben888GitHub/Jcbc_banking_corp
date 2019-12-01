@@ -1,0 +1,42 @@
+[{
+    "users": [{
+    "acc-name": "HungNguyen",
+    "PIN": "123456",
+    "accounts": [{
+        "acc-number": "9999-9999-0000",
+        "balance": 1000000.00,
+        "currency": "SGD"
+    },  {
+        "acc-number": "9999-0000-9999",
+        "balance": 10.00,
+        "currency": "USD"
+    }, {
+        "acc-number": "0000-9999-9999",
+        "balance": 58392.51,
+        "currency": "CNY"
+    }
+    ],
+    "dependencies": ["MsNguyen", "MrNguyen"]
+
+    },
+
+    {
+        "acc-name": "BenRyan",
+        "PIN": "654321",
+        "accounts": [{
+            "acc-number": "1234-5678-9000",
+            "balance": 1030.00,
+            "currency": "EUR"
+        },  {
+            "acc-number": "5621-7352-8932",
+            "balance": 3540.00,
+            "currency": "SGD"
+        }, {
+            "acc-number": "1337-3254-8920",
+            "balance": 58392.51,
+            "currency": "RU"
+        }
+    ],
+        "dependencies": ["MsBenedict", "MrBenedict"]   
+    }]
+}]

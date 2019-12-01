@@ -321,7 +321,6 @@ class InitTransferScreen extends Component {
 
 }
 
-
 const styles = StyleSheet.create({
     image: {
         height: MAX_HEIGHT,

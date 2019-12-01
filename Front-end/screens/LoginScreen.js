@@ -117,7 +117,7 @@ class LoginScreen extends Component {
                             <TextInput
                                 // placeholder={this.state.loginField}
                                 value={this.state.loginField}
-                                autoCapitalize={false}
+                                autoCapitalize='none'
                                 onFocus={() => {
                                     this.setState({ loginField: '' });
                                 }}
