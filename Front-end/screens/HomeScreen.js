@@ -1,21 +1,14 @@
-import React, { Component } from "react";
-import { View, TouchableOpacity } from "react-native";
-import { AppLoading } from "expo";
+import React, { Component } from 'react';
+import { View, TouchableOpacity, StyleSheet } from 'react-native';
+import { AppLoading } from 'expo';
+//import { Icon } from "react-native-vector-icons";
 import {
-  Container,
-  Text,
-  Header,
-  Content,
-  Button,
-  Success,
-  Footer,
-  FooterTab,
-  Title,
-  Icon
-} from "native-base";
-import * as Font from "expo-font";
-import { Ionicons } from "@expo/vector-icons";
-import { getStatusBarHeight } from "react-native-status-bar-height";
+    Container, Text, Header, Content, Button,
+    Success, Footer, FooterTab, Title, Icon
+} from 'native-base';
+import * as Font from 'expo-font';
+import { Ionicons, MaterialIcons } from '@expo/vector-icons';
+import { getStatusBarHeight } from 'react-native-status-bar-height';
 
 export default class HomeScreen extends React.Component {
   constructor(props) {
@@ -58,32 +51,41 @@ export default class HomeScreen extends React.Component {
               justifyContent: "center"
             }}
           >
-            <Button
-              onPress={() => alert("Transfer Successful")}
-              style={{
-                height: 60,
-                backgroundColor: "#B22222",
-                margin: 20
-              }}
-            >
-              <Text style={{ margin: 10, fontWeight: "700", color: "white" }}>
-                Transfer
-              </Text>
-            </Button>
 
-            <Button
-              onPress={() => navigate("Transfer")}
-              style={{
-                height: 60,
-                backgroundColor: "#B22222",
-                margin: 20
-              }}
-            >
-              <Text style={{ margin: 10, fontWeight: "700", color: "white" }}>
-                Go to Transfer screen
+            <TouchableOpacity
+              onPress={() => navigate('Transfer')}
+              style={style.btn}>
+              <View style={style.btn_content}>
+              <Text style={style.txt}>
+                Transfer
+                                
               </Text>
-            </Button>
+              <Ionicons style={style.icon_default} size={50} name="ios-swap"/>
+              </View>
+            </TouchableOpacity>
             {/* */}
+            <View style={style.btn_container}>
+              <TouchableOpacity onPress={() => alert("In Development")}
+               style={style.btn_alt}>
+                <View style={style.btn_content}>
+                 <Text style={style.txt}>
+                    Account
+                  </Text>
+                  <MaterialIcons style={style.icon_default} name="person" size={45} />
+                </View>
+              </TouchableOpacity>
+                        
+              <TouchableOpacity onPress={() => alert("In Development")}
+                style={style.btn_alt}>
+                <View style={style.btn_content}>
+                  <Text style={style.txt}>
+                    Pay
+                  </Text>
+                  <MaterialIcons style={style.icon_default} name="payment" size={45} />
+                </View>
+              </TouchableOpacity>
+            </View>
+
             <Button
               onPress={() => navigate("Transfer2")}
               style={{
@@ -132,3 +134,48 @@ export default class HomeScreen extends React.Component {
     );
   }
 }
+
+const style = StyleSheet.create({
+  btn:{
+      height: 75,
+      width: 250,
+      backgroundColor: '#B22222',
+      paddingHorizontal: 10,
+      borderRadius: 5,
+      marginTop: 10
+  },
+
+  btn_alt:{
+      height: 100,
+      width: 150,
+      backgroundColor: '#B22222',
+      paddingHorizontal: 10,
+      borderRadius: 5,
+      margin: 10
+  },
+
+  btn_content:{
+      flex: 1,
+      alignItems: 'center',
+      justifyContent: 'center',
+      padding: 5,
+      margin: 10
+  },
+
+  btn_container:{
+      flex: 1,
+      padding: 15,
+      flexDirection: 'row',
+      justifyContent: 'space-between'
+  },
+
+  txt:{
+      fontWeight: '700',
+      color: 'white' 
+  },
+  
+  icon_default:{
+      color: 'white',
+      
+  }
+});

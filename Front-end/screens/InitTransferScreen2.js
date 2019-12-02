@@ -50,7 +50,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      selected: "Ryan",
+      selected: "key1",
       titleText: "Bank Transfer",
       bodyText: "JCBC Saving Account",
       underBodyText: "899-678898-009",
@@ -70,6 +70,11 @@ class App extends Component {
   // }
 
   onValueChange(value) {
+    const { navigate } = this.props.navigation;
+    if(value === "Ryan"){
+        console.log(value)
+        navigate('Transfer')
+    }
     this.setState({
       selected: value
     });
@@ -190,8 +195,9 @@ class App extends Component {
               selectedValue={this.state.selected}
               onValueChange={val => this.onValueChange(val)}
             >
-              <Picker.Item label="To saved beneficiaries" value="Ryan" />
               <Picker.Item label="I want to input manually" value="key1" />
+              <Picker.Item label="To saved beneficiaries" value="Ryan" />
+              
             </Picker>
           </Card>
           {/* Blank Comment */}

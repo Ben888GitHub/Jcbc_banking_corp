@@ -46,13 +46,18 @@ class InitTransferScreen extends Component {
     };
 
     onValueChange(value) {
-        this.setState({
+        const { navigate } = this.props.navigation;
+        if(value === "key1"){
+            console.log(value)
+            navigate('Transfer2')
+        }
+        /*this.setState({
           selected: value
-        });
+        })*/;
       }
 
     render() {
-        // const { navigate } = this.props.navigation; //navigation is always a props
+        //const { navigate } = this.props.navigation; //navigation is always a props
         const TransferAlert = () => {
             Alert.alert("You Have Successfully Transferred");
           };
