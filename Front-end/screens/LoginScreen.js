@@ -23,9 +23,23 @@ let screenHeight = Math.round(Dimensions.get('window').height);
 const MIN_HEIGHT = 160;
 const MAX_HEIGHT = screenHeight * 0.4;
 
-let tempData = [
-    'Alex Tjuatja', 'Ben Ryan', 'Kylæ Ang', 'Zwe Nyan', 'Hung Nguyen'
-];
+import reducer from '../reducers/reducers';
+import { authenticate } from '../reducers/actions';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+
+let tempData = ['Alex Tjuatja', 'Ben Ryan', 'Kylæ Ang', 'Zwe Nyan', 'Hung Nguyen'];
+
+const mapStateToProps = (state) => {
+    const { currentUser } = state;
+    return { currentUser };
+};
+
+const mapDispatchToProps = dispatch => (
+    bindActionCreators({
+        authenticate,
+    }, dispatch)
+);
 
 class LoginScreen extends Component {
     constructor() {
@@ -45,6 +59,10 @@ class LoginScreen extends Component {
     whenFocused = () => {
         this.textinput.focus();
         this.myScrollView.scrollTo({ x: 0, y: screenHeight, animated: true });
+    }
+
+    _checkCode = () => {
+        this.props.authenticate({ name: 'Sample', accnum: 'sample_accnum' });
     }
 
     render() {
@@ -342,4 +360,5 @@ const styles = StyleSheet.create({
     },
 });
 
-export default LoginScreen;
+// export default LoginScreen;
+export default connect(mapStateToProps, mapDispatchToProps)(LoginScreen);

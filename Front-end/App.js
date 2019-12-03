@@ -2,7 +2,7 @@ import { createAppContainer } from "react-navigation"; // AppContainer is the co
 import { createStackNavigator } from "react-navigation-stack"; // Stack is continuous of screens
 
 import React, { useState } from "react";
-import InitTransferScreen2 from "./screens/InitTransferScreen2"; 
+import InitTransferScreen2 from "./screens/InitTransferScreen2";
 import InitTransferScreen from "./screens/InitTransferScreen";
 import InitTransferConfirmation from "./screens/InitTransferConfirmation";
 import HomeScreen from "./screens/HomeScreen";
@@ -13,6 +13,11 @@ import { Root } from "native-base";
 import { AppLoading } from "expo";
 import * as Font from "expo-font";
 import { Ionicons } from "@expo/vector-icons";
+
+import { Provider } from "react-redux";
+import { createStore } from "redux";
+import reducer from "./reducers/reducers";
+const store = createStore(reducer);
 
 // First Step
 const AppContainer = createAppContainer(
@@ -66,17 +71,11 @@ export default class App extends React.Component {
     }
 
     return (
-      <Root>
-        <AppContainer />
-      </Root>
+      <Provider store={store} >
+        <Root>
+          <AppContainer />
+        </Root>
+      </Provider>
     );
   }
 }
-
-// export default function App() {
-//   return (
-//     <Root>
-//       <AppContainer />
-//     </Root>
-//   );
-// }
