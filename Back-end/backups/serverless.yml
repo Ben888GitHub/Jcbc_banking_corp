@@ -11,6 +11,7 @@ provider:
 plugins:
   - serverless-offline
   
+
 functions:
   wd_groups:
     handler: handler.cp3405
@@ -18,10 +19,6 @@ functions:
       - http:
           method: GET
           path: /
-          cors: true
-      - http:
-          method: POST
-          path: /authenticate
           cors: true
       
 
