@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, TouchableOpacity, StyleSheet, ImageBackground } from 'react-native';
 import { AppLoading } from 'expo';
 //import { Icon } from "react-native-vector-icons";
 import {
@@ -40,8 +40,9 @@ export default class HomeScreen extends React.Component {
         <Header style={{ paddingTop: 30, backgroundColor: "#B22222" }}>
           <Title style={{ color: "white" }}>Mobile Banking Apps</Title>
         </Header>
-
+        <ImageBackground source={require('../assets/transfer.jpg')} resizeMode='cover' style={style.backgroundImage}>
         <Content>
+        
           <View
             style={{
               padding: 10,
@@ -51,6 +52,7 @@ export default class HomeScreen extends React.Component {
               justifyContent: "center"
             }}
           >
+            
 
             <TouchableOpacity
               onPress={() => navigate('Transfer')}
@@ -85,7 +87,7 @@ export default class HomeScreen extends React.Component {
                 </View>
               </TouchableOpacity>
             </View>
-
+            {/*
             <Button
               onPress={() => navigate("Transfer2")}
               style={{
@@ -109,10 +111,11 @@ export default class HomeScreen extends React.Component {
               <Text style={{ margin: 10, fontWeight: "700", color: "white" }}>
                 Go to TransferConfirm screen
               </Text>
-            </Button>
+            </Button>*/}
           </View>
+          
         </Content>
-        
+        </ImageBackground>
 
         <Footer>
           <FooterTab style={{ backgroundColor: "#B22222" }}>
@@ -177,5 +180,11 @@ const style = StyleSheet.create({
   icon_default:{
       color: 'white',
       
+  },
+  backgroundImage:{
+    flex: 1,
+    width: '100%',
+    height: '100%',
+    //resizeMode: 'cover'
   }
 });

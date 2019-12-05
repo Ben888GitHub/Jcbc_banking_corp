@@ -75,9 +75,9 @@ class App extends Component {
         console.log(value)
         navigate('Transfer')
     }
-    this.setState({
+    /*this.setState({
       selected: value
-    });
+    })*/;
   }
   render() {
     const screenWidth = Math.round(Dimensions.get("window").width);
