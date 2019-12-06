@@ -73,7 +73,7 @@ export default class HomeScreen extends React.Component {
                  <Text style={style.txt}>
                     Account
                   </Text>
-                  <MaterialIcons style={style.icon_default} name="person" size={45} />
+                  <MaterialIcons style={style.icon_default} name="person" size={65} />
                 </View>
               </TouchableOpacity>
                         
@@ -83,10 +83,22 @@ export default class HomeScreen extends React.Component {
                   <Text style={style.txt}>
                     Pay
                   </Text>
-                  <MaterialIcons style={style.icon_default} name="payment" size={45} />
+                  <MaterialIcons style={style.icon_default} name="payment" size={65} />
                 </View>
               </TouchableOpacity>
             </View>
+
+            <TouchableOpacity
+              onPress={() => alert("In development")}
+              style={style.btn}>
+              <View style={style.btn_content}>
+              <Text style={style.txt}>
+                Withdrawal
+                                
+              </Text>
+              <Ionicons style={style.icon_default} size={50} name="ios-cash"/>
+              </View>
+            </TouchableOpacity>
             {/*
             <Button
               onPress={() => navigate("Transfer2")}
@@ -126,10 +138,10 @@ export default class HomeScreen extends React.Component {
               <Icon style={{ color: "white" }} name="person" />
             </Button>
             <Button>
-              <Icon style={{ color: "white" }} name="logo-angular" />
-            </Button>
-            <Button>
               <Icon style={{ color: "white" }} name="settings" />
+            </Button>
+            <Button onPress={() => navigate('Login')}>
+              <Icon style={{ color: "white" }} name="ios-exit" />
             </Button>
           </FooterTab>
         </Footer>
@@ -140,21 +152,23 @@ export default class HomeScreen extends React.Component {
 
 const style = StyleSheet.create({
   btn:{
-      height: 75,
+      height: 110,
       width: 250,
       backgroundColor: '#B22222',
       paddingHorizontal: 10,
       borderRadius: 5,
-      marginTop: 10
+      marginTop: 10,
+      opacity: 80
   },
 
   btn_alt:{
-      height: 100,
+      height: 175,
       width: 150,
       backgroundColor: '#B22222',
       paddingHorizontal: 10,
       borderRadius: 5,
-      margin: 10
+      margin: 10,
+      opacity: 80
   },
 
   btn_content:{
@@ -174,7 +188,9 @@ const style = StyleSheet.create({
 
   txt:{
       fontWeight: '700',
-      color: 'white' 
+      color: 'white',
+      fontSize: 24,
+      //fontFamily 
   },
   
   icon_default:{
