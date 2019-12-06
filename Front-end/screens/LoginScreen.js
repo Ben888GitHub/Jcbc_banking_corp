@@ -101,14 +101,23 @@ class LoginScreen extends Component {
         "https://ixmhlhrubj.execute-api.ap-southeast-1.amazonaws.com/dev/authenticate",
         {
           accname: "winsontju",
-          pin: "903832"
+          pin: "90383"
         }
       )
       .then(res => {
-        console.log(res.data);
+        if(res.data.length == 0){
+            alert("Please enter correct Info");
+        }
+        else{
+            console.log(res.statusText)
+            console.log(res.data)
+            console.log(res.status)
+            alert("Ding");
+        }
       })
       .catch(err => {
-        console.log(err);
+        console.error(err)
+        console.log(err)
       });
   }
 
