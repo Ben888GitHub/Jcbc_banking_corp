@@ -31,6 +31,10 @@ import {
   Text,
   Input
 } from "native-base";
+import reducer from '../reducers/reducers';
+import { authenticate } from '../reducers/actions';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
 // import { Dropdown } from "react-native-material-dropdown";
 
@@ -45,6 +49,16 @@ import {
 
 // const DropDown = require("react-native-dropdown");
 // const { Select, Option, OptionList, updatePosition } = DropDown;
+const mapStateToProps = (state) => {
+  const { currentUser } = state;
+  return { currentUser };
+};
+
+const mapDispatchToProps = dispatch => (
+  bindActionCreators({
+      authenticate,
+  }, dispatch)
+);
 
 class App extends Component {
   constructor(props) {
@@ -373,7 +387,8 @@ const styles1 = StyleSheet.create({
   }
 });
 
-export default App;
+export default connect(mapStateToProps, mapDispatchToProps)(App);
+
 AppRegistry.registerComponent("App", () => App);
 
 {

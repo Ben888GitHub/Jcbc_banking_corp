@@ -13,6 +13,11 @@ import { Asset } from 'expo-asset';
 
 import red from '../assets/red2.jpg';
 
+import reducer from '../reducers/reducers';
+import { authenticate } from '../reducers/actions';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+
 // const MIN_HEIGHT = Header.HEIGHT;
 const MIN_HEIGHT = 110;
 const MAX_HEIGHT = 250;
@@ -20,6 +25,18 @@ const MAX_HEIGHT = 250;
 let tempData = [
     'Alex Tjuatja', 'Ben Ryan', 'Kylæ Ang', 'Zwe Nyan', 'Hung Nguyen', "Harry Kyaw"
 ];
+
+const mapStateToProps = (state) => {
+    const { currentUser } = state;
+    return { currentUser };
+};
+
+const mapDispatchToProps = dispatch => (
+    bindActionCreators({
+        authenticate,
+    }, dispatch)
+);
+
 
 class InitTransferScreen extends Component {
     constructor() {
@@ -402,4 +419,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default InitTransferScreen;
+export default connect(mapStateToProps, mapDispatchToProps)(InitTransferScreen);

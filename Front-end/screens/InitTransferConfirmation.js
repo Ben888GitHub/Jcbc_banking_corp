@@ -32,6 +32,22 @@ import {
   Input
 } from "native-base";
 import { Ionicons } from "@expo/vector-icons";
+import reducer from '../reducers/reducers';
+import { authenticate } from '../reducers/actions';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+
+const mapStateToProps = (state) => {
+  const { currentUser } = state;
+  return { currentUser };
+};
+
+const mapDispatchToProps = dispatch => (
+  bindActionCreators({
+      authenticate,
+  }, dispatch)
+);
+
 
 class App extends Component {
   constructor(props) {
@@ -188,4 +204,5 @@ const styles = StyleSheet.create({
   }
 });
 
-export default App;
+export default connect(mapStateToProps, mapDispatchToProps)(App);
+

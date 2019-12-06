@@ -9,8 +9,26 @@ import {
 import * as Font from 'expo-font';
 import { Ionicons, MaterialIcons } from '@expo/vector-icons';
 import { getStatusBarHeight } from 'react-native-status-bar-height';
+import reducer from '../reducers/reducers';
+import { authenticate } from '../reducers/actions';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
-export default class HomeScreen extends React.Component {
+
+// Redux
+const mapStateToProps = (state) => {
+  const { currentUser } = state;
+  return { currentUser };
+};
+
+const mapDispatchToProps = dispatch => (
+  bindActionCreators({
+      authenticate,
+  }, dispatch)
+);
+
+
+class HomeScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -204,3 +222,5 @@ const style = StyleSheet.create({
     //resizeMode: 'cover'
   }
 });
+
+export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen);
