@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, Image, Dimensions, StatusBar, TouchableOpacity,ScrollView, Alert } from 'react-native';
+import { StyleSheet, Text, View, Image, Dimensions, StatusBar, TouchableOpacity, ScrollView, Alert } from 'react-native';
 import * as Animatable from 'react-native-animatable';
 // import { Header } from 'react-navigation-stack';
-import { Header, Container, Left, Body, Title, Right, Card, CardItem, Picker, Icon,  Button, Item, Input } from 'native-base';
+import { Header, Container, Left, Body, Title, Right, Card, CardItem, Picker, Icon, Button, Item, Input } from 'native-base';
 import { Ionicons } from '@expo/vector-icons';
 
 import HeaderImageScrollView, { TriggeringView } from 'react-native-image-header-scroll-view';
@@ -33,7 +33,7 @@ class InitTransferScreen extends Component {
         };
     };
 
-    
+
 
     static navigationOptions = {
         headerRight: () => (
@@ -47,20 +47,20 @@ class InitTransferScreen extends Component {
 
     onValueChange(value) {
         const { navigate } = this.props.navigation;
-        if(value === "key1"){
+        if (value === "key1") {
             console.log(value)
             navigate('Transfer2')
         }
         /*this.setState({
           selected: value
         })*/;
-      }
+    }
 
     render() {
         //const { navigate } = this.props.navigation; //navigation is always a props
         const TransferAlert = () => {
             Alert.alert("You Have Successfully Transferred");
-          };
+        };
         const screenWidth = Math.round(Dimensions.get("window").width);
         const marginNum = 30;
         let tempDataList = tempData.map((value, index) => {
@@ -204,53 +204,57 @@ class InitTransferScreen extends Component {
                     {/* */}
                     {/* THE PICKER DROPDOWN FOR TRANSFER OPTIONS */}
                     <Text
-            style={{
-              fontWeight: "bold",
-              marginTop: 15,
-              fontSize: 17,
-              marginLeft: 13,
-              marginBottom: 5
-            }}
-          >
-            Transfer Options
+                        style={{
+                            fontWeight: "bold",
+                            marginTop: 15,
+                            fontSize: 17,
+                            marginLeft: 13,
+                            marginBottom: 5
+                        }}
+                    >
+                        Transfer Options
           </Text>
-          <Card
-            style={{
-              margin: 20,
-              borderRadius: 5,
-              flexDirection: "row",
-              alignItems: "center",
-              justifyContent: "space-between",
-              width: 390,
-              marginLeft: 13
-            }}
-          >
-            <Picker
-              mode="dropdown"
-              iosHeader="Select Transfer Solution"
-              iosIcon={
-                <Icon
-                  name="arrow-down"
-                  // style={{ position: "absolute", right: 0 }}
-                />
-              }
-              style={{
-                width: screenWidth * 0.92,
-                fontWeight: "bold"
-              }}
-              selectedValue={this.state.selected}
-              onValueChange={val => this.onValueChange(val)}
-            >
-              <Picker.Item label="To saved beneficiaries" value="Ryan"  />
-              <Picker.Item label="I want to input manually" value="key1"  />
-            </Picker>
-          </Card>
+                    <Card
+                        style={{
+                            margin: 20,
+                            borderRadius: 5,
+                            flexDirection: "row",
+                            alignItems: "center",
+                            justifyContent: "space-between",
+                            width: 390,
+                            marginLeft: 13
+                        }}
+                    >
+                        <Picker
+                            mode="dropdown"
+                            iosHeader="Select Transfer Solution"
+                            iosIcon={
+                                <Icon
+                                    name="arrow-down"
+                                // style={{ position: "absolute", right: 0 }}
+                                />
+                            }
+                            style={{
+                                width: screenWidth * 0.92,
+                                fontWeight: "bold"
+                            }}
+                            selectedValue={this.state.selected}
+                            onValueChange={val => this.onValueChange(val)}
+                        >
+                            <Picker.Item label="To saved beneficiaries" value="Ryan" />
+                            <Picker.Item label="I want to input manually" value="key1" />
+                        </Picker>
+                    </Card>
+
+                    <Text style={[styles.sectionTitle, { padding: 20 }]}>Send to saved beneficiaries:</Text>
                     <View style={[
                         styles.section,
-                        //  styles.sectionLarge
+                        {
+                            paddingLeft: 0,
+                            paddingRight: 0
+                        }
                     ]}>
-                        <Text style={styles.sectionTitle}>Send to saved beneficiaries:</Text>
-                        {/* THIS IS THE ScrollView for the SAVED BENEFICIARIES */}
+                        {/* THIS IS THE Horizontal ScrollView for the SAVED BENEFICIARIES */}
                         <ScrollView
                             ref={(ref) => this.scroller = ref}
                             style={{
@@ -276,45 +280,45 @@ class InitTransferScreen extends Component {
                     {/* <View style={{ height: 700 }}></View> */}
                     {/* ENTER AMOUNT TEXT INPUT WITH PLACEHOLDER */}
                     <Text
-            style={{
-              fontWeight: "bold",
-              marginTop: 20,
-              fontSize: 17,
-              marginLeft: 13,
-              marginBottom: 5
-            }}
-          >
-            Amount:
+                        style={{
+                            fontWeight: "bold",
+                            marginTop: 20,
+                            fontSize: 17,
+                            marginLeft: 13,
+                            marginBottom: 5
+                        }}
+                    >
+                        Amount:
           </Text>
-          <Item
-            regular
-            style={{ borderRadius: 5.5, width: 390, marginLeft: 12 }}
-          >
-            <Input placeholder="Enter Amount" />
-          </Item>
-          {/* */}
+                    <Item
+                        regular
+                        style={{ borderRadius: 5.5, width: 390, marginLeft: 12 }}
+                    >
+                        <Input placeholder="Enter Amount" />
+                    </Item>
+                    {/* */}
                     {/* THIS IS TRANSFER BUTTON */}
                     <View style={{ alignItems: "center", padding: 15 }}>
-            <Button
-              danger
-              style={{ margin: 25, borderRadius: 10, width: 120, height: 60 }}
-            >
-              <Text
-                onPress={TransferAlert}
-                style={{
-                  fontWeight: "bold",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  marginLeft: 16,
-                  fontSize: 16,
-                  color: "#fff"
-                }}
-              >
-                {" "}
-                Transfer{" "}
-              </Text>
-            </Button>
-          </View>
+                        <Button
+                            danger
+                            style={{ margin: 25, borderRadius: 10, width: 120, height: 60 }}
+                        >
+                            <Text
+                                onPress={TransferAlert}
+                                style={{
+                                    fontWeight: "bold",
+                                    justifyContent: "center",
+                                    alignItems: "center",
+                                    marginLeft: 16,
+                                    fontSize: 16,
+                                    color: "#fff"
+                                }}
+                            >
+                                {" "}
+                                Transfer{" "}
+                            </Text>
+                        </Button>
+                    </View>
 
                 </HeaderImageScrollView>
             </View >

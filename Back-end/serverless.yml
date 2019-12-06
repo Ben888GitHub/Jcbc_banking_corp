@@ -23,5 +23,9 @@ functions:
           method: POST
           path: /authenticate
           cors: true
+      - http:
+          method: POST
+          path: /transfer
+          cors: true
       
 

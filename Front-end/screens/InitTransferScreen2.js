@@ -71,9 +71,9 @@ class App extends Component {
 
   onValueChange(value) {
     const { navigate } = this.props.navigation;
-    if(value === "Ryan"){
-        console.log(value)
-        navigate('Transfer')
+    if (value === "Ryan") {
+      console.log(value)
+      navigate('Transfer')
     }
     /*this.setState({
       selected: value
@@ -156,6 +156,7 @@ class App extends Component {
             </Text>
           </View>
           {/* Blank Comment */}
+
           {/* This is the card which have the Picker Dropdown inside */}
           <Text
             style={{
@@ -185,7 +186,7 @@ class App extends Component {
               iosIcon={
                 <Icon
                   name="arrow-down"
-                  // style={{ position: "absolute", right: 0 }}
+                // style={{ position: "absolute", right: 0 }}
                 />
               }
               style={{
@@ -197,7 +198,7 @@ class App extends Component {
             >
               <Picker.Item label="I want to input manually" value="key1" />
               <Picker.Item label="To saved beneficiaries" value="Ryan" />
-              
+
             </Picker>
           </Card>
           {/* Blank Comment */}
@@ -267,7 +268,7 @@ class App extends Component {
               iosIcon={
                 <Icon
                   name="arrow-down"
-                  // style={{ position: "absolute", right: 0 }}
+                // style={{ position: "absolute", right: 0 }}
                 />
               }
               style={{

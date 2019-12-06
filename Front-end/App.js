@@ -51,11 +51,13 @@ export default class App extends React.Component {
   async componentDidMount() {
     // Asynchronous componentDidMount
     await Font.loadAsync({
+
       // Wait for the font to be successfully imported from fonts directory and it will execute all the components
       // Wait to be loaded
       Museo: require("./fonts/museosanscyrl-300.ttf"), // ttf is true type form
       MuseoBold: require("./fonts/museosanscyrl-700.ttf"),
       MuseoSemiBold: require("./fonts/museosanscyrl-500.ttf"),
+
       //Below are the default font of Android, don't delete them:
       Roboto: require("native-base/Fonts/Roboto.ttf"),
       Roboto_medium: require("native-base/Fonts/Roboto_medium.ttf"),

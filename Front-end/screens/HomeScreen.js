@@ -3,8 +3,8 @@ import { View, TouchableOpacity, StyleSheet, ImageBackground } from 'react-nativ
 import { AppLoading } from 'expo';
 //import { Icon } from "react-native-vector-icons";
 import {
-    Container, Text, Header, Content, Button,
-    Success, Footer, FooterTab, Title, Icon
+  Container, Text, Header, Content, Button,
+  Success, Footer, FooterTab, Title, Icon
 } from 'native-base';
 import * as Font from 'expo-font';
 import { Ionicons, MaterialIcons } from '@expo/vector-icons';
@@ -41,53 +41,52 @@ export default class HomeScreen extends React.Component {
           <Title style={{ color: "white" }}>Mobile Banking Apps</Title>
         </Header>
         <ImageBackground source={require('../assets/transfer.jpg')} resizeMode='cover' style={style.backgroundImage}>
-        <Content>
-        
-          <View
-            style={{
-              padding: 10,
-              flex: 1,
-              flexDirection: "column",
-              alignItems: "center",
-              justifyContent: "center"
-            }}
-          >
-            
+          <Content>
 
-            <TouchableOpacity
-              onPress={() => navigate('Transfer')}
-              style={style.btn}>
-              <View style={style.btn_content}>
-              <Text style={style.txt}>
-                Transfer
-                                
-              </Text>
-              <Ionicons style={style.icon_default} size={50} name="ios-swap"/>
-              </View>
-            </TouchableOpacity>
-            {/* */}
-            <View style={style.btn_container}>
-              <TouchableOpacity onPress={() => alert("In Development")}
-               style={style.btn_alt}>
-                <View style={style.btn_content}>
-                 <Text style={style.txt}>
-                    Account
-                  </Text>
-                  <MaterialIcons style={style.icon_default} name="person" size={45} />
-                </View>
-              </TouchableOpacity>
-                        
-              <TouchableOpacity onPress={() => alert("In Development")}
-                style={style.btn_alt}>
+            <View
+              style={{
+                padding: 10,
+                flex: 1,
+                flexDirection: "column",
+                alignItems: "center",
+                justifyContent: "center"
+              }}
+            >
+
+
+              <TouchableOpacity
+                onPress={() => navigate('Transfer')}
+                style={style.btn}>
                 <View style={style.btn_content}>
                   <Text style={style.txt}>
-                    Pay
-                  </Text>
-                  <MaterialIcons style={style.icon_default} name="payment" size={45} />
+                    Transfer
+              </Text>
+                  <Ionicons style={style.icon_default} size={50} name="ios-swap" />
                 </View>
               </TouchableOpacity>
-            </View>
-            {/*
+              {/* */}
+              <View style={style.btn_container}>
+                <TouchableOpacity onPress={() => alert("In Development")}
+                  style={style.btn_alt}>
+                  <View style={style.btn_content}>
+                    <Text style={style.txt}>
+                      Account
+                  </Text>
+                    <MaterialIcons style={style.icon_default} name="person" size={45} />
+                  </View>
+                </TouchableOpacity>
+
+                <TouchableOpacity onPress={() => alert("In Development")}
+                  style={style.btn_alt}>
+                  <View style={style.btn_content}>
+                    <Text style={style.txt}>
+                      Pay
+                  </Text>
+                    <MaterialIcons style={style.icon_default} name="payment" size={45} />
+                  </View>
+                </TouchableOpacity>
+              </View>
+              {/*
             <Button
               onPress={() => navigate("Transfer2")}
               style={{
@@ -112,9 +111,9 @@ export default class HomeScreen extends React.Component {
                 Go to TransferConfirm screen
               </Text>
             </Button>*/}
-          </View>
-          
-        </Content>
+            </View>
+
+          </Content>
         </ImageBackground>
 
         <Footer>
@@ -139,49 +138,49 @@ export default class HomeScreen extends React.Component {
 }
 
 const style = StyleSheet.create({
-  btn:{
-      height: 75,
-      width: 250,
-      backgroundColor: '#B22222',
-      paddingHorizontal: 10,
-      borderRadius: 5,
-      marginTop: 10
+  btn: {
+    height: 75,
+    width: 250,
+    backgroundColor: '#B22222',
+    paddingHorizontal: 10,
+    borderRadius: 5,
+    marginTop: 10
   },
 
-  btn_alt:{
-      height: 100,
-      width: 150,
-      backgroundColor: '#B22222',
-      paddingHorizontal: 10,
-      borderRadius: 5,
-      margin: 10
+  btn_alt: {
+    height: 100,
+    width: 150,
+    backgroundColor: '#B22222',
+    paddingHorizontal: 10,
+    borderRadius: 5,
+    margin: 10
   },
 
-  btn_content:{
-      flex: 1,
-      alignItems: 'center',
-      justifyContent: 'center',
-      padding: 5,
-      margin: 10
+  btn_content: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 5,
+    margin: 10
   },
 
-  btn_container:{
-      flex: 1,
-      padding: 15,
-      flexDirection: 'row',
-      justifyContent: 'space-between'
+  btn_container: {
+    flex: 1,
+    padding: 15,
+    flexDirection: 'row',
+    justifyContent: 'space-between'
   },
 
-  txt:{
-      fontWeight: '700',
-      color: 'white' 
+  txt: {
+    fontWeight: '700',
+    color: 'white'
   },
-  
-  icon_default:{
-      color: 'white',
-      
+
+  icon_default: {
+    color: 'white',
+
   },
-  backgroundImage:{
+  backgroundImage: {
     flex: 1,
     width: '100%',
     height: '100%',

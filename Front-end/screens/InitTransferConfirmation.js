@@ -55,6 +55,7 @@ class App extends Component {
     var hours = new Date().getHours(); //Current Hours
     var min = new Date().getMinutes(); //Current Minutes
     var sec = new Date().getSeconds(); //Current Seconds
+
     that.setState({
       //Setting the value of the date time
       date:
