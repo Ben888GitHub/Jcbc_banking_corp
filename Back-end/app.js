@@ -73,7 +73,7 @@ app.post("/transfer", async (request, response) => {
     });
 
     let source_updateContent = {
-        $set: { "accounts.$.balance": currentBalance - request.body.transfer_amount }
+        $set: { "accounts.$.balance": currentBalance.balance - request.body.transfer_amount }
     };
     console.log(currentBalance.balance);
     let source_result = await collection.updateOne(source_requete, source_updateContent);
@@ -83,26 +83,25 @@ app.post("/transfer", async (request, response) => {
 
     let destAccNumber = request.body.dest_acc_num.toString();
 
-    let currentAccount = await collection.findOne(dest_requete);
-    let currentAccList = currentAccount.accounts;
-    var currentBalance = currentAccList.find(function (eachAccount) {
-        if (eachAccount.accnumber === sourceAccNumber) {
+    currentAccount = await collection.findOne(dest_requete);
+    currentAccList = currentAccount.accounts;
+    currentBalance = currentAccList.find(function (eachAccount) {
+        if (eachAccount.accnumber === destAccNumber) {
             return eachAccount;
         };
     });
 
     let dest_updateContent = {
-        $set: { "accounts.$.balance": currentBalance + request.body.transfer_amount }
+        $set: { "accounts.$.balance": currentBalance.balance + request.body.transfer_amount }
     };
     console.log(currentBalance.balance);
     let dest_result = await collection.updateOne(dest_requete, dest_updateContent);
 
-
-    if (result.length === 0) {
-        response.send(false);
-    } else {
-        response.send(true);
-    };
+    // if (result.length === 0) {
+    //     response.send(false);
+    // } else {
+    //     response.send(true);
+    // };
 });
 
 
