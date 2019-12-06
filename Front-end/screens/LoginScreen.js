@@ -65,6 +65,19 @@ class LoginScreen extends Component {
         this.props.authenticate({ name: 'Sample', accnum: 'sample_accnum' });
     }
 
+    componentDidMount() {
+      axios.post('https://ixmhlhrubj.execute-api.ap-southeast-1.amazonaws.com/dev/authenticate', {
+    accname: 'winsontju',
+    pin: '903832'
+  })
+  .then(function (response) {
+    console.log(response);
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+    }
+
     render() {
         const marginNum = 10;
         const { navigate } = this.props.navigation;
