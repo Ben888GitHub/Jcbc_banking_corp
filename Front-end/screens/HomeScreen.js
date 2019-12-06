@@ -41,52 +41,65 @@ export default class HomeScreen extends React.Component {
           <Title style={{ color: "white" }}>Mobile Banking Apps</Title>
         </Header>
         <ImageBackground source={require('../assets/transfer.jpg')} resizeMode='cover' style={style.backgroundImage}>
-          <Content>
+        <Content>
+        
+          <View
+            style={{
+              padding: 10,
+              flex: 1,
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center"
+            }}
+          >
+            
 
-            <View
-              style={{
-                padding: 10,
-                flex: 1,
-                flexDirection: "column",
-                alignItems: "center",
-                justifyContent: "center"
-              }}
-            >
-
-
-              <TouchableOpacity
-                onPress={() => navigate('Transfer')}
-                style={style.btn}>
-                <View style={style.btn_content}>
-                  <Text style={style.txt}>
-                    Transfer
+            <TouchableOpacity
+              onPress={() => navigate('Transfer')}
+              style={style.btn}>
+              <View style={style.btn_content}>
+              <Text style={style.txt}>
+                Transfer
+                                
               </Text>
-                  <Ionicons style={style.icon_default} size={50} name="ios-swap" />
+              <Ionicons style={style.icon_default} size={50} name="ios-swap"/>
+              </View>
+            </TouchableOpacity>
+            {/* */}
+            <View style={style.btn_container}>
+              <TouchableOpacity onPress={() => alert("In Development")}
+               style={style.btn_alt}>
+                <View style={style.btn_content}>
+                 <Text style={style.txt}>
+                    Account
+                  </Text>
+                  <MaterialIcons style={style.icon_default} name="person" size={65} />
                 </View>
               </TouchableOpacity>
-              {/* */}
-              <View style={style.btn_container}>
-                <TouchableOpacity onPress={() => alert("In Development")}
-                  style={style.btn_alt}>
-                  <View style={style.btn_content}>
-                    <Text style={style.txt}>
-                      Account
+                        
+              <TouchableOpacity onPress={() => alert("In Development")}
+                style={style.btn_alt}>
+                <View style={style.btn_content}>
+                  <Text style={style.txt}>
+                    Pay
                   </Text>
-                    <MaterialIcons style={style.icon_default} name="person" size={45} />
-                  </View>
-                </TouchableOpacity>
+                  <MaterialIcons style={style.icon_default} name="payment" size={65} />
+                </View>
+              </TouchableOpacity>
+            </View>
 
-                <TouchableOpacity onPress={() => alert("In Development")}
-                  style={style.btn_alt}>
-                  <View style={style.btn_content}>
-                    <Text style={style.txt}>
-                      Pay
-                  </Text>
-                    <MaterialIcons style={style.icon_default} name="payment" size={45} />
-                  </View>
-                </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => alert("In development")}
+              style={style.btn}>
+              <View style={style.btn_content}>
+              <Text style={style.txt}>
+                Withdrawal
+                                
+              </Text>
+              <Ionicons style={style.icon_default} size={50} name="ios-cash"/>
               </View>
-              {/*
+            </TouchableOpacity>
+            {/*
             <Button
               onPress={() => navigate("Transfer2")}
               style={{
@@ -125,10 +138,10 @@ export default class HomeScreen extends React.Component {
               <Icon style={{ color: "white" }} name="person" />
             </Button>
             <Button>
-              <Icon style={{ color: "white" }} name="logo-angular" />
-            </Button>
-            <Button>
               <Icon style={{ color: "white" }} name="settings" />
+            </Button>
+            <Button onPress={() => navigate('Login')}>
+              <Icon style={{ color: "white" }} name="ios-exit" />
             </Button>
           </FooterTab>
         </Footer>
@@ -138,22 +151,24 @@ export default class HomeScreen extends React.Component {
 }
 
 const style = StyleSheet.create({
-  btn: {
-    height: 75,
-    width: 250,
-    backgroundColor: '#B22222',
-    paddingHorizontal: 10,
-    borderRadius: 5,
-    marginTop: 10
+  btn:{
+      height: 110,
+      width: 250,
+      backgroundColor: '#B22222',
+      paddingHorizontal: 10,
+      borderRadius: 5,
+      marginTop: 10,
+      opacity: 80
   },
 
-  btn_alt: {
-    height: 100,
-    width: 150,
-    backgroundColor: '#B22222',
-    paddingHorizontal: 10,
-    borderRadius: 5,
-    margin: 10
+  btn_alt:{
+      height: 175,
+      width: 150,
+      backgroundColor: '#B22222',
+      paddingHorizontal: 10,
+      borderRadius: 5,
+      margin: 10,
+      opacity: 80
   },
 
   btn_content: {
@@ -171,9 +186,11 @@ const style = StyleSheet.create({
     justifyContent: 'space-between'
   },
 
-  txt: {
-    fontWeight: '700',
-    color: 'white'
+  txt:{
+      fontWeight: '700',
+      color: 'white',
+      fontSize: 24,
+      //fontFamily 
   },
 
   icon_default: {
