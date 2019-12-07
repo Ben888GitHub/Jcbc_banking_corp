@@ -95,13 +95,13 @@ class LoginScreen extends Component {
     this.props.authenticate({ name: "Sample", accnum: "sample_accnum" });
   };
 
-  componentDidMount() {
+  _handlesubmit = () => {
     axios
       .post(
         "https://ixmhlhrubj.execute-api.ap-southeast-1.amazonaws.com/dev/authenticate",
         {
-          accname: "winsontju",
-          pin: "90383"
+          accname: this.state.loginField,
+          pin: this.state.code
         }
       )
       .then(res => {
@@ -112,7 +112,13 @@ class LoginScreen extends Component {
             console.log(res.statusText)
             console.log(res.data)
             console.log(res.status)
-            alert("Ding");
+            //alert("Ding")
+            this.props.navigation.push('Home')
+            Toast.show({
+              text: "Welcome to JCBC Banking.",
+              buttonText: "Okay"
+            })
+
         }
       })
       .catch(err => {
@@ -289,17 +295,13 @@ class LoginScreen extends Component {
                       animated: true
                     });
                   }}
-                  onFulfill={this._checkCode}
+                  //onFulfill={this._handlesubmit}
                   onBackspace={this._focusePrevInput}
                 />
 
                 <Button
                   onPress={() => {
-                    navigate("Home");
-                    Toast.show({
-                      text: "Welcome to JCBC Banking.",
-                      buttonText: "Okay"
-                    });
+                    this._handlesubmit()
                   }}
                   style={{
                     backgroundColor: "black",
