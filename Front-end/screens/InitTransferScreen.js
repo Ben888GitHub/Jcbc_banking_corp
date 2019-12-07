@@ -73,6 +73,38 @@ class InitTransferScreen extends Component {
         })*/;
     }
 
+    _handletransfer = () => {
+        axios
+          .post(
+            "https://ixmhlhrubj.execute-api.ap-southeast-1.amazonaws.com/dev/transfer",
+            {
+              sender_username: this.state.username,
+              soure_acc_num: this.state.accountNumber,
+              transfer_amount: this.amount,
+              dest_acc_num: this.beneficiaryAccNumber
+            }
+          )
+          .then(res => {
+                console.log(res.statusText)
+                console.log(res.data)
+                console.log(res.status)
+                //alert("Ding")
+                Toast.show({
+                  text: "Transfer Successful!",
+                  buttonText: "OK"
+                })
+                this.props.navigation.push('TransferConfirm')
+                })
+    
+            
+          
+          .catch(err => {
+            console.error(err)
+            console.log(err)
+            alert('Invalid Details!')
+          });
+      }
+
     render() {
         //const { navigate } = this.props.navigation; //navigation is always a props
         const TransferAlert = () => {

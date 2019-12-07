@@ -57,7 +57,7 @@ class App extends Component {
       bankName: "JCBC Saving Account",
       accountNumber: "(899-678898-009)",
       beneficiary: "BENEDICT RYAN",
-      beneficiaryAccNumber: "000-000-9118-0000",
+      beneficiaryAccNumber: "0000-9118-0000",
       beneficiaryBank: "HSBC",
       date: " ",
       amount: "10,000"
