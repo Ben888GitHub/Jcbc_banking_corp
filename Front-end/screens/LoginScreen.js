@@ -105,27 +105,25 @@ class LoginScreen extends Component {
         }
       )
       .then(res => {
-        if(res.data.length == 0){
-            alert("Please enter correct Info");
-        }
-        else{
-            console.log(res.statusText)
-            console.log(res.data)
-            console.log(res.status)
-            //alert("Ding")
-            this.props.navigation.push('Home')
-            Toast.show({
-              text: "Welcome to JCBC Banking.",
-              buttonText: "Okay"
-            })
-
+        if (res.data.length == 0) {
+          alert("Please enter correct Info");
+        } else {
+          console.log(res.statusText);
+          console.log(res.data);
+          console.log(res.status);
+          //alert("Ding")
+          this.props.navigation.push("Home");
+          Toast.show({
+            text: "Welcome to JCBC Banking.",
+            buttonText: "Okay"
+          });
         }
       })
       .catch(err => {
-        console.error(err)
-        console.log(err)
+        console.error(err);
+        console.log(err);
       });
-  }
+  };
 
   render() {
     const marginNum = 10;
@@ -301,7 +299,7 @@ class LoginScreen extends Component {
 
                 <Button
                   onPress={() => {
-                    this._handlesubmit()
+                    this._handlesubmit();
                   }}
                   style={{
                     backgroundColor: "black",
