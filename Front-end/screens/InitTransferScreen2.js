@@ -125,7 +125,7 @@ class App extends Component {
           this.props.navigation.push("TransferConfirm")
         }
         }
-      })
+      )
       .catch(err => {
         console.error(err);
         console.log(err);
@@ -134,9 +134,9 @@ class App extends Component {
   };
   render() {
     const screenWidth = Math.round(Dimensions.get("window").width);
-    const TransferAlert = () => {
-      Alert.alert("You Have Successfully Transferred");
-    };
+    // const TransferAlert = () => {
+    //   Alert.alert("You Have Successfully Transferred");
+    // };
     // Blank Comment
     // This is the functionality for the Account Number Input on the Banking App
     const AccountNumberValue = () => {
@@ -443,7 +443,7 @@ class App extends Component {
               }}
             >
               <Text
-                onPress={TransferAlert}
+                // onPress={TransferAlert}
                 style={{
                   fontWeight: "bold",
                   justifyContent: "center",
