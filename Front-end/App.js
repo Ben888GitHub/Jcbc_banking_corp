@@ -8,6 +8,8 @@ import InitTransferConfirmation from "./screens/InitTransferConfirmation";
 import HomeScreen from "./screens/HomeScreen";
 import LoginScreen from "./screens/LoginScreen";
 
+import { setCustomText } from 'react-native-global-props';
+
 import { Root } from "native-base";
 
 import { AppLoading } from "expo";
@@ -35,7 +37,8 @@ const AppContainer = createAppContainer(
     {
       // config
       headerMode: "none",
-      initialRouteName: "Login" // initialRouteName will display the first component
+      // initialRouteName: "Login" // initialRouteName will display the first component
+      initialRouteName: "Home" // initialRouteName will display the first component
     }
   )
 );
@@ -46,6 +49,15 @@ export default class App extends React.Component {
     this.state = {
       isReady: false // For loading the font
     };
+  }
+
+  defaultFonts() {
+    const customTextProps = {
+      style: {
+        fontFamily: 'Museo'
+      }
+    }
+    setCustomText(customTextProps);
   }
 
   async componentDidMount() {
@@ -63,6 +75,7 @@ export default class App extends React.Component {
       Roboto_medium: require("native-base/Fonts/Roboto_medium.ttf"),
       ...Ionicons.font
     });
+    this.defaultFonts();
     this.setState({ isReady: true });
   }
 
@@ -73,7 +86,7 @@ export default class App extends React.Component {
     }
 
     return (
-      <Provider store={store} >
+      <Provider store={store}>
         <Root>
           <AppContainer />
         </Root>

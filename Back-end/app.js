@@ -54,17 +54,21 @@ app.post("/transfer", async (request, response) => {
         "dest_acc_num": "1",
     };
 
+
     // Manipulating with the source:
     let source_requete = {
         $and: [
             { "accname": request.body.sender_username },
-            { "accounts.accnumber": request.body.source_acc_num.toString() }
+            { "accounts.accnumber": request.body.source_acc_num }
         ]
     };
 
-    let sourceAccNumber = request.body.source_acc_num.toString();
+    let sourceAccNumber = request.body.source_acc_num;
 
     let currentAccount = await collection.findOne(source_requete);
+
+
+
     let currentAccList = currentAccount.accounts;
     var currentBalance = currentAccList.find(function (eachAccount) {
         if (eachAccount.accnumber === sourceAccNumber) {
@@ -75,15 +79,21 @@ app.post("/transfer", async (request, response) => {
     let source_updateContent = {
         $set: { "accounts.$.balance": currentBalance.balance - request.body.transfer_amount }
     };
-    console.log(currentBalance.balance);
     let source_result = await collection.updateOne(source_requete, source_updateContent);
 
-    // Manipulating with the destination:
-    let dest_requete = { "accounts.accnumber": request.body.dest_acc_num.toString() };
 
-    let destAccNumber = request.body.dest_acc_num.toString();
+    // Manipulating with the destination:
+    let dest_requete = { "accounts.accnumber": request.body.dest_acc_num };
+
+    let destAccNumber = request.body.dest_acc_num;
 
     currentAccount = await collection.findOne(dest_requete);
+    if (!currentAccount) {
+        console.log('Destination account is not exist.');
+        response.status(500).send({ errorMessage: 'Destination account is not exist.' });
+        return;
+    };
+
     currentAccList = currentAccount.accounts;
     currentBalance = currentAccList.find(function (eachAccount) {
         if (eachAccount.accnumber === destAccNumber) {
@@ -91,17 +101,20 @@ app.post("/transfer", async (request, response) => {
         };
     });
 
+    if (currentBalance.balance < request.body.transfer_amount) {
+        response.status(500).send({ errorMessage: 'Source balance is not efficient.' });
+        return;
+    };
+
     let dest_updateContent = {
         $set: { "accounts.$.balance": currentBalance.balance + request.body.transfer_amount }
     };
-    console.log(currentBalance.balance);
     let dest_result = await collection.updateOne(dest_requete, dest_updateContent);
 
-    // if (result.length === 0) {
-    //     response.send(false);
-    // } else {
-    //     response.send(true);
-    // };
+    response.status(200).send({
+        substracting: source_result,
+        adding: dest_result
+    });
 });
 
 

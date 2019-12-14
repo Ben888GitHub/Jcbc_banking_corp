@@ -1,0 +1,184 @@
+[
+    {
+        "_id": {
+            "$oid": "5de4cdd617ed2eb94c60103b"
+        },
+        "accname": "hungnguyen",
+        "pin": "123456",
+        "email": "vanhung.nguyen2@my.jcu.edu.au",
+        "accounts": [
+            {
+                "accnumber": "999999990000",
+                "balance": {
+                    "$numberInt": "1000000"
+                },
+                "currency": "SGD"
+            },
+            {
+                "accnumber": "999900009999",
+                "balance": {
+                    "$numberInt": "190"
+                },
+                "currency": "USD"
+            },
+            {
+                "accnumber": "000099999999",
+                "balance": {
+                    "$numberDouble": "58392.51"
+                },
+                "currency": "CNY"
+            },
+            {
+                "accnumber": "666666666666",
+                "balance": {
+                    "$numberLong": "6666666666"
+                },
+                "currency": "VND"
+            }
+        ],
+        "dependencies": [
+            "benryan",
+            "zwenyan"
+        ]
+    },
+    {
+        "_id": {
+            "$oid": "5de4ceda923cd107bfbd6a1e"
+        },
+        "accname": "benryan",
+        "pin": "123457",
+        "email": "benedict.ryan@my.jcu.edu.au",
+        "accounts": [
+            {
+                "accnumber": "999999999999",
+                "balance": {
+                    "$numberInt": "13002280"
+                },
+                "currency": "SGD"
+            },
+            {
+                "accnumber": "999912349999",
+                "balance": {
+                    "$numberInt": "10"
+                },
+                "currency": "USD"
+            },
+            {
+                "accnumber": "098765432109",
+                "balance": {
+                    "$numberDouble": "20.25"
+                },
+                "currency": "CAD"
+            }
+        ],
+        "dependencies": [
+            "zwenyan",
+            "hungnguyen"
+        ]
+    },
+    {
+        "_id": {
+            "$oid": "5de4cff24307e34df849cd7c"
+        },
+        "accname": "winsontju",
+        "pin": "903832",
+        "email": "winson.tjuata@my.jcu.edu.au",
+        "accounts": [
+            {
+                "accnumber": "123456781290",
+                "balance": {
+                    "$numberInt": "103000"
+                },
+                "currency": "SGD"
+            }
+        ],
+        "dependencies": [
+            "harry",
+            "kyleang"
+        ]
+    },
+    {
+        "_id": {
+            "$oid": "5de4d3574307e34df849cd7d"
+        },
+        "accname": "zwenyan",
+        "pin": "561337",
+        "email": "zwe.nyantoe@my.jcu.edu.au",
+        "accounts": [
+            {
+                "accnumber": "837213450781",
+                "balance": {
+                    "$numberInt": "4080"
+                },
+                "currency": "SGD"
+            },
+            {
+                "accnumber": "674398731230",
+                "balance": {
+                    "$numberDouble": "120.5"
+                },
+                "currency": "VND"
+            }
+        ],
+        "dependencies": [
+            "benryan",
+            "harry"
+        ]
+    },
+    {
+        "_id": {
+            "$oid": "5de4d4264307e34df849cd7e"
+        },
+        "accname": "kyleang",
+        "pin": "834661",
+        "email": "kyle.ang@my.jcu.edu.au",
+        "accounts": [
+            {
+                "accnumber": "875346420020",
+                "balance": {
+                    "$numberLong": "589241110100"
+                },
+                "currency": "SGD"
+            },
+            {
+                "accnumber": "908357228391",
+                "balance": {
+                    "$numberInt": "500"
+                },
+                "currency": "USD"
+            }
+        ],
+        "dependencies": [
+            "hungnguyen",
+            "winsontju"
+        ]
+    },
+    {
+        "_id": {
+            "$oid": "5de4d72f4307e34df849cd7f"
+        },
+        "accname": "harry",
+        "pin": "438972",
+        "email": "kyaw.phyo@my.jcu.edu.au",
+        "accounts": [
+            {
+                "accnumber": "250034870000",
+                "balance": {
+                    "$numberInt": "249999998"
+                },
+                "currency": "IDR"
+            },
+            {
+                "accnumber": "398278230981",
+                "balance": {
+                    "$numberInt": "810"
+                },
+                "currency": "SGD"
+            }
+        ],
+        "dependencies": [
+            "kyleang",
+            "zwenyan"
+        ]
+    }
+]

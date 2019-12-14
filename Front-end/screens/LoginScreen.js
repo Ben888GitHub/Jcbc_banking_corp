@@ -62,7 +62,7 @@ class LoginScreen extends Component {
     }
 
     _checkCode = () => {
-        this.props.authenticate({ name: 'Sample', accnum: 'sample_accnum' });
+        this.props.authenticate({ accnum: this.state.loginField, code: this.state.code });
     }
 
     render() {

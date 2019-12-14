@@ -1,12 +1,12 @@
 service: cp3405
 org: hungnguy
-app: mydummyapp
+app: cp3405
 
 provider:
   name: aws
   runtime: nodejs10.x
   region: ap-southeast-1
-  profile: default
+  profile: cp3405
 
 plugins:
   - serverless-offline
