@@ -7,6 +7,7 @@ import InitTransferScreen from "./screens/InitTransferScreen";
 import InitTransferConfirmation from "./screens/InitTransferConfirmation";
 import HomeScreen from "./screens/HomeScreen";
 import LoginScreen from "./screens/LoginScreen";
+import AccountScreen from "./screens/account_page";
 
 import { setCustomText } from 'react-native-global-props';
 
@@ -32,7 +33,8 @@ const AppContainer = createAppContainer(
       Home: { screen: HomeScreen },
       Transfer: { screen: InitTransferScreen },
       Transfer2: { screen: InitTransferScreen2 },
-      TransferConfirm: { screen: InitTransferConfirmation }
+      TransferConfirm: { screen: InitTransferConfirmation },
+      Account : {screen: AccountScreen}
     },
     {
       // config
@@ -73,6 +75,8 @@ export default class App extends React.Component {
       //Below are the default font of Android, don't delete them:
       Roboto: require("native-base/Fonts/Roboto.ttf"),
       Roboto_medium: require("native-base/Fonts/Roboto_medium.ttf"),
+      Roboto_700 : require("./fonts/roboto-700.ttf"),
+      Roboto_regular : require("./fonts/roboto-regular.ttf"),
       ...Ionicons.font
     });
     this.defaultFonts();

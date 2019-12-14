@@ -31,6 +31,11 @@ import {
   Text,
   Input
 } from "native-base";
+import reducer from "../reducers/reducers";
+import { authenticate } from "../reducers/actions";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import axios from "axios";
 
 // import { Dropdown } from "react-native-material-dropdown";
 
@@ -45,6 +50,18 @@ import {
 
 // const DropDown = require("react-native-dropdown");
 // const { Select, Option, OptionList, updatePosition } = DropDown;
+const mapStateToProps = state => {
+  const { currentUser } = state;
+  return { currentUser };
+};
+
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(
+    {
+      authenticate
+    },
+    dispatch
+  );
 
 class App extends Component {
   constructor(props) {
@@ -72,18 +89,54 @@ class App extends Component {
   onValueChange(value) {
     const { navigate } = this.props.navigation;
     if (value === "Ryan") {
-      console.log(value)
-      navigate('Transfer')
+      console.log(value);
+      navigate("Transfer");
     }
     /*this.setState({
       selected: value
-    })*/;
+    })*/
   }
+
+  _handletransfer = () => {
+    axios
+      .post(
+        "https://ixmhlhrubj.execute-api.ap-southeast-1.amazonaws.com/dev/transfer",
+        {
+          sender_username: this.state.username,
+          source_acc_num: this.state.accountNumber,
+          transfer_amount: this.state.amount,
+          dest_acc_num: this.state.beneficiaryAccNumber
+        }
+      )
+      .then(res => {
+        console.log(res.statusText);
+        console.log(res.data);
+        console.log(res.status);
+
+        if (res.status === 404) {
+          // alert sth about the acc info is wrong.
+          alert("Invalid Details")
+        }
+
+        if (res.status === 200) {
+          // this.props.navigation.push("TransferConfirm");
+          // alert successful
+          alert("Successful")
+          this.props.navigation.push("TransferConfirm")
+        }
+        }
+      )
+      .catch(err => {
+        console.error(err);
+        console.log(err);
+        alert("Invalid Details!");
+      });
+  };
   render() {
     const screenWidth = Math.round(Dimensions.get("window").width);
-    const TransferAlert = () => {
-      Alert.alert("You Have Successfully Transferred");
-    };
+    // const TransferAlert = () => {
+    //   Alert.alert("You Have Successfully Transferred");
+    // };
     // Blank Comment
     // This is the functionality for the Account Number Input on the Banking App
     const AccountNumberValue = () => {
@@ -186,7 +239,7 @@ class App extends Component {
               iosIcon={
                 <Icon
                   name="arrow-down"
-                // style={{ position: "absolute", right: 0 }}
+                  // style={{ position: "absolute", right: 0 }}
                 />
               }
               style={{
@@ -198,7 +251,6 @@ class App extends Component {
             >
               <Picker.Item label="I want to input manually" value="key1" />
               <Picker.Item label="To saved beneficiaries" value="Ryan" />
-
             </Picker>
           </Card>
           {/* Blank Comment */}
@@ -218,7 +270,17 @@ class App extends Component {
             regular
             style={{ borderRadius: 5.5, width: 390, marginLeft: 12 }}
           >
-            <Input placeholder="Your Account Number" />
+            <Input
+              value={this.state.accountNumber}
+              autoCapitalize="none"
+              placeholder="Your Account Number"
+              onFocus={() => {
+                this.setState({ accountNumber: "" });
+              }}
+              onChangeText={text => {
+                this.setState({ accountNumber: text });
+              }}
+            />
           </Item>
           {/* */}
           {/* ACCOUNT NAME INPUT */}
@@ -237,7 +299,16 @@ class App extends Component {
             regular
             style={{ borderRadius: 5.5, width: 390, marginLeft: 12 }}
           >
-            <Input placeholder="Your Account Name" />
+            <Input
+              value={this.state.username}
+              onFocus={() => {
+                this.setState({ username: "" });
+              }}
+              onChangeText={text => {
+                this.setState({ username: text });
+              }}
+              placeholder="Your Account Name"
+            />
           </Item>
           {/* */}
           {/* BANK COMPANY PICKER DROPDOWN */}
@@ -268,7 +339,7 @@ class App extends Component {
               iosIcon={
                 <Icon
                   name="arrow-down"
-                // style={{ position: "absolute", right: 0 }}
+                  // style={{ position: "absolute", right: 0 }}
                 />
               }
               style={{
@@ -322,17 +393,57 @@ class App extends Component {
             regular
             style={{ borderRadius: 5.5, width: 390, marginLeft: 12 }}
           >
-            <Input placeholder="Enter Amount" />
+            <Input
+              value={this.state.amount}
+              onFocus={() => {
+                this.setState({ amount: "" });
+              }}
+              onChangeText={text => {
+                this.setState({ amount: text });
+              }}
+              placeholder="Enter Amount"
+            />
           </Item>
           {/* */}
-          {/* BUTTON OF TRAMSFER  */}
+          {/* BENEFICIARY ACCOUNT NUMBER */}
+          <Text
+            style={{
+              fontWeight: "bold",
+              marginTop: 20,
+              fontSize: 17,
+              marginLeft: 13,
+              marginBottom: 5
+            }}
+          >
+            Beneficiary Account Number:
+          </Text>
+          <Item
+            regular
+            style={{ borderRadius: 5.5, width: 390, marginLeft: 12 }}
+          >
+            <Input
+              value={this.state.beneficiaryAccNumber}
+              onFocus={() => {
+                this.setState({ beneficiaryAccNumber: "" });
+              }}
+              onChangeText={text => {
+                this.setState({ beneficiaryAccNumber: text });
+              }}
+              placeholder="Enter Beneficiary Account Number"
+            />
+          </Item>
+          {/* */}
+          {/* BUTTON OF TRANSFER  */}
           <View style={{ alignItems: "center", padding: 15 }}>
             <Button
               danger
               style={{ margin: 25, borderRadius: 10, width: 120, height: 60 }}
+              onPress={() => {
+                this._handletransfer();
+              }}
             >
               <Text
-                onPress={TransferAlert}
+                // onPress={TransferAlert}
                 style={{
                   fontWeight: "bold",
                   justifyContent: "center",
@@ -373,7 +484,8 @@ const styles1 = StyleSheet.create({
   }
 });
 
-export default App;
+export default connect(mapStateToProps, mapDispatchToProps)(App);
+
 AppRegistry.registerComponent("App", () => App);
 
 {

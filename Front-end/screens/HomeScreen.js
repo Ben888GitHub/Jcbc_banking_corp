@@ -9,7 +9,6 @@ import {
 import * as Font from 'expo-font';
 import { Ionicons, MaterialIcons } from '@expo/vector-icons';
 import { getStatusBarHeight } from 'react-native-status-bar-height';
-
 import reducer from '../reducers/reducers';
 import { authenticate } from '../reducers/actions';
 import { connect } from 'react-redux';
@@ -158,8 +157,7 @@ class HomeScreen extends React.Component {
             </TouchableOpacity>
             
             <View style={style.btn_container}>
-
-            <TouchableOpacity onPress={() => alert("In Development")}
+              <TouchableOpacity onPress={() => navigate('Account')}
                style={style.btn_alt}>
                 <View style={style.btn_content}>
                  <Text style={style.txt}>

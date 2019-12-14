@@ -13,6 +13,11 @@ import { Asset } from 'expo-asset';
 
 import red from '../assets/red2.jpg';
 
+import reducer from '../reducers/reducers';
+import { authenticate } from '../reducers/actions';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+
 // const MIN_HEIGHT = Header.HEIGHT;
 const MIN_HEIGHT = 110;
 const MAX_HEIGHT = 250;
@@ -20,6 +25,18 @@ const MAX_HEIGHT = 250;
 let tempData = [
     'Alex Tjuatja', 'Ben Ryan', 'Kylæ Ang', 'Zwe Nyan', 'Hung Nguyen', "Harry Kyaw"
 ];
+
+const mapStateToProps = (state) => {
+    const { currentUser } = state;
+    return { currentUser };
+};
+
+const mapDispatchToProps = dispatch => (
+    bindActionCreators({
+        authenticate,
+    }, dispatch)
+);
+
 
 class InitTransferScreen extends Component {
     constructor() {
@@ -56,6 +73,38 @@ class InitTransferScreen extends Component {
         })*/;
     }
 
+    _handletransfer = () => {
+        axios
+            .post(
+                "https://ixmhlhrubj.execute-api.ap-southeast-1.amazonaws.com/dev/transfer",
+                {
+                    sender_username: this.state.username,
+                    soure_acc_num: this.state.accountNumber,
+                    transfer_amount: this.amount,
+                    dest_acc_num: this.beneficiaryAccNumber
+                }
+            )
+            .then(res => {
+                console.log(res.statusText)
+                console.log(res.data)
+                console.log(res.status)
+                //alert("Ding")
+                Toast.show({
+                    text: "Transfer Successful!",
+                    buttonText: "OK"
+                })
+                this.props.navigation.push('TransferConfirm')
+            })
+
+
+
+            .catch(err => {
+                console.error(err)
+                console.log(err)
+                alert('Invalid Details!')
+            });
+    }
+
     render() {
         //const { navigate } = this.props.navigation; //navigation is always a props
         const TransferAlert = () => {
@@ -66,7 +115,7 @@ class InitTransferScreen extends Component {
         let tempDataList = tempData.map((value, index) => {
             let widthSize = this.screenWidth * 0.4;
             return (
-                <Card
+                <Card key={index}
                     style={{
                         borderRadius: 10,
                         borderColor: "transparent",
@@ -402,4 +451,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default InitTransferScreen;
+export default connect(mapStateToProps, mapDispatchToProps)(InitTransferScreen);
