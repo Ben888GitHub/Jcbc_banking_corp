@@ -17,6 +17,8 @@ import reducer from '../reducers/reducers';
 import { authenticate } from '../reducers/actions';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { RNSlidingButton, SlideDirection } from 'rn-sliding-button';
+//import { SlideButton, SlideDirection } from 'react-native-slide-button';
 
 // const MIN_HEIGHT = Header.HEIGHT;
 const MIN_HEIGHT = 110;
@@ -95,8 +97,6 @@ class InitTransferScreen extends Component {
                 })
                 this.props.navigation.push('TransferConfirm')
             })
-
-
 
             .catch(err => {
                 console.error(err)
@@ -347,26 +347,42 @@ class InitTransferScreen extends Component {
                     </Item>
                     {/* */}
                     {/* THIS IS TRANSFER BUTTON */}
+                    {/*
                     <View style={{ alignItems: "center", padding: 15 }}>
-                        <Button
-                            danger
-                            style={{ margin: 25, borderRadius: 10, width: 120, height: 60 }}
-                        >
-                            <Text
-                                onPress={TransferAlert}
-                                style={{
-                                    fontWeight: "bold",
-                                    justifyContent: "center",
-                                    alignItems: "center",
-                                    marginLeft: 16,
-                                    fontSize: 16,
-                                    color: "#fff"
-                                }}
-                            >
-                                {" "}
-                                Transfer{" "}
-                            </Text>
-                        </Button>
+                    <SlideButton
+                      onSlideSuccess={TransferAlert}
+                      slideDirection={SlideDirection.RIGHT}
+                      width={500}
+                      height={50}>
+                      <Text> Slide to Transfer </Text>
+                    </SlideButton>
+                    </View>*/}
+                    <View style={{ alignItems: "center", padding: 15 }}>
+                        <RNSlidingButton
+                            style={{
+                                width: 240,
+                                borderRadius: 10,
+                                height: 60,
+                                margin: 25,
+                                backgroundColor: "#c13b3e"
+                            }}
+                            height={70}
+                            onSlidingSuccess={TransferAlert}
+                            slideDirection={SlideDirection.RIGHT}>
+                            <View>
+                                <Text style=
+                                    {{
+                                        fontWeight: "bold",
+                                        justifyContent: "center",
+                                        alignItems: "center",
+                                        marginLeft: 16,
+                                        fontSize: 16,
+                                        color: "#fff"
+                                    }}>
+                                    Slide To Transfer
+                          </Text>
+                            </View>
+                        </RNSlidingButton>
                     </View>
 
                 </HeaderImageScrollView>

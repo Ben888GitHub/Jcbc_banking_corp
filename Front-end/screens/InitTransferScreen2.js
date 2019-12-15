@@ -36,6 +36,7 @@ import { authenticate } from "../reducers/actions";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import axios from "axios";
+import {RNSlidingButton, SlideDirection} from 'rn-sliding-button';
 
 // import { Dropdown } from "react-native-material-dropdown";
 
@@ -434,7 +435,8 @@ class App extends Component {
           </Item>
           {/* */}
           {/* BUTTON OF TRANSFER  */}
-          <View style={{ alignItems: "center", padding: 15 }}>
+          {/*<View style={{ alignItems: "center", padding: 15 }}>
+
             <Button
               danger
               style={{ margin: 25, borderRadius: 10, width: 120, height: 60 }}
@@ -454,6 +456,33 @@ class App extends Component {
                 Transfer{" "}
               </Text>
             </Button>
+          </View>*/}
+
+          <View style={{ alignItems: "center", padding: 15}}>
+            <RNSlidingButton
+              style={{
+                width: 240,
+                borderRadius: 10,
+                height: 60,
+                margin: 25,
+                backgroundColor: "#c13b3e"
+              }}
+              height={70}
+              onSlidingSuccess={ () => {this._handletransfer()}}
+              successfulSlidePercent={90}
+              slideDirection={SlideDirection.RIGHT}>
+              <View>
+                <Text style=
+                {{ fontWeight: "bold",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    marginLeft: 16,
+                    fontSize: 16,
+                    color: "#fff"}}>
+                  Slide To Transfer
+                </Text>
+              </View>
+            </RNSlidingButton>
           </View>
         </Content>
       </Container>
