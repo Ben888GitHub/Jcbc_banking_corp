@@ -10,5 +10,6 @@ npm-debug.*
 web-build/
 web-report/
 Front-end/node_modules/**/*
+Front-end/.expo/packager-info.json
 # macOS
 .DS_Store
