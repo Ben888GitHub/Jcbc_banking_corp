@@ -102,7 +102,7 @@ app.post("/transfer", async (request, response) => {
     });
 
     if (currentBalance.balance < request.body.transfer_amount) {
-        response.status(500).send({ errorMessage: 'Source balance is not efficient.' });
+        response.status(500).send({ errorMessage: 'Source balance is not sufficient.' });
         return;
     };
 
@@ -111,7 +111,23 @@ app.post("/transfer", async (request, response) => {
     };
     let dest_result = await collection.updateOne(dest_requete, dest_updateContent);
 
+    let collectionTransactions = database.collection("transactions");
+    let timeStamp = JSON.stringify(Date.now());
+    let transactionID = request.body.sender_username + timeStamp;
+    let transactionRecord = await collectionTransactions.insertOne({
+        transactionid: transactionID,
+        sourceaccname: request.body.sender_username,
+        sourceaccnum: request.body.source_acc_num,
+        destinationaccname: "Not Defined",
+        destinationaccnum: request.body.dest_acc_num,
+        datestamp: timeStamp,
+        sourcecurrency: "SGD",
+        destinationcurrency: "SGD",
+        amount: request.body.transfer_amount,
+    })
+
     response.status(200).send({
+        transactionRecord: transactionRecord,
         substracting: source_result,
         adding: dest_result
     });

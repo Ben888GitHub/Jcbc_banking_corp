@@ -314,20 +314,6 @@ class InitTransferScreen extends Component {
                             {tempDataList}
                         </ScrollView>
                     </View>
-
-                    {/* <View>
-                        <ScrollView
-                            ref={(ref) => this.scroller = ref}
-                            style={{
-                                marginBottom: 20
-                            }}
-                            horizontal="true"
-                        >
-                            {tempDataList}
-                        </ScrollView>
-                    </View> */}
-                    {/* <View style={{ height: 700 }}></View> */}
-                    {/* ENTER AMOUNT TEXT INPUT WITH PLACEHOLDER */}
                     <Text
                         style={{
                             fontWeight: "bold",
@@ -345,18 +331,6 @@ class InitTransferScreen extends Component {
                     >
                         <Input placeholder="Enter Amount" />
                     </Item>
-                    {/* */}
-                    {/* THIS IS TRANSFER BUTTON */}
-                    {/*
-                    <View style={{ alignItems: "center", padding: 15 }}>
-                    <SlideButton
-                      onSlideSuccess={TransferAlert}
-                      slideDirection={SlideDirection.RIGHT}
-                      width={500}
-                      height={50}>
-                      <Text> Slide to Transfer </Text>
-                    </SlideButton>
-                    </View>*/}
                     <View style={{ alignItems: "center", padding: 15 }}>
                         <RNSlidingButton
                             style={{
