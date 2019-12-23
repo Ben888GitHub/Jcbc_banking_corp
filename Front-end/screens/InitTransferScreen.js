@@ -17,6 +17,8 @@ import reducer from '../reducers/reducers';
 import { authenticate } from '../reducers/actions';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { RNSlidingButton, SlideDirection } from 'rn-sliding-button';
+//import { SlideButton, SlideDirection } from 'react-native-slide-button';
 
 // const MIN_HEIGHT = Header.HEIGHT;
 const MIN_HEIGHT = 110;
@@ -75,35 +77,33 @@ class InitTransferScreen extends Component {
 
     _handletransfer = () => {
         axios
-          .post(
-            "https://ixmhlhrubj.execute-api.ap-southeast-1.amazonaws.com/dev/transfer",
-            {
-              sender_username: this.state.username,
-              soure_acc_num: this.state.accountNumber,
-              transfer_amount: this.amount,
-              dest_acc_num: this.beneficiaryAccNumber
-            }
-          )
-          .then(res => {
+            .post(
+                "https://ixmhlhrubj.execute-api.ap-southeast-1.amazonaws.com/dev/transfer",
+                {
+                    sender_username: this.state.username,
+                    soure_acc_num: this.state.accountNumber,
+                    transfer_amount: this.amount,
+                    dest_acc_num: this.beneficiaryAccNumber
+                }
+            )
+            .then(res => {
                 console.log(res.statusText)
                 console.log(res.data)
                 console.log(res.status)
                 //alert("Ding")
                 Toast.show({
-                  text: "Transfer Successful!",
-                  buttonText: "OK"
+                    text: "Transfer Successful!",
+                    buttonText: "OK"
                 })
                 this.props.navigation.push('TransferConfirm')
-                })
-    
-            
-          
-          .catch(err => {
-            console.error(err)
-            console.log(err)
-            alert('Invalid Details!')
-          });
-      }
+            })
+
+            .catch(err => {
+                console.error(err)
+                console.log(err)
+                alert('Invalid Details!')
+            });
+    }
 
     render() {
         //const { navigate } = this.props.navigation; //navigation is always a props
@@ -115,7 +115,7 @@ class InitTransferScreen extends Component {
         let tempDataList = tempData.map((value, index) => {
             let widthSize = this.screenWidth * 0.4;
             return (
-                <Card
+                <Card key={index}
                     style={{
                         borderRadius: 10,
                         borderColor: "transparent",
@@ -314,20 +314,6 @@ class InitTransferScreen extends Component {
                             {tempDataList}
                         </ScrollView>
                     </View>
-
-                    {/* <View>
-                        <ScrollView
-                            ref={(ref) => this.scroller = ref}
-                            style={{
-                                marginBottom: 20
-                            }}
-                            horizontal="true"
-                        >
-                            {tempDataList}
-                        </ScrollView>
-                    </View> */}
-                    {/* <View style={{ height: 700 }}></View> */}
-                    {/* ENTER AMOUNT TEXT INPUT WITH PLACEHOLDER */}
                     <Text
                         style={{
                             fontWeight: "bold",
@@ -345,28 +331,32 @@ class InitTransferScreen extends Component {
                     >
                         <Input placeholder="Enter Amount" />
                     </Item>
-                    {/* */}
-                    {/* THIS IS TRANSFER BUTTON */}
                     <View style={{ alignItems: "center", padding: 15 }}>
-                        <Button
-                            danger
-                            style={{ margin: 25, borderRadius: 10, width: 120, height: 60 }}
-                        >
-                            <Text
-                                onPress={TransferAlert}
-                                style={{
-                                    fontWeight: "bold",
-                                    justifyContent: "center",
-                                    alignItems: "center",
-                                    marginLeft: 16,
-                                    fontSize: 16,
-                                    color: "#fff"
-                                }}
-                            >
-                                {" "}
-                                Transfer{" "}
-                            </Text>
-                        </Button>
+                        <RNSlidingButton
+                            style={{
+                                width: 240,
+                                borderRadius: 10,
+                                height: 60,
+                                margin: 25,
+                                backgroundColor: "#c13b3e"
+                            }}
+                            height={70}
+                            onSlidingSuccess={TransferAlert}
+                            slideDirection={SlideDirection.RIGHT}>
+                            <View>
+                                <Text style=
+                                    {{
+                                        fontWeight: "bold",
+                                        justifyContent: "center",
+                                        alignItems: "center",
+                                        marginLeft: 16,
+                                        fontSize: 16,
+                                        color: "#fff"
+                                    }}>
+                                    Slide To Transfer
+                          </Text>
+                            </View>
+                        </RNSlidingButton>
                     </View>
 
                 </HeaderImageScrollView>

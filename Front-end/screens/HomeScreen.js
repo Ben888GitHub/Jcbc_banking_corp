@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import { View, TouchableOpacity, StyleSheet, ImageBackground } from 'react-native';
+import { View, TouchableOpacity, StyleSheet, ImageBackground, Text, Image } from 'react-native';
 import { AppLoading } from 'expo';
 //import { Icon } from "react-native-vector-icons";
 import {
-  Container, Text, Header, Content, Button,
-  Success, Footer, FooterTab, Title, Icon
+  Container, Header, Content, Button,
+  Success, Footer, FooterTab, Title, Icon, Card, CardItem
 } from 'native-base';
 import * as Font from 'expo-font';
 import { Ionicons, MaterialIcons } from '@expo/vector-icons';
@@ -14,8 +14,6 @@ import { authenticate } from '../reducers/actions';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-
-// Redux
 const mapStateToProps = (state) => {
   const { currentUser } = state;
   return { currentUser };
@@ -23,10 +21,11 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = dispatch => (
   bindActionCreators({
-      authenticate,
+    authenticate,
   }, dispatch)
 );
 
+const fastChunkString = require('fast-chunk-string');
 
 class HomeScreen extends React.Component {
   constructor(props) {
@@ -37,31 +36,106 @@ class HomeScreen extends React.Component {
   }
 
   async componentDidMount() {
-    await Font.loadAsync({
-      Museo: require("../fonts/museosanscyrl-300.ttf"),
-      MuseoBold: require("../fonts/museosanscyrl-700.ttf"),
-      MuseoSemiBold: require("../fonts/museosanscyrl-500.ttf"),
-      ...Ionicons.font
-    });
     this.setState({ isReady: true });
   }
 
+  accNumberString = (aString) => {
+    let arr = fastChunkString(aString, { size: 4, unicodeAware: false });
+    return (arr[0] + " " + arr[1] + " " + arr[2] + " ");
+  }
+
   render() {
+
     const { navigate } = this.props.navigation; //navigation is always a props
+    console.log(this.props.currentUser);
 
     if (!this.state.isReady) {
       return <AppLoading />;
     }
 
     return (
-      <Container>
-        <Header style={{ paddingTop: 30, backgroundColor: "#B22222" }}>
-          <Title style={{ color: "white" }}>Mobile Banking Apps</Title>
-        </Header>
-        <ImageBackground source={require('../assets/transfer.jpg')} resizeMode='cover' style={style.backgroundImage}>
+      <Container style={{ paddingTop: getStatusBarHeight() * 2, padding: 10 }}>
+
+        {/* <ImageBackground source={require('../assets/transfer.jpg')} resizeMode='cover' style={style.backgroundImage}> */}
+
         <Content>
-        
-          <View
+
+          <Text>Hello, {this.props.currentUser.accname}</Text>
+
+          <Text style={{
+            fontFamily: 'MuseoBold',
+            fontSize: 30,
+            fontWeight: '400'
+          }}>Your Accounts</Text>
+
+          {this.props.currentUser.accounts.map((element, key) => (
+
+            <Card key={key} style={{
+              borderColor: 'transparent',
+              backgroundColor: 'transparent',
+              marginBottom: 8,
+              borderRadius: 20,
+            }}>
+              <TouchableOpacity onPress={() =>
+                navigate('Transfer', {
+                  accnumber: element.accnumber
+                })
+              }>
+                <ImageBackground source={require('../assets/bank.jpg')} resizeMode='cover'
+                  style={{}}
+                  imageStyle={{ borderRadius: 21 }}>
+                  <CardItem style={{
+                    height: 150,
+                    backgroundColor: key !== 0 ? 'rgba(0,0,0,0.7)' : 'rgba(178,34,34,0.7)',
+                    borderRadius: 20,
+                  }}>
+                    <View style={{
+                      padding: 10,
+                      height: '100%',
+                      flexGrow: 1,
+                      flexDirection: 'column',
+                      justifyContent: 'space-between',
+                      alignItems: 'flex-start'
+                    }}>
+                      <View>
+                        <Text style={{
+                          marginBottom: 6,
+                          opacity: 0.5,
+                          color: 'white'
+                        }}>{key === 0 ? 'Default Account' : 'Foreign Currency Account'}</Text>
+                        <Text style={{
+                          color: 'white',
+                          fontFamily: 'MuseoSemiBold',
+                          fontWeight: '400'
+                        }}>{this.accNumberString(element.accnumber)}</Text>
+                      </View>
+
+                      <View>
+                        <Text style={{ fontSize: 23, fontFamily: 'MuseoBold', fontWeight: '400', color: 'white' }}>
+                          {element.currency}
+                        </Text>
+                      </View>
+                    </View>
+
+                    <View style={{ height: '100%', padding: 10, justifyContent: 'flex-end', alignItems: 'flex-end' }}>
+                      <Text style={{ color: 'white', opacity: 0.5, marginBottom: 6 }}>{'Total balance'.toUpperCase()}</Text>
+                      <Text style={{
+                        color: 'white', fontFamily: 'MuseoBold',
+                        fontWeight: '400', fontSize: 22
+                      }}>
+                        {element.balance}
+                      </Text>
+                    </View>
+                  </CardItem>
+                </ImageBackground>
+              </TouchableOpacity>
+            </Card>
+          ))}
+
+
+
+
+          {/* <View
             style={{
               padding: 10,
               flex: 1,
@@ -70,20 +144,18 @@ class HomeScreen extends React.Component {
               justifyContent: "center"
             }}
           >
-            
 
             <TouchableOpacity
               onPress={() => navigate('Transfer')}
               style={style.btn}>
               <View style={style.btn_content}>
               <Text style={style.txt}>
-                Transfer
-                                
+                Transfer     
               </Text>
               <Ionicons style={style.icon_default} size={50} name="ios-swap"/>
               </View>
             </TouchableOpacity>
-            {/* */}
+            
             <View style={style.btn_container}>
               <TouchableOpacity onPress={() => navigate('Account')}
                style={style.btn_alt}>
@@ -117,36 +189,12 @@ class HomeScreen extends React.Component {
               <Ionicons style={style.icon_default} size={50} name="ios-cash"/>
               </View>
             </TouchableOpacity>
-            {/*
-            <Button
-              onPress={() => navigate("Transfer2")}
-              style={{
-                height: 60,
-                backgroundColor: "#B22222",
-                margin: 20
-              }}
-            >
-              <Text style={{ margin: 10, fontWeight: "700", color: "white" }}>
-                Go to Transfer2 screen
-              </Text>
-              </Button>
-              <Button
-              onPress={() => navigate("TransferConfirm")}
-              style={{
-                height: 60,
-                backgroundColor: "#B22222",
-                margin: 20
-              }}
-            >
-              <Text style={{ margin: 10, fontWeight: "700", color: "white" }}>
-                Go to TransferConfirm screen
-              </Text>
-            </Button>*/}
-            </View>
+            
+            </View> */}
 
-          </Content>
-        </ImageBackground>
-
+        </Content>
+        {/* </ImageBackground> */}
+        {/* 
         <Footer>
           <FooterTab style={{ backgroundColor: "#B22222" }}>
             <Button>
@@ -162,31 +210,35 @@ class HomeScreen extends React.Component {
               <Icon style={{ color: "white" }} name="ios-exit" />
             </Button>
           </FooterTab>
-        </Footer>
-      </Container>
+        </Footer> */}
+      </Container >
     );
   }
 }
 
+HomeScreen.navigationOptions = {
+  headerTransparent: true
+};
+
 const style = StyleSheet.create({
-  btn:{
-      height: 110,
-      width: 250,
-      backgroundColor: '#B22222',
-      paddingHorizontal: 10,
-      borderRadius: 5,
-      marginTop: 10,
-      opacity: 80
+  btn: {
+    height: 110,
+    width: 250,
+    backgroundColor: '#B22222',
+    paddingHorizontal: 10,
+    borderRadius: 5,
+    marginTop: 10,
+    opacity: 80
   },
 
-  btn_alt:{
-      height: 175,
-      width: 150,
-      backgroundColor: '#B22222',
-      paddingHorizontal: 10,
-      borderRadius: 5,
-      margin: 10,
-      opacity: 80
+  btn_alt: {
+    height: 175,
+    width: 150,
+    backgroundColor: '#B22222',
+    paddingHorizontal: 10,
+    borderRadius: 5,
+    margin: 10,
+    opacity: 80
   },
 
   btn_content: {
@@ -204,11 +256,11 @@ const style = StyleSheet.create({
     justifyContent: 'space-between'
   },
 
-  txt:{
-      fontWeight: '700',
-      color: 'white',
-      fontSize: 24,
-      //fontFamily 
+  txt: {
+    fontWeight: '700',
+    color: 'white',
+    fontSize: 24,
+    //fontFamily 
   },
 
   icon_default: {

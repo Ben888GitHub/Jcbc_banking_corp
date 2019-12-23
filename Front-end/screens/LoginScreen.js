@@ -268,133 +268,133 @@ class LoginScreen extends Component {
             }}
           >
             {this.state.loginField !== "" &&
-            this.state.loginField !== "Username" ? (
-              <View>
-                <Text
-                  style={{
-                    fontFamily: "MuseoBold",
-                    fontSize: 15,
-                    marginBottom: marginNum
-                  }}
-                >
-                  Please provide your pin code:
-                </Text>
-
-                <SmoothPinCodeInput
-                  ref={x => (this.textinput = x)}
-                  // autoFocus={true}
-                  codeLength={6}
-                  value={this.state.code}
-                  onTextChange={code => {
-                    this.setState({ code });
-                    this.myScrollView.scrollTo({
-                      x: 0,
-                      y: screenHeight,
-                      animated: true
-                    });
-                  }}
-                  //onFulfill={this._handlesubmit}
-                  onBackspace={this._focusePrevInput}
-                />
-
-                <Button
-                  onPress={() => {
-                    this._handlesubmit();
-                  }}
-                  style={{
-                    backgroundColor: "black",
-                    flexDirection: "row",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    padding: 20,
-                    shadowColor: "#000",
-                    shadowOffset: {
-                      width: 0,
-                      height: 2
-                    },
-                    marginTop: marginNum,
-                    marginBottom: marginNum,
-                    shadowOpacity: 0.25,
-                    shadowRadius: 3.84,
-                    elevation: 5
-                  }}
-                >
+              this.state.loginField !== "Username" ? (
+                <View>
                   <Text
                     style={{
-                      fontSize: 15,
                       fontFamily: "MuseoBold",
-                      color: "white"
+                      fontSize: 15,
+                      marginBottom: marginNum
                     }}
                   >
-                    Next
+                    Please provide your pin code:
+                </Text>
+
+                  <SmoothPinCodeInput
+                    ref={x => (this.textinput = x)}
+                    // autoFocus={true}
+                    codeLength={6}
+                    value={this.state.code}
+                    onTextChange={code => {
+                      this.setState({ code });
+                      this.myScrollView.scrollTo({
+                        x: 0,
+                        y: screenHeight,
+                        animated: true
+                      });
+                    }}
+                    //onFulfill={this._handlesubmit}
+                    onBackspace={this._focusePrevInput}
+                  />
+
+                  <Button
+                    onPress={() => {
+                      this._handlesubmit();
+                    }}
+                    style={{
+                      backgroundColor: "black",
+                      flexDirection: "row",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      padding: 20,
+                      shadowColor: "#000",
+                      shadowOffset: {
+                        width: 0,
+                        height: 2
+                      },
+                      marginTop: marginNum,
+                      marginBottom: marginNum,
+                      shadowOpacity: 0.25,
+                      shadowRadius: 3.84,
+                      elevation: 5
+                    }}
+                  >
+                    <Text
+                      style={{
+                        fontSize: 15,
+                        fontFamily: "MuseoBold",
+                        color: "white"
+                      }}
+                    >
+                      Next
                   </Text>
-                </Button>
-              </View>
-            ) : (
-              <View>
-                <Text
-                  style={{
-                    fontFamily: "MuseoBold",
-                    fontSize: 15,
-                    marginBottom: marginNum
-                  }}
-                >
-                  New to our bank?
-                </Text>
-                <Ionicons
-                  name="md-paper-plane"
-                  size={56}
-                  color="black"
-                  style={{ opacity: 0.2, marginBottom: marginNum }}
-                />
-
-                <Text
-                  style={{
-                    fontFamily: "Museo",
-                    fontSize: 18,
-                    marginBottom: marginNum + 10
-                  }}
-                >
-                  Let's just sign up today!
-                </Text>
-
-                <Button
-                  onPress={() => {
-                    this.setState({ booked: true });
-                    Toast.show({
-                      text: "We will get back to you soon.",
-                      buttonText: "Okay"
-                    });
-                  }}
-                  style={{
-                    backgroundColor: "black",
-                    flexDirection: "row",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    padding: 20,
-                    shadowColor: "#000",
-                    shadowOffset: {
-                      width: 0,
-                      height: 2
-                    },
-                    marginBottom: marginNum,
-                    shadowOpacity: 0.25,
-                    shadowRadius: 3.84,
-                    elevation: 5
-                  }}
-                >
+                  </Button>
+                </View>
+              ) : (
+                <View>
                   <Text
                     style={{
-                      fontSize: 15,
                       fontFamily: "MuseoBold",
-                      color: "white"
+                      fontSize: 15,
+                      marginBottom: marginNum
                     }}
                   >
-                    Go to our nearest branch
+                    New to our bank?
+                </Text>
+                  <Ionicons
+                    name="md-paper-plane"
+                    size={56}
+                    color="black"
+                    style={{ opacity: 0.2, marginBottom: marginNum }}
+                  />
+
+                  <Text
+                    style={{
+                      fontFamily: "Museo",
+                      fontSize: 18,
+                      marginBottom: marginNum + 10
+                    }}
+                  >
+                    Let's just sign up today!
+                </Text>
+
+                  <Button
+                    onPress={() => {
+                      this.setState({ booked: true });
+                      Toast.show({
+                        text: "We will get back to you soon.",
+                        buttonText: "Okay"
+                      });
+                    }}
+                    style={{
+                      backgroundColor: "black",
+                      flexDirection: "row",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      padding: 20,
+                      shadowColor: "#000",
+                      shadowOffset: {
+                        width: 0,
+                        height: 2
+                      },
+                      marginBottom: marginNum,
+                      shadowOpacity: 0.25,
+                      shadowRadius: 3.84,
+                      elevation: 5
+                    }}
+                  >
+                    <Text
+                      style={{
+                        fontSize: 15,
+                        fontFamily: "MuseoBold",
+                        color: "white"
+                      }}
+                    >
+                      Go to our nearest branch
                   </Text>
-                </Button>
-              </View>
-            )}
+                  </Button>
+                </View>
+              )}
           </View>
         </HeaderImageScrollView>
       </KeyboardAvoidingView>
