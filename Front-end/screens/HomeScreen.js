@@ -78,7 +78,7 @@ class HomeScreen extends React.Component {
             }}>
               <TouchableOpacity onPress={() =>
                 navigate('Transfer', {
-                  accnumber: element.accnumber
+                  element: element
                 })
               }>
                 <ImageBackground source={require('../assets/bank.jpg')} resizeMode='cover'
