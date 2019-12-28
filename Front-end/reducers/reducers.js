@@ -26,8 +26,14 @@ let defaultUser = {
     }
   ],
   "dependencies": [
-    "benryan",
-    "zwenyan"
+    {
+      "accname": "benryan",
+      "accnumber": "999999999999"
+    },
+    {
+      "accname": "zwenyan",
+      "accnumber": "837213450781"
+    }
   ]
 };
 

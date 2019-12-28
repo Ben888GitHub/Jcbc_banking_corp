@@ -28,6 +28,7 @@ let tempData = [
     'Alex Tjuatja', 'Ben Ryan', 'Kylæ Ang', 'Zwe Nyan', 'Hung Nguyen', "Harry Kyaw"
 ];
 
+//let tempData = this.state.currentUser.dependencies;
 const mapStateToProps = (state) => {
     const { currentUser } = state;
     return { currentUser };
@@ -41,8 +42,8 @@ const mapDispatchToProps = dispatch => (
 
 
 class InitTransferScreen extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.scroller = null;
         this.state = {
             selected: "Ryan",
@@ -112,7 +113,8 @@ class InitTransferScreen extends Component {
         };
         const screenWidth = Math.round(Dimensions.get("window").width);
         const marginNum = 30;
-        let tempDataList = tempData.map((value, index) => {
+        console.log(this.props.currentUser);
+        let tempDataList = this.props.currentUser.dependencies.map((value, index) => {
             let widthSize = this.screenWidth * 0.4;
             return (
                 <Card key={index}
@@ -145,12 +147,13 @@ class InitTransferScreen extends Component {
                             <Text style={{
                                 color: '#c13b3e',
                                 fontSize: 25
-                            }}>{value.split(' ')[0]}</Text>
+                            }}>{value.accname}</Text>
+                            {/*
                             <Text style={{
                                 fontWeight: '700',
                                 color: '#c13b3e',
                                 fontSize: 25
-                            }}>{value.split(' ')[1]}</Text>
+                            }}>Nothing</Text>*/}
                         </View>
 
                     </CardItem>
@@ -162,8 +165,8 @@ class InitTransferScreen extends Component {
                         alignItems: 'center'
                     }}>
                         <Body>
-                            <Text style={{ color: 'white', fontWeight: '700' }}>HSBC</Text>
-                            <Text style={{ color: 'white' }}>Ending: 1245</Text>
+                            <Text style={{ color: 'white', fontWeight: '700' }}>Account Number</Text>
+                            <Text style={{ color: 'white' }}>{value.accnumber}</Text>
                         </Body>
                     </CardItem>
                 </Card >
@@ -241,14 +244,14 @@ class InitTransferScreen extends Component {
                             <Text style={{ fontWeight: '700', fontSize: 20, color: 'white' }}>JCBC Saving Account</Text>
                         </View>
                         <View>
-                            <Text style={{ color: 'white' }}>9999-9999-0000</Text>
+                            <Text style={{ color: 'white' }}>{this.props.navigation.state.params.element.accnumber}</Text>
                         </View>
                     </TriggeringView>
 
 
                     {/* MAIN CONTENT IS HERE */}
                     <View style={styles.section}>
-                        <Text style={{ fontSize: 18 }}>Balace Total: €50,000</Text>
+                        <Text style={{ fontSize: 18 }}>Balance Total: {this.props.navigation.state.params.element.currency} {this.props.navigation.state.params.element.balance}</Text>
                     </View>
                     {/* */}
                     {/* THE PICKER DROPDOWN FOR TRANSFER OPTIONS */}
