@@ -327,12 +327,17 @@ class InitTransferScreen extends Component {
                         }}
                     >
                         Amount:
-          </Text>
+                    </Text>
                     <Item
                         regular
                         style={{ borderRadius: 5.5, width: 390, marginLeft: 12 }}
                     >
-                        <Input placeholder="Enter Amount" />
+                        <Input
+                            pattern={[
+                                '(?=.*\\d)', // number required
+                            ]}
+                            keyboardType={'numeric'}
+                            placeholder="Enter Amount" />
                     </Item>
                     <View style={{ alignItems: "center", padding: 15 }}>
                         <RNSlidingButton
