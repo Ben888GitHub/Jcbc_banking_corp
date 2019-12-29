@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, TouchableOpacity, StyleSheet, ImageBackground, Text } from 'react-native';
+import { View, TouchableOpacity, StyleSheet, ImageBackground, Image, Text } from 'react-native';
 import { AppLoading } from 'expo';
 import { Container, Content, Card, CardItem } from 'native-base';
 import { getStatusBarHeight } from 'react-native-status-bar-height';
@@ -53,13 +53,38 @@ class HomeScreen extends React.Component {
 
         <Content>
 
-          <Text>Hello, {this.props.currentUser.accname}</Text>
+          <View style={{
+            flex: 1,
+            flexDirection: "row"
+          }}>
+            <View style={{
+              flex: 0.7,
+              flexDirection: "column"
+            }}>
 
-          <Text style={{
-            fontFamily: 'MuseoBold',
-            fontSize: 30,
-            fontWeight: '400'
-          }}>Your Accounts</Text>
+              <Text style={{ marginHorizontal: 20 }}>Hello, {this.props.currentUser.accname}</Text>
+
+              <Text style={{
+                fontFamily: 'MuseoBold',
+                fontSize: 30,
+                fontWeight: '400',
+                margin: 20,
+              }}>Your Accounts</Text>
+            </View>
+            <TouchableOpacity 
+            onPress = {() => navigate("Settings")}
+            style={{
+              flex: 0.3,
+              alignItems: 'center',
+              justifyContent: 'center',
+              
+            }}
+            >
+              <Image style={style.settingsLogo}
+                source={require('../assets/settings.png')} ></Image>
+            </TouchableOpacity>
+
+          </View>
 
           {this.props.currentUser.accounts.map((element, key) => (
 
@@ -178,7 +203,11 @@ const style = StyleSheet.create({
 
   icon_default: {
     color: 'white',
-
+  },
+  settingsLogo: {
+    width: 70,
+    height: 70,
+    resizeMode: 'contain',
   },
   backgroundImage: {
     flex: 1,

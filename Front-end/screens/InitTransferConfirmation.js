@@ -4,8 +4,6 @@ import {
   View,
   Alert
 } from "react-native";
-
-import { AppLoading } from "expo";
 import {
   Header,
   Container,

@@ -7,6 +7,7 @@ import AccountScreen from "./screens/account_page";
 import InitTransferScreen from "./screens/InitTransferScreen";
 import InitTransferScreen2 from "./screens/InitTransferScreen2";
 import InitTransferConfirmation from "./screens/InitTransferConfirmation";
+import Settings from "./screens/settings";
 import { setCustomText } from 'react-native-global-props';
 import { Root } from "native-base";
 import { AppLoading } from "expo";
@@ -15,6 +16,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { Provider } from "react-redux";
 import { createStore } from "redux";
 import reducer from "./reducers/reducers";
+import settings from "./screens/settings";
 const store = createStore(reducer);
 
 // First Step
@@ -29,7 +31,8 @@ const AppContainer = createAppContainer(
       Transfer: { screen: InitTransferScreen },
       Transfer2: { screen: InitTransferScreen2 },
       TransferConfirm: { screen: InitTransferConfirmation },
-      Account : {screen: AccountScreen}
+      Account : { screen: AccountScreen },
+      Settings : { screen: settings },
     },
     {
       // config
