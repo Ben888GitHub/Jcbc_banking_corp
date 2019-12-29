@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, Image, Dimensions, StatusBar, TouchableOpacity, ScrollView, Alert, KeyboardAvoidingView } from 'react-native';
+import { StyleSheet, Text, View, Image, Dimensions, StatusBar, TouchableWithoutFeedback, Keyboard, TouchableOpacity, SafeAreaView, ScrollView, Alert, KeyboardAvoidingView, Platform } from 'react-native';
 import * as Animatable from 'react-native-animatable';
 // import { Header } from 'react-navigation-stack';
 import { Header, Container, Left, Body, Title, Right, Card, CardItem, Picker, Icon, Button, Item, Input } from 'native-base';
@@ -115,7 +115,6 @@ class InitTransferScreen extends Component {
         const marginNum = 30;
         console.log(this.props.currentUser);
         let tempDataList = this.props.currentUser.dependencies.map((value, index) => {
-            let widthSize = this.screenWidth * 0.4;
             return (
                 <Card key={index}
                     style={{
@@ -195,17 +194,13 @@ class InitTransferScreen extends Component {
                     renderHeader={() => <Image
                         source={require('../assets/red2.jpg')}
                         style={styles.image} />}
-
                     //Render the small navbar:
-                    
                     renderFixedForeground={() => (
                         <Animatable.View
                             style={styles.navTitleView}
                             ref={navTitleView => {
                                 this.navTitleView = navTitleView;
-                            }}
-                        >
-
+                            }}>
                             <View style={{
                                 width: '100%',
                                 flexDirection: 'row',
@@ -222,7 +217,7 @@ class InitTransferScreen extends Component {
 
                         </Animatable.View>
                     )}
-                    
+
                     //Render the big navbar:
                     renderForeground={() => (
 
@@ -233,146 +228,147 @@ class InitTransferScreen extends Component {
                         </View>
                     )}
                 >
-                    <KeyboardAvoidingView behavior='padding' keyboardVerticalOffset={-200}>
-                    <TriggeringView
-                        style={{
-                            padding: 20,
-                            backgroundColor: '#c13b3e'
-                        }}
-                        onHide={() => this.navTitleView.fadeInUp(500)}
-                        onDisplay={() => this.navTitleView.fadeOutDown(500)}
-                    >
-                        <View>
-                            <Text style={{ fontWeight: '700', fontSize: 20, color: 'white' }}>JCBC Saving Account</Text>
-                        </View>
-                        <View>
-                            <Text style={{ color: 'white' }}>{this.props.navigation.state.params.element.accnumber}</Text>
-                        </View>
-                    </TriggeringView>
+                    <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : null}
+                        style={{ flex: 1 }}>
+                        <SafeAreaView style={{ flex: 1 }}>
+                            <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+                                <View style={{
+                                    flex: 1,
+                                    justifyContent: "flex-end",
+                                }}>
+                                    <TriggeringView
+                                        style={{
+                                            padding: 20,
+                                            backgroundColor: '#c13b3e'
+                                        }}
+                                        onHide={() => this.navTitleView.fadeInUp(500)}
+                                        onDisplay={() => this.navTitleView.fadeOutDown(500)}
+                                    >
+                                        <View>
+                                            <Text style={{ fontWeight: '700', fontSize: 20, color: 'white' }}>JCBC Saving Account</Text>
+                                        </View>
+                                        <View>
+                                            <Text style={{ color: 'white' }}>{this.props.navigation.state.params.element.accnumber}</Text>
+                                        </View>
+                                    </TriggeringView>
 
 
-                    {/* MAIN CONTENT IS HERE */}
-                    <View style={styles.section}>
-                        <Text style={{ fontSize: 18 }}>Balance Total: {this.props.navigation.state.params.element.currency} {this.props.navigation.state.params.element.balance}</Text>
-                    </View>
-                    {/* */}
-                    {/* THE PICKER DROPDOWN FOR TRANSFER OPTIONS */}
-                    <Text
-                        style={{
-                            fontWeight: "bold",
-                            marginTop: 15,
-                            fontSize: 17,
-                            marginLeft: 13,
-                            marginBottom: 5
-                        }}
-                    >
-                        Transfer Options
-          </Text>
-                    <Card
-                        style={{
-                            margin: 20,
-                            borderRadius: 5,
-                            flexDirection: "row",
-                            alignItems: "center",
-                            justifyContent: "space-between",
-                            width: 390,
-                            marginLeft: 13
-                        }}
-                    >
-                        <Picker
-                            mode="dropdown"
-                            iosHeader="Select Transfer Solution"
-                            iosIcon={
-                                <Icon
-                                    name="arrow-down"
-                                // style={{ position: "absolute", right: 0 }}
-                                />
-                            }
-                            style={{
-                                width: screenWidth * 0.92,
-                                fontWeight: "bold"
-                            }}
-                            selectedValue={this.state.selected}
-                            onValueChange={val => this.onValueChange(val)}
-                        >
-                            <Picker.Item label="To saved beneficiaries" value="Ryan" />
-                            <Picker.Item label="I want to input manually" value="key1" />
-                        </Picker>
-                    </Card>
-
-                    <Text style={[styles.sectionTitle, { padding: 20 }]}>Send to saved beneficiaries:</Text>
-                    <View style={[
-                        styles.section,
-                        {
-                            paddingLeft: 0,
-                            paddingRight: 0
-                        }
-                    ]}>
-                        {/* THIS IS THE Horizontal ScrollView for the SAVED BENEFICIARIES */}
-                        <ScrollView
-                            ref={(ref) => this.scroller = ref}
-                            style={{
-                                marginBottom: 20
-                            }}
-                            horizontal="true"
-                        >
-                            {tempDataList}
-                        </ScrollView>
-                    </View>
-                    <Text
-                        style={{
-                            fontWeight: "bold",
-                            marginTop: 20,
-                            fontSize: 17,
-                            marginLeft: 13,
-                            marginBottom: 5
-                        }}
-                    >
-                        Amount:
-                    </Text>
-                    
-                    <Item
-                        regular
-                        style={{ borderRadius: 5.5, width: 390, marginLeft: 12 }}
-                    >
-                        
-                        <Input
-                            pattern={[
-                                '(?=.*\\d)', // number required
-                            ]}
-                            keyboardType={'numeric'}
-                            placeholder="Enter Amount" />
-                        
-                    </Item>
-                    <View style={{ alignItems: "center", padding: 15 }}>
-                        <RNSlidingButton
-                            style={{
-                                width: 240,
-                                borderRadius: 10,
-                                height: 60,
-                                margin: 25,
-                                backgroundColor: "#c13b3e"
-                            }}
-                            height={70}
-                            onSlidingSuccess={TransferAlert}
-                            slideDirection={SlideDirection.RIGHT}>
-                            <View>
-                                <Text style=
-                                    {{
+                                    {/* MAIN CONTENT IS HERE */}
+                                    <View style={styles.section}>
+                                        <Text style={{ fontSize: 18 }}>Balance Total: {this.props.navigation.state.params.element.currency} {this.props.navigation.state.params.element.balance}</Text>
+                                    </View>
+                                    {/* THE PICKER DROPDOWN FOR TRANSFER OPTIONS */}
+                                    <Text style={{
                                         fontWeight: "bold",
-                                        justifyContent: "center",
-                                        alignItems: "center",
-                                        marginLeft: 16,
-                                        fontSize: 16,
-                                        color: "#fff"
+                                        marginTop: 15,
+                                        fontSize: 17,
+                                        marginLeft: 13,
+                                        marginBottom: 5
                                     }}>
-                                    Slide To Transfer
-                          </Text>
-                            </View>
-                        </RNSlidingButton>
-                    </View>
-                    </KeyboardAvoidingView>
+                                        Transfer Options
+                            </Text>
+                                    <Card
+                                        style={{
+                                            margin: 20,
+                                            borderRadius: 5,
+                                            flexDirection: "row",
+                                            alignItems: "center",
+                                            justifyContent: "space-between",
+                                            width: 390,
+                                            marginLeft: 13
+                                        }}>
+                                        <Picker
+                                            mode="dropdown"
+                                            iosHeader="Select Transfer Solution"
+                                            iosIcon={
+                                                <Icon
+                                                    name="arrow-down"
+                                                // style={{ position: "absolute", right: 0 }}
+                                                />
+                                            }
+                                            style={{
+                                                width: screenWidth * 0.92,
+                                                fontWeight: "bold"
+                                            }}
+                                            selectedValue={this.state.selected}
+                                            onValueChange={val => this.onValueChange(val)}
+                                        >
+                                            <Picker.Item label="To saved beneficiaries" value="Ryan" />
+                                            <Picker.Item label="I want to input manually" value="key1" />
+                                        </Picker>
+                                    </Card>
+                                    <Text style={[styles.sectionTitle, { padding: 20 }]}>
+                                        Send to saved beneficiaries:
+                            </Text>
+                                    <View style={[
+                                        styles.section,
+                                        {
+                                            paddingLeft: 0,
+                                            paddingRight: 0
+                                        }
+                                    ]}>
+                                        {/* THIS IS THE Horizontal ScrollView for the SAVED BENEFICIARIES */}
+                                        <ScrollView
+                                            ref={(ref) => this.scroller = ref}
+                                            style={{
+                                                marginBottom: 20
+                                            }}
+                                            horizontal="true"
+                                        >
+                                            {tempDataList}
+                                        </ScrollView>
+                                    </View>
+                                    <Text
+                                        style={{
+                                            fontWeight: "bold",
+                                            marginTop: 20,
+                                            fontSize: 17,
+                                            marginLeft: 13,
+                                            marginBottom: 5
+                                        }}
+                                    >
+                                        Amount:
+                            </Text>
+                                    <Item
+                                        regular
+                                        style={{ borderRadius: 5.5, width: 390, marginLeft: 12 }}>
+                                        <Input
+                                            pattern={[
+                                                '(?=.*\\d)', // number required
+                                            ]}
+                                            keyboardType={'numeric'}
+                                            placeholder="Enter Amount" />
 
+                                    </Item>
+                                    <View style={{ alignItems: "center", padding: 15 }}>
+                                        <RNSlidingButton
+                                            style={{
+                                                width: 240,
+                                                borderRadius: 10,
+                                                height: 60,
+                                                margin: 25,
+                                                backgroundColor: "#c13b3e"
+                                            }}
+                                            height={70}
+                                            onSlidingSuccess={TransferAlert}
+                                            slideDirection={SlideDirection.RIGHT}>
+                                            <Text style=
+                                                {{
+                                                    fontWeight: "bold",
+                                                    justifyContent: "center",
+                                                    alignItems: "center",
+                                                    marginLeft: 16,
+                                                    fontSize: 16,
+                                                    color: "#fff"
+                                                }}>
+                                                Slide To Transfer >
+                                            </Text>
+                                        </RNSlidingButton>
+                                    </View>
+                                </View>
+                            </TouchableWithoutFeedback>
+                        </SafeAreaView>
+                    </KeyboardAvoidingView>
                 </HeaderImageScrollView>
             </View >
         );
