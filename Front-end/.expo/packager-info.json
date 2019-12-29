@@ -1,1 +1,9 @@
-{}
+{
+  "expoServerPort": null,
+  "expoServerNgrokUrl": "https://ve-w37.benedict-frontenddeveloper.front-end.exp.direct",
+  "packagerNgrokUrl": "https://packager.ve-w37.benedict-frontenddeveloper.front-end.exp.direct",
+  "ngrokPid": 48267,
+  "devToolsPort": 19002,
+  "packagerPort": null,
+  "packagerPid": null
+}
