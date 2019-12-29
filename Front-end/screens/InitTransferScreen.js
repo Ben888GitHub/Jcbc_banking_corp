@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, Image, Dimensions, StatusBar, TouchableOpacity, ScrollView, Alert } from 'react-native';
+import { StyleSheet, Text, View, Image, Dimensions, StatusBar, TouchableOpacity, ScrollView, Alert, KeyboardAvoidingView } from 'react-native';
 import * as Animatable from 'react-native-animatable';
 // import { Header } from 'react-navigation-stack';
 import { Header, Container, Left, Body, Title, Right, Card, CardItem, Picker, Icon, Button, Item, Input } from 'native-base';
@@ -197,6 +197,7 @@ class InitTransferScreen extends Component {
                         style={styles.image} />}
 
                     //Render the small navbar:
+                    
                     renderFixedForeground={() => (
                         <Animatable.View
                             style={styles.navTitleView}
@@ -221,7 +222,7 @@ class InitTransferScreen extends Component {
 
                         </Animatable.View>
                     )}
-
+                    
                     //Render the big navbar:
                     renderForeground={() => (
 
@@ -232,6 +233,7 @@ class InitTransferScreen extends Component {
                         </View>
                     )}
                 >
+                    <KeyboardAvoidingView behavior='padding' keyboardVerticalOffset={-200}>
                     <TriggeringView
                         style={{
                             padding: 20,
@@ -327,12 +329,20 @@ class InitTransferScreen extends Component {
                         }}
                     >
                         Amount:
-          </Text>
+                    </Text>
+                    
                     <Item
                         regular
                         style={{ borderRadius: 5.5, width: 390, marginLeft: 12 }}
                     >
-                        <Input placeholder="Enter Amount" />
+                        
+                        <Input
+                            pattern={[
+                                '(?=.*\\d)', // number required
+                            ]}
+                            keyboardType={'numeric'}
+                            placeholder="Enter Amount" />
+                        
                     </Item>
                     <View style={{ alignItems: "center", padding: 15 }}>
                         <RNSlidingButton
@@ -361,6 +371,7 @@ class InitTransferScreen extends Component {
                             </View>
                         </RNSlidingButton>
                     </View>
+                    </KeyboardAvoidingView>
 
                 </HeaderImageScrollView>
             </View >
