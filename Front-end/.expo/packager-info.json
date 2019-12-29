@@ -3,8 +3,8 @@
   "expoServerPort": null,
   "packagerPort": null,
   "packagerPid": null,
-  "expoServerNgrokUrl": null,
-  "packagerNgrokUrl": null,
-  "ngrokPid": null,
+  "expoServerNgrokUrl": "https://ve-w37.hungnguy.front-end.exp.direct",
+  "packagerNgrokUrl": "https://packager.ve-w37.hungnguy.front-end.exp.direct",
+  "ngrokPid": 751,
   "webpackServerPort": null
 }

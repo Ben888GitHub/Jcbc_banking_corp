@@ -36,7 +36,7 @@ import { authenticate } from "../reducers/actions";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import axios from "axios";
-import {RNSlidingButton, SlideDirection} from 'rn-sliding-button';
+import { RNSlidingButton, SlideDirection } from 'rn-sliding-button';
 
 // import { Dropdown } from "react-native-material-dropdown";
 
@@ -125,7 +125,7 @@ class App extends Component {
           alert("Successful")
           this.props.navigation.push("TransferConfirm")
         }
-        }
+      }
       )
       .catch(err => {
         console.error(err);
@@ -240,7 +240,7 @@ class App extends Component {
               iosIcon={
                 <Icon
                   name="arrow-down"
-                  // style={{ position: "absolute", right: 0 }}
+                // style={{ position: "absolute", right: 0 }}
                 />
               }
               style={{
@@ -275,6 +275,10 @@ class App extends Component {
               value={this.state.accountNumber}
               autoCapitalize="none"
               placeholder="Your Account Number"
+              pattern={[
+                '(?=.*\\d)', // number required
+              ]}
+              keyboardType={'numeric'}
               onFocus={() => {
                 this.setState({ accountNumber: "" });
               }}
@@ -340,7 +344,7 @@ class App extends Component {
               iosIcon={
                 <Icon
                   name="arrow-down"
-                  // style={{ position: "absolute", right: 0 }}
+                // style={{ position: "absolute", right: 0 }}
                 />
               }
               style={{
@@ -396,6 +400,10 @@ class App extends Component {
           >
             <Input
               value={this.state.amount}
+              pattern={[
+                '(?=.*\\d)', // number required
+              ]}
+              keyboardType={'numeric'}
               onFocus={() => {
                 this.setState({ amount: "" });
               }}
@@ -423,6 +431,10 @@ class App extends Component {
             style={{ borderRadius: 5.5, width: 390, marginLeft: 12 }}
           >
             <Input
+              pattern={[
+                '(?=.*\\d)', // number required
+              ]}
+              keyboardType={'numeric'}
               value={this.state.beneficiaryAccNumber}
               onFocus={() => {
                 this.setState({ beneficiaryAccNumber: "" });
@@ -458,7 +470,7 @@ class App extends Component {
             </Button>
           </View>*/}
 
-          <View style={{ alignItems: "center", padding: 15}}>
+          <View style={{ alignItems: "center", padding: 15 }}>
             <RNSlidingButton
               style={{
                 width: 240,
@@ -468,17 +480,19 @@ class App extends Component {
                 backgroundColor: "#c13b3e"
               }}
               height={70}
-              onSlidingSuccess={ () => {this._handletransfer()}}
+              onSlidingSuccess={() => { this._handletransfer() }}
               successfulSlidePercent={90}
               slideDirection={SlideDirection.RIGHT}>
               <View>
                 <Text style=
-                {{ fontWeight: "bold",
+                  {{
+                    fontWeight: "bold",
                     justifyContent: "center",
                     alignItems: "center",
                     marginLeft: 16,
                     fontSize: 16,
-                    color: "#fff"}}>
+                    color: "#fff"
+                  }}>
                   Slide To Transfer
                 </Text>
               </View>
