@@ -5,5 +5,13 @@
   "ngrokPid": 48267,
   "devToolsPort": 19002,
   "packagerPort": null,
+<<<<<<< HEAD
   "packagerPid": null
+=======
+  "packagerPid": null,
+  "expoServerNgrokUrl": "https://ve-w37.hungnguy.front-end.exp.direct",
+  "packagerNgrokUrl": "https://packager.ve-w37.hungnguy.front-end.exp.direct",
+  "ngrokPid": 751,
+  "webpackServerPort": null
+>>>>>>> fbe7fd81e7bc5897c5e6d03ac89697abc67f9f01
 }
