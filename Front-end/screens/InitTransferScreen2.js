@@ -2,55 +2,31 @@ import React, { Component } from "react";
 import {
   StyleSheet,
   View,
-  StatusBar,
-  TextInput,
   AppRegistry,
   Dimensions,
-  SafeAreaView,
-  ScrollView,
   Alert
 } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
-import { AppLoading } from "expo";
 import {
   Header,
   Container,
   Content,
-  Accordion,
   Left,
   Body,
-  Title,
   Right,
   Card,
   CardItem,
-  Form,
   Item,
   Picker,
   Icon,
-  Button,
   Text,
   Input
 } from "native-base";
-import reducer from "../reducers/reducers";
 import { authenticate } from "../reducers/actions";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import axios from "axios";
 import { RNSlidingButton, SlideDirection } from 'rn-sliding-button';
 
-// import { Dropdown } from "react-native-material-dropdown";
-
-// import Icon from "react-native-vector-icons/FontAwesome";
-
-// import {
-//   Select,
-//   Option,
-//   OptionList,
-//   updatePosition
-// } from "react-native-dropdown";
-
-// const DropDown = require("react-native-dropdown");
-// const { Select, Option, OptionList, updatePosition } = DropDown;
 const mapStateToProps = state => {
   const { currentUser } = state;
   return { currentUser };
@@ -73,19 +49,9 @@ class App extends Component {
       bodyText: "JCBC Saving Account",
       underBodyText: "899-678898-009",
       singaporeDollars: 700000,
-      // canada: " "
       AccountNumberInputValue: " "
     };
   }
-
-  // _canada(province) function is to return the value of canada in the state
-  // _canada(province) {
-  //   this.setState({
-  //     // Make an update to the state
-  //     ...this.state,
-  //     canada: province // Add new key value to the state
-  //   });
-  // }
 
   onValueChange(value) {
     const { navigate } = this.props.navigation;
@@ -93,9 +59,6 @@ class App extends Component {
       console.log(value);
       navigate("Transfer");
     }
-    /*this.setState({
-      selected: value
-    })*/
   }
 
   _handletransfer = () => {
@@ -120,8 +83,6 @@ class App extends Component {
         }
 
         if (res.status === 200) {
-          // this.props.navigation.push("TransferConfirm");
-          // alert successful
           alert("Successful")
           this.props.navigation.push("TransferConfirm")
         }
@@ -135,9 +96,6 @@ class App extends Component {
   };
   render() {
     const screenWidth = Math.round(Dimensions.get("window").width);
-    // const TransferAlert = () => {
-    //   Alert.alert("You Have Successfully Transferred");
-    // };
     // Blank Comment
     // This is the functionality for the Account Number Input on the Banking App
     const AccountNumberValue = () => {
@@ -209,7 +167,6 @@ class App extends Component {
               S${this.state.singaporeDollars}
             </Text>
           </View>
-          {/* Blank Comment */}
 
           {/* This is the card which have the Picker Dropdown inside */}
           <Text
@@ -230,7 +187,7 @@ class App extends Component {
               flexDirection: "row",
               alignItems: "center",
               justifyContent: "space-between",
-              width: 390,
+              width: screenWidth - 26,
               marginLeft: 13
             }}
           >
@@ -254,7 +211,6 @@ class App extends Component {
               <Picker.Item label="To saved beneficiaries" value="Ryan" />
             </Picker>
           </Card>
-          {/* Blank Comment */}
           {/* ACCOUNT NUMBER INPUT */}
           <Text
             style={{
@@ -269,7 +225,7 @@ class App extends Component {
           </Text>
           <Item
             regular
-            style={{ borderRadius: 5.5, width: 390, marginLeft: 12 }}
+            style={{ borderRadius: 5.5, width: screenWidth - 24, marginLeft: 12 }}
           >
             <Input
               value={this.state.accountNumber}
@@ -302,7 +258,7 @@ class App extends Component {
           </Text>
           <Item
             regular
-            style={{ borderRadius: 5.5, width: 390, marginLeft: 12 }}
+            style={{ borderRadius: 5.5, width: screenWidth - 24, marginLeft: 12 }}
           >
             <Input
               value={this.state.username}
@@ -334,7 +290,7 @@ class App extends Component {
               flexDirection: "row",
               alignItems: "center",
               justifyContent: "space-between",
-              width: 390,
+              width: screenWidth - 26,
               marginLeft: 13
             }}
           >
@@ -362,7 +318,6 @@ class App extends Component {
               <Picker.Item label="Bank of America" value="key5" />
             </Picker>
           </Card>
-          {/* */}
           {/* NOTE INPUT */}
           <Text
             style={{
@@ -377,11 +332,10 @@ class App extends Component {
           </Text>
           <Item
             regular
-            style={{ borderRadius: 5.5, width: 390, marginLeft: 12 }}
+            style={{ borderRadius: 5.5, width: screenWidth - 24, marginLeft: 12 }}
           >
             <Input placeholder="Write something (Optional)" />
           </Item>
-          {/* */}
           {/* AMOUNT INPUT */}
           <Text
             style={{
@@ -396,7 +350,7 @@ class App extends Component {
           </Text>
           <Item
             regular
-            style={{ borderRadius: 5.5, width: 390, marginLeft: 12 }}
+            style={{ borderRadius: 5.5, width: screenWidth - 24, marginLeft: 12 }}
           >
             <Input
               value={this.state.amount}
@@ -413,7 +367,6 @@ class App extends Component {
               placeholder="Enter Amount"
             />
           </Item>
-          {/* */}
           {/* BENEFICIARY ACCOUNT NUMBER */}
           <Text
             style={{
@@ -428,7 +381,7 @@ class App extends Component {
           </Text>
           <Item
             regular
-            style={{ borderRadius: 5.5, width: 390, marginLeft: 12 }}
+            style={{ borderRadius: 5.5, width: screenWidth - 24, marginLeft: 12 }}
           >
             <Input
               pattern={[
@@ -445,31 +398,6 @@ class App extends Component {
               placeholder="Enter Beneficiary Account Number"
             />
           </Item>
-          {/* */}
-          {/* BUTTON OF TRANSFER  */}
-          {/*<View style={{ alignItems: "center", padding: 15 }}>
-
-            <Button
-              danger
-              style={{ margin: 25, borderRadius: 10, width: 120, height: 60 }}
-              onPress={() => {
-                this._handletransfer();
-              }}
-            >
-              <Text
-                // onPress={TransferAlert}
-                style={{
-                  fontWeight: "bold",
-                  justifyContent: "center",
-                  alignItems: "center"
-                }}
-              >
-                {" "}
-                Transfer{" "}
-              </Text>
-            </Button>
-          </View>*/}
-
           <View style={{ alignItems: "center", padding: 15 }}>
             <RNSlidingButton
               style={{
@@ -530,20 +458,3 @@ const styles1 = StyleSheet.create({
 export default connect(mapStateToProps, mapDispatchToProps)(App);
 
 AppRegistry.registerComponent("App", () => App);
-
-{
-  /* Blank Comment */
-}
-
-{
-  /* <Input
-            placeholder="  Bank"
-            leftIcon={
-              <Ionicons
-                style={{ marginRight: 15 }}
-                name="ios-arrow-down"
-                size={32}
-              />
-            }
-          /> */
-}

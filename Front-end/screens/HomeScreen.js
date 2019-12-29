@@ -1,15 +1,8 @@
-import React, { Component } from 'react';
-import { View, TouchableOpacity, StyleSheet, ImageBackground, Text, Image } from 'react-native';
+import React from 'react';
+import { View, TouchableOpacity, StyleSheet, ImageBackground, Text } from 'react-native';
 import { AppLoading } from 'expo';
-//import { Icon } from "react-native-vector-icons";
-import {
-  Container, Header, Content, Button,
-  Success, Footer, FooterTab, Title, Icon, Card, CardItem
-} from 'native-base';
-import * as Font from 'expo-font';
-import { Ionicons, MaterialIcons } from '@expo/vector-icons';
+import { Container, Content, Card, CardItem } from 'native-base';
 import { getStatusBarHeight } from 'react-native-status-bar-height';
-import reducer from '../reducers/reducers';
 import { authenticate } from '../reducers/actions';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -131,86 +124,7 @@ class HomeScreen extends React.Component {
               </TouchableOpacity>
             </Card>
           ))}
-
-
-
-
-          {/* <View
-            style={{
-              padding: 10,
-              flex: 1,
-              flexDirection: "column",
-              alignItems: "center",
-              justifyContent: "center"
-            }}
-          >
-
-            <TouchableOpacity
-              onPress={() => navigate('Transfer')}
-              style={style.btn}>
-              <View style={style.btn_content}>
-              <Text style={style.txt}>
-                Transfer     
-              </Text>
-              <Ionicons style={style.icon_default} size={50} name="ios-swap"/>
-              </View>
-            </TouchableOpacity>
-            
-            <View style={style.btn_container}>
-              <TouchableOpacity onPress={() => navigate('Account')}
-               style={style.btn_alt}>
-                <View style={style.btn_content}>
-                 <Text style={style.txt}>
-                    Account
-                  </Text>
-                  <MaterialIcons style={style.icon_default} name="person" size={65} />
-                </View>
-              </TouchableOpacity>
-                        
-              <TouchableOpacity onPress={() => alert("In Development")}
-                style={style.btn_alt}>
-                <View style={style.btn_content}>
-                  <Text style={style.txt}>
-                    Pay
-                  </Text>
-                  <MaterialIcons style={style.icon_default} name="payment" size={65} />
-                </View>
-              </TouchableOpacity>
-            </View>
-
-            <TouchableOpacity
-              onPress={() => alert("In development")}
-              style={style.btn}>
-              <View style={style.btn_content}>
-              <Text style={style.txt}>
-                Withdrawal
-                                
-              </Text>
-              <Ionicons style={style.icon_default} size={50} name="ios-cash"/>
-              </View>
-            </TouchableOpacity>
-            
-            </View> */}
-
         </Content>
-        {/* </ImageBackground> */}
-        {/* 
-        <Footer>
-          <FooterTab style={{ backgroundColor: "#B22222" }}>
-            <Button>
-              <Icon style={{ color: "white" }} name="home" />
-            </Button>
-            <Button>
-              <Icon style={{ color: "white" }} name="person" />
-            </Button>
-            <Button>
-              <Icon style={{ color: "white" }} name="settings" />
-            </Button>
-            <Button onPress={() => navigate('Login')}>
-              <Icon style={{ color: "white" }} name="ios-exit" />
-            </Button>
-          </FooterTab>
-        </Footer> */}
       </Container >
     );
   }
@@ -260,7 +174,6 @@ const style = StyleSheet.create({
     fontWeight: '700',
     color: 'white',
     fontSize: 24,
-    //fontFamily 
   },
 
   icon_default: {

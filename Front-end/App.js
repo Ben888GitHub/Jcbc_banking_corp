@@ -1,22 +1,17 @@
 import { createAppContainer } from "react-navigation"; // AppContainer is the cover the entire applications navigations
 import { createStackNavigator } from "react-navigation-stack"; // Stack is continuous of screens
-
-import React, { useState } from "react";
-import InitTransferScreen2 from "./screens/InitTransferScreen2";
-import InitTransferScreen from "./screens/InitTransferScreen";
-import InitTransferConfirmation from "./screens/InitTransferConfirmation";
+import React from "react";
 import HomeScreen from "./screens/HomeScreen";
 import LoginScreen from "./screens/LoginScreen";
 import AccountScreen from "./screens/account_page";
-
+import InitTransferScreen from "./screens/InitTransferScreen";
+import InitTransferScreen2 from "./screens/InitTransferScreen2";
+import InitTransferConfirmation from "./screens/InitTransferConfirmation";
 import { setCustomText } from 'react-native-global-props';
-
 import { Root } from "native-base";
-
 import { AppLoading } from "expo";
 import * as Font from "expo-font";
 import { Ionicons } from "@expo/vector-icons";
-
 import { Provider } from "react-redux";
 import { createStore } from "redux";
 import reducer from "./reducers/reducers";

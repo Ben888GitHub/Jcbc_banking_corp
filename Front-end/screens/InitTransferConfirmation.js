@@ -2,12 +2,6 @@ import React, { Component } from "react";
 import {
   StyleSheet,
   View,
-  StatusBar,
-  TextInput,
-  AppRegistry,
-  Dimensions,
-  SafeAreaView,
-  ScrollView,
   Alert
 } from "react-native";
 
@@ -16,23 +10,13 @@ import {
   Header,
   Container,
   Content,
-  Accordion,
-  Left,
   Body,
-  Title,
-  Right,
   Card,
   CardItem,
-  Form,
-  Item,
-  Picker,
   Icon,
   Button,
   Text,
-  Input
 } from "native-base";
-import { Ionicons } from "@expo/vector-icons";
-import reducer from '../reducers/reducers';
 import { authenticate } from '../reducers/actions';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
