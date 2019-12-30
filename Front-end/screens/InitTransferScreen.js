@@ -93,6 +93,11 @@ class InitTransferScreen extends Component {
             });
     }
 
+    setvalue(accnum){
+        this.beneficiaryAccNumber = accnum //set value of destination acc number
+        console.log(this.beneficiaryAccNumber)
+        //console.log(accnum)
+    }
     render() {
         //const { navigate } = this.props.navigation; //navigation is always a props
         const TransferAlert = () => {
@@ -103,7 +108,8 @@ class InitTransferScreen extends Component {
         console.log(this.props.currentUser);
         let tempDataList = this.props.currentUser.dependencies.map((value, index) => {
             return (
-                <Card key={index}
+                <TouchableOpacity onPress={() => this.setvalue(value.accnumber)}>
+                <Card pointerEvents="none" key={index}
                     style={{
                         borderRadius: 10,
                         borderColor: "transparent",
@@ -156,6 +162,7 @@ class InitTransferScreen extends Component {
                         </Body>
                     </CardItem>
                 </Card >
+                </TouchableOpacity>
             );
         });
 
