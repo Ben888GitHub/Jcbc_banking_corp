@@ -9,6 +9,7 @@ import { authenticate } from '../reducers/actions';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { RNSlidingButton, SlideDirection } from 'rn-sliding-button';
+import axios from "axios";
 
 // const MIN_HEIGHT = Header.HEIGHT;
 const MIN_HEIGHT = 110;
@@ -39,6 +40,7 @@ class InitTransferScreen extends Component {
             showNavTitle: false,
             imageStatus: false,
             isReady: false,
+            selected: "",
         };
     };
 
@@ -68,10 +70,10 @@ class InitTransferScreen extends Component {
             .post(
                 "https://ixmhlhrubj.execute-api.ap-southeast-1.amazonaws.com/dev/transfer",
                 {
-                    sender_username: this.state.username,
-                    soure_acc_num: this.state.accountNumber,
-                    transfer_amount: this.amount,
-                    dest_acc_num: this.beneficiaryAccNumber
+                    sender_username: this.props.currentUser.accname,
+                    source_acc_num: this.props.navigation.state.params.element.accnumber,
+                    transfer_amount: this.state.amount,
+                    dest_acc_num: this.state.beneficiaryAccNumber
                 }
             )
             .then(res => {
@@ -79,14 +81,18 @@ class InitTransferScreen extends Component {
                 console.log(res.data)
                 console.log(res.status)
                 //alert("Ding")
-                Toast.show({
+                /*Toast.show({
                     text: "Transfer Successful!",
                     buttonText: "OK"
-                })
+                })*/
                 this.props.navigation.push('TransferConfirm')
             })
 
             .catch(err => {
+                console.log(this.state.beneficiaryAccNumber)
+                console.log(this.props.navigation.state.params.element.accnumber)
+                console.log(this.props.currentUser.accname)
+                console.log(this.state.amount)
                 console.error(err)
                 console.log(err)
                 alert('Invalid Details!')
@@ -94,8 +100,11 @@ class InitTransferScreen extends Component {
     }
 
     setvalue(accnum){
-        this.beneficiaryAccNumber = accnum //set value of destination acc number
-        console.log(this.beneficiaryAccNumber)
+        this.state.beneficiaryAccNumber = accnum //set value of destination acc number
+        console.log(this.state.beneficiaryAccNumber)
+        console.log(this.props.navigation.state.params.element.accnumber)
+        console.log(this.props.currentUser.accname)
+        this.state.selected = "Selected"
         //console.log(accnum)
     }
     render() {
@@ -159,6 +168,7 @@ class InitTransferScreen extends Component {
                         <Body>
                             <Text style={{ color: 'white', fontWeight: '700' }}>Account Number</Text>
                             <Text style={{ color: 'white' }}>{value.accnumber}</Text>
+                            <Text style={{ color: 'white' }}>Placeholder</Text>
                         </Body>
                     </CardItem>
                 </Card >
@@ -318,11 +328,19 @@ class InitTransferScreen extends Component {
                                 regular
                                 style={{ borderRadius: 5.5, width: screenWidth - 24, marginLeft: 12 }}>
                                 <Input
+                                  value={Number.parseInt(this.state.amount, 10)}
                                     pattern={[
                                         '(?=.*\\d)', // number required
                                     ]}
                                     keyboardType={'numeric'}
-                                    placeholder="Enter Amount" />
+                                    placeholder="Enter Amount"
+                                    onFocus={() => {
+                                      this.setState({ amount: "" });
+                                    }}
+                                    onChangeText={text => {
+                                      this.setState({ amount: text });
+                                    }} />
+
                             </Item>
                             <View style={{
                                 alignItems: "center", padding: 15
@@ -338,7 +356,8 @@ class InitTransferScreen extends Component {
                                         flex: 1,
                                     }}
                                     height={70}
-                                    onSlidingSuccess={TransferAlert}
+                                    onSlidingSuccess={() => { this._handletransfer() }}
+                                    successfulSlidePercent={90}
                                     slideDirection={SlideDirection.RIGHT}>
                                     <Text style=
                                         {{
