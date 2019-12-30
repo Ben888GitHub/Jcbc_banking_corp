@@ -9,22 +9,12 @@ import {
   StatusBar,
   TouchableOpacity,
   ScrollView,
-  Keyboard,
   KeyboardAvoidingView
 } from "react-native";
 import SmoothPinCodeInput from "react-native-smooth-pincode-input";
-import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import * as Animatable from "react-native-animatable";
-// import { Header } from 'react-navigation-stack';
 import {
-  Header,
-  Container,
-  Left,
-  Body,
   Title,
-  Right,
-  Card,
-  CardItem,
   Button,
   Toast
 } from "native-base";
@@ -34,18 +24,12 @@ import axios from "axios";
 import HeaderImageScrollView, {
   TriggeringView
 } from "react-native-image-header-scroll-view";
-import { AppLoading } from "expo";
-import { NavigationEvents } from "react-navigation";
-import { Asset } from "expo-asset";
-
-import red from "../assets/red2.jpg";
 
 // const MIN_HEIGHT = Header.HEIGHT;
 let screenHeight = Math.round(Dimensions.get("window").height);
 const MIN_HEIGHT = 160;
 const MAX_HEIGHT = screenHeight * 0.4;
 
-import reducer from "../reducers/reducers";
 import { authenticate } from "../reducers/actions";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
@@ -53,7 +37,7 @@ import { bindActionCreators } from "redux";
 let tempData = [
   "Alex Tjuatja",
   "Ben Ryan",
-  "Kylæ Ang",
+  "Kyle Ang",
   "Zwe Nyan",
   "Hung Nguyen"
 ];
@@ -154,16 +138,14 @@ class LoginScreen extends Component {
               style={styles.navTitleView}
               ref={navTitleView => {
                 this.navTitleView = navTitleView;
-              }}
-            >
+              }}>
               <View
                 style={{
                   width: "100%",
                   flexDirection: "row",
                   alignItems: "center",
                   marginTop: 20
-                }}
-              >
+                }}>
                 <Title style={{ color: "white", marginLeft: 15, fontSize: 25 }}>
                   Sign In
                 </Title>
@@ -184,8 +166,7 @@ class LoginScreen extends Component {
                 Sign In
               </Text>
             </View>
-          )}
-        >
+          )}>
           <TriggeringView
             style={{
               backgroundColor: "black"
@@ -199,8 +180,7 @@ class LoginScreen extends Component {
                 flexDirection: "row",
                 alignItems: "center",
                 justifyContent: "space-between"
-              }}
-            >
+              }}>
               <TextInput
                 // placeholder={this.state.loginField}
                 value={this.state.loginField}
@@ -226,8 +206,7 @@ class LoginScreen extends Component {
                   this.state.loginField === "Username"
                     ? { opacity: 0.5 }
                     : { opacity: 1 }
-                ]}
-              />
+                ]}/>
 
               {this.state.loginField !== "" &&
                 this.state.loginField !== "Username" && (
@@ -243,13 +222,11 @@ class LoginScreen extends Component {
                     onPress={() => {
                       this.setState({ nextPressed: true });
                       this.whenFocused();
-                    }}
-                  >
+                    }}>
                     <Ionicons
                       name="md-arrow-round-forward"
                       size={35}
-                      color="white"
-                    />
+                      color="white"/>
                   </TouchableOpacity>
                 )}
             </View>
@@ -265,8 +242,7 @@ class LoginScreen extends Component {
               flex: 1,
               alignItems: "center",
               justifyContent: "center"
-            }}
-          >
+            }}>
             {this.state.loginField !== "" &&
               this.state.loginField !== "Username" ? (
                 <View>
@@ -279,7 +255,6 @@ class LoginScreen extends Component {
                   >
                     Please provide your pin code:
                 </Text>
-
                   <SmoothPinCodeInput
                     ref={x => (this.textinput = x)}
                     // autoFocus={true}
@@ -296,7 +271,6 @@ class LoginScreen extends Component {
                     //onFulfill={this._handlesubmit}
                     onBackspace={this._focusePrevInput}
                   />
-
                   <Button
                     onPress={() => {
                       this._handlesubmit();
@@ -324,8 +298,7 @@ class LoginScreen extends Component {
                         fontSize: 15,
                         fontFamily: "MuseoBold",
                         color: "white"
-                      }}
-                    >
+                      }}>
                       Next
                   </Text>
                   </Button>
@@ -337,8 +310,7 @@ class LoginScreen extends Component {
                       fontFamily: "MuseoBold",
                       fontSize: 15,
                       marginBottom: marginNum
-                    }}
-                  >
+                    }}>
                     New to our bank?
                 </Text>
                   <Ionicons
