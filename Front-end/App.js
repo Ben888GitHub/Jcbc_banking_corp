@@ -16,7 +16,6 @@ import { Ionicons } from "@expo/vector-icons";
 import { Provider } from "react-redux";
 import { createStore } from "redux";
 import reducer from "./reducers/reducers";
-import settings from "./screens/settings";
 const store = createStore(reducer);
 
 // First Step
@@ -32,13 +31,13 @@ const AppContainer = createAppContainer(
       Transfer2: { screen: InitTransferScreen2 },
       TransferConfirm: { screen: InitTransferConfirmation },
       Account : { screen: AccountScreen },
-      Settings : { screen: settings },
+      Settings : { screen: Settings },
     },
     {
       // config
       headerMode: "none",
       // initialRouteName: "Login" // initialRouteName will display the first component
-      initialRouteName: "Home" // initialRouteName will display the first component
+      initialRouteName: "Login" // initialRouteName will display the first component
     }
   )
 );

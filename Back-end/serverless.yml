@@ -1,12 +1,12 @@
 service: cp3405
-org: hungnguy
-app: cp3405
+org: zwenyantoe
+app: myapp
 
 provider:
   name: aws
   runtime: nodejs10.x
   region: ap-southeast-1
-  profile: cp3405
+  profile: default
 
 plugins:
   - serverless-offline
@@ -26,6 +26,10 @@ functions:
       - http:
           method: POST
           path: /transfer
+          cors: true
+      - http: 
+          method: POST
+          path: /sendmail
           cors: true
       
 
