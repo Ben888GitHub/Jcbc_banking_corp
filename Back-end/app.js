@@ -1,7 +1,6 @@
 const Express = require("express");
 const BodyParser = require("body-parser");
 const MongoClient = require("mongodb").MongoClient;
-const ObjectId = require("mongodb").ObjectID;
 
 const CONNECTION_URL = "mongodb+srv://root:root@cluster0-djxyv.mongodb.net/test";
 const DATABASE_NAME = "users";
