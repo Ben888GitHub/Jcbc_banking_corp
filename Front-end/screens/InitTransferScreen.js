@@ -41,6 +41,7 @@ class InitTransferScreen extends Component {
             imageStatus: false,
             isReady: false,
             selected: "",
+            indexToHaveBorder: null
         };
     };
 
@@ -66,13 +67,21 @@ class InitTransferScreen extends Component {
     }
 
     _handletransfer = () => {
+        let amountToTransfer;
+        try {
+          amountToTransfer = parseInt(this.state.amount);
+          console.log(typeof (amountToTransfer));
+        } catch {
+          amountToTransfer = this.state.amount;
+          console.log(typeof (amountToTransfer));
+        };
         axios
             .post(
                 "https://ixmhlhrubj.execute-api.ap-southeast-1.amazonaws.com/dev/transfer",
                 {
                     sender_username: this.props.currentUser.accname,
                     source_acc_num: this.props.navigation.state.params.element.accnumber,
-                    transfer_amount: this.state.amount,
+                    transfer_amount: amountToTransfer,
                     dest_acc_num: this.state.beneficiaryAccNumber
                 }
             )
@@ -101,10 +110,16 @@ class InitTransferScreen extends Component {
 
     setvalue(accnum){
         this.state.beneficiaryAccNumber = accnum //set value of destination acc number
+        this.setState({shadowOffset: {
+            width: 2,
+            height: 6,
+        },
+        shadowOpacity: 0.50,
+        shadowRadius: 20})
         console.log(this.state.beneficiaryAccNumber)
         console.log(this.props.navigation.state.params.element.accnumber)
         console.log(this.props.currentUser.accname)
-        this.state.selected = "Selected"
+        //this.state.selected = "Selected"
         //console.log(accnum)
     }
     render() {
@@ -117,11 +132,16 @@ class InitTransferScreen extends Component {
         console.log(this.props.currentUser);
         let tempDataList = this.props.currentUser.dependencies.map((value, index) => {
             return (
-                <TouchableOpacity onPress={() => this.setvalue(value.accnumber)}>
+                <TouchableOpacity onPress={() =>{ 
+                    this.setvalue(value.accnumber);
+                    this.setState({indexToHaveBorder:index})
+                }}>
                 <Card pointerEvents="none" key={index}
                     style={{
+
                         borderRadius: 10,
-                        borderColor: "transparent",
+                        borderColor: (index == this.state.indexToHaveBorder && this.state.indexToHaveBorder != null ? 'blue' : 'transparent'),
+                      borderWidth: 3,
                         borderStyle: null,
                         width: 170,
                         height: 170,
@@ -328,7 +348,7 @@ class InitTransferScreen extends Component {
                                 regular
                                 style={{ borderRadius: 5.5, width: screenWidth - 24, marginLeft: 12 }}>
                                 <Input
-                                  value={Number.parseInt(this.state.amount, 10)}
+                                  value={this.state.amount}
                                     pattern={[
                                         '(?=.*\\d)', // number required
                                     ]}
