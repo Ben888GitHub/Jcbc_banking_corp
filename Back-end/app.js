@@ -19,8 +19,8 @@ const sgMail = require('@sendgrid/mail');
 
 
 let randomNum = ""
-for(i = 0; i < 6; i ++){
-    randomNum += Math.floor(Math.round(Math.random()*9))
+for (i = 0; i < 6; i++) {
+    randomNum += Math.floor(Math.round(Math.random() * 9))
 }
 
 
@@ -74,8 +74,6 @@ app.post("/transfer", async (request, response) => {
     let sourceAccNumber = request.body.source_acc_num;
 
     let currentAccount = await collection.findOne(source_requete);
-
-
 
     let currentAccList = currentAccount.accounts;
     var currentBalance = currentAccList.find(function (eachAccount) {
@@ -155,8 +153,8 @@ app.post("/sendmail", async function (req, res) {
     await sgMail.send(msg);
     res.send({
         output: "Your otp is " + randomNum + " sent to " + emailToSend,
-        otp : randomNum,
-        timestamp : toSend.toString()
+        otp: randomNum,
+        timestamp: toSend.toString()
     });
 });
 
