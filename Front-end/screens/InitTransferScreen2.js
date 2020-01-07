@@ -1,11 +1,5 @@
 import React, { Component } from "react";
-import {
-  StyleSheet,
-  View,
-  AppRegistry,
-  Dimensions,
-  Alert
-} from "react-native";
+import { StyleSheet, View, AppRegistry, Dimensions, Alert } from "react-native";
 import {
   Header,
   Container,
@@ -25,7 +19,7 @@ import { authenticate } from "../reducers/actions";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import axios from "axios";
-import { RNSlidingButton, SlideDirection } from 'rn-sliding-button';
+import { RNSlidingButton, SlideDirection } from "rn-sliding-button";
 
 const mapStateToProps = state => {
   const { currentUser } = state;
@@ -69,6 +63,7 @@ class App extends Component {
           sender_username: this.state.username,
           source_acc_num: this.state.accountNumber,
           transfer_amount: this.state.amount,
+          receiver_username: this.state.receiver_username, // TODO
           dest_acc_num: this.state.beneficiaryAccNumber
         }
       )
@@ -79,21 +74,22 @@ class App extends Component {
 
         if (res.status === 404) {
           // alert sth about the acc info is wrong.
-          alert("Invalid Details")
+          alert("Invalid Details");
         }
 
         if (res.status === 200) {
-          alert("Successful")
-          this.props.navigation.push("TransferConfirm")
+          alert("Successful");
+          this.props.navigation.push("TransferConfirm");
         }
-      }
-      )
+      })
       .catch(err => {
         console.error(err);
         console.log(err);
         alert("Invalid Details!");
       });
   };
+
+  emailOtpApi = () => {};
   render() {
     const screenWidth = Math.round(Dimensions.get("window").width);
     // Blank Comment
@@ -197,7 +193,7 @@ class App extends Component {
               iosIcon={
                 <Icon
                   name="arrow-down"
-                // style={{ position: "absolute", right: 0 }}
+                  // style={{ position: "absolute", right: 0 }}
                 />
               }
               style={{
@@ -225,16 +221,20 @@ class App extends Component {
           </Text>
           <Item
             regular
-            style={{ borderRadius: 5.5, width: screenWidth - 24, marginLeft: 12 }}
+            style={{
+              borderRadius: 5.5,
+              width: screenWidth - 24,
+              marginLeft: 12
+            }}
           >
             <Input
               value={this.state.accountNumber}
               autoCapitalize="none"
               placeholder="Your Account Number"
               pattern={[
-                '(?=.*\\d)', // number required
+                "(?=.*\\d)" // number required
               ]}
-              keyboardType={'numeric'}
+              keyboardType={"numeric"}
               onFocus={() => {
                 this.setState({ accountNumber: "" });
               }}
@@ -258,7 +258,11 @@ class App extends Component {
           </Text>
           <Item
             regular
-            style={{ borderRadius: 5.5, width: screenWidth - 24, marginLeft: 12 }}
+            style={{
+              borderRadius: 5.5,
+              width: screenWidth - 24,
+              marginLeft: 12
+            }}
           >
             <Input
               value={this.state.username}
@@ -300,7 +304,7 @@ class App extends Component {
               iosIcon={
                 <Icon
                   name="arrow-down"
-                // style={{ position: "absolute", right: 0 }}
+                  // style={{ position: "absolute", right: 0 }}
                 />
               }
               style={{
@@ -332,7 +336,11 @@ class App extends Component {
           </Text>
           <Item
             regular
-            style={{ borderRadius: 5.5, width: screenWidth - 24, marginLeft: 12 }}
+            style={{
+              borderRadius: 5.5,
+              width: screenWidth - 24,
+              marginLeft: 12
+            }}
           >
             <Input placeholder="Write something (Optional)" />
           </Item>
@@ -350,14 +358,18 @@ class App extends Component {
           </Text>
           <Item
             regular
-            style={{ borderRadius: 5.5, width: screenWidth - 24, marginLeft: 12 }}
+            style={{
+              borderRadius: 5.5,
+              width: screenWidth - 24,
+              marginLeft: 12
+            }}
           >
             <Input
               value={this.state.amount}
               pattern={[
-                '(?=.*\\d)', // number required
+                "(?=.*\\d)" // number required
               ]}
-              keyboardType={'numeric'}
+              keyboardType={"numeric"}
               onFocus={() => {
                 this.setState({ amount: "" });
               }}
@@ -381,13 +393,17 @@ class App extends Component {
           </Text>
           <Item
             regular
-            style={{ borderRadius: 5.5, width: screenWidth - 24, marginLeft: 12 }}
+            style={{
+              borderRadius: 5.5,
+              width: screenWidth - 24,
+              marginLeft: 12
+            }}
           >
             <Input
               pattern={[
-                '(?=.*\\d)', // number required
+                "(?=.*\\d)" // number required
               ]}
-              keyboardType={'numeric'}
+              keyboardType={"numeric"}
               value={this.state.beneficiaryAccNumber}
               onFocus={() => {
                 this.setState({ beneficiaryAccNumber: "" });
@@ -408,19 +424,23 @@ class App extends Component {
                 backgroundColor: "#c13b3e"
               }}
               height={70}
-              onSlidingSuccess={() => { this._handletransfer() }}
+              onSlidingSuccess={() => {
+                this._handletransfer();
+              }}
               successfulSlidePercent={90}
-              slideDirection={SlideDirection.RIGHT}>
+              slideDirection={SlideDirection.RIGHT}
+            >
               <View>
-                <Text style=
-                  {{
+                <Text
+                  style={{
                     fontWeight: "bold",
                     justifyContent: "center",
                     alignItems: "center",
                     marginLeft: 16,
                     fontSize: 16,
                     color: "#fff"
-                  }}>
+                  }}
+                >
                   Slide To Transfer
                 </Text>
               </View>
