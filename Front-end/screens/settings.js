@@ -13,7 +13,6 @@ import {
 import { authenticate } from '../reducers/actions';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import HomeScreen from "./HomeScreen";
 
 const mapStateToProps = (state) => {
     const { currentUser } = state;
@@ -27,8 +26,6 @@ const mapDispatchToProps = dispatch => (
 );
 
 const screenWidth = Math.round(Dimensions.get("window").width);
-
-
 
 class App extends Component {
     constructor(props){

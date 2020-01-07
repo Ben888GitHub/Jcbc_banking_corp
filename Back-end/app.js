@@ -1,7 +1,6 @@
 const Express = require("express");
 const BodyParser = require("body-parser");
 const MongoClient = require("mongodb").MongoClient;
-const ObjectId = require("mongodb").ObjectID;
 
 const CONNECTION_URL = "mongodb+srv://root:root@cluster0-djxyv.mongodb.net/test";
 const DATABASE_NAME = "users";
@@ -14,6 +13,15 @@ app.use(BodyParser.json());
 app.use(BodyParser.urlencoded({ extended: true }));
 
 var database, collection;
+
+const sgMail = require('@sendgrid/mail');
+
+
+
+let randomNum = ""
+for (i = 0; i < 6; i++) {
+    randomNum += Math.floor(Math.round(Math.random() * 9))
+}
 
 
 app.get("/", (request, response) => {
@@ -66,8 +74,6 @@ app.post("/transfer", async (request, response) => {
     let sourceAccNumber = request.body.source_acc_num;
 
     let currentAccount = await collection.findOne(source_requete);
-
-
 
     let currentAccList = currentAccount.accounts;
     var currentBalance = currentAccList.find(function (eachAccount) {
@@ -133,5 +139,23 @@ app.post("/transfer", async (request, response) => {
     });
 });
 
+app.post("/sendmail", async function (req, res) {
+    let emailToSend = req.body.email;
+    let timeStamp = new Date();
+    let toSend = timeStamp.getTime();
+    sgMail.setApiKey("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");
+    const msg = {
+        to: emailToSend,
+        from: 'admin@jcbc.com',
+        subject: 'Your JCBC one-time password',
+        html: `<h1>Your OTP for JCBC is ${randomNum}</h1>`
+    };
+    await sgMail.send(msg);
+    res.send({
+        output: "Your otp is " + randomNum + " sent to " + emailToSend,
+        otp: randomNum,
+        timestamp: toSend.toString()
+    });
+});
 
 module.exports = app;
