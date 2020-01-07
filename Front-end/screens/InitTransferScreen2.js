@@ -59,23 +59,19 @@ class App extends Component {
     let amountToTransfer;
     try {
       amountToTransfer = parseInt(this.state.amount);
-      console.log(typeof (amountToTransfer));
+      console.log(typeof amountToTransfer);
     } catch {
       amountToTransfer = this.state.amount;
-      console.log(typeof (amountToTransfer));
-    };
+      console.log(typeof amountToTransfer);
+    }
     axios
       .post(
         "https://ixmhlhrubj.execute-api.ap-southeast-1.amazonaws.com/dev/transfer",
         {
           sender_username: this.state.username,
           source_acc_num: this.state.accountNumber,
-<<<<<<< HEAD
           transfer_amount: this.state.amount,
           receiver_username: this.state.receiver_username, // TODO
-=======
-          transfer_amount: amountToTransfer,
->>>>>>> 6fb35b97248e67d419b62344fb8190f37457ad7a
           dest_acc_num: this.state.beneficiaryAccNumber
         }
       )
