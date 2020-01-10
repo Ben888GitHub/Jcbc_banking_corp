@@ -31,6 +31,10 @@ const mapDispatchToProps = dispatch => (
     }, dispatch)
 );
 
+const fastChunkString = require('fast-chunk-string');
+
+
+
 class InitTransferScreen extends Component {
     constructor(props) {
         super(props);
@@ -40,7 +44,6 @@ class InitTransferScreen extends Component {
             showNavTitle: false,
             imageStatus: false,
             isReady: false,
-            selected: "",
             indexToHaveBorder: null
         };
     };
@@ -55,6 +58,10 @@ class InitTransferScreen extends Component {
         ),
     };
 
+    accNumberString = (aString) => {
+        let arr = fastChunkString(aString, { size: 4, unicodeAware: false });
+        return (arr[0] + " " + arr[1] + " " + arr[2] + " ");
+      }
     onValueChange(value) {
         const { navigate } = this.props.navigation;
         if (value === "key1") {
@@ -89,12 +96,16 @@ class InitTransferScreen extends Component {
                 console.log(res.statusText)
                 console.log(res.data)
                 console.log(res.status)
+<<<<<<< HEAD
                 //alert("Ding")
                 /*Toast.show({
                     text: "Transfer Successful!",
                     buttonText: "OK"
                 })*/
                 this.props.navigation.push('EmailOtp')
+=======
+                this.props.navigation.push('TransferConfirm')
+>>>>>>> 34d607ed3a4e7b46e913caf2bf7fe36c0f4dad27
             })
 
             .catch(err => {
@@ -110,17 +121,9 @@ class InitTransferScreen extends Component {
 
     setvalue(accnum){
         this.state.beneficiaryAccNumber = accnum //set value of destination acc number
-        this.setState({shadowOffset: {
-            width: 2,
-            height: 6,
-        },
-        shadowOpacity: 0.50,
-        shadowRadius: 20})
         console.log(this.state.beneficiaryAccNumber)
         console.log(this.props.navigation.state.params.element.accnumber)
         console.log(this.props.currentUser.accname)
-        //this.state.selected = "Selected"
-        //console.log(accnum)
     }
     render() {
         //const { navigate } = this.props.navigation; //navigation is always a props
@@ -141,19 +144,19 @@ class InitTransferScreen extends Component {
 
                         borderRadius: 10,
                         borderColor: (index == this.state.indexToHaveBorder && this.state.indexToHaveBorder != null ? 'blue' : 'transparent'),
-                      borderWidth: 3,
+                        borderWidth: 10,
                         borderStyle: null,
                         width: 170,
                         height: 170,
                         marginTop: marginNum,
                         marginBottom: marginNum,
                         marginLeft: 15,
-                        shadowColor: "#000",
+                        shadowColor: "#000000",
                         shadowOffset: {
-                            width: 0,
-                            height: 3,
+                            width: 2,
+                            height: 4,
                         },
-                        shadowOpacity: 0.16,
+                        shadowOpacity: 0.65,
                         shadowRadius: 20,
                         elevation: 5,
 
@@ -169,12 +172,6 @@ class InitTransferScreen extends Component {
                                 color: '#c13b3e',
                                 fontSize: 25
                             }}>{value.accname}</Text>
-                            {/*
-                            <Text style={{
-                                fontWeight: '700',
-                                color: '#c13b3e',
-                                fontSize: 25
-                            }}>Nothing</Text>*/}
                         </View>
 
                     </CardItem>
@@ -187,8 +184,7 @@ class InitTransferScreen extends Component {
                     }}>
                         <Body>
                             <Text style={{ color: 'white', fontWeight: '700' }}>Account Number</Text>
-                            <Text style={{ color: 'white' }}>{value.accnumber}</Text>
-                            <Text style={{ color: 'white' }}>Placeholder</Text>
+                            <Text style={{ color: 'white' }}>{this.accNumberString(value.accnumber)}</Text>
                         </Body>
                     </CardItem>
                 </Card >
