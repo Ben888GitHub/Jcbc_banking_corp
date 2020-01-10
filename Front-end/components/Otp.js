@@ -40,7 +40,7 @@ class Otp extends Component {
         codeInputHighlightStyle={styles.underlineStyleHighLighted}
         onCodeFilled={code => {
           console.log(`Code is ${code}, you are good to go!`);
-          alert("You have successfully transfer");
+          alert("You are running out of time");
         }}
       />
     );

@@ -94,7 +94,7 @@ class InitTransferScreen extends Component {
                     text: "Transfer Successful!",
                     buttonText: "OK"
                 })*/
-                this.props.navigation.push('TransferConfirm')
+                this.props.navigation.push('EmailOtp')
             })
 
             .catch(err => {

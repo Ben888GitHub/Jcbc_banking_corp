@@ -70,7 +70,7 @@ class App extends Component {
         {
           sender_username: this.state.username,
           source_acc_num: this.state.accountNumber,
-          transfer_amount: this.state.amount,
+          transfer_amount: amountToTransfer,
           receiver_username: this.state.receiver_username, // TODO
           dest_acc_num: this.state.beneficiaryAccNumber
         }
@@ -87,7 +87,7 @@ class App extends Component {
 
         if (res.status === 200) {
           alert("Successful");
-          this.props.navigation.push("TransferConfirm");
+          this.props.navigation.push("EmailOtp");
         }
       })
       .catch(err => {

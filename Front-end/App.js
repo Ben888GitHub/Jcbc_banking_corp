@@ -8,6 +8,7 @@ import InitTransferScreen from "./screens/InitTransferScreen";
 import InitTransferScreen2 from "./screens/InitTransferScreen2";
 import InitTransferConfirmation from "./screens/InitTransferConfirmation";
 import Settings from "./screens/settings";
+import emailOtp from "./screens/emailOtp"
 import { setCustomText } from 'react-native-global-props';
 import { Root } from "native-base";
 import { AppLoading } from "expo";
@@ -32,6 +33,7 @@ const AppContainer = createAppContainer(
       TransferConfirm: { screen: InitTransferConfirmation },
       Account : { screen: AccountScreen },
       Settings : { screen: Settings },
+      EmailOtp: {screen: emailOtp}
     },
     {
       // config
