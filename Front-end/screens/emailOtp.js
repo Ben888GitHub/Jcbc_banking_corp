@@ -21,7 +21,7 @@ import {
   Textarea
 } from "native-base";
 import axios from "axios";
-import Otp from "../components/Otp.js";
+import Otp from "../components/Otp";
 import Countdown from "react-countdown";
 
 class emailOtp extends React.Component {
@@ -38,19 +38,19 @@ class emailOtp extends React.Component {
   }
 
   componentDidMount() {
-    axios
-      .post(
-        "https://ixmhlhrubj.execute-api.ap-southeast-1.amazonaws.com/dev/sendmail",
-        {
-          email: this.state.email
-        }
-      )
-      .then(res => {
-        console.log(res.statusText);
-        console.log(res.data);
-        console.log(res.status);
-      })
-      .catch();
+    // axios
+    //   .post(
+    //     "https://ixmhlhrubj.execute-api.ap-southeast-1.amazonaws.com/dev/sendmail",
+    //     {
+    //       email: this.state.email
+    //     }
+    //   )
+    //   .then(res => {
+    //     console.log(res.statusText);
+    //     console.log(res.data);
+    //     console.log(res.status);
+    //   })
+    //   .catch();
   }
 
   _getOTP = () => {};
@@ -58,6 +58,7 @@ class emailOtp extends React.Component {
   render() {
     const countdown = ""; //TODO
     const Completionist = () => <Text>You are good to go!</Text>;
+    const { navigate } = this.props.navigation;
     const renderer = ({ seconds, completed }) => {
       if (completed) {
         // Render a completed state
@@ -118,7 +119,7 @@ class emailOtp extends React.Component {
             <Countdown date={Date.now() + 30000} renderer={renderer} /> seconds
             left
           </Text>
-          <Text style={styles.resendCodeStyle}>
+          {/* <Text style={styles.resendCodeStyle}>
             Didn't receive the OTP?
             <Text
               style={{
@@ -130,7 +131,7 @@ class emailOtp extends React.Component {
               <Text></Text>
               Resend Code
             </Text>
-          </Text>
+          </Text> */}
         </Content>
 
         {/* */}

@@ -21,17 +21,45 @@ import {
   Input,
   Textarea
 } from "native-base";
+import axios from "axios";
 
 class Otp extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      pin_count: 6
+      pin_count: 6,
+      email: "benedictryan80@gmail.com",
+      data: ""
     };
   }
 
+  componentDidMount() {
+    axios
+      .post(
+        "https://ixmhlhrubj.execute-api.ap-southeast-1.amazonaws.com/dev/sendmail",
+        {
+          email: this.state.email
+        }
+      )
+      .then(res => {
+        this.setState({
+          data: res.data.otp
+        });
+      })
+      .catch();
+  }
+
+  // onValueChange(value) {
+  //   const { navigate } = this.props.navigation;
+  //   if (value === this.state.data) {
+  //     console.log(value);
+  //     navigate("TransferConfirm");
+  //   }
+  // }
+
   render() {
     const { pin_count } = this.state;
+    // const { navigate } = this.props.navigation;
     return (
       <OTPInputView
         style={{
@@ -48,10 +76,13 @@ class Otp extends Component {
         codeInputHighlightStyle={styles.underlineStyleHighLighted}
         onCodeFilled={code => {
           console.log(`Code is ${code}, you are good to go!`);
-          alert("You are running out of time");
-          {
-            /*TODO */
+          if (code !== this.state.data) {
+            alert("Invalid Input");
+          } else {
+            alert("You are good to go");
           }
+          // alert("You are running out of time");
+          // this.props.navigation.push("TransferConfirm");
         }}
       />
     );
@@ -83,6 +114,12 @@ const styles = StyleSheet.create({
 
   underlineStyleHighLighted: {
     borderColor: "#03DAC6"
+  },
+  theButtonSize: {
+    width: 200,
+    marginTop: 40,
+    alignItems: "center",
+    justifyContent: "center"
   }
 });
 

@@ -8,8 +8,9 @@ import InitTransferScreen from "./screens/InitTransferScreen";
 import InitTransferScreen2 from "./screens/InitTransferScreen2";
 import InitTransferConfirmation from "./screens/InitTransferConfirmation";
 import Settings from "./screens/settings";
-import emailOtp from "./screens/emailOtp"
-import { setCustomText } from 'react-native-global-props';
+import emailOtp from "./screens/emailOtp";
+import Otp from "./components/Otp";
+import { setCustomText } from "react-native-global-props";
 import { Root } from "native-base";
 import { AppLoading } from "expo";
 import * as Font from "expo-font";
@@ -31,11 +32,12 @@ const AppContainer = createAppContainer(
       Home: { screen: HomeScreen },
       Transfer: { screen: InitTransferScreen },
       Transfer2: { screen: InitTransferScreen2 },
-      Transfer3: {screen: InitTransferScreen3},
+      Transfer3: { screen: InitTransferScreen3 },
       TransferConfirm: { screen: InitTransferConfirmation },
-      Account : { screen: AccountScreen },
-      Settings : { screen: Settings },
-      EmailOtp: {screen: emailOtp}
+      Account: { screen: AccountScreen },
+      Settings: { screen: Settings },
+      EmailOtp: { screen: emailOtp },
+      OTP: { screen: Otp }
     },
     {
       // config
@@ -57,16 +59,15 @@ export default class App extends React.Component {
   defaultFonts() {
     const customTextProps = {
       style: {
-        fontFamily: 'Museo'
+        fontFamily: "Museo"
       }
-    }
+    };
     setCustomText(customTextProps);
   }
 
   async componentDidMount() {
     // Asynchronous componentDidMount
     await Font.loadAsync({
-
       // Wait for the font to be successfully imported from fonts directory and it will execute all the components
       // Wait to be loaded
       Museo: require("./fonts/museosanscyrl-300.ttf"), // ttf is true type form
@@ -76,8 +77,8 @@ export default class App extends React.Component {
       //Below are the default font of Android, don't delete them:
       Roboto: require("native-base/Fonts/Roboto.ttf"),
       Roboto_medium: require("native-base/Fonts/Roboto_medium.ttf"),
-      Roboto_700 : require("./fonts/roboto-700.ttf"),
-      Roboto_regular : require("./fonts/roboto-regular.ttf"),
+      Roboto_700: require("./fonts/roboto-700.ttf"),
+      Roboto_regular: require("./fonts/roboto-regular.ttf"),
       ...Ionicons.font
     });
     this.defaultFonts();
