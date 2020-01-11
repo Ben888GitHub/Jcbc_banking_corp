@@ -96,16 +96,12 @@ class InitTransferScreen extends Component {
                 console.log(res.statusText)
                 console.log(res.data)
                 console.log(res.status)
-<<<<<<< HEAD
                 //alert("Ding")
                 /*Toast.show({
                     text: "Transfer Successful!",
                     buttonText: "OK"
                 })*/
                 this.props.navigation.push('EmailOtp')
-=======
-                this.props.navigation.push('TransferConfirm')
->>>>>>> 34d607ed3a4e7b46e913caf2bf7fe36c0f4dad27
             })
 
             .catch(err => {

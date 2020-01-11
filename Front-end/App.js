@@ -17,6 +17,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { Provider } from "react-redux";
 import { createStore } from "redux";
 import reducer from "./reducers/reducers";
+import InitTransferScreen3 from "./screens/InitTransferScreen3";
 const store = createStore(reducer);
 
 // First Step
@@ -30,6 +31,7 @@ const AppContainer = createAppContainer(
       Home: { screen: HomeScreen },
       Transfer: { screen: InitTransferScreen },
       Transfer2: { screen: InitTransferScreen2 },
+      Transfer3: {screen: InitTransferScreen3},
       TransferConfirm: { screen: InitTransferConfirmation },
       Account : { screen: AccountScreen },
       Settings : { screen: Settings },

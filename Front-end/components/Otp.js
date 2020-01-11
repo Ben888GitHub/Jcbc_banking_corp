@@ -23,7 +23,15 @@ import {
 } from "native-base";
 
 class Otp extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      pin_count: 6
+    };
+  }
+
   render() {
+    const { pin_count } = this.state;
     return (
       <OTPInputView
         style={{
@@ -32,7 +40,7 @@ class Otp extends Component {
           alignItems: "center",
           justifyContent: "center"
         }}
-        pinCount={6}
+        pinCount={pin_count}
         // code={this.state.code} //You can supply this prop or not. The component will be used as a controlled / uncontrolled component respectively.
         // onCodeChanged = {code => { this.setState({code})}}
         autoFocusOnLoad
@@ -41,6 +49,9 @@ class Otp extends Component {
         onCodeFilled={code => {
           console.log(`Code is ${code}, you are good to go!`);
           alert("You are running out of time");
+          {
+            /*TODO */
+          }
         }}
       />
     );

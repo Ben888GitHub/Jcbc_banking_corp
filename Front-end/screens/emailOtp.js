@@ -32,15 +32,28 @@ class emailOtp extends React.Component {
       resendCode: "Resend Code",
       countdownTimer: " ",
       timerStop: " ",
-      countdown: " " //TODO
+      countdown: " ", //TODO
+      email: "benedictryan80@gmail.com"
     };
   }
 
-  componentDidMount() {}
+  componentDidMount() {
+    axios
+      .post(
+        "https://ixmhlhrubj.execute-api.ap-southeast-1.amazonaws.com/dev/sendmail",
+        {
+          email: this.state.email
+        }
+      )
+      .then(res => {
+        console.log(res.statusText);
+        console.log(res.data);
+        console.log(res.status);
+      })
+      .catch();
+  }
 
   _getOTP = () => {};
-
-  setTiming = () => {};
 
   render() {
     const countdown = ""; //TODO
@@ -102,7 +115,7 @@ class emailOtp extends React.Component {
           <Otp />
           <Text style={styles.timingStyle}>
             Time Remaining:{" "}
-            <Countdown date={Date.now() + 20000} renderer={renderer} /> seconds
+            <Countdown date={Date.now() + 30000} renderer={renderer} /> seconds
             left
           </Text>
           <Text style={styles.resendCodeStyle}>
