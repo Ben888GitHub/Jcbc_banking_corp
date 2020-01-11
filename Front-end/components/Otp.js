@@ -29,7 +29,8 @@ class Otp extends Component {
     this.state = {
       pin_count: 6,
       email: "benedictryan80@gmail.com",
-      data: ""
+      data: "",
+      thebutton: <Button>Hey</Button>
     };
   }
 
@@ -61,30 +62,37 @@ class Otp extends Component {
     const { pin_count } = this.state;
     // const { navigate } = this.props.navigation;
     return (
-      <OTPInputView
-        style={{
-          width: "80%",
-          height: 200,
-          alignItems: "center",
-          justifyContent: "center"
-        }}
-        pinCount={pin_count}
-        // code={this.state.code} //You can supply this prop or not. The component will be used as a controlled / uncontrolled component respectively.
-        // onCodeChanged = {code => { this.setState({code})}}
-        autoFocusOnLoad
-        codeInputFieldStyle={styles.underlineStyleBase}
-        codeInputHighlightStyle={styles.underlineStyleHighLighted}
-        onCodeFilled={code => {
-          console.log(`Code is ${code}, you are good to go!`);
-          if (code !== this.state.data) {
-            alert("Invalid Input");
-          } else {
-            alert("You are good to go");
-          }
-          // alert("You are running out of time");
-          // this.props.navigation.push("TransferConfirm");
-        }}
-      />
+      <View>
+        <OTPInputView
+          style={{
+            width: "80%",
+            height: 200,
+            alignItems: "center",
+            justifyContent: "center"
+          }}
+          pinCount={pin_count}
+          // code={this.state.code} //You can supply this prop or not. The component will be used as a controlled / uncontrolled component respectively.
+          // onCodeChanged = {code => { this.setState({code})}}
+          autoFocusOnLoad
+          codeInputFieldStyle={styles.underlineStyleBase}
+          codeInputHighlightStyle={styles.underlineStyleHighLighted}
+          onCodeFilled={code => {
+            console.log(`Your OTP Pin is ${code}, you are good to go!`);
+            if (code !== this.state.data) {
+              alert("Invalid Input");
+              // navigate back to Transfer Screen
+            } else {
+              alert("You are good to go");
+              // navigate to Confirmation Page
+            }
+            // alert("You are running out of time");
+            // this.props.navigation.push("TransferConfirm");
+          }}
+        />
+        <Button>
+          <Text>Hello</Text>
+        </Button>
+      </View>
     );
   }
 }
