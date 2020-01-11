@@ -3,7 +3,7 @@
   "expoServerPort": null,
   "packagerPort": null,
   "packagerPid": null,
-  "expoServerNgrokUrl": null,
-  "packagerNgrokUrl": null,
-  "ngrokPid": null
+  "expoServerNgrokUrl": "https://ve-w37.benedict-frontenddeveloper.front-end.exp.direct",
+  "packagerNgrokUrl": "https://packager.ve-w37.benedict-frontenddeveloper.front-end.exp.direct",
+  "ngrokPid": 44178
 }

@@ -87,7 +87,7 @@ class App extends Component {
 
         if (res.status === 200) {
           alert("Successful");
-          this.props.navigation.push("EmailOtp");
+          this.props.navigation.push("EmailOtp2");
         }
       })
       .catch(err => {

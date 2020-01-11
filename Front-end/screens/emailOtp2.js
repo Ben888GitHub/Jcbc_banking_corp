@@ -25,7 +25,7 @@ import axios from "axios";
 import Countdown from "react-countdown";
 import OTPInputView from "@twotalltotems/react-native-otp-input";
 
-class emailOtp extends React.Component {
+class emailOtp2 extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -85,7 +85,7 @@ class emailOtp extends React.Component {
       if (completed) {
         // Render a completed state
         // set a state to hide the input
-        return this.props.navigation.navigate("Transfer");
+        return this.props.navigation.navigate("Transfer2");
       } else {
         // Render a countdown
         return <Text>{seconds}</Text>;
@@ -154,7 +154,7 @@ class emailOtp extends React.Component {
               console.log(`Your OTP Pin is ${code}, you are good to go!`);
               if (code !== this.state.data) {
                 alert("Invalid Input");
-                this.props.navigation.navigate("Transfer");
+                this.props.navigation.navigate("Transfer2");
                 {
                   /*TODO */
                 }
@@ -279,4 +279,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default emailOtp;
+export default emailOtp2;
