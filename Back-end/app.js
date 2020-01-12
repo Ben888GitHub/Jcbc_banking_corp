@@ -17,8 +17,6 @@ var database, collection;
 
 const sgMail = require('@sendgrid/mail');
 
-
-
 let randomNum = ""
 for (i = 0; i < 6; i++) {
     randomNum += Math.floor(Math.round(Math.random() * 9))

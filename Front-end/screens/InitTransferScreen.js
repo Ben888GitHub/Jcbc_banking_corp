@@ -99,7 +99,7 @@ class InitTransferScreen extends Component {
             });
     }
 
-    setvalue(accnum){
+    setvalue(accnum) {
         this.state.beneficiaryAccNumber = accnum //set value of destination acc number
         console.log(this.state.beneficiaryAccNumber)
         console.log(this.props.navigation.state.params.element.accnumber)
@@ -118,60 +118,60 @@ class InitTransferScreen extends Component {
         let tempDataList = this.props.currentUser.dependencies.map((value, index) => {
             return (
                 <TouchableOpacity onPress={() => this.setvalue(value.accnumber)}>
-                <Card pointerEvents="none" key={index}
-                    style={{
-                        borderRadius: 10,
-                        borderColor: "transparent",
-                        borderStyle: null,
-                        width: 170,
-                        height: 170,
-                        marginTop: marginNum,
-                        marginBottom: marginNum,
-                        marginLeft: 15,
-                        shadowColor: "#000",
-                        shadowOffset: {
-                            width: 0,
-                            height: 3,
-                        },
-                        shadowOpacity: 0.16,
-                        shadowRadius: 20,
-                        elevation: 5,
+                    <Card pointerEvents="none" key={index}
+                        style={{
+                            borderRadius: 10,
+                            borderColor: "transparent",
+                            borderStyle: null,
+                            width: 170,
+                            height: 170,
+                            marginTop: marginNum,
+                            marginBottom: marginNum,
+                            marginLeft: 15,
+                            shadowColor: "#000",
+                            shadowOffset: {
+                                width: 0,
+                                height: 3,
+                            },
+                            shadowOpacity: 0.16,
+                            shadowRadius: 20,
+                            elevation: 5,
 
-                        flex: 1,
-                        flexDirection: 'column',
-                        justifyContent: 'space-evenly'
-                    }}
-                >
-                    <CardItem header style={{ borderRadius: 10 }}>
+                            flex: 1,
+                            flexDirection: 'column',
+                            justifyContent: 'space-evenly'
+                        }}
+                    >
+                        <CardItem header style={{ borderRadius: 10 }}>
 
-                        <View style={{ flex: 1, flexDirection: 'column' }}>
-                            <Text style={{
-                                color: '#c13b3e',
-                                fontSize: 25
-                            }}>{value.accname}</Text>
-                            {/*
+                            <View style={{ flex: 1, flexDirection: 'column' }}>
+                                <Text style={{
+                                    color: '#c13b3e',
+                                    fontSize: 25
+                                }}>{value.accname}</Text>
+                                {/*
                             <Text style={{
                                 fontWeight: '700',
                                 color: '#c13b3e',
                                 fontSize: 25
                             }}>Nothing</Text>*/}
-                        </View>
+                            </View>
 
-                    </CardItem>
+                        </CardItem>
 
-                    <CardItem style={{
-                        borderRadius: 0,
-                        borderBottomLeftRadius: 10, borderBottomRightRadius: 10,
-                        backgroundColor: '#c13b3e', height: 70, flex: 1, flexDirection: 'column',
-                        alignItems: 'center'
-                    }}>
-                        <Body>
-                            <Text style={{ color: 'white', fontWeight: '700' }}>Account Number</Text>
-                            <Text style={{ color: 'white' }}>{value.accnumber}</Text>
-                            <Text style={{ color: 'white' }}>Placeholder</Text>
-                        </Body>
-                    </CardItem>
-                </Card >
+                        <CardItem style={{
+                            borderRadius: 0,
+                            borderBottomLeftRadius: 10, borderBottomRightRadius: 10,
+                            backgroundColor: '#c13b3e', height: 70, flex: 1, flexDirection: 'column',
+                            alignItems: 'center'
+                        }}>
+                            <Body>
+                                <Text style={{ color: 'white', fontWeight: '700' }}>Account Number</Text>
+                                <Text style={{ color: 'white' }}>{value.accnumber}</Text>
+                                <Text style={{ color: 'white' }}>Placeholder</Text>
+                            </Body>
+                        </CardItem>
+                    </Card >
                 </TouchableOpacity>
             );
         });
@@ -328,17 +328,17 @@ class InitTransferScreen extends Component {
                                 regular
                                 style={{ borderRadius: 5.5, width: screenWidth - 24, marginLeft: 12 }}>
                                 <Input
-                                  value={Number.parseInt(this.state.amount, 10)}
+                                    value={Number.parseInt(this.state.amount, 10)}
                                     pattern={[
                                         '(?=.*\\d)', // number required
                                     ]}
                                     keyboardType={'numeric'}
                                     placeholder="Enter Amount"
                                     onFocus={() => {
-                                      this.setState({ amount: "" });
+                                        this.setState({ amount: "" });
                                     }}
                                     onChangeText={text => {
-                                      this.setState({ amount: text });
+                                        this.setState({ amount: text });
                                     }} />
 
                             </Item>
@@ -377,11 +377,6 @@ class InitTransferScreen extends Component {
             </View >
         );
     }
-
-
-
-
-
 }
 
 const styles = StyleSheet.create({
