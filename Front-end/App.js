@@ -7,6 +7,7 @@ import AccountScreen from "./screens/account_page";
 import InitTransferScreen from "./screens/InitTransferScreen";
 import InitTransferScreen2 from "./screens/InitTransferScreen2";
 import InitTransferConfirmation from "./screens/InitTransferConfirmation";
+import InitTransferComplete from "./screens/InitTransferComplete";
 import Settings from "./screens/settings";
 import emailOtp from "./screens/emailOtp";
 import emailOtp2 from "./screens/emailOtp2";
@@ -35,6 +36,7 @@ const AppContainer = createAppContainer(
       Transfer2: { screen: InitTransferScreen2 },
       Transfer3: { screen: InitTransferScreen3 },
       TransferConfirm: { screen: InitTransferConfirmation },
+      TransferComplete: { screen: InitTransferComplete },
       Account: { screen: AccountScreen },
       Settings: { screen: Settings },
       EmailOtp: { screen: emailOtp },
