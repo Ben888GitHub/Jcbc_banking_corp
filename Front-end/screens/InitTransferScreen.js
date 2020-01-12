@@ -93,22 +93,27 @@ class InitTransferScreen extends Component {
   };
   onValueChange(value) {
     const { navigate } = this.props.navigation;
+    //console.log(value);
     if (value === "key1") {
       console.log(value);
       navigate("Transfer2");
+    }
+    else if(value === "Ryan2"){
+        console.log(value);
+        navigate("Transfer3");
     }
     /*this.setState({
           selected: value
         })*/
   }
-
+/*
   onValueChange2(value) {
     const { navigate } = this.props.navigation;
     if (value === "Ryan2") {
       console.log(value);
       navigate("Transfer3");
     }
-  }
+  }*/
 
   _handletransfer = () => {
     let amountToTransfer;
