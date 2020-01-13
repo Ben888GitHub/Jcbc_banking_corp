@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, View, TouchableOpacity } from "react-native";
 import {
   Header,
   Container,
@@ -21,8 +21,9 @@ import {
   Textarea
 } from "native-base";
 import axios from "axios";
-import Otp from "../components/Otp.js";
+// import Otp from "../components/Otp";
 import Countdown from "react-countdown";
+import OTPInputView from "@twotalltotems/react-native-otp-input";
 
 class emailOtp extends React.Component {
   constructor(props) {
@@ -32,23 +33,59 @@ class emailOtp extends React.Component {
       resendCode: "Resend Code",
       countdownTimer: " ",
       timerStop: " ",
-      countdown: " " //TODO
+      countdown: 0, //TODO
+      email: "benedictryan80@gmail.com",
+      pin_count: 6,
+      data: "",
+      thebutton: <Button>Hey</Button>
     };
   }
 
-  componentDidMount() {}
+  componentDidMount() {
+    axios
+      .post(
+        "https://ixmhlhrubj.execute-api.ap-southeast-1.amazonaws.com/dev/sendmail",
+        {
+          email: this.state.email
+        }
+      )
+      .then(res => {
+        this.setState({
+          data: res.data.otp
+        });
+      })
+      .catch();
+  }
 
   _getOTP = () => {};
 
-  setTiming = () => {};
+  resendTheOtp = () => {
+    axios
+      .post(
+        "https://ixmhlhrubj.execute-api.ap-southeast-1.amazonaws.com/dev/sendmail",
+        {
+          email: this.state.email
+        }
+      )
+      .then(res => {
+        alert("Your OTP has been resent");
+        this.setState({
+          data: res.data.otp
+        });
+      })
+      .catch();
+  };
 
   render() {
     const countdown = ""; //TODO
-    const Completionist = () => <Text>You are good to go!</Text>;
+    const Completionist = () => alert("Session Expired"); // <Text>Session Expired</Text>;
+    const { navigate } = this.props.navigation;
+    const { pin_count } = this.state;
     const renderer = ({ seconds, completed }) => {
       if (completed) {
         // Render a completed state
-        return <Completionist />;
+        // set a state to hide the input
+        return this.props.navigation.navigate("Transfer");
       } else {
         // Render a countdown
         return <Text>{seconds}</Text>;
@@ -99,25 +136,66 @@ class emailOtp extends React.Component {
         {/* */}
         {/* This section is for OTP Input */}
         <Content>
-          <Otp />
+          {/* <Otp /> */}
+          <OTPInputView
+            style={{
+              width: "80%",
+              height: 200,
+              alignItems: "center",
+              justifyContent: "center"
+            }}
+            pinCount={pin_count}
+            // code={this.state.code} //You can supply this prop or not. The component will be used as a controlled / uncontrolled component respectively.
+            // onCodeChanged = {code => { this.setState({code})}}
+            autoFocusOnLoad
+            codeInputFieldStyle={styles.underlineStyleBase}
+            codeInputHighlightStyle={styles.underlineStyleHighLighted}
+            onCodeFilled={code => {
+              console.log(`Your OTP Pin is ${code}, you are good to go!`);
+              if (code !== this.state.data) {
+                alert("Invalid Input");
+                this.props.navigation.navigate("Transfer");
+                {
+                  /*TODO */
+                }
+              } else {
+                alert("You are good to go");
+                this.props.navigation.push("TransferConfirm");
+              }
+              // alert("You are running out of time");
+              // this.props.navigation.push("TransferConfirm");
+            }}
+          />
           <Text style={styles.timingStyle}>
             Time Remaining:{" "}
-            <Countdown date={Date.now() + 20000} renderer={renderer} /> seconds
+            <Countdown date={Date.now() + 30000} renderer={renderer} /> seconds
             left
+            {/* <Text>
+              If time remaining is up, then you will be redirected to your
+              Transfer Page
+            </Text> */}
           </Text>
-          <Text style={styles.resendCodeStyle}>
-            Didn't receive the OTP?
-            <Text
-              style={{
-                fontSize: 17,
-                fontWeight: "bold"
-              }}
-            >
-              {" "}
-              <Text></Text>
-              Resend Code
-            </Text>
-          </Text>
+          <Text style={styles.resendCodeStyle}>Didn't receive the OTP?</Text>
+          {/* <Button transparent> </Button> */}
+          <TouchableOpacity
+            style={{ marginHorizontal: 55, marginVertical: 15 }}
+            onPress={this.resendTheOtp}
+          >
+            <View>
+              <Text
+                style={{
+                  fontSize: 17,
+                  fontWeight: "bold"
+                }}
+              >
+                {" "}
+                <Text></Text>
+                <Text>Resend Code</Text>{" "}
+                {/* Remember to put onPress here 👆 on TouchableOpacity for redirecting back */}
+              </Text>
+            </View>
+          </TouchableOpacity>
+          {/* </Text> */}
         </Content>
 
         {/* */}
@@ -167,6 +245,37 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     marginHorizontal: 55,
     fontSize: 17
+  },
+  borderStyleBase: {
+    width: 30,
+    height: 45
+  },
+
+  borderStyleHighLighted: {
+    borderColor: "#03DAC6"
+  },
+
+  underlineStyleBase: {
+    width: 40,
+    height: 30,
+    borderWidth: 0,
+    borderBottomWidth: 4,
+    borderColor: "lightgrey",
+    alignItems: "center",
+    justifyContent: "center",
+    marginLeft: 24,
+    marginTop: -95,
+    fontSize: 25
+  },
+
+  underlineStyleHighLighted: {
+    borderColor: "#03DAC6"
+  },
+  theButtonSize: {
+    width: 200,
+    marginTop: 40,
+    alignItems: "center",
+    justifyContent: "center"
   }
 });
 

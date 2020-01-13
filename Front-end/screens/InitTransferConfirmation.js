@@ -1,9 +1,5 @@
 import React, { Component } from "react";
-import {
-  StyleSheet,
-  View,
-  Alert
-} from "react-native";
+import { StyleSheet, View, Alert } from "react-native";
 import {
   Header,
   Container,
@@ -13,23 +9,24 @@ import {
   CardItem,
   Icon,
   Button,
-  Text,
+  Text
 } from "native-base";
-import { authenticate } from '../reducers/actions';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+import { authenticate } from "../reducers/actions";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   const { currentUser } = state;
   return { currentUser };
 };
 
-const mapDispatchToProps = dispatch => (
-  bindActionCreators({
-      authenticate,
-  }, dispatch)
-);
-
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(
+    {
+      authenticate
+    },
+    dispatch
+  );
 
 class App extends Component {
   constructor(props) {
@@ -61,6 +58,7 @@ class App extends Component {
     });
   }
   render() {
+    const { navigate } = this.props.navigation;
     const TransferAlert = () =>
       Alert.alert("You have successfully transferred");
     return (
@@ -155,6 +153,7 @@ class App extends Component {
           </Card>
           <View style={{ alignItems: "center", padding: 15 }}>
             <Button
+              onPress={() => navigate("TransferComplete")}
               danger
               style={{ margin: 25, borderRadius: 10, width: 120, height: 60 }}
             >
@@ -187,4 +186,3 @@ const styles = StyleSheet.create({
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
-
