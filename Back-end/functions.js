@@ -14,7 +14,7 @@ app.use(BodyParser.urlencoded({ extended: true }));
 
 var database, collection;
 
-exports.transfer = async(transferData) => {
+let transfer = async (transferData) => {
 
 
     let client = await MongoClient.connect(CONNECTION_URL, { useNewUrlParser: true });
@@ -97,3 +97,5 @@ exports.transfer = async(transferData) => {
     };
     return toReturn;
 };
+
+export default transfer;
