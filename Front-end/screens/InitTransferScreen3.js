@@ -160,7 +160,7 @@ render(){
           flexDirection: "column",
           justifyContent: "flex-end",
           //marginVertical: 100,
-          marginHorizontal: 20,
+          marginHorizontal: 10,
           //marginBottom: 130
         }}
       >
