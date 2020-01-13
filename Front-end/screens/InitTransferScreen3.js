@@ -29,7 +29,7 @@ const mapStateToProps = state => {
     const { currentUser } = state;
     return { currentUser };
   };
-  
+
   const mapDispatchToProps = dispatch =>
     bindActionCreators(
       {
@@ -38,6 +38,9 @@ const mapStateToProps = state => {
       dispatch
     );
 
+    const { width } = Dimensions.get('window')
+    const qrSize = width * 0.7
+
 class InitTransfer3 extends Component{
     state={
  //       [hasPermission, setHasPermission] = useState(null);
@@ -45,7 +48,7 @@ class InitTransfer3 extends Component{
         hasPermission: null,
         scanned: false
     };
-    
+
     async componentDidMount() {
         this.getPermissionsAsync();
     }
@@ -73,6 +76,8 @@ class InitTransfer3 extends Component{
             navigate("Transfer2")
         }
     }
+
+
 
 
 render(){
@@ -103,38 +108,7 @@ render(){
         </Left>
         <Title style={styles.headerText}>Scan QR Code</Title>
       </Header>
-      <View
-        style={{
-          flex: 1,
-          flexDirection: "column",
-          justifyContent: "flex-end",
-          marginVertical: 100,
-          marginHorizontal: 20,
-          marginBottom: 130
-        }}
-      >
-        <BarCodeScanner
-          onBarCodeScanned={scanned ? undefined : this.handleBarCodeScanned}
-          style={StyleSheet.absoluteFillObject}
-        />
 
-        {scanned && (
-          <Button
-            style={{ backgroundColor: "#c13b3e" }}
-            onPress={() => setScanned(false)}
-          >
-            <Text
-              style={{
-                alignItems: "center",
-                justifyContent: "center",
-                color: "white"
-              }}
-            >
-              Tap to scan another QR code
-            </Text>
-          </Button>
-        )}
-      </View>
       <Text
             style={{
               fontWeight: "bold",
@@ -177,9 +151,51 @@ render(){
               <Picker.Item label="To beneficiaries' QR Code" value="Ryan2" />
               <Picker.Item label="I want to input manually" value="key1" />
               <Picker.Item label="To saved beneficiaries" value="Ryan" />
-              
+
             </Picker>
             </Card>
+      <View
+        style={{
+          flex: 1,
+          flexDirection: "column",
+          justifyContent: "flex-end",
+          //marginVertical: 100,
+          marginHorizontal: 10,
+          //marginBottom: 130
+        }}
+      >
+      <BarCodeScanner
+        onBarCodeRead={this.handleBarCodeScanned}
+        style={[StyleSheet.absoluteFill, styles.barcodeScanner]}/>
+        <Text style={styles.description}>Scan your QR code</Text>
+        {/*<Image
+          style={styles.qr}
+          source={require('../assets/img/QR.png')}
+        />*/}
+
+        {scanned && (
+          <Button
+            style={{ backgroundColor: "#c13b3e" }}
+            onPress={() => setScanned(false)}
+          >
+            <Text
+              style={{
+                alignItems: "center",
+                justifyContent: "center",
+                color: "black"
+              }}
+            >
+              Tap to scan another QR code
+            </Text>
+          </Button>
+        )}
+      </View>
+
+      <Text
+        onPress={() => this.props.navigation.pop()}
+        style={styles.cancel}>
+        Cancel
+      </Text>
       <Footer style={{ backgroundColor: "#c13b3e", padding: 20, height: 120 }}>
         <Text style={styles.footerText}>
           Scan the selected beneficiary QR code {"\n"} to proceed to OTP
@@ -201,15 +217,45 @@ const styles = StyleSheet.create({
     fontSize: 20,
     width: "100%",
     fontWeight: "bold",
-    marginLeft: 240,
-    marginVertical: 20
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    marginVertical: 10
   },
   footerText: {
     color: "white",
     fontSize: 18,
     width: "100%",
     fontWeight: "normal"
-  }
+
+  },
+  barcodeStyle: {
+    marginTop: '20%',
+    marginBottom: '20%',
+    width: qrSize,
+    height: qrSize,
+  },
+  qr: {
+    marginTop: '20%',
+    marginBottom: '20%',
+    width: qrSize,
+    height: qrSize,
+  },
+  description: {
+    fontSize: width * 0.04,
+    marginTop: '10%',
+    textAlign: 'center',
+    width: '20%',
+    color: 'white',
+  },
+  cancel: {
+    fontSize: width * 0.05,
+    textAlign: 'center',
+    width: '70%',
+    color: '#000',
+    marginLeft: 'auto',
+    marginRight:'auto',
+    marginBottom: '5%'
+  },
 });
 
 //export default InitTransferq;

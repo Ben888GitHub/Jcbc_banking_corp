@@ -191,7 +191,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/cp3405/dev/1578881353174-2020-01-13T02:09:13.174Z/cp3405.zip"
+          "S3Key": "serverless/cp3405/dev/1578890431099-2020-01-13T04:40:31.099Z/cp3405.zip"
         },
         "FunctionName": "cp3405-dev-wd_groups",
         "Handler": "s_wd_groups.handler",
@@ -210,14 +210,14 @@
         "IamRoleLambdaExecution"
       ]
     },
-    "WdUnderscoregroupsLambdaVersionxeFuA2eNR9jbpln5Kz1fdoFC2Z33yRMFJcSCYmYg": {
+    "WdUnderscoregroupsLambdaVersionqvNJKXo0OpGsslqfSZQL2vIvbYAGtChoG3BvB3IbU": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "WdUnderscoregroupsLambdaFunction"
         },
-        "CodeSha256": "bZw/RQKUZnKLpNYM4gLCJp4M7YvHQA+UHZHOimLiMU0="
+        "CodeSha256": "aFZBIZALx0C4/vUkXQVJnXI7Jm/KcMFovm27b2VaaAY="
       }
     },
     "ApiGatewayRestApi": {
@@ -747,7 +747,7 @@
         "MethodResponses": []
       }
     },
-    "ApiGatewayDeployment1578881344624": {
+    "ApiGatewayDeployment1578890420528": {
       "Type": "AWS::ApiGateway::Deployment",
       "Properties": {
         "RestApiId": {
@@ -899,7 +899,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/cp3405/dev/1578881353174-2020-01-13T02:09:13.174Z/custom-resources.zip"
+          "S3Key": "serverless/cp3405/dev/1578890431099-2020-01-13T04:40:31.099Z/custom-resources.zip"
         },
         "FunctionName": "cp3405-dev-custom-resource-apigw-cw-role",
         "Handler": "apiGatewayCloudWatchRole/handler.handler",
@@ -955,7 +955,7 @@
     "WdUnderscoregroupsLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "WdUnderscoregroupsLambdaVersionxeFuA2eNR9jbpln5Kz1fdoFC2Z33yRMFJcSCYmYg"
+        "Ref": "WdUnderscoregroupsLambdaVersionqvNJKXo0OpGsslqfSZQL2vIvbYAGtChoG3BvB3IbU"
       }
     },
     "ServiceEndpoint": {

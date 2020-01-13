@@ -14,9 +14,7 @@ app.use(BodyParser.urlencoded({ extended: true }));
 
 var database, collection;
 
-let transfer = async (transferData) => {
-
-
+async function transfer(transferData) {
     let client = await MongoClient.connect(CONNECTION_URL, { useNewUrlParser: true });
     database = client.db(DATABASE_NAME);
     collection = database.collection("userlist");
@@ -96,6 +94,6 @@ let transfer = async (transferData) => {
         adding: dest_result
     };
     return toReturn;
-};
+}
 
-export default transfer;
+module.exports.transfer = transfer;

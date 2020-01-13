@@ -1,7 +1,7 @@
 const Express = require("express");
 const BodyParser = require("body-parser");
 const MongoClient = require("mongodb").MongoClient;
-const transfer = require('./functions');
+const functions = require('./functions');
 const CONNECTION_URL = "mongodb+srv://root:root@cluster0-djxyv.mongodb.net/test";
 const DATABASE_NAME = "users";
 
@@ -56,7 +56,7 @@ app.post("/transfer", async (request, response) => {
         "dest_acc_num": request.body.dest_acc_num,
     };
 
-    let repondre = transfer(sampleRequest);
+    let repondre = functions.transfer(sampleRequest);
 
     response.status(200).send(repondre);
 });
@@ -71,7 +71,7 @@ app.post("/transfer_byqr", async (request, response) => {
         "dest_acc_num": request.body.qrcode,
     };
 
-    let repondre = transfer(sampleRequest);
+    let repondre = functions.transfer(sampleRequest);
 
     response.status(200).send(repondre);
 });

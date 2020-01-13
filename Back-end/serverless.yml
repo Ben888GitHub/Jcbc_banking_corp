@@ -1,6 +1,6 @@
 service: cp3405
-org: zwenyantoe
-app: myapp
+org: hungnguy
+app: cp3405
 
 provider:
   name: aws
