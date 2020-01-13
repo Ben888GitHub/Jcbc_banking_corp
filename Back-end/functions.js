@@ -14,12 +14,8 @@ app.use(BodyParser.urlencoded({ extended: true }));
 
 var database, collection;
 
-<<<<<<< HEAD
-async function transfer(transferData){
-=======
 async function transfer(transferData) {
 
->>>>>>> 9572d0ebc16f674272cce6735e9b91c1a1c487c0
     let db = await MongoClient.connect(CONNECTION_URL, { useNewUrlParser: true });
     database = db.db(DATABASE_NAME);
     collection = database.collection("userlist");
@@ -114,7 +110,7 @@ async function connectToDatabase() {
 
     return MongoClient.connect(CONNECTION_URL, { useNewUrlParser: true })
         .then(db => {
-            cachedDb = db.db(DATABASE_NAME).collection(COLLECTION_NAME);;
+            cachedDb = db.db(DATABASE_NAME).collection("userlist");
             return cachedDb;
         });
 };

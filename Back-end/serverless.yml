@@ -1,6 +1,10 @@
+# service: cp3405
+# org: hungnguy
+# app: cp3405
+
 service: cp3405
-org: hungnguy
-app: cp3405
+org: zwenyantoe
+app: myapp
 
 provider:
   name: aws
@@ -17,6 +21,13 @@ functions:
     events:
      - http:
          path: authenticate_test
+         method: post
+         cors: true
+  transfer_test:
+    handler: handler.transfer_test
+    events:
+     - http:
+         path: transfer_test
          method: post
          cors: true
   wd_groups:
