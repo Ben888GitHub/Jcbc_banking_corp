@@ -25,7 +25,7 @@ functions:
           cors: true
       - http:
           method: POST
-          path: /transfer
+          path: /transfertest
           cors: true
       - http: 
           method: POST
@@ -33,5 +33,9 @@ functions:
           cors: true
       - http:
           method: POST
-          path: /transfer_byqr
+          path: /transfer_byqrtest
+          cors: true
+      - http:
+          method: POST
+          path: /transfer
           cors: true
