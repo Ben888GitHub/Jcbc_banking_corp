@@ -21,37 +21,6 @@ for (i = 0; i < 6; i++) {
     randomNum += Math.floor(Math.round(Math.random() * 9))
 }
 
-
-// TESTING WITH THE SERVERLESS FORMAT:
-
-module.exports.authenticate_test = (event, context, callback) => {
-
-    context.callbackWaitsForEmptyEventLoop = false;
-    functions.connectToDatabase()
-        .then(collection => {
-            console.log(JSON.parse(event.body));
-            let requete = {
-                'accname': JSON.parse(event.body).accname,
-                'pin': JSON.parse(event.body).pin,
-            };
-            collection.find(requete).toArray((error, result) => {
-                if (error) {
-                    return response.status(500).send(error);
-                }
-                callback(null, {
-                    statusCode: 200,
-                    body: JSON.stringify(result)
-                });
-            });
-        })
-        .catch(err => {
-            console.log('=> an error occurred: ', err);
-            callback(err);
-        });
-};
-
-// ENDING TESTING WITH THE SERVERLESS FORMAT.
-
 app.get("/", (request, response) => {
     response.send('Hello');
 });

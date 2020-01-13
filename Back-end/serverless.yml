@@ -12,6 +12,13 @@ plugins:
   - serverless-offline
   
 functions:
+  authenticate_test:
+    handler: handler.authenticate_test
+    events:
+     - http:
+         path: authenticate_test
+         method: post
+         cors: true
   wd_groups:
     handler: handler.cp3405
     events:
