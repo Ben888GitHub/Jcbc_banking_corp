@@ -131,6 +131,10 @@ exports.transfer_test = (event, context, callback) => {
         })
       });
     })
+    .catch(err => {
+      console.log('=> an error occurred: ', err);
+      callback(err);
+    })
 }
 
 // ENDING TESTING WITH THE SERVERLESS FORMAT.
