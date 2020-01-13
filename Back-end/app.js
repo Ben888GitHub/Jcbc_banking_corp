@@ -155,7 +155,6 @@ app.post("/transfertest", async (request, response) => {
 });
 
 app.post("/transfer_byqrtest", async (request, response) => {
-
     let sampleRequest = {
         "sender_username": request.body.sender_username,
         "source_acc_num": request.body.source_acc_num,
