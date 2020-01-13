@@ -385,7 +385,7 @@ class InitTransferScreen extends Component {
                   flexDirection: "row",
                   alignItems: "center",
                   justifyContent: "space-between",
-                  width: 390,
+                  width: screenWidth - 24,
                   marginLeft: 13
                 }}
               >
@@ -399,7 +399,7 @@ class InitTransferScreen extends Component {
                     />
                   }
                   style={{
-                    width: screenWidth * 0.92,
+                    width: screenWidth - 24,
                     fontWeight: "bold"
                   }}
                   selectedValue={this.state.selected}
