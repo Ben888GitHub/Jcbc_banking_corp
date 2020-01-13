@@ -53,15 +53,19 @@ class App extends Component {
       console.log(value);
       navigate("Transfer");
     }
+    else if(value === "Ryan2"){
+      console.log(value);
+      navigate("Transfer3");
+    }
   }
-
+/*
   onValueChange2(value) {
     const { navigate } = this.props.navigation;
     if (value === "Ryan2") {
       console.log(value);
       navigate("Transfer3");
     }
-  }
+  }*/
 
   _handletransfer = () => {
     let amountToTransfer;
@@ -218,7 +222,7 @@ class App extends Component {
               }}
               selectedValue={this.state.selected}
               onValueChange={val => this.onValueChange(val)}
-              onValueChange2={val => this.onValueChange2(val)}
+              //onValueChange2={val => this.onValueChange2(val)}
             >
               <Picker.Item label="I want to input manually" value="key1" />
               <Picker.Item label="To saved beneficiaries" value="Ryan" />

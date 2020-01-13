@@ -93,22 +93,27 @@ class InitTransferScreen extends Component {
   };
   onValueChange(value) {
     const { navigate } = this.props.navigation;
+    //console.log(value);
     if (value === "key1") {
       console.log(value);
       navigate("Transfer2");
+    }
+    else if (value === "Ryan2") {
+      console.log(value);
+      navigate("Transfer3");
     }
     /*this.setState({
           selected: value
         })*/
   }
-
-  onValueChange2(value) {
-    const { navigate } = this.props.navigation;
-    if (value === "Ryan2") {
-      console.log(value);
-      navigate("Transfer3");
-    }
-  }
+  /*
+    onValueChange2(value) {
+      const { navigate } = this.props.navigation;
+      if (value === "Ryan2") {
+        console.log(value);
+        navigate("Transfer3");
+      }
+    }*/
 
   _handletransfer = () => {
     let amountToTransfer;
@@ -182,7 +187,7 @@ class InitTransferScreen extends Component {
                 borderRadius: 10,
                 borderColor:
                   index == this.state.indexToHaveBorder &&
-                  this.state.indexToHaveBorder != null
+                    this.state.indexToHaveBorder != null
                     ? "blue"
                     : "transparent",
                 borderWidth: 10,
@@ -390,7 +395,7 @@ class InitTransferScreen extends Component {
                   iosIcon={
                     <Icon
                       name="arrow-down"
-                      // style={{ position: "absolute", right: 0 }}
+                    // style={{ position: "absolute", right: 0 }}
                     />
                   }
                   style={{

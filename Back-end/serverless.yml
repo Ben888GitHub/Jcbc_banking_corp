@@ -31,5 +31,7 @@ functions:
           method: POST
           path: /sendmail
           cors: true
-      
-
+      - http:
+          method: POST
+          path: /transfer_byqr
+          cors: true
