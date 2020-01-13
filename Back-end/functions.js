@@ -98,3 +98,22 @@ async function transfer(transferData) {
 }
 
 module.exports.transfer = transfer;
+
+let cachedDb = null;
+
+async function connectToDatabase() {
+    console.log('=> connecting to database in progress...');
+
+    if (cachedDb) {
+        console.log('=> using CACHED database instance');
+        return Promise.resolve(cachedDb);
+    }
+
+    return MongoClient.connect(CONNECTION_URL, { useNewUrlParser: true })
+        .then(db => {
+            cachedDb = db.db(DATABASE_NAME).collection(COLLECTION_NAME);;
+            return cachedDb;
+        });
+};
+
+module.exports.connectToDatabase = connectToDatabase;
