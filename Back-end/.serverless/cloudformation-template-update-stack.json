@@ -191,7 +191,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/cp3405/dev/1578878778081-2020-01-13T01:26:18.081Z/cp3405.zip"
+          "S3Key": "serverless/cp3405/dev/1578885139023-2020-01-13T03:12:19.023Z/cp3405.zip"
         },
         "FunctionName": "cp3405-dev-wd_groups",
         "Handler": "s_wd_groups.handler",
@@ -210,14 +210,14 @@
         "IamRoleLambdaExecution"
       ]
     },
-    "WdUnderscoregroupsLambdaVersionA1t6198btPaylrie37t9zAyIPknrRbK6J76SRc": {
+    "WdUnderscoregroupsLambdaVersionotKABOQwOq7Tj2Y0ADag5uy4yyZwtyZFS94zwptgZ8": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "WdUnderscoregroupsLambdaFunction"
         },
-        "CodeSha256": "o6iOXQP7xXwnryicTdvkR3ceB+3bFMSliKv3p6NoY14="
+        "CodeSha256": "w2k/jLP7HI1ettRTCAhBoyBw99J6hlLhOGfmrcOwVKc="
       }
     },
     "ApiGatewayRestApi": {
@@ -747,7 +747,7 @@
         "MethodResponses": []
       }
     },
-    "ApiGatewayDeployment1578878769884": {
+    "ApiGatewayDeployment1578885123301": {
       "Type": "AWS::ApiGateway::Deployment",
       "Properties": {
         "RestApiId": {
@@ -899,7 +899,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/cp3405/dev/1578878778081-2020-01-13T01:26:18.081Z/custom-resources.zip"
+          "S3Key": "serverless/cp3405/dev/1578885139023-2020-01-13T03:12:19.023Z/custom-resources.zip"
         },
         "FunctionName": "cp3405-dev-custom-resource-apigw-cw-role",
         "Handler": "apiGatewayCloudWatchRole/handler.handler",
@@ -955,7 +955,7 @@
     "WdUnderscoregroupsLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "WdUnderscoregroupsLambdaVersionA1t6198btPaylrie37t9zAyIPknrRbK6J76SRc"
+        "Ref": "WdUnderscoregroupsLambdaVersionotKABOQwOq7Tj2Y0ADag5uy4yyZwtyZFS94zwptgZ8"
       }
     },
     "ServiceEndpoint": {

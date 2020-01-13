@@ -14,9 +14,7 @@ app.use(BodyParser.urlencoded({ extended: true }));
 
 var database, collection;
 
-let transfer = (transferData) => {
-
-
+ async function transfer (transferData) {
     let client = await MongoClient.connect(CONNECTION_URL, { useNewUrlParser: true });
     database = client.db(DATABASE_NAME);
     collection = database.collection("userlist");
@@ -54,7 +52,7 @@ let transfer = (transferData) => {
     currentAccount = await collection.findOne(dest_requete);
     if (!currentAccount) {
         console.log('Destination account is not exist.');
-        response.status(500).send({ errorMessage: 'Destination account is not exist.' });
+         return({ errorMessage: 'Destination account is not exist.' });
         return;
     };
 
@@ -66,7 +64,7 @@ let transfer = (transferData) => {
     });
 
     if (currentBalance.balance < transferData.transfer_amount) {
-        response.status(500).send({ errorMessage: 'Source balance is not sufficient.' });
+        return ({ errorMessage: 'Source balance is not sufficient.' });
         return;
     };
 
@@ -96,6 +94,7 @@ let transfer = (transferData) => {
         adding: dest_result
     };
     return toReturn;
-}
+};
 
-export default transfer;
+
+module.exports.transfer = transfer;
