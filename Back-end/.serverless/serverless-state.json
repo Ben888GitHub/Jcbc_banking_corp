@@ -206,7 +206,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/cp3405/dev/1578890431099-2020-01-13T04:40:31.099Z/cp3405.zip"
+                "S3Key": "serverless/cp3405/dev/1578896940098-2020-01-13T06:29:00.098Z/cp3405.zip"
               },
               "FunctionName": "cp3405-dev-wd_groups",
               "Handler": "s_wd_groups.handler",
@@ -225,14 +225,14 @@
               "IamRoleLambdaExecution"
             ]
           },
-          "WdUnderscoregroupsLambdaVersionqvNJKXo0OpGsslqfSZQL2vIvbYAGtChoG3BvB3IbU": {
+          "WdUnderscoregroupsLambdaVersionEKZ0zYt4oHBXkwR4hNLa6GxVe9YmusXmRkHbQKyur4": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "WdUnderscoregroupsLambdaFunction"
               },
-              "CodeSha256": "aFZBIZALx0C4/vUkXQVJnXI7Jm/KcMFovm27b2VaaAY="
+              "CodeSha256": "aAF3UUkhsbKX7+Z7IlmZ0XCsXw7T7U+FIdYqw5KlxCE="
             }
           },
           "ApiGatewayRestApi": {
@@ -261,7 +261,7 @@
               }
             }
           },
-          "ApiGatewayResourceTransfer": {
+          "ApiGatewayResourceTransfertest": {
             "Type": "AWS::ApiGateway::Resource",
             "Properties": {
               "ParentId": {
@@ -270,7 +270,7 @@
                   "RootResourceId"
                 ]
               },
-              "PathPart": "transfer",
+              "PathPart": "transfertest",
               "RestApiId": {
                 "Ref": "ApiGatewayRestApi"
               }
@@ -291,7 +291,7 @@
               }
             }
           },
-          "ApiGatewayResourceTransferbyqr": {
+          "ApiGatewayResourceTransferbyqrtest": {
             "Type": "AWS::ApiGateway::Resource",
             "Properties": {
               "ParentId": {
@@ -300,7 +300,22 @@
                   "RootResourceId"
                 ]
               },
-              "PathPart": "transfer_byqr",
+              "PathPart": "transfer_byqrtest",
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              }
+            }
+          },
+          "ApiGatewayResourceTransfer": {
+            "Type": "AWS::ApiGateway::Resource",
+            "Properties": {
+              "ParentId": {
+                "Fn::GetAtt": [
+                  "ApiGatewayRestApi",
+                  "RootResourceId"
+                ]
+              },
+              "PathPart": "transfer",
               "RestApiId": {
                 "Ref": "ApiGatewayRestApi"
               }
@@ -403,7 +418,7 @@
               }
             }
           },
-          "ApiGatewayMethodTransferOptions": {
+          "ApiGatewayMethodTransfertestOptions": {
             "Type": "AWS::ApiGateway::Method",
             "Properties": {
               "AuthorizationType": "NONE",
@@ -443,7 +458,7 @@
                 ]
               },
               "ResourceId": {
-                "Ref": "ApiGatewayResourceTransfer"
+                "Ref": "ApiGatewayResourceTransfertest"
               },
               "RestApiId": {
                 "Ref": "ApiGatewayRestApi"
@@ -497,7 +512,7 @@
               }
             }
           },
-          "ApiGatewayMethodTransferbyqrOptions": {
+          "ApiGatewayMethodTransferbyqrtestOptions": {
             "Type": "AWS::ApiGateway::Method",
             "Properties": {
               "AuthorizationType": "NONE",
@@ -537,7 +552,54 @@
                 ]
               },
               "ResourceId": {
-                "Ref": "ApiGatewayResourceTransferbyqr"
+                "Ref": "ApiGatewayResourceTransferbyqrtest"
+              },
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              }
+            }
+          },
+          "ApiGatewayMethodTransferOptions": {
+            "Type": "AWS::ApiGateway::Method",
+            "Properties": {
+              "AuthorizationType": "NONE",
+              "HttpMethod": "OPTIONS",
+              "MethodResponses": [
+                {
+                  "StatusCode": "200",
+                  "ResponseParameters": {
+                    "method.response.header.Access-Control-Allow-Origin": true,
+                    "method.response.header.Access-Control-Allow-Headers": true,
+                    "method.response.header.Access-Control-Allow-Methods": true,
+                    "method.response.header.Access-Control-Allow-Credentials": true
+                  },
+                  "ResponseModels": {}
+                }
+              ],
+              "RequestParameters": {},
+              "Integration": {
+                "Type": "MOCK",
+                "RequestTemplates": {
+                  "application/json": "{statusCode:200}"
+                },
+                "ContentHandling": "CONVERT_TO_TEXT",
+                "IntegrationResponses": [
+                  {
+                    "StatusCode": "200",
+                    "ResponseParameters": {
+                      "method.response.header.Access-Control-Allow-Origin": "'*'",
+                      "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'",
+                      "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,POST'",
+                      "method.response.header.Access-Control-Allow-Credentials": "'false'"
+                    },
+                    "ResponseTemplates": {
+                      "application/json": "#set($origin = $input.params(\"Origin\"))\n#if($origin == \"\") #set($origin = $input.params(\"origin\")) #end\n#if($origin.matches(\".*\")) #set($context.responseOverride.header.Access-Control-Allow-Origin = $origin) #end"
+                    }
+                  }
+                ]
+              },
+              "ResourceId": {
+                "Ref": "ApiGatewayResourceTransfer"
               },
               "RestApiId": {
                 "Ref": "ApiGatewayRestApi"
@@ -633,13 +695,13 @@
               "MethodResponses": []
             }
           },
-          "ApiGatewayMethodTransferPost": {
+          "ApiGatewayMethodTransfertestPost": {
             "Type": "AWS::ApiGateway::Method",
             "Properties": {
               "HttpMethod": "POST",
               "RequestParameters": {},
               "ResourceId": {
-                "Ref": "ApiGatewayResourceTransfer"
+                "Ref": "ApiGatewayResourceTransfertest"
               },
               "RestApiId": {
                 "Ref": "ApiGatewayRestApi"
@@ -719,13 +781,13 @@
               "MethodResponses": []
             }
           },
-          "ApiGatewayMethodTransferbyqrPost": {
+          "ApiGatewayMethodTransferbyqrtestPost": {
             "Type": "AWS::ApiGateway::Method",
             "Properties": {
               "HttpMethod": "POST",
               "RequestParameters": {},
               "ResourceId": {
-                "Ref": "ApiGatewayResourceTransferbyqr"
+                "Ref": "ApiGatewayResourceTransferbyqrtest"
               },
               "RestApiId": {
                 "Ref": "ApiGatewayRestApi"
@@ -762,7 +824,50 @@
               "MethodResponses": []
             }
           },
-          "ApiGatewayDeployment1578890420528": {
+          "ApiGatewayMethodTransferPost": {
+            "Type": "AWS::ApiGateway::Method",
+            "Properties": {
+              "HttpMethod": "POST",
+              "RequestParameters": {},
+              "ResourceId": {
+                "Ref": "ApiGatewayResourceTransfer"
+              },
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              },
+              "ApiKeyRequired": false,
+              "AuthorizationType": "NONE",
+              "Integration": {
+                "IntegrationHttpMethod": "POST",
+                "Type": "AWS_PROXY",
+                "Uri": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition"
+                      },
+                      ":apigateway:",
+                      {
+                        "Ref": "AWS::Region"
+                      },
+                      ":lambda:path/2015-03-31/functions/",
+                      {
+                        "Fn::GetAtt": [
+                          "WdUnderscoregroupsLambdaFunction",
+                          "Arn"
+                        ]
+                      },
+                      "/invocations"
+                    ]
+                  ]
+                }
+              },
+              "MethodResponses": []
+            }
+          },
+          "ApiGatewayDeployment1578896932040": {
             "Type": "AWS::ApiGateway::Deployment",
             "Properties": {
               "RestApiId": {
@@ -773,14 +878,16 @@
             "DependsOn": [
               "ApiGatewayMethodOptions",
               "ApiGatewayMethodAuthenticateOptions",
-              "ApiGatewayMethodTransferOptions",
+              "ApiGatewayMethodTransfertestOptions",
               "ApiGatewayMethodSendmailOptions",
-              "ApiGatewayMethodTransferbyqrOptions",
+              "ApiGatewayMethodTransferbyqrtestOptions",
+              "ApiGatewayMethodTransferOptions",
               "ApiGatewayMethodGet",
               "ApiGatewayMethodAuthenticatePost",
-              "ApiGatewayMethodTransferPost",
+              "ApiGatewayMethodTransfertestPost",
               "ApiGatewayMethodSendmailPost",
-              "ApiGatewayMethodTransferbyqrPost"
+              "ApiGatewayMethodTransferbyqrtestPost",
+              "ApiGatewayMethodTransferPost"
             ]
           },
           "WdUnderscoregroupsLambdaPermissionApiGateway": {
@@ -914,7 +1021,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/cp3405/dev/1578890431099-2020-01-13T04:40:31.099Z/custom-resources.zip"
+                "S3Key": "serverless/cp3405/dev/1578896940098-2020-01-13T06:29:00.098Z/custom-resources.zip"
               },
               "FunctionName": "cp3405-dev-custom-resource-apigw-cw-role",
               "Handler": "apiGatewayCloudWatchRole/handler.handler",
@@ -970,7 +1077,7 @@
           "WdUnderscoregroupsLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "WdUnderscoregroupsLambdaVersionqvNJKXo0OpGsslqfSZQL2vIvbYAGtChoG3BvB3IbU"
+              "Ref": "WdUnderscoregroupsLambdaVersionEKZ0zYt4oHBXkwR4hNLa6GxVe9YmusXmRkHbQKyur4"
             }
           },
           "ServiceEndpoint": {
@@ -1135,7 +1242,7 @@
           {
             "http": {
               "method": "post",
-              "path": "transfer",
+              "path": "transfertest",
               "cors": {
                 "origins": [
                   "*"
@@ -1187,7 +1294,33 @@
           {
             "http": {
               "method": "post",
-              "path": "transfer_byqr",
+              "path": "transfer_byqrtest",
+              "cors": {
+                "origins": [
+                  "*"
+                ],
+                "origin": "*",
+                "methods": [
+                  "OPTIONS",
+                  "POST"
+                ],
+                "headers": [
+                  "Content-Type",
+                  "X-Amz-Date",
+                  "Authorization",
+                  "X-Api-Key",
+                  "X-Amz-Security-Token",
+                  "X-Amz-User-Agent"
+                ],
+                "allowCredentials": false
+              },
+              "integration": "AWS_PROXY"
+            }
+          },
+          {
+            "http": {
+              "method": "post",
+              "path": "transfer",
               "cors": {
                 "origins": [
                   "*"
@@ -1229,7 +1362,7 @@
     "artifact": "/Users/zwenyan/cp3405-sp53-2019-assignment2-full_stack_beast_-_group-6/Back-end/.serverless/cp3405.zip"
   },
   "package": {
-    "artifactDirectoryName": "serverless/cp3405/dev/1578890431099-2020-01-13T04:40:31.099Z",
+    "artifactDirectoryName": "serverless/cp3405/dev/1578896940098-2020-01-13T06:29:00.098Z",
     "artifact": "cp3405.zip"
   }
 }

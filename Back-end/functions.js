@@ -15,8 +15,9 @@ app.use(BodyParser.urlencoded({ extended: true }));
 var database, collection;
 
 async function transfer(transferData) {
-    let client = await MongoClient.connect(CONNECTION_URL, { useNewUrlParser: true });
-    database = client.db(DATABASE_NAME);
+
+    let db = await MongoClient.connect(CONNECTION_URL, { useNewUrlParser: true });
+    database = db.db(DATABASE_NAME);
     collection = database.collection("userlist");
 
     // Manipulating with the source:
