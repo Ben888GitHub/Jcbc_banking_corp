@@ -1,9 +1,7 @@
 const Express = require("express");
 const BodyParser = require("body-parser");
 const MongoClient = require("mongodb").MongoClient;
-
 const functions = require('./functions');
-
 const CONNECTION_URL = "mongodb+srv://root:root@cluster0-djxyv.mongodb.net/test";
 const DATABASE_NAME = "users";
 
@@ -22,7 +20,6 @@ let randomNum = ""
 for (i = 0; i < 6; i++) {
     randomNum += Math.floor(Math.round(Math.random() * 9))
 }
-
 
 app.get("/", (request, response) => {
     response.send('Hello');
@@ -47,6 +44,7 @@ app.post("/authenticate", async (request, response) => {
         response.send(result);
     });
 });
+
 
 app.post("/transfer", async (request, response) => {
 
@@ -139,35 +137,35 @@ app.post("/transfer", async (request, response) => {
     });
 });
 
-// app.post("/transfer", async (request, response) => {
 
-//     let sampleRequest = {
-//         "sender_username": request.body.sender_username,
-//         "source_acc_num": request.body.source_acc_num,
-//         "transfer_amount": request.body.transfer_amount,
-//         // "receiver_username": "1",
-//         "dest_acc_num": request.body.dest_acc_num,
-//     };
+app.post("/transfertest", async (request, response) => {
 
-//     let repondre = functions.transfer(sampleRequest);
+    let sampleRequest = {
+        "sender_username": request.body.sender_username,
+        "source_acc_num": request.body.source_acc_num,
+        "transfer_amount": request.body.transfer_amount,
+        // "receiver_username": "1",
+        "dest_acc_num": request.body.dest_acc_num,
+    };
 
-//     response.status(200).send(repondre);
-// });
+    let repondre = functions.transfer(sampleRequest);
 
-// app.post("/transfer_byqr", async (request, response) => {
+    response.status(200).send(repondre);
+});
 
-//     let sampleRequest = {
-//         "sender_username": request.body.sender_username,
-//         "source_acc_num": request.body.source_acc_num,
-//         "transfer_amount": request.body.transfer_amount,
-//         // "receiver_username": "1",
-//         "dest_acc_num": request.body.qrcode,
-//     };
+app.post("/transfer_byqrtest", async (request, response) => {
+    let sampleRequest = {
+        "sender_username": request.body.sender_username,
+        "source_acc_num": request.body.source_acc_num,
+        "transfer_amount": request.body.transfer_amount,
+        // "receiver_username": "1",
+        "dest_acc_num": request.body.qrcode,
+    };
 
-//     let repondre = functions.transfer(sampleRequest);
+    let repondre = functions.transfer(sampleRequest);
 
-//     response.status(200).send(repondre);
-// });
+    response.status(200).send(repondre);
+});
 
 app.post("/sendmail", async function (req, res) {
     let emailToSend = req.body.email;

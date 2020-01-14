@@ -6,7 +6,7 @@ This is a full stack banking app. The front-end is written in React Native, and 
 
 ---
 
-To run the project locally on your machine: 
+## Pre-requisites
 
 Make sure you have node, npm and expo-cli on your computer.
 
@@ -24,13 +24,44 @@ Ensure everything is working fine by running these three commands:
 
 ---
 
-`cd` to the directory you want your project to be in.
+## Running on your local machine
+
+To run the project locally on your machine: 
+
+cd` to the directory you want your project to be in.
 
 Type in `git clone https://github.com/mvpclub/cp3405-sp53-2019-assignment2-full_stack_beast_-_group-6.git` 
 
 After you've cloned the repository, `cd` into the frontend directory by typing `cd Front-end`
 
-`npm start` to install all the required dependencies.
+`npm install` to install all the required dependencies.
 
-`expo start` to begin the Metro Bundler and run on your desired platform.
+`npm start` to begin the Metro Bundler and run on your desired platform.
 
+---
+
+ ## Notes
+
+The current back-end AWS credentials belong to some of the project contributors, so you will not be able to deploy some of the serverless functions as the AWS credentials currently being used are tied to ours. You can copy the code to your own application and deploy them if you are interested.
+
+---
+
+## Contributors
+
+### Front-end
+
+Benedict Ryan
+
+Winson Tjuatja
+
+Kyaw Phyo Aung
+
+### Back-end
+
+Zwe Nyan Toe
+
+Van Hung Nguyen
+
+### Database
+
+Kyle Ang

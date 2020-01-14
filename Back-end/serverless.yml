@@ -1,3 +1,7 @@
+# service: cp3405
+# org: hungnguy
+# app: cp3405
+
 service: cp3405
 org: zwenyantoe
 app: myapp
@@ -12,6 +16,20 @@ plugins:
   - serverless-offline
   
 functions:
+  authenticate_test:
+    handler: handler.authenticate_test
+    events:
+     - http:
+         path: authenticate_test
+         method: post
+         cors: true
+  transfer_test:
+    handler: handler.transfer_test
+    events:
+     - http:
+         path: transfer_test
+         method: post
+         cors: true
   wd_groups:
     handler: handler.cp3405
     events:
@@ -25,7 +43,7 @@ functions:
           cors: true
       - http:
           method: POST
-          path: /transfer
+          path: /transfertest
           cors: true
       - http: 
           method: POST
@@ -33,5 +51,9 @@ functions:
           cors: true
       - http:
           method: POST
-          path: /transfer_byqr
+          path: /transfer_byqrtest
+          cors: true
+      - http:
+          method: POST
+          path: /transfer
           cors: true
