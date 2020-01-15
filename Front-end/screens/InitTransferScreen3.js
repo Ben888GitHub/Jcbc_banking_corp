@@ -1,6 +1,7 @@
 import React, { useState, useEffect, Component } from "react";
 import { View, StyleSheet, Dimensions } from "react-native";
 import { BarCodeScanner } from "expo-barcode-scanner";
+//import { BarCodeScanner } from 'expo';
 import * as Permissions from 'expo-permissions';
 import { authenticate } from "../reducers/actions";
 import { connect } from "react-redux";
@@ -76,16 +77,17 @@ class InitTransfer3 extends Component{
             navigate("Transfer2")
         }
     }
+    _handleBarCodeRead = ({type, data}) => {
+      console.log(data);
+      this.setState({scanned: true});
+      alert(`type ${type} and data ${data}`);
+      //Do action when Code is scanned
+      }
 
 
 
-
-render(){
+render() {
     const screenWidth = Math.round(Dimensions.get("window").width);
-    /*const handleBarCodeScanned = ({ type, data }) => {
-        setScanned(true);
-        alert(`Bar code with type ${type} and data ${data} has been scanned!`);
-    };*/
     const { hasPermission, scanned } = this.state;
 
     if (hasPermission === null) {
@@ -99,7 +101,7 @@ render(){
     <Container style={{ backgroundColor: "#f7f7f7" }}>
       <Header
         span
-        style={{ backgroundColor: "#c13b3e", padding: 20, height: 120 }}
+        style={{ backgroundColor: "#c13b3e", padding: 20, height: 50 }}
       >
         <Left>
           <Button transparent>
@@ -128,7 +130,8 @@ render(){
               alignItems: "center",
               justifyContent: "space-between",
               width: screenWidth - 26,
-              marginLeft: 13
+              marginLeft: 13,
+              marginBottom: 10
             }}
           >
             <Picker
@@ -160,15 +163,15 @@ render(){
           flexDirection: "column",
           justifyContent: "flex-end",
           //marginVertical: 100,
-          marginHorizontal: 10,
+          //marginHorizontal: 10,
           //marginBottom: 130
         }}
       >
       <BarCodeScanner
-        onBarCodeRead={this.handleBarCodeScanned}
+        onBarCodeScanned={this._handleBarCodeRead}
         style={[StyleSheet.absoluteFill, styles.barcodeScanner]}/>
-        <Text style={styles.description}>Scan your QR code</Text>
-        {/*<Image
+        {/*<Text style={styles.description}>Scan your QR code</Text>
+        <Image
           style={styles.qr}
           source={require('../assets/img/QR.png')}
         />*/}
@@ -176,7 +179,7 @@ render(){
         {scanned && (
           <Button
             style={{ backgroundColor: "#c13b3e" }}
-            onPress={() => setScanned(false)}
+            onPress={() => this.setState({ scanned: false })}
           >
             <Text
               style={{
@@ -196,7 +199,7 @@ render(){
         style={styles.cancel}>
         Cancel
       </Text>
-      <Footer style={{ backgroundColor: "#c13b3e", padding: 20, height: 120 }}>
+      <Footer style={{ backgroundColor: "#c13b3e", padding: 10, height: 80}}>
         <Text style={styles.footerText}>
           Scan the selected beneficiary QR code {"\n"} to proceed to OTP
         </Text>
@@ -204,12 +207,7 @@ render(){
     </Container>
   );
  }
-    handleBarCodeScanned = ({ type, data }) => {
-        setScanned(true);
-        alert(`Bar code with type ${type} and data ${data} has been scanned!`);
-    };
 }
-
 
 const styles = StyleSheet.create({
   headerText: {
@@ -219,13 +217,16 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginLeft: 'auto',
     marginRight: 'auto',
-    marginVertical: 10
+    paddingTop: 5
   },
   footerText: {
     color: "white",
     fontSize: 18,
     width: "100%",
-    fontWeight: "normal"
+    fontWeight: "normal",
+    textAlign: 'center',
+    margin: 5,
+    padding: 5
 
   },
   barcodeStyle: {
