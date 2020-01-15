@@ -4,3 +4,10 @@ export const authenticate = data => {
         payload: data
     }
 }
+
+export const getTransactions = data => {
+    return {
+        type: "GET_TRANSACTIONS",
+        payload: data
+    }
+}

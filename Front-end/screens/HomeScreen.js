@@ -71,14 +71,14 @@ class HomeScreen extends React.Component {
                 margin: 20,
               }}>Your Accounts</Text>
             </View>
-            <TouchableOpacity 
-            onPress = {() => navigate("Settings")}
-            style={{
-              flex: 0.3,
-              alignItems: 'center',
-              justifyContent: 'center',
-              
-            }}
+            <TouchableOpacity
+              onPress={() => navigate("Settings")}
+              style={{
+                flex: 0.3,
+                alignItems: 'center',
+                justifyContent: 'center',
+
+              }}
             >
               <Image style={style.settingsLogo}
                 source={require('../assets/settings.png')} ></Image>
@@ -95,9 +95,12 @@ class HomeScreen extends React.Component {
               borderRadius: 20,
             }}>
               <TouchableOpacity onPress={() =>
-                navigate('Transfer', {
+                navigate('AccountDetails', {
                   element: element
                 })
+                // navigate('Transfer', {
+                //   element: element
+                // })
               }>
                 <ImageBackground source={require('../assets/bank.jpg')} resizeMode='cover'
                   style={{}}

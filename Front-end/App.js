@@ -4,6 +4,7 @@ import React from "react";
 import HomeScreen from "./screens/HomeScreen";
 import LoginScreen from "./screens/LoginScreen";
 import AccountScreen from "./screens/account_page";
+import AccountDetails from './screens/AccountDetails';
 import InitTransferScreen from "./screens/InitTransferScreen";
 import InitTransferScreen2 from "./screens/InitTransferScreen2";
 import InitTransferConfirmation from "./screens/InitTransferConfirmation";
@@ -21,6 +22,8 @@ import { Provider } from "react-redux";
 import { createStore } from "redux";
 import reducer from "./reducers/reducers";
 import InitTransferScreen3 from "./screens/InitTransferScreen3";
+import CardsScreen from "./screens/Cards";
+import History from "./screens/TransactionHistory";
 const store = createStore(reducer);
 
 // First Step
@@ -41,13 +44,17 @@ const AppContainer = createAppContainer(
       Settings: { screen: Settings },
       EmailOtp: { screen: emailOtp },
       EmailOtp2: { screen: emailOtp2 },
-      OTP: { screen: Otp }
+      OTP: { screen: Otp },
+      Cards: { screen: CardsScreen },
+      AccountDetails: { screen: AccountDetails },
+      History: { screen: History }
     },
     {
       // config
-      headerMode: "none",
+      // headerMode: "none",
       // initialRouteName: "Login" // initialRouteName will display the first component
-      initialRouteName: "Login" // initialRouteName will display the first component
+      // initialRouteName: "Login" // initialRouteName will display the first component
+      initialRouteName: "Home" // initialRouteName will display the first component
     }
   )
 );
