@@ -20,19 +20,13 @@ const mapDispatchToProps = dispatch => (
 
 const fastChunkString = require('fast-chunk-string');
 
-_handletransfer = () => {
-    console.log(this.props.currentUser.accname);
-    console.log(this.state.accnum);
-    console.log(this.state.amount);
-    console.log(this.state.dest_acc);
-  };
-
 class QRAmount extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             isReady: false,
-            dest_acc: null
+            dest_acc: null,
+            indexToHaveBorder: null
         };
     }
 
@@ -56,6 +50,14 @@ class QRAmount extends React.Component {
         return (arr[0] + " " + arr[1] + " " + arr[2] + " ");
     }
 
+    _handletransfer = () => {
+        console.log(this.props.currentUser.accname);
+        console.log(this.state.accnum);
+        console.log(this.state.amount);
+        console.log(this.state.dest_acc);
+        alert(`Dest_accnum: ${this.state.dest_acc} Accnum: ${this.state.accnum} Accname: ${this.props.currentUser.accname} Amount: ${this.state.amount}`)
+    };
+
     render() {
     console.log(this.props.currentUser);
     const { navigate } = this.props.navigation;
@@ -75,11 +77,16 @@ class QRAmount extends React.Component {
                         backgroundColor: 'transparent',
                         marginBottom: 8,
                         borderRadius: 20,
+                        borderColor:
+                            key == this.state.indexToHaveBorder &&
+                              this.state.indexToHaveBorder != null
+                              ? "blue"
+                              : "transparent",
                     }}>
                         <TouchableOpacity
                             onPress={() => {
                             this.setvalue(value.accnumber);
-                            //this.setState({ indexToHaveBorder: index });
+                            this.setState({ indexToHaveBorder: key });
                             }}
                         >
                             <ImageBackground source={require('../assets/bank.jpg')} resizeMode='cover'
@@ -89,6 +96,7 @@ class QRAmount extends React.Component {
                                 height: 150,
                                 backgroundColor: key !== 0 ? 'rgba(0,0,0,0.7)' : 'rgba(178,34,34,0.7)',
                                 borderRadius: 20,
+                                
                             }}>
                                 <View style={{
                                 padding: 10,
