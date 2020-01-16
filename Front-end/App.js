@@ -4,6 +4,7 @@ import React from "react";
 import HomeScreen from "./screens/HomeScreen";
 import LoginScreen from "./screens/LoginScreen";
 import AccountScreen from "./screens/account_page";
+import AccountDetails from './screens/AccountDetails';
 import InitTransferScreen from "./screens/InitTransferScreen";
 import InitTransferScreen2 from "./screens/InitTransferScreen2";
 import InitTransferConfirmation from "./screens/InitTransferConfirmation";
@@ -12,6 +13,7 @@ import Settings from "./screens/settings";
 import emailOtp from "./screens/emailOtp";
 import emailOtp2 from "./screens/emailOtp2";
 import Otp from "./components/Otp";
+import QRAmount from "./screens/QRAmount";
 import { setCustomText } from "react-native-global-props";
 import { Root } from "native-base";
 import { AppLoading } from "expo";
@@ -21,6 +23,8 @@ import { Provider } from "react-redux";
 import { createStore } from "redux";
 import reducer from "./reducers/reducers";
 import InitTransferScreen3 from "./screens/InitTransferScreen3";
+import CardsScreen from "./screens/Cards";
+import History from "./screens/TransactionHistory";
 const store = createStore(reducer);
 
 // First Step
@@ -41,13 +45,18 @@ const AppContainer = createAppContainer(
       Settings: { screen: Settings },
       EmailOtp: { screen: emailOtp },
       EmailOtp2: { screen: emailOtp2 },
-      OTP: { screen: Otp }
+      OTP: { screen: Otp },
+      Cards: { screen: CardsScreen },
+      AccountDetails: { screen: AccountDetails },
+      History: { screen: History },
+      AmountQR: { screen: QRAmount}
     },
     {
       // config
-      headerMode: "none",
+      // headerMode: "none",
       // initialRouteName: "Login" // initialRouteName will display the first component
-      initialRouteName: "Login" // initialRouteName will display the first component
+      // initialRouteName: "Login" // initialRouteName will display the first component
+      initialRouteName: "Home" // initialRouteName will display the first component
     }
   )
 );

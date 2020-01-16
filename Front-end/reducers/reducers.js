@@ -37,6 +37,7 @@ let defaultUser = {
   ]
 };
 
+
 function reducer(state = { currentUser: defaultUser }, action) {
   switch (action.type) {
     case "AUTHENTICATE_DONE":
