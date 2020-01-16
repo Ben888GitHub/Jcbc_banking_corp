@@ -3,6 +3,7 @@ let defaultUser = {
   "accname": "hungnguyen",
   "pin": "123456",
   "email": "vanhung.nguyen2@my.jcu.edu.au",
+  "secret": "GQQT6JSLMRLVWXTEH47WW5JGGFGVUKKE",
   "accounts": [
     {
       "accnumber": "999999990000",
