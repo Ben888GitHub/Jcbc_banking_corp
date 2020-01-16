@@ -2,7 +2,7 @@
 const awsServerlessExpress = require("aws-serverless-express");
 const app = require("./app");
 const server = awsServerlessExpress.createServer(app);
-
+const Speakeasy = require("speakeasy")
 const Express = require("express");
 const BodyParser = require("body-parser");
 const MongoClient = require("mongodb").MongoClient;
@@ -16,7 +16,7 @@ exports.cp3405 = (event, context) => {
 };
 
 let randomNum = "";
-for (i = 0; i < 6; i++) {
+for (let i = 0; i < 6; i++) {
   randomNum += Math.floor(Math.round(Math.random() * 9));
 };
 
@@ -45,10 +45,44 @@ exports.sendmail = (event, context, callback) => {
           timestamp: toSend.toString()
         })
       });
-
-
     });
 }
+
+exports.get_otp = (event, context, callback) => {
+  context.callbackWaitsForEmptyEventLoop = false;
+  functions.connectToDatabase()
+    .then(() => {
+      let response = {
+        "token": Speakeasy.totp({
+          secret: JSON.parse(event.body).secret,
+          encoding: "base32",
+        }),
+        "remaining": (30 - Math.floor((new Date()).getTime() / 1000.0 % 30))
+      };
+      callback(null, {
+        statusCode: 200,
+        body: JSON.stringify(response)
+      })
+    })
+}
+
+exports.check_otp = (event, context, callback) => {
+  context.callbackWaitsForEmptyEventLoop = false;
+  functions.connectToDatabase()
+    .then(() => {
+      let response = Speakeasy.totp.verify({
+          secret: JSON.parse(event.body).secret,
+          encoding: "base32",
+          token: JSON.parse(event.body).token,
+          window: 0
+        })
+      callback(null, {
+        statusCode: 200,
+        body: JSON.stringify(response)
+      });
+    });
+}
+
 
 exports.authenticate = (event, context, callback) => {
   context.callbackWaitsForEmptyEventLoop = false;

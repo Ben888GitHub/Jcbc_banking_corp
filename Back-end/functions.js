@@ -15,7 +15,6 @@ app.use(BodyParser.urlencoded({ extended: true }));
 var database, collection;
 
 async function transfer(transferData) {
-
     let db = await MongoClient.connect(CONNECTION_URL, { useNewUrlParser: true });
     database = db.db(DATABASE_NAME);
     collection = database.collection("userlist");
