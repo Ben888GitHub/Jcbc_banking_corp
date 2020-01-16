@@ -79,9 +79,7 @@ class AccountDetails extends React.Component {
         }
 
         return (
-            <Container style={{ paddingTop: getStatusBarHeight() * 2, padding: 10 }}>
-
-                {/* <ImageBackground source={require('../assets/transfer.jpg')} resizeMode='cover' style={style.backgroundImage}> */}
+            <Container style={{ paddingTop: getStatusBarHeight() * 1.2, padding: 10 }}>
 
                 <Content>
 
@@ -200,7 +198,11 @@ class AccountDetails extends React.Component {
 }
 
 AccountDetails.navigationOptions = {
-    headerTransparent: true
+    headerStyle: {
+        shadowColor: 'transparent',
+        borderBottomWidth: 0,
+        elevation: 0,
+    }
 };
 
 const style = StyleSheet.create({

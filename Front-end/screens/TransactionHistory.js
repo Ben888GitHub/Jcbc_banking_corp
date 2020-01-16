@@ -7,6 +7,7 @@ import { authenticate, getTransactions } from '../reducers/actions';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Ionicons } from '@expo/vector-icons';
+
 import defaultTrans from '../trans';
 
 const mapStateToProps = (state) => {
@@ -27,15 +28,29 @@ class History extends React.Component {
         super(props);
         this.state = {
             isReady: false,
+            current_usr: this.props.currentUser,
             currentacc: null,
-            dataGrid: defaultTrans
+            dataGrid: []
         };
     }
 
     componentWillMount = () => {
-        let element = this.props.navigation.getParam('element');
-        this.setState({ currentacc: element });
+        this.setState({ currentacc: this.props.navigation.getParam('element') });
+        this.setState({ dataGrid: this.filterMyTransactions(this.state.current_usr) });
+    }
 
+    filterMyTransactions = (acc) => {
+        let toReturn = [];
+        console.log(acc.accname);
+        defaultTrans.forEach(element => {
+            if (element.destinationaccname == acc.accname
+                || element.sourceaccname == acc.accname
+            ) {
+                toReturn.push(element);
+            }
+        });
+        console.log(toReturn);
+        return toReturn;
     }
 
     async componentDidMount() {
@@ -48,24 +63,25 @@ class History extends React.Component {
     }
 
 
-
     render() {
         let { dataGrid } = this.state;
         const { navigate } = this.props.navigation; //navigation is always a props
         let { currentacc } = this.state;
+        let { current_usr } = this.state;
         let yelloBackgrd = '#eee8de';
-        console.log(this.props.currentUser);
 
         if (!this.state.isReady) {
             return <AppLoading />;
         }
 
         return (
-            <Container style={{ paddingTop: getStatusBarHeight() * 2, padding: 10 }}>
+            <Container style={{
+                // paddingTop: getStatusBarHeight() * 2,
+                padding: 10
+            }}>
                 <StatusBar barStyle="dark-content" />
-                {/* <ImageBackground source={require('../assets/transfer.jpg')} resizeMode='cover' style={style.backgroundImage}> */}
 
-                <Content>
+                <Content showsVerticalScrollIndicator={false}>
 
                     <View style={{
                         marginBottom: 20,
@@ -81,8 +97,7 @@ class History extends React.Component {
                             <Text style={{
                                 fontFamily: 'MuseoBold',
                                 fontSize: 30,
-                                fontWeight: '400',
-                                // margin: 20,
+                                fontWeight: '400'
                             }}>Transactions</Text>
                         </View>
 
@@ -95,7 +110,10 @@ class History extends React.Component {
                         borderWidth: 1,
                         borderColor: '#cac0b6'
                     }}>
-                        <Text>/!\ This page is still under construction by Hung</Text>
+                        <View style={{ width: '100%', alignItems: 'flex-end' }}>
+                            <Text style={{ fontFamily: 'MuseoBold', fontWeight: '400', color: '#cac0b6' }}>Balance</Text>
+                            <Text style={{ fontFamily: 'MuseoBold', fontWeight: '400', fontSize: 25 }}>{currentacc.balance}</Text>
+                        </View>
                     </View>
 
 
@@ -111,15 +129,12 @@ class History extends React.Component {
                             <Text style={{ fontFamily: 'MuseoBold', fontWeight: '400', fontSize: 20 }}>Saving Account</Text>
                         </View>
 
-                        <View style={{ marginBottom: 12 }}>
+                        <View>
                             <Text style={{ fontFamily: 'MuseoBold', fontWeight: '400', color: '#cac0b6' }}>Account Number</Text>
                             <Text style={{ fontFamily: 'MuseoBold', fontWeight: '400', fontSize: 20 }}>{currentacc.accnumber}</Text>
                         </View>
 
-                        <View>
-                            <Text style={{ fontFamily: 'MuseoBold', fontWeight: '400', color: '#cac0b6' }}>Balance</Text>
-                            <Text style={{ fontFamily: 'MuseoBold', fontWeight: '400', fontSize: 25 }}>{currentacc.balance}</Text>
-                        </View>
+
 
                     </View>
 
@@ -144,9 +159,9 @@ class History extends React.Component {
                                     justifyContent: 'flex-end',
                                     backgroundColor: yelloBackgrd
                                 }}>
-
+                                    <Text>Bank Transfer</Text>
                                     <Text style={{ fontFamily: 'MuseoBold', fontWeight: '400', fontSize: 20 }}>
-                                        {sub_element.amount}
+                                        <Text>{sub_element.sourceaccname == current_usr.accname ? '-' : '+'}</Text> {sub_element.amount}
                                     </Text>
                                 </CardItem>
                             </Card>
@@ -159,7 +174,12 @@ class History extends React.Component {
 }
 
 History.navigationOptions = {
-    headerTransparent: true
+    // headerTransparent: true,
+    headerStyle: {
+        shadowColor: 'transparent',
+        borderBottomWidth: 0,
+        elevation: 0,
+    }
 };
 
 const style = StyleSheet.create({

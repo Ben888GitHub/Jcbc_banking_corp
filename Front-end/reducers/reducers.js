@@ -44,8 +44,6 @@ function reducer(state = { currentUser: defaultUser }, action) {
       let newState = {
         currentUser: action.payload
       };
-      console.log("newState in reducers:");
-      console.log(newState);
       return newState;
     case "DECREMENT":
       return {

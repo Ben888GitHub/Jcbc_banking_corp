@@ -1,7 +1,7 @@
 export default defaultTrans = [
     {
         "transactionid": "1234567812345678",
-        "sourceaccname": "harry",
+        "sourceaccname": "hungnguyen",
         "sourceaccnum": "250034870000",
         "destinationaccname": "benryan",
         "destinationaccnum": "999999999999",
@@ -23,7 +23,7 @@ export default defaultTrans = [
     },
     {
         "transactionid": "0000111122223333",
-        "sourceaccname": "zwenyan",
+        "sourceaccname": "hungnguyen",
         "sourceaccnum": "837213450781",
         "destinationaccname": "kyleang",
         "destinationaccnum": "875346420020",
@@ -44,10 +44,10 @@ export default defaultTrans = [
         "amount": 100000
     },
     {
-        "transactionid": "hungnguyen1577698662959",
+        "transactionid": "1577698662959",
         "sourceaccname": "hungnguyen",
         "sourceaccnum": "999999990000",
-        "destinationaccname": "Not Defined",
+        "destinationaccname": "winsontju",
         "destinationaccnum": "999999999999",
         "datestamp": "1577698662959",
         "sourcecurrency": "SGD",

@@ -159,7 +159,12 @@ class HomeScreen extends React.Component {
 }
 
 HomeScreen.navigationOptions = {
-  headerTransparent: true
+  headerTransparent: true,
+  // headerStyle: {
+  //   shadowColor: 'transparent',
+  //   borderBottomWidth: 0,
+  //   elevation: 0,
+  // },
 };
 
 const style = StyleSheet.create({
