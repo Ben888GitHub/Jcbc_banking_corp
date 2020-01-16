@@ -13,6 +13,7 @@ import Settings from "./screens/settings";
 import emailOtp from "./screens/emailOtp";
 import emailOtp2 from "./screens/emailOtp2";
 import Otp from "./components/Otp";
+import QRAmount from "./screens/QRAmount";
 import { setCustomText } from "react-native-global-props";
 import { Root } from "native-base";
 import { AppLoading } from "expo";
@@ -47,7 +48,8 @@ const AppContainer = createAppContainer(
       OTP: { screen: Otp },
       Cards: { screen: CardsScreen },
       AccountDetails: { screen: AccountDetails },
-      History: { screen: History }
+      History: { screen: History },
+      AmountQR: { screen: QRAmount}
     },
     {
       // config

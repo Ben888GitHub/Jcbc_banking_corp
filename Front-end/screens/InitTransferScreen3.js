@@ -78,15 +78,18 @@ class InitTransfer3 extends Component{
         }
     }
     _handleBarCodeRead = ({type, data}) => {
+      const { navigate } = this.props.navigation;
       console.log(data);
       this.setState({scanned: true});
-      alert(`type ${type} and data ${data}`);
+      navigate('AmountQR', {data: data});
+      //alert(`type ${type} and data ${data}`);
       //Do action when Code is scanned
       }
 
 
 
 render() {
+    const { navigate } = this.props.navigation;
     const screenWidth = Math.round(Dimensions.get("window").width);
     const { hasPermission, scanned } = this.state;
 
