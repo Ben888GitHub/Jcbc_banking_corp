@@ -9,15 +9,48 @@ const MongoClient = require("mongodb").MongoClient;
 const functions = require('./functions');
 const CONNECTION_URL = "mongodb+srv://root:root@cluster0-djxyv.mongodb.net/test";
 const DATABASE_NAME = "users";
+const sgMail = require('@sendgrid/mail');
 
 exports.cp3405 = (event, context) => {
   awsServerlessExpress.proxy(server, event, context);
 };
 
+let randomNum = "";
+for (i = 0; i < 6; i++) {
+  randomNum += Math.floor(Math.round(Math.random() * 9));
+};
 
-// TESTING WITH THE SERVERLESS FORMAT:
+// SERVERLESS FORMAT : 
 
-exports.authenticate_test = (event, context, callback) => {
+exports.sendmail = (event, context, callback) => {
+  context.callbackWaitsForEmptyEventLoop = false;
+  functions.connectToDatabase()
+    .then(async () => {
+      let emailToSend = JSON.parse(event.body).email;
+      let timeStamp = new Date();
+      let toSend = timeStamp.getTime();
+      sgMail.setApiKey("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");
+      const msg = {
+        to: emailToSend,
+        from: 'admin@jcbc.com',
+        subject: 'Your JCBC one-time password',
+        html: `<h1>Your OTP for JCBC is ${randomNum}</h1>`
+      };
+      await sgMail.send(msg);
+      callback(null, {
+        statusCode: 200,
+        body: JSON.stringify({
+          output: "Your otp is " + randomNum + " sent to " + emailToSend,
+          otp: randomNum,
+          timestamp: toSend.toString()
+        })
+      });
+
+
+    });
+}
+
+exports.authenticate = (event, context, callback) => {
   context.callbackWaitsForEmptyEventLoop = false;
   functions.connectToDatabase()
     .then(collection => {
@@ -46,7 +79,8 @@ exports.authenticate_test = (event, context, callback) => {
     });
 };
 
-exports.transfer_test = (event, context, callback) => {
+
+exports.transfer = (event, context, callback) => {
   context.callbackWaitsForEmptyEventLoop = false;
   functions.connectToDatabase()
     .then(async collection => {
@@ -84,7 +118,7 @@ exports.transfer_test = (event, context, callback) => {
         callback(null, {
           statusCode: 500,
           body: JSON.stringify({ errorMessage: 'Destination account is not exist.' })
-        });
+        }); s
       }
 
       currentAccList = currentAccount.accounts;
@@ -101,11 +135,11 @@ exports.transfer_test = (event, context, callback) => {
         });
       }
       let dest_updateContent = {
-        $set: {"account.$.balance": currentBalance.balance + JSON.parse(event.body).transfer_amount }
+        $set: { "account.$.balance": currentBalance.balance + JSON.parse(event.body).transfer_amount }
       };
 
       let dest_result = await collection.updateOne(dest_requete, dest_updateContent);
-      
+
       let client = await MongoClient.connect(CONNECTION_URL, { useNewUrlParser: true });
       let database = client.db(DATABASE_NAME);
       let collectionTransactions = database.collection("transactions");
@@ -124,7 +158,7 @@ exports.transfer_test = (event, context, callback) => {
       })
       callback(null, {
         statusCode: 200,
-        body: JSON.stringify({ 
+        body: JSON.stringify({
           transactionRecord: transactionRecord,
           subtracting: source_result,
           adding: dest_result

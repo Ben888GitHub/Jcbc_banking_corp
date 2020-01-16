@@ -17,17 +17,24 @@ plugins:
   
 functions:
   authenticate_test:
-    handler: handler.authenticate_test
+    handler: handler.authenticate
     events:
      - http:
-         path: authenticate_test
+         path: authenticate
          method: post
          cors: true
-  transfer_test:
-    handler: handler.transfer_test
+  transfer:
+    handler: handler.transfer
     events:
      - http:
-         path: transfer_test
+         path: transfer
+         method: post
+         cors: true
+  sendmail:
+    handler: handler.sendmail
+    events:
+     - http:
+         path: sendmail
          method: post
          cors: true
   wd_groups:
@@ -39,21 +46,9 @@ functions:
           cors: true
       - http:
           method: POST
-          path: /authenticate
-          cors: true
-      - http:
-          method: POST
-          path: /transfertest
-          cors: true
-      - http: 
-          method: POST
-          path: /sendmail
-          cors: true
-      - http:
-          method: POST
           path: /transfer_byqrtest
           cors: true
       - http:
           method: POST
-          path: /transfer
+          path: /transfer_test
           cors: true

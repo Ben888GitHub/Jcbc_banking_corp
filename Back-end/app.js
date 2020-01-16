@@ -25,7 +25,7 @@ app.get("/", (request, response) => {
     response.send('Hello');
 });
 
-app.post("/authenticate", async (request, response) => {
+app.post("/authenticate_test", async (request, response) => {
     let pincode = request.body.pin;
     let accname = request.body.accname;
 
@@ -46,7 +46,7 @@ app.post("/authenticate", async (request, response) => {
 });
 
 
-app.post("/transfer", async (request, response) => {
+app.post("/transfer_test", async (request, response) => {
 
     let client = await MongoClient.connect(CONNECTION_URL, { useNewUrlParser: true });
     database = client.db(DATABASE_NAME);
@@ -137,22 +137,6 @@ app.post("/transfer", async (request, response) => {
     });
 });
 
-
-app.post("/transfertest", async (request, response) => {
-
-    let sampleRequest = {
-        "sender_username": request.body.sender_username,
-        "source_acc_num": request.body.source_acc_num,
-        "transfer_amount": request.body.transfer_amount,
-        // "receiver_username": "1",
-        "dest_acc_num": request.body.dest_acc_num,
-    };
-
-    let repondre = functions.transfer(sampleRequest);
-
-    response.status(200).send(repondre);
-});
-
 app.post("/transfer_byqrtest", async (request, response) => {
     let sampleRequest = {
         "sender_username": request.body.sender_username,
@@ -165,25 +149,6 @@ app.post("/transfer_byqrtest", async (request, response) => {
     let repondre = functions.transfer(sampleRequest);
 
     response.status(200).send(repondre);
-});
-
-app.post("/sendmail", async function (req, res) {
-    let emailToSend = req.body.email;
-    let timeStamp = new Date();
-    let toSend = timeStamp.getTime();
-    sgMail.setApiKey("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");
-    const msg = {
-        to: emailToSend,
-        from: 'admin@jcbc.com',
-        subject: 'Your JCBC one-time password',
-        html: `<h1>Your OTP for JCBC is ${randomNum}</h1>`
-    };
-    await sgMail.send(msg);
-    res.send({
-        output: "Your otp is " + randomNum + " sent to " + emailToSend,
-        otp: randomNum,
-        timestamp: toSend.toString()
-    });
 });
 
 module.exports = app;
