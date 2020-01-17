@@ -3,11 +3,25 @@ let defaultUser = {
   "accname": "hungnguyen",
   "pin": "123456",
   "email": "vanhung.nguyen2@my.jcu.edu.au",
+  "secret": "GQQT6JSLMRLVWXTEH47WW5JGGFGVUKKE",
   "accounts": [
     {
       "accnumber": "999999990000",
       "balance": 1000000,
-      "currency": "SGD"
+      "currency": "SGD",
+      "cards": [
+        {
+          "cardnum": 1234567890000000,
+          "nameoncard": 'HUNG NGUYEN',
+          "type": "MasterCard",
+          "validthru": '07/22'
+        }, {
+          "cardnum": 1234567890000011,
+          "nameoncard": 'HUNG NGUYEN',
+          "type": "VISA",
+          "validthru": '07/22'
+        }
+      ]
     },
     {
       "accnumber": "999900009999",
@@ -22,7 +36,19 @@ let defaultUser = {
     {
       "accnumber": "666666666666",
       "balance": 6666666666,
-      "currency": "VND"
+      "currency": "VND", "cards": [
+        {
+          "cardnum": 2234567891000000,
+          "nameoncard": 'HUNG NGUYEN',
+          "type": "UnionPay",
+          "validthru": '12/22'
+        }, {
+          "cardnum": 7734567890000011,
+          "nameoncard": 'HUNG NGUYEN',
+          "type": "Amex",
+          "validthru": '07/22'
+        }
+      ]
     }
   ],
   "dependencies": [
@@ -44,8 +70,6 @@ function reducer(state = { currentUser: defaultUser }, action) {
       let newState = {
         currentUser: action.payload
       };
-      console.log("newState in reducers:");
-      console.log(newState);
       return newState;
     case "DECREMENT":
       return {
