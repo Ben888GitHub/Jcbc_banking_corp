@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, TouchableOpacity, StyleSheet, ImageBackground, Image, Text } from 'react-native';
+import { View, TouchableOpacity, StyleSheet, ImageBackground, Image, Text, Button} from 'react-native';
 import { AppLoading } from 'expo';
 import { Container, Content, Card, CardItem } from 'native-base';
 import { getStatusBarHeight } from 'react-native-status-bar-height';
@@ -7,6 +7,8 @@ import { authenticate } from '../reducers/actions';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Ionicons } from '@expo/vector-icons';
+import Dialog, { ScaleAnimation, DialogTitle, DialogFooter, DialogButton, DialogContent } from 'react-native-popup-dialog';
+import QRCode from 'react-native-qrcode';
 
 const mapStateToProps = (state) => {
     const { currentUser } = state;
@@ -140,8 +142,54 @@ class AccountDetails extends React.Component {
                             <Text style={{ fontFamily: 'MuseoBold', fontWeight: '400', fontSize: 25 }}>{currentacc.balance}</Text>
                         </View>
 
-                    </View>
+                        <Button
+                            title="My QR Code"
+                            color="#ed112a"
+                            style={{
+                                marginTop: 30
+                            }}
+                            onPress={() => { this.setState({ visible: true }); }}
+                        />
+                        <Dialog
+                            visible={this.state.visible}
+                            onTouchOutside={() => {
+                                this.setState({ visible: false });
+                            }}
 
+                            dialogAnimation={new ScaleAnimation({
+                                initialValue: 0,
+                                useNativeDriver: true,
+                            })}
+
+                            dialogTitle={
+
+                                <DialogTitle
+                                    title={currentacc.accname}
+                                //   style={styles.qrtitle}
+                                //   hasTitleBar={false}
+                                //   align="center"
+                                />
+                            }
+
+                            footer={
+                                <DialogFooter>
+                                    <DialogButton
+                                        text="Dismiss"
+                                        onPress={() => { this.setState({ visible: false }); }}
+                                    />
+                                </DialogFooter>
+                            }
+                        >
+                            <DialogContent>
+                                <View style={styles.qrview}>
+                                    <QRCode
+                                        value={currentacc.accnumber}
+                                        size={200} />
+                                    {/* <Text>{currentacc.accnumber}</Text> */}
+                                </View>
+                            </DialogContent>
+                        </Dialog>
+                    </View>
 
                     {dataGrid.map((element, key) => {
                         return (

@@ -26,7 +26,8 @@ class QRAmount extends React.Component {
         this.state = {
             isReady: false,
             dest_acc: null,
-            indexToHaveBorder: null
+            indexToHaveBorder: null,
+            source_acc: null
         };
     }
 
@@ -35,15 +36,18 @@ class QRAmount extends React.Component {
     }
 
     componentWillMount = () => {
+        let source = this.props.navigation.getParam('acc');
         let data = this.props.navigation.getParam('data');
+        //Let source = this.props.navigation.getParam('acc');
         this.setState({ dest_acc: data });
+        this.setState({ source_acc: acc })
     }
 
-    setvalue(accnum) {
+    /*setvalue(accnum) {
         this.state.accnum = accnum;
         console.log(accnum);
         console.log(this.props.currentUser.accname);
-    }
+    }*/
 
     accNumberString = (aString) => {
         let arr = fastChunkString(aString, { size: 4, unicodeAware: false });
@@ -52,10 +56,10 @@ class QRAmount extends React.Component {
 
     _handletransfer = () => {
         console.log(this.props.currentUser.accname);
-        console.log(this.state.accnum);
+        console.log(this.state.source_acc);
         console.log(this.state.amount);
         console.log(this.state.dest_acc);
-        alert(`Dest_accnum: ${this.state.dest_acc} Accnum: ${this.state.accnum} Accname: ${this.props.currentUser.accname} Amount: ${this.state.amount}`)
+        alert(`Dest_accnum: ${this.state.dest_acc} Accnum: ${this.state.source_acc} Accname: ${this.props.currentUser.accname} Amount: ${this.state.amount}`)
     };
 
     render() {
@@ -65,7 +69,7 @@ class QRAmount extends React.Component {
     //let acclist = this.props.currentUser.accounts.map((value, key) => {
             return (
                 <Content>
-                <Text style={{
+                {/*<Text style={{
                 fontFamily: 'MuseoBold',
                 fontSize: 30,
                 fontWeight: '400',
@@ -139,7 +143,7 @@ class QRAmount extends React.Component {
                             </ImageBackground>
                         
                         </TouchableOpacity>
-                    </Card>
+                            </Card>*/}
             ))}
             <Text
             style={{

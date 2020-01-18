@@ -54,6 +54,11 @@ class InitTransfer3 extends Component{
         this.getPermissionsAsync();
     }
 
+    componentWillMount = () => {
+      let currentaccount = this.props.navigation.getParam('data');
+      this.setState({ currentacc: currentaccount });
+  }
+
     getPermissionsAsync = async () => {
         const { status } = await Permissions.askAsync(Permissions.CAMERA);
         this.setState({ hasPermission: status === 'granted' });
@@ -81,7 +86,7 @@ class InitTransfer3 extends Component{
       const { navigate } = this.props.navigation;
       console.log(data);
       this.setState({scanned: true});
-      navigate('AmountQR', {data: data});
+      navigate('AmountQR', {data: data, acc: currentacc });
       //alert(`type ${type} and data ${data}`);
       //Do action when Code is scanned
       }
