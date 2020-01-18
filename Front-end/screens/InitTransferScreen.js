@@ -100,7 +100,7 @@ class InitTransferScreen extends Component {
     }
     else if (value === "Ryan2") {
       console.log(value);
-      navigate("Transfer3");
+      navigate("Transfer3", {data: this.props.navigation.state.params.element.accnumber});
     }
     /*this.setState({
           selected: value
@@ -246,7 +246,7 @@ class InitTransferScreen extends Component {
                 </Body>
               </CardItem>
             </Card>
-          </TouchableOpacity>
+              </TouchableOpacity>
         );
       }
     );
