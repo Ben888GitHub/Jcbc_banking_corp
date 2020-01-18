@@ -37,6 +37,13 @@ functions:
          path: sendmail
          method: post
          cors: true
+  sendinvoice:
+    handler: handler.sendinvoice
+    events:
+      - http:
+          path: sendinvoice
+          method: post
+          cors: true
   get_otp:
     handler: handler.get_otp
     events:
