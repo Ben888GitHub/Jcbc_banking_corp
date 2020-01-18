@@ -19,13 +19,15 @@ import {
   Text,
   Input,
   Textarea,
-  ListItem
+  ListItem,
+  Footer,
+  FooterTab
   // CheckBox
 } from "native-base";
 import axios from "axios";
 import CheckBox from "react-native-check-box";
 
-class App extends React.Component {
+class InitTransferComplete extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -37,7 +39,8 @@ class App extends React.Component {
       beneficiaryBank: "HSBC",
       date: " ",
       amount: "10,000",
-      isChecked: false
+      isChecked: false,
+      sendInvoice: ""
     };
   }
 
@@ -57,7 +60,24 @@ class App extends React.Component {
   }
 
   sendToRecipient = () => {
-    axios.post().then();
+    axios
+      .post(
+        "https://ixmhlhrubj.execute-api.ap-southeast-1.amazonaws.com/dev/sendinvoice",
+        {
+          sender_email: "zwenyantoe@gmail.com",
+          amount: 24000,
+          sender_accname: "zwenyan",
+          sender_accnum: "837213450781",
+          receive_accnum: "875346420020"
+        }
+      )
+      .then(res => {
+        alert("Invoice has been sent to the Recipient's email");
+        console.log(res.data);
+        this.setState({
+          sendInvoice: res.data
+        });
+      });
   };
 
   doingNewTransfer = () => {};
@@ -65,6 +85,7 @@ class App extends React.Component {
   navigateToHome = () => {};
 
   render() {
+    const { navigate } = this.props.navigation;
     return (
       <Container style={{ flex: 1 }}>
         <Header
@@ -167,6 +188,12 @@ class App extends React.Component {
               this.setState({
                 isChecked: !this.state.isChecked
               });
+              // this.sendToRecipient();
+              if (!this.state.isChecked) {
+                return this.sendToRecipient();
+              } else {
+                return;
+              }
             }}
             isChecked={this.state.isChecked}
             leftText={"Tick on the checkbox to send the receipt via email"}
@@ -204,12 +231,14 @@ class App extends React.Component {
             style={{
               height: 80,
               marginTop: 30,
+              // marginBottom: 10,
               backgroundColor: "#c13b3e",
               width: 80,
               marginLeft: 15
             }}
             iconLeft
             rounded
+            onPress={() => navigate("Home")}
           >
             <Icon
               style={{ fontSize: 50, color: "white", marginLeft: 20 }}
@@ -231,4 +260,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default App;
+export default InitTransferComplete;

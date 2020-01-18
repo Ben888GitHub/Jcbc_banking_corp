@@ -1,11 +1,11 @@
 import React from "react";
 import {
-  View,
   TouchableOpacity,
   StyleSheet,
   ImageBackground,
   Image,
-  Text
+  Text,
+  View
 } from "react-native";
 import { Footer, FooterTab, Button, Icon } from "native-base";
 import { AppLoading } from "expo";
@@ -217,25 +217,33 @@ class HomeScreen extends React.Component {
               </TouchableOpacity>
             </Card>
           ))}
-          <Footer span style={{ height: 30, width: "100%" }}>
-            <FooterTab style={{ backgroundColor: "#c13b3e" }}>
-              <Button vertical>
-                <Icon name="contact" style={{ color: "white" }} />
-                <Text style={{ color: "white" }}>Account</Text>
-              </Button>
-              <Button vertical>
-                <Icon name="list-box" style={{ color: "white" }} />
-                <Text style={{ color: "white" }}>History</Text>
-              </Button>
-              {/* <Button vertical active> */}
-              <Button vertical>
-                {/* <Icon active name="navigate" /> */}
-                <Icon name="cog" style={{ color: "white" }} />
-                <Text style={{ color: "white" }}>Settings</Text>
-              </Button>
-            </FooterTab>
-          </Footer>
         </Content>
+        <Footer
+          span
+          style={{
+            height: 40,
+            width: "115%",
+            marginHorizontal: -30,
+            marginVertical: -10
+          }}
+        >
+          <FooterTab style={{ backgroundColor: "#c13b3e" }}>
+            <Button vertical>
+              <Icon name="contact" style={{ color: "white" }} />
+              <Text style={{ color: "white" }}>Account</Text>
+            </Button>
+            <Button vertical onPress={() => navigate("History")}>
+              <Icon name="list-box" style={{ color: "white" }} />
+              <Text style={{ color: "white" }}>History</Text>
+            </Button>
+            {/* <Button vertical active> */}
+            <Button vertical onPress={() => navigate("Settings")}>
+              {/* <Icon active name="navigate" /> */}
+              <Icon name="cog" style={{ color: "white" }} />
+              <Text style={{ color: "white" }}>Settings</Text>
+            </Button>
+          </FooterTab>
+        </Footer>
       </Container>
     );
   }

@@ -55,6 +55,7 @@ class App extends Component {
   };
 
   render() {
+    const { navigate } = this.props.navigation;
     return (
       <View style={styles.container}>
         <View style={styles.header}>
@@ -141,6 +142,24 @@ class App extends Component {
             </DialogContent>
           </Dialog>
         </View>
+        <Footer span style={{ height: 30, width: "100%" }}>
+          <FooterTab style={{ backgroundColor: "#c13b3e" }}>
+            <Button vertical onPress={() => navigate("Home")}>
+              <Icon name="contact" style={{ color: "white" }} />
+              <Text style={{ color: "white" }}>Account</Text>
+            </Button>
+            <Button vertical>
+              <Icon name="list-box" style={{ color: "white" }} />
+              <Text style={{ color: "white" }}>History</Text>
+            </Button>
+            {/* <Button vertical active> */}
+            <Button vertical>
+              {/* <Icon active name="navigate" /> */}
+              <Icon name="cog" style={{ color: "white" }} />
+              <Text style={{ color: "white" }}>Settings</Text>
+            </Button>
+          </FooterTab>
+        </Footer>
       </View>
     );
   }
