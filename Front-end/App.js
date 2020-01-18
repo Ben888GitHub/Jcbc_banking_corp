@@ -4,7 +4,7 @@ import React from "react";
 import HomeScreen from "./screens/HomeScreen";
 import LoginScreen from "./screens/LoginScreen";
 import AccountScreen from "./screens/account_page";
-import AccountDetails from './screens/AccountDetails';
+import AccountDetails from "./screens/AccountDetails";
 import InitTransferScreen from "./screens/InitTransferScreen";
 import InitTransferScreen2 from "./screens/InitTransferScreen2";
 import InitTransferConfirmation from "./screens/InitTransferConfirmation";
@@ -49,7 +49,7 @@ const AppContainer = createAppContainer(
       Cards: { screen: CardsScreen },
       AccountDetails: { screen: AccountDetails },
       History: { screen: History },
-      AmountQR: { screen: QRAmount}
+      AmountQR: { screen: QRAmount }
     },
     {
       // config

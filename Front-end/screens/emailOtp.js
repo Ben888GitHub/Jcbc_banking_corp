@@ -71,7 +71,8 @@ class emailOtp extends React.Component {
       .then(res => {
         alert("Your OTP has been resent");
         this.setState({
-          data: res.data.otp
+          data: res.data.otp,
+          show: true
         });
       })
       .catch();
@@ -180,6 +181,9 @@ class emailOtp extends React.Component {
                 console.log(`Your OTP Pin is ${code}, you are good to go!`);
                 if (code !== this.state.data) {
                   alert("Invalid Input");
+                  this.setState({
+                    show: false
+                  });
                   // this.props.navigation.navigate("Transfer");
                 } else {
                   alert("You are good to go");
@@ -217,9 +221,9 @@ class emailOtp extends React.Component {
             </View>
           </TouchableOpacity>
           {/* </Text> */}
-          <Button onPress={this.ShowHideComponent}>
+          {/* <Button onPress={this.ShowHideComponent}>
             <Text>Hide/Show Component</Text>
-          </Button>
+          </Button> */}
         </Content>
 
         {/* */}
