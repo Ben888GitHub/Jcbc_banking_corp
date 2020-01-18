@@ -263,7 +263,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/cp3405/dev/1579349450714-2020-01-18T12:10:50.714Z/cp3405.zip"
+          "S3Key": "serverless/cp3405/dev/1579353124067-2020-01-18T13:12:04.067Z/cp3405.zip"
         },
         "FunctionName": "cp3405-dev-authenticate_test",
         "Handler": "s_authenticate_test.handler",
@@ -282,14 +282,14 @@
         "IamRoleLambdaExecution"
       ]
     },
-    "AuthenticateUnderscoretestLambdaVersionVMoFmGGbEnHnsKwjr0mZRDcSAYq7HuehCBFD3aM6U": {
+    "AuthenticateUnderscoretestLambdaVersionzoBWQF62aIys8D3zYLz5jps77rbvKzDIQImAIp06A": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "AuthenticateUnderscoretestLambdaFunction"
         },
-        "CodeSha256": "DyMBiem2TfyKYAo2mfJzx9+Z1wVP2ho9QwFqIj+9FbE="
+        "CodeSha256": "1rwL1fLIfNhdYyDxlImS/sbqFRi0VBvdye/5dP+5k80="
       }
     },
     "TransferLambdaFunction": {
@@ -299,7 +299,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/cp3405/dev/1579349450714-2020-01-18T12:10:50.714Z/cp3405.zip"
+          "S3Key": "serverless/cp3405/dev/1579353124067-2020-01-18T13:12:04.067Z/cp3405.zip"
         },
         "FunctionName": "cp3405-dev-transfer",
         "Handler": "s_transfer.handler",
@@ -318,14 +318,14 @@
         "IamRoleLambdaExecution"
       ]
     },
-    "TransferLambdaVersioncZ4wShrNwoiEiyTifpWBOTz3sfIY9qqekzBlOny4yXM": {
+    "TransferLambdaVersioni0cgmt0oWgnah5RyqknZJwrksmULVkdSZgrZ40VdM": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "TransferLambdaFunction"
         },
-        "CodeSha256": "DyMBiem2TfyKYAo2mfJzx9+Z1wVP2ho9QwFqIj+9FbE="
+        "CodeSha256": "1rwL1fLIfNhdYyDxlImS/sbqFRi0VBvdye/5dP+5k80="
       }
     },
     "SendmailLambdaFunction": {
@@ -335,7 +335,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/cp3405/dev/1579349450714-2020-01-18T12:10:50.714Z/cp3405.zip"
+          "S3Key": "serverless/cp3405/dev/1579353124067-2020-01-18T13:12:04.067Z/cp3405.zip"
         },
         "FunctionName": "cp3405-dev-sendmail",
         "Handler": "s_sendmail.handler",
@@ -354,14 +354,14 @@
         "IamRoleLambdaExecution"
       ]
     },
-    "SendmailLambdaVersionJk2SKjJd242OsJYwRGQ0vX3dmWvqiltCexqrlb6E": {
+    "SendmailLambdaVersionQzU5yDlViIfD26QAx0scuKK1LZjZ1taDbay64w5Bihg": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "SendmailLambdaFunction"
         },
-        "CodeSha256": "DyMBiem2TfyKYAo2mfJzx9+Z1wVP2ho9QwFqIj+9FbE="
+        "CodeSha256": "1rwL1fLIfNhdYyDxlImS/sbqFRi0VBvdye/5dP+5k80="
       }
     },
     "SendinvoiceLambdaFunction": {
@@ -371,7 +371,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/cp3405/dev/1579349450714-2020-01-18T12:10:50.714Z/cp3405.zip"
+          "S3Key": "serverless/cp3405/dev/1579353124067-2020-01-18T13:12:04.067Z/cp3405.zip"
         },
         "FunctionName": "cp3405-dev-sendinvoice",
         "Handler": "s_sendinvoice.handler",
@@ -390,14 +390,14 @@
         "IamRoleLambdaExecution"
       ]
     },
-    "SendinvoiceLambdaVersionta5rxyWvnhnJbwbHUi6vJJ9DZOemFxrCCSOXgPzZhc": {
+    "SendinvoiceLambdaVersioniASS6QnsIXQ1bCEuA4h75mbFwR330HzJKYOVjMc": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "SendinvoiceLambdaFunction"
         },
-        "CodeSha256": "DyMBiem2TfyKYAo2mfJzx9+Z1wVP2ho9QwFqIj+9FbE="
+        "CodeSha256": "1rwL1fLIfNhdYyDxlImS/sbqFRi0VBvdye/5dP+5k80="
       }
     },
     "GetUnderscoreotpLambdaFunction": {
@@ -407,7 +407,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/cp3405/dev/1579349450714-2020-01-18T12:10:50.714Z/cp3405.zip"
+          "S3Key": "serverless/cp3405/dev/1579353124067-2020-01-18T13:12:04.067Z/cp3405.zip"
         },
         "FunctionName": "cp3405-dev-get_otp",
         "Handler": "s_get_otp.handler",
@@ -426,14 +426,14 @@
         "IamRoleLambdaExecution"
       ]
     },
-    "GetUnderscoreotpLambdaVersionJz9urWXaEfzmEHKnRiOVmteikkg8qH2Kc5V6CqOPmM": {
+    "GetUnderscoreotpLambdaVersionUqbS9wD5VGaZpXD5bDG8lyuiqbJdbjQdVuCT78ilAo": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "GetUnderscoreotpLambdaFunction"
         },
-        "CodeSha256": "DyMBiem2TfyKYAo2mfJzx9+Z1wVP2ho9QwFqIj+9FbE="
+        "CodeSha256": "1rwL1fLIfNhdYyDxlImS/sbqFRi0VBvdye/5dP+5k80="
       }
     },
     "CheckUnderscoreotpLambdaFunction": {
@@ -443,7 +443,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/cp3405/dev/1579349450714-2020-01-18T12:10:50.714Z/cp3405.zip"
+          "S3Key": "serverless/cp3405/dev/1579353124067-2020-01-18T13:12:04.067Z/cp3405.zip"
         },
         "FunctionName": "cp3405-dev-check_otp",
         "Handler": "s_check_otp.handler",
@@ -462,14 +462,14 @@
         "IamRoleLambdaExecution"
       ]
     },
-    "CheckUnderscoreotpLambdaVersion52m7saA31ajLUMIFJLbpFzMrPxfSAoyCr0Ap4dJCc": {
+    "CheckUnderscoreotpLambdaVersionhfpyzVUAcUJNGn0qxcdah0HkHqMH8FIAiBZwPo7lZLo": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "CheckUnderscoreotpLambdaFunction"
         },
-        "CodeSha256": "DyMBiem2TfyKYAo2mfJzx9+Z1wVP2ho9QwFqIj+9FbE="
+        "CodeSha256": "1rwL1fLIfNhdYyDxlImS/sbqFRi0VBvdye/5dP+5k80="
       }
     },
     "WdUnderscoregroupsLambdaFunction": {
@@ -479,7 +479,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/cp3405/dev/1579349450714-2020-01-18T12:10:50.714Z/cp3405.zip"
+          "S3Key": "serverless/cp3405/dev/1579353124067-2020-01-18T13:12:04.067Z/cp3405.zip"
         },
         "FunctionName": "cp3405-dev-wd_groups",
         "Handler": "s_wd_groups.handler",
@@ -498,14 +498,14 @@
         "IamRoleLambdaExecution"
       ]
     },
-    "WdUnderscoregroupsLambdaVersionpk3Km8frlQCmA3nOQdKNRT7ACNwaatGkv97IxBA658w": {
+    "WdUnderscoregroupsLambdaVersionKr5PMzvuwDDutOuWe5aiDavPSAqeEZcWDbVhX5ijg": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "WdUnderscoregroupsLambdaFunction"
         },
-        "CodeSha256": "DyMBiem2TfyKYAo2mfJzx9+Z1wVP2ho9QwFqIj+9FbE="
+        "CodeSha256": "1rwL1fLIfNhdYyDxlImS/sbqFRi0VBvdye/5dP+5k80="
       }
     },
     "ApiGatewayRestApi": {
@@ -1245,7 +1245,7 @@
         "MethodResponses": []
       }
     },
-    "ApiGatewayDeployment1579349441603": {
+    "ApiGatewayDeployment1579353113690": {
       "Type": "AWS::ApiGateway::Deployment",
       "Properties": {
         "RestApiId": {
@@ -1623,7 +1623,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/cp3405/dev/1579349450714-2020-01-18T12:10:50.714Z/custom-resources.zip"
+          "S3Key": "serverless/cp3405/dev/1579353124067-2020-01-18T13:12:04.067Z/custom-resources.zip"
         },
         "FunctionName": "cp3405-dev-custom-resource-apigw-cw-role",
         "Handler": "apiGatewayCloudWatchRole/handler.handler",
@@ -1739,43 +1739,43 @@
     "AuthenticateUnderscoretestLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "AuthenticateUnderscoretestLambdaVersionVMoFmGGbEnHnsKwjr0mZRDcSAYq7HuehCBFD3aM6U"
+        "Ref": "AuthenticateUnderscoretestLambdaVersionzoBWQF62aIys8D3zYLz5jps77rbvKzDIQImAIp06A"
       }
     },
     "TransferLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "TransferLambdaVersioncZ4wShrNwoiEiyTifpWBOTz3sfIY9qqekzBlOny4yXM"
+        "Ref": "TransferLambdaVersioni0cgmt0oWgnah5RyqknZJwrksmULVkdSZgrZ40VdM"
       }
     },
     "SendmailLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "SendmailLambdaVersionJk2SKjJd242OsJYwRGQ0vX3dmWvqiltCexqrlb6E"
+        "Ref": "SendmailLambdaVersionQzU5yDlViIfD26QAx0scuKK1LZjZ1taDbay64w5Bihg"
       }
     },
     "SendinvoiceLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "SendinvoiceLambdaVersionta5rxyWvnhnJbwbHUi6vJJ9DZOemFxrCCSOXgPzZhc"
+        "Ref": "SendinvoiceLambdaVersioniASS6QnsIXQ1bCEuA4h75mbFwR330HzJKYOVjMc"
       }
     },
     "GetUnderscoreotpLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "GetUnderscoreotpLambdaVersionJz9urWXaEfzmEHKnRiOVmteikkg8qH2Kc5V6CqOPmM"
+        "Ref": "GetUnderscoreotpLambdaVersionUqbS9wD5VGaZpXD5bDG8lyuiqbJdbjQdVuCT78ilAo"
       }
     },
     "CheckUnderscoreotpLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "CheckUnderscoreotpLambdaVersion52m7saA31ajLUMIFJLbpFzMrPxfSAoyCr0Ap4dJCc"
+        "Ref": "CheckUnderscoreotpLambdaVersionhfpyzVUAcUJNGn0qxcdah0HkHqMH8FIAiBZwPo7lZLo"
       }
     },
     "WdUnderscoregroupsLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "WdUnderscoregroupsLambdaVersionpk3Km8frlQCmA3nOQdKNRT7ACNwaatGkv97IxBA658w"
+        "Ref": "WdUnderscoregroupsLambdaVersionKr5PMzvuwDDutOuWe5aiDavPSAqeEZcWDbVhX5ijg"
       }
     },
     "ServiceEndpoint": {

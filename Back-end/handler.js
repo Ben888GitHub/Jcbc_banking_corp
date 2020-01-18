@@ -28,28 +28,26 @@ exports.sendinvoice = (event, context, callback) => {
     .then(async () => {
       let toSend = new Date().getTime();
       let request_data = {
-        email : JSON.parse(event.body).email,
-        amount : JSON.parse(event.body).amount,
-        sender_accnum : JSON.parse(event.body).sender_accnum,
-        sender_accname : JSON.parse(event.body).sender_accname,
-        receive_accnum : JSON.parse(event.body).receive_accnum,
-        receive_accname : JSON.parse(event.body).receive_accname
+        sender_email: JSON.parse(event.body).sender_email,
+        amount: JSON.parse(event.body).amount,
+        sender_accnum: JSON.parse(event.body).sender_accnum,
+        sender_accname: JSON.parse(event.body).sender_accname,
+        receive_accnum: JSON.parse(event.body).receive_accnum,
       }
       sgMail.setApiKey("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");
-      const msg = {
-        to: request_data.email,
+      const sender_msg = {
+        to: request_data.sender_email,
         from: 'admin@jcbc.com',
-        subject: 'Your transfer invoice for ' + request_data.email,
+        subject: 'Your transfer invoice for ' + request_data.sender_email,
         html: `<h1>Here is your transfer invoice.</h1><p style = "font-family: Courier New, Courier, monospace">`
-          + `<br/><br/> Your email ---------------- ${request_data.email}`
+          + `<br/><br/> Your email ---------------- ${request_data.sender_email}`
           + `<br/><br/> Amount transfered --------- ${request_data.amount}`
           + `<br/><br/> Sender account name ------- ${request_data.sender_accname}`
           + `<br/><br/> Sender account number ----- ${request_data.sender_accnum}`
-          + `<br/><br/> Reciever account name ----- ${request_data.receive_accname}`
           + `<br/><br/> Reciever account number --- ${request_data.receive_accnum}`
           + `<br/></p><h1> Thank you for using JCBC banking app. </h1>`
       };
-      await sgMail.send(msg);
+      await sgMail.send(sender_msg);
       callback(null, {
         statusCode: 200,
         body: JSON.stringify({
