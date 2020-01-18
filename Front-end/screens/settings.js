@@ -3,7 +3,8 @@ import {
     StyleSheet,
     View,
     Dimensions,
-    Alert
+    Alert,
+    Picker
 } from "react-native";
 import {
     Card,
@@ -13,6 +14,7 @@ import {
 import { authenticate } from '../reducers/actions';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import Dialog, { ScaleAnimation, DialogTitle, DialogFooter, DialogButton, DialogContent } from 'react-native-popup-dialog';
 
 const mapStateToProps = (state) => {
     const { currentUser } = state;
@@ -30,6 +32,10 @@ const screenWidth = Math.round(Dimensions.get("window").width);
 class App extends Component {
     constructor(props){
         super(props)
+        this.state = {
+            isReady: false,
+            currentacc : null
+        }
     }
 
     logOutHandler = () => {
@@ -61,6 +67,15 @@ class App extends Component {
                             style={styles.cardStyle}
                             header
                             button
+                            onPress={() => { this.setState({ visible: true }); }}>
+                            <Text style={styles.settingsFont}>
+                                My QR Code
+                            </Text>
+                        </CardItem>
+                        <CardItem
+                            style={styles.cardStyle}
+                            header
+                            button
                             onPress={ this.logOutHandler.bind(this) }>
                             <Text style = {styles.settingsFont}>
                                 Log Out
@@ -77,6 +92,56 @@ class App extends Component {
                             </Text>
                         </CardItem>
                     </Card>
+
+                    <Dialog
+                        visible={this.state.visible}
+                        onTouchOutside={() => {
+                            this.setState({ visible: false });
+                        }}
+
+                        dialogAnimation={new ScaleAnimation({
+                            initialValue: 0,
+                            useNativeDriver: true,
+                        })}
+
+                        dialogTitle={
+
+                            <DialogTitle
+                                title="QR Code Setting"
+                            //   style={styles.qrtitle}
+                            //   hasTitleBar={false}
+                            //   align="center"
+                            />
+                        }
+
+                        footer={
+                            <DialogFooter>
+                                <DialogButton
+                                    text="Dismiss"
+                                    onPress={() => { this.setState({ visible: false }); }}
+                                />
+                            </DialogFooter>
+                        }
+                    >
+                        <DialogContent style={{ width: screenWidth - 30 }}>
+                            <View style={{ flexDirection: "row" }}>
+                                <View style={{ flex: 1, marginTop: 10 }}>
+                                    <Text>Color :</Text>
+                                </View>
+                                <View style={{ flex: 1 }}>
+                                    <Picker
+                                        selectedValue={this.state.color}
+                                        style={{ height: 50, width: 130 }}
+                                        onValueChange={(itemValue, itemIndex) =>
+                                            this.setState({ color: itemValue })
+                                        }>
+                                        <Picker.Item label="Black" value="black" />
+                                        <Picker.Item label="Red" value="red" />
+                                    </Picker>
+                                </View>
+                            </View>
+                        </DialogContent>
+                    </Dialog>
                 </View>
 
             </View>
@@ -98,6 +163,14 @@ const styles = StyleSheet.create({
         fontSize: 17,
         fontWeight: "bold",
         color: "#fff"
+    },
+    qrtitle: {
+        color: "red",
+        fontSize: 16.5,
+        width: "100%",
+        textAlign: "center",
+        fontWeight: "bold",
+        marginTop: 20,
     },
     title: {
         color: "white",
