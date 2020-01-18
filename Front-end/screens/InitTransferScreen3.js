@@ -86,7 +86,7 @@ class InitTransfer3 extends Component{
       const { navigate } = this.props.navigation;
       console.log(data);
       this.setState({scanned: true});
-      navigate('AmountQR', {data: data, acc: currentacc });
+      navigate('AmountQR', {data: data, acc: this.state.currentacc });
       //alert(`type ${type} and data ${data}`);
       //Do action when Code is scanned
       }

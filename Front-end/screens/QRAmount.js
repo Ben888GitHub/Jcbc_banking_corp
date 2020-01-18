@@ -40,7 +40,7 @@ class QRAmount extends React.Component {
         let data = this.props.navigation.getParam('data');
         //Let source = this.props.navigation.getParam('acc');
         this.setState({ dest_acc: data });
-        this.setState({ source_acc: acc })
+        this.setState({ source_acc: source })
     }
 
     /*setvalue(accnum) {
@@ -143,8 +143,8 @@ class QRAmount extends React.Component {
                             </ImageBackground>
                         
                         </TouchableOpacity>
-                            </Card>*/}
-            ))}
+                            </Card>
+                            //))}*/}
             <Text
             style={{
               fontWeight: "bold",
