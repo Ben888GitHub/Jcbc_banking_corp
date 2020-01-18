@@ -52,13 +52,12 @@ class App extends Component {
     if (value === "Ryan") {
       console.log(value);
       navigate("Transfer");
-    }
-    else if(value === "Ryan2"){
+    } else if (value === "Ryan2") {
       console.log(value);
       navigate("Transfer3");
     }
   }
-/*
+  /*
   onValueChange2(value) {
     const { navigate } = this.props.navigation;
     if (value === "Ryan2") {
@@ -93,7 +92,7 @@ class App extends Component {
         console.log(res.status);
 
         if (res.status === 404) {
-          // alert sth about the acc info is wrong.
+          // alert sth about the acc info is invalid.
           alert("Invalid Details");
         }
 

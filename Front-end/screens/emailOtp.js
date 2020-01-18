@@ -102,10 +102,13 @@ class emailOtp extends React.Component {
         // set a state to hide the input
         // return this.props.navigation.navigate("Transfer");
         this.setState({
-          show: false,
-          sessionTimeout: <Text style={{ color: "red" }}>Session Expired</Text>
+          show: false
+          // sessionTimeout:
         });
-        return this.state.sessionTimeout;
+        // return this.state.sessionTimeout;
+        alert("Session Expired");
+        return <Text>Session Expired</Text>;
+        // return <Text style={{ color: "red" }}>Session Expired</Text>;
         // return this.setState({
         //   showOtpPlaceholder: false
         // });
@@ -187,6 +190,7 @@ class emailOtp extends React.Component {
                   // this.props.navigation.navigate("Transfer");
                 } else {
                   alert("You are good to go");
+                  this.props.navigation.navigate("TransferComplete");
                   // this.props.navigation.push("TransferConfirm");
                 }
               }}
@@ -197,7 +201,7 @@ class emailOtp extends React.Component {
           <Text style={styles.timingStyle}>
             Time Remaining: {/* </Text>
             <Text> */}
-            <Countdown date={Date.now() + 5000} renderer={renderer} />{" "}
+            <Countdown date={Date.now() + 15000} renderer={renderer} />{" "}
           </Text>
 
           <Text style={styles.resendCodeStyle}>Didn't receive the OTP?</Text>
