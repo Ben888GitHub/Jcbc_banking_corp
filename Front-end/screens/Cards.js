@@ -91,24 +91,35 @@ class CardsScreen extends React.Component {
           </View>
 
           {dataGrid ? (dataGrid.map((sub_element, sub_key) => {
-            let texte = '../assets/' + sub_element.type.toLowerCase() + '.png';
-            let cardType = require('../assets/mastercard.png');
+            let cardType = {
+              'VISA': require('../assets/visa.png'),
+              'MasterCard': require('../assets/mastercard.png'),
+              'UnionPay': require('../assets/unionpay.png'),
+              'Amex': require('../assets/amex.png'),
+            };
             return (
               <ImageBackground source={require('../assets/bank2.jpg')}
+
                 resizeMode='cover'
-                style={{ marginVertical: 8, backgroundColor: yelloBackgrd, borderRadius: 20 }}
+                style={{
+                  marginVertical: 8, backgroundColor: yelloBackgrd, borderRadius: 20,
+                  // transform: [{ scaleX: 0.9 }],
+                }}
                 imageStyle={{ borderRadius: 20, opacity: 0.3 }}>
-                <View style={{
-                  padding: 20,
-                  width: '100%',
-                  aspectRatio: 1.58,
-                  flexDirection: 'column',
-                  alignItems: 'flex-start',
-                  justifyContent: 'space-between'
-                }}>
+                <View
+
+                  style={{
+
+                    padding: 20,
+                    width: '100%',
+                    aspectRatio: 1.58,
+                    flexDirection: 'column',
+                    alignItems: 'flex-start',
+                    justifyContent: 'space-between'
+                  }}>
                   <View style={{ width: '100%', flexDirection: 'row', justifyContent: 'space-between' }}>
                     <Text style={{ fontFamily: 'MuseoBold', fontWeight: '400', fontSize: 30, color: 'rgba(0,0,0,0.3)' }}>JCBC</Text>
-                    <Image style={{ height: 80, width: 100, resizeMode: 'center' }} source={cardType} />
+                    <Image style={{ height: 80, width: 100, resizeMode: 'center' }} source={cardType[sub_element.type]} />
                   </View>
 
                   <Text style={{
