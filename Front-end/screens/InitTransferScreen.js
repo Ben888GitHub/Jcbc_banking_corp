@@ -97,8 +97,7 @@ class InitTransferScreen extends Component {
     if (value === "key1") {
       console.log(value);
       navigate("Transfer2");
-    }
-    else if (value === "Ryan2") {
+    } else if (value === "Ryan2") {
       console.log(value);
       navigate("Transfer3");
     }
@@ -117,11 +116,17 @@ class InitTransferScreen extends Component {
 
   _handletransfer = () => {
     let amountToTransfer;
+    if (this.state.amount === undefined) {
+      alert("Invalid input");
+      return;
+    }
     try {
       amountToTransfer = parseInt(this.state.amount);
+      console.log("this is the amount: " + amountToTransfer);
       console.log(typeof amountToTransfer);
     } catch {
       amountToTransfer = this.state.amount;
+      console.log("this is the amount: " + amountToTransfer);
       console.log(typeof amountToTransfer);
     }
     axios
@@ -187,7 +192,7 @@ class InitTransferScreen extends Component {
                 borderRadius: 10,
                 borderColor:
                   index == this.state.indexToHaveBorder &&
-                    this.state.indexToHaveBorder != null
+                  this.state.indexToHaveBorder != null
                     ? "blue"
                     : "transparent",
                 borderWidth: 10,
@@ -395,7 +400,7 @@ class InitTransferScreen extends Component {
                   iosIcon={
                     <Icon
                       name="arrow-down"
-                    // style={{ position: "absolute", right: 0 }}
+                      // style={{ position: "absolute", right: 0 }}
                     />
                   }
                   style={{

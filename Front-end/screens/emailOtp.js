@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, View, TouchableOpacity } from "react-native";
+import { StyleSheet, View, TouchableOpacity, Switch } from "react-native";
 import {
   Header,
   Container,
@@ -32,12 +32,13 @@ class emailOtp extends React.Component {
       pageTitle: "Enter OTP  ",
       resendCode: "Resend Code",
       countdownTimer: " ",
-      timerStop: " ",
       countdown: 0, //TODO
       email: "benedictryan80@gmail.com",
       pin_count: 6,
       data: "",
-      thebutton: <Button>Hey</Button>
+      showOtpPlaceholder: true,
+      show: true,
+      sessionTimeout: null
     };
   }
 
@@ -76,21 +77,43 @@ class emailOtp extends React.Component {
       .catch();
   };
 
+  // componentHideAndShow = () => {
+  //   this.setState(previousState => ({ content: !previousState.content }));
+  // };
+
+  ShowHideComponent = () => {
+    if (this.state.show == true) {
+      this.setState({ show: false });
+    } else {
+      this.setState({ show: true });
+    }
+  };
+
   render() {
     const countdown = ""; //TODO
     const Completionist = () => alert("Session Expired"); // <Text>Session Expired</Text>;
     const { navigate } = this.props.navigation;
     const { pin_count } = this.state;
+    const { showOtpPlaceholder } = this.state;
     const renderer = ({ seconds, completed }) => {
       if (completed) {
         // Render a completed state
         // set a state to hide the input
-        return this.props.navigation.navigate("Transfer");
+        // return this.props.navigation.navigate("Transfer");
+        this.setState({
+          show: false,
+          sessionTimeout: <Text style={{ color: "red" }}>Session Expired</Text>
+        });
+        return this.state.sessionTimeout;
+        // return this.setState({
+        //   showOtpPlaceholder: false
+        // });
       } else {
         // Render a countdown
         return <Text>{seconds}</Text>;
       }
     };
+
     return (
       // <View style={styles.container}>
       <Container style={styles.container2}>
@@ -137,44 +160,42 @@ class emailOtp extends React.Component {
         {/* This section is for OTP Input */}
         <Content>
           {/* <Otp /> */}
-          <OTPInputView
-            style={{
-              width: "80%",
-              height: 200,
-              alignItems: "center",
-              justifyContent: "center"
-            }}
-            pinCount={pin_count}
-            // code={this.state.code} //You can supply this prop or not. The component will be used as a controlled / uncontrolled component respectively.
-            // onCodeChanged = {code => { this.setState({code})}}
-            autoFocusOnLoad
-            codeInputFieldStyle={styles.underlineStyleBase}
-            codeInputHighlightStyle={styles.underlineStyleHighLighted}
-            onCodeFilled={code => {
-              console.log(`Your OTP Pin is ${code}, you are good to go!`);
-              if (code !== this.state.data) {
-                alert("Invalid Input");
-                this.props.navigation.navigate("Transfer");
-                {
-                  /*TODO */
+          {this.state.show ? (
+            <OTPInputView
+              style={{
+                width: "80%",
+                height: 200,
+                alignItems: "center",
+                justifyContent: "center"
+              }}
+              // editable={}
+              pinCount={pin_count}
+              // code={this.state.code} //You can supply this prop or not. The component will be used as a controlled / uncontrolled component respectively.
+              // onCodeChanged = {code => { this.setState({code})}}
+              autoFocusOnLoad
+              codeInputFieldStyle={styles.underlineStyleBase}
+              codeInputHighlightStyle={styles.underlineStyleHighLighted}
+              hideInput={this.ShowHideComponent}
+              onCodeFilled={code => {
+                console.log(`Your OTP Pin is ${code}, you are good to go!`);
+                if (code !== this.state.data) {
+                  alert("Invalid Input");
+                  // this.props.navigation.navigate("Transfer");
+                } else {
+                  alert("You are good to go");
+                  // this.props.navigation.push("TransferConfirm");
                 }
-              } else {
-                alert("You are good to go");
-                this.props.navigation.push("TransferConfirm");
-              }
-              // alert("You are running out of time");
-              // this.props.navigation.push("TransferConfirm");
-            }}
-          />
+              }}
+            />
+          ) : null}
+          <View></View>
+          {/* <Text>Hello</Text> */}
           <Text style={styles.timingStyle}>
-            Time Remaining:{" "}
-            <Countdown date={Date.now() + 30000} renderer={renderer} /> seconds
-            left
-            {/* <Text>
-              If time remaining is up, then you will be redirected to your
-              Transfer Page
-            </Text> */}
+            Time Remaining: {/* </Text>
+            <Text> */}
+            <Countdown date={Date.now() + 5000} renderer={renderer} />{" "}
           </Text>
+
           <Text style={styles.resendCodeStyle}>Didn't receive the OTP?</Text>
           {/* <Button transparent> </Button> */}
           <TouchableOpacity
@@ -196,6 +217,9 @@ class emailOtp extends React.Component {
             </View>
           </TouchableOpacity>
           {/* </Text> */}
+          <Button onPress={this.ShowHideComponent}>
+            <Text>Hide/Show Component</Text>
+          </Button>
         </Content>
 
         {/* */}
@@ -214,6 +238,12 @@ const styles = StyleSheet.create({
   },
   container2: {
     backgroundColor: "#f7f7f7"
+  },
+  headerText: {
+    fontSize: 20,
+    textAlign: "center",
+    margin: 10,
+    fontWeight: "bold"
   },
   headerStyle: {
     height: 100,
@@ -236,16 +266,16 @@ const styles = StyleSheet.create({
     width: 120,
     marginVertical: 40
   },
-  timingStyle: {
-    marginVertical: -120,
-    marginHorizontal: 55,
-    marginBottom: 50
-  },
-  resendCodeStyle: {
-    marginVertical: 10,
-    marginHorizontal: 55,
-    fontSize: 17
-  },
+  // timingStyle: {
+  //   marginVertical: -120,
+  //   marginHorizontal: 55,
+  //   marginBottom: 50
+  // },
+  // resendCodeStyle: {
+  //   marginVertical: 10,
+  //   marginHorizontal: 55,
+  //   fontSize: 17
+  // },
   borderStyleBase: {
     width: 30,
     height: 45

@@ -1,9 +1,9 @@
 {
   "devToolsPort": 19002,
-  "expoServerPort": 19000,
-  "packagerPort": 19001,
-  "packagerPid": 16616,
-  "expoServerNgrokUrl": "https://ve-w37.anonymous.front-end.exp.direct",
-  "packagerNgrokUrl": "https://packager.ve-w37.anonymous.front-end.exp.direct",
-  "ngrokPid": 5144
+  "expoServerPort": null,
+  "packagerPort": null,
+  "packagerPid": null,
+  "expoServerNgrokUrl": null,
+  "packagerNgrokUrl": null,
+  "ngrokPid": null
 }
