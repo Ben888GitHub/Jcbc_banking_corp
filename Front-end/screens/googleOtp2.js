@@ -70,22 +70,6 @@ class googleOtp extends React.Component {
     };
   }
 
-  // componentDidMount() {
-  //   axios
-  //     .post(
-  //       "https://ixmhlhrubj.execute-api.ap-southeast-1.amazonaws.com/dev/check_otp",
-  //       {
-  //         secret: this.props.currentUser.secret,
-  //         token: this.state.token
-  //       }
-  //     )
-  //     .then(res => {
-  //       this.setState({
-  //         success: res.data
-  //       });
-  //     })
-  //     .catch();
-  // }
   componentWillMount() {
     let username = this.props.navigation.getParam("sender_username");
     let accountNum = this.props.navigation.getParam("source_acc_num");
@@ -180,47 +164,12 @@ class googleOtp extends React.Component {
   //   this.setState(previousState => ({ content: !previousState.content }));
   // };
 
-  ShowHideComponent = () => {
-    if (this.state.show == true) {
-      this.setState({ show: false });
-    } else {
-      this.setState({ show: true });
-    }
-  };
-
-  RunAndStopCountdown = () => {
-    if (this.state.showCountdown == true) {
-      this.setState({ showCountdown: false });
-    } else {
-      this.setState({ showCountdown: true });
-    }
-  };
-
   render() {
     const countdown = ""; //TODO
     const Completionist = () => alert("Session Expired"); // <Text>Session Expired</Text>;
     // const { navigate } = this.props.navigation;
     const { pin_count } = this.state;
     const { showOtpPlaceholder } = this.state;
-    const renderer = ({ seconds, completed }) => {
-      if (completed) {
-        // set a state to hide the input
-        this.setState({
-          show: false
-          // sessionTimeout:
-        });
-        // return this.state.sessionTimeout;
-        alert("Session Expired");
-        return <Text>Session Expired</Text>;
-        // return <Text style={{ color: "red" }}>Session Expired</Text>;
-        // return this.setState({
-        //   showOtpPlaceholder: false
-        // });
-      } else {
-        // Render a countdown
-        return <Text>{seconds}</Text>;
-      }
-    };
 
     return (
       // <View style={styles.container}>
@@ -265,14 +214,7 @@ class googleOtp extends React.Component {
           >
             6 Digits OTP has been send to your email
           </Text>
-          {/* */}
-          {/* This section is for OTP Input */}
-          {/* <KeyboardAvoidingView
-            behavior={Platform.OS === "ios" ? "padding" : null}
-            style={{ flex: 1 }}
-          > */}
-          {/* <Otp /> */}
-          {/* {this.state.show ? ( */}
+
           <OTPInputView
             style={{
               width: "80%",
@@ -314,17 +256,9 @@ class googleOtp extends React.Component {
                 {" "}
                 <Text></Text>
                 <Text style={{ color: "white" }}>Confirm OTP</Text>{" "}
-                {/* Remember to put onPress here 👆 on Button for redirecting back */}
               </Text>
             </View>
           </Button>
-          {/* </Text> */}
-          {/* <Button onPress={this.ShowHideComponent}>
-            <Text>Hide/Show Component</Text>
-          </Button> */}
-          {/* </KeyboardAvoidingView> */}
-
-          {/* */}
         </Content>
       </Container>
       // </View>

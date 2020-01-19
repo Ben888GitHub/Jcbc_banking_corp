@@ -106,7 +106,9 @@ class InitTransferScreen extends Component {
     //console.log(value);
     if (value === "key1") {
       console.log(value);
-      navigate("Transfer2");
+      navigate("Transfer2", {
+        source: this.props.navigation.state.params.element.accnumber
+      });
     } else if (value === "Ryan2") {
       console.log(value);
       navigate("Transfer3", {
@@ -118,6 +120,7 @@ class InitTransferScreen extends Component {
   _handletransfer = () => {
     // let amountToTransfer;
     if (this.state.amount === undefined || this.state.amount === NaN) {
+      // todo
       alert("Invalid input");
       return;
     } else {

@@ -44,6 +44,10 @@ class App extends Component {
       underBodyText: "899-678898-009",
       singaporeDollars: 700000,
       AccountNumberInputValue: " "
+      // username: "",
+      // accountNumber: null,
+      // amount: null,
+      // beneficiaryAccNumber: null
     };
   }
 
@@ -66,51 +70,80 @@ class App extends Component {
     }
   }*/
 
+  componentWillMount() {
+    let currentAccount = this.props.navigation.getParam("source");
+
+    this.setState({
+      source_acc_num: currentAccount
+    });
+  }
+
   _handletransfer = () => {
-    let amountToTransfer;
-    try {
-      amountToTransfer = parseInt(this.state.amount);
-      console.log(typeof amountToTransfer);
-    } catch {
-      amountToTransfer = this.state.amount;
-      console.log(typeof amountToTransfer);
+    if (this.state.username === undefined) {
+      alert("Invalid input");
+      return;
     }
-    axios
-      .post(
-        "https://ixmhlhrubj.execute-api.ap-southeast-1.amazonaws.com/dev/transfer",
-        {
-          sender_username: this.state.username,
-          source_acc_num: this.state.accountNumber,
-          transfer_amount: amountToTransfer,
-          receiver_username: this.state.receiver_username, // TODO
-          dest_acc_num: this.state.beneficiaryAccNumber
-        }
-      )
-      .then(res => {
-        console.log(res.statusText);
-        console.log(res.data);
-        console.log(res.status);
-
-        if (res.status === 404) {
-          // alert sth about the acc info is invalid.
-          alert("Invalid Details");
-        }
-
-        if (res.status === 502) {
-          // alert sth about the acc info is invalid.
-          alert("Invalid Details");
-        }
-
-        if (res.status === 200) {
-          alert("Successful");
-          this.props.navigation.push("EmailOtp2");
-        }
-      })
-      .catch(err => {
-        console.error(err);
-        console.log(err);
-        alert("Invalid Details! Request error");
+    if (this.state.amount === undefined) {
+      alert("Invalid input");
+      return;
+    }
+    if (this.state.beneficiaryAccNumber === undefined) {
+      alert("Invalid input");
+      return;
+    }
+    if (this.state.accountNumber === undefined) {
+      alert("Invalid input");
+      return;
+    } else {
+      this.props.navigation.navigate("GoogleOtp2", {
+        sender_username: this.props.currentUser.accname,
+        source_acc_num: this.state.source_acc_num,
+        transfer_amount: this.state.amount,
+        dest_acc_num: this.state.beneficiaryAccNumber
       });
+    }
+    // let amountToTransfer;
+    // try {
+    //   amountToTransfer = parseInt(this.state.amount);
+    //   console.log(typeof amountToTransfer);
+    // } catch {
+    //   amountToTransfer = this.state.amount;
+    //   console.log(typeof amountToTransfer);
+    // }
+    // axios
+    //   .post(
+    //     "https://ixmhlhrubj.execute-api.ap-southeast-1.amazonaws.com/dev/transfer",
+    //     {
+    //       sender_username: this.state.username,
+    //       source_acc_num: this.state.accountNumber,
+    //       transfer_amount: amountToTransfer,
+    //       receiver_username: this.state.receiver_username, // TODO
+    //       dest_acc_num: this.state.beneficiaryAccNumber
+    //     }
+    //   )
+    //   .then(res => {
+    //     console.log(res.statusText);
+    //     console.log(res.data);
+    //     console.log(res.status);
+
+    //     if (res.status === 404) {
+    //       alert("Invalid Details");
+    //     }
+
+    //     if (res.status === 502) {
+    //       alert("Invalid Details");
+    //     }
+
+    //     if (res.status === 200) {
+    //       alert("Successful");
+    //       this.props.navigation.push("EmailOtp2");
+    //     }
+    //   })
+    //   .catch(err => {
+    //     console.error(err);
+    //     console.log(err);
+    //     alert("Invalid Details! Request error");
+    //   });
   };
 
   emailOtpApi = () => {};
