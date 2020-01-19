@@ -92,10 +92,8 @@ class LoginScreen extends Component {
         if (res.data.length == 0) {
           alert("Please enter correct Info");
         } else {
-          console.log(res.statusText);
           console.log(res.data);
-          console.log(res.status);
-          //alert("Ding")
+          this.props.authenticate(res.data[0]);
           this.props.navigation.push("Home");
           Toast.show({
             text: "Welcome to JCBC Banking.",
@@ -206,7 +204,7 @@ class LoginScreen extends Component {
                   this.state.loginField === "Username"
                     ? { opacity: 0.5 }
                     : { opacity: 1 }
-                ]}/>
+                ]} />
 
               {this.state.loginField !== "" &&
                 this.state.loginField !== "Username" && (
@@ -226,7 +224,7 @@ class LoginScreen extends Component {
                     <Ionicons
                       name="md-arrow-round-forward"
                       size={35}
-                      color="white"/>
+                      color="white" />
                   </TouchableOpacity>
                 )}
             </View>
@@ -373,6 +371,10 @@ class LoginScreen extends Component {
     );
   }
 }
+
+LoginScreen.navigationOptions = {
+  header: null,
+};
 
 const styles = StyleSheet.create({
   image: {

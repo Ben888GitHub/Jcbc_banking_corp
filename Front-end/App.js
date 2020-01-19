@@ -54,9 +54,8 @@ const AppContainer = createAppContainer(
     {
       // config
       // headerMode: "none",
-      // initialRouteName: "Login" // initialRouteName will display the first component
-      // initialRouteName: "Login" // initialRouteName will display the first component
-      initialRouteName: "Home" // initialRouteName will display the first component
+      initialRouteName: "Login" // initialRouteName will display the first component
+      // initialRouteName: "Home" // initialRouteName will display the first component
     }
   )
 );

@@ -32,7 +32,8 @@ class CardsScreen extends React.Component {
       isReady: false,
       current_usr: this.props.currentUser,
       currentacc: null,
-      dataGrid: []
+      dataGrid: [],
+      focusIndex: null
     };
   }
 
@@ -53,6 +54,9 @@ class CardsScreen extends React.Component {
 
   render() {
     let { dataGrid } = this.state;
+    // dataGrid.forEach((each) => {
+    //   each.onfocus = false;
+    // });
     const { navigate } = this.props.navigation; //navigation is always a props
     let { currentacc } = this.state;
     let { current_usr } = this.state;
@@ -63,15 +67,13 @@ class CardsScreen extends React.Component {
     }
 
     return (
-      <Container style={{
-        // paddingTop: getStatusBarHeight() * 2,
-        padding: 10
-      }}>
+      <Container>
         <StatusBar barStyle="dark-content" />
 
         <Content showsVerticalScrollIndicator={false}>
 
           <View style={{
+            padding: 10,
             marginBottom: 20,
             flex: 1,
             flexDirection: "row"
@@ -86,6 +88,7 @@ class CardsScreen extends React.Component {
                 fontFamily: 'MuseoBold',
                 fontSize: 30,
                 fontWeight: '400'
+                // }}>{this.state.focusIndex}</Text>
               }}>Cards</Text>
             </View>
           </View>
@@ -98,44 +101,62 @@ class CardsScreen extends React.Component {
               'Amex': require('../assets/amex.png'),
             };
             return (
-              <ImageBackground source={require('../assets/bank2.jpg')}
-
-                resizeMode='cover'
-                style={{
-                  marginVertical: 8, backgroundColor: yelloBackgrd, borderRadius: 20,
-                  // transform: [{ scaleX: 0.9 }],
-                }}
-                imageStyle={{ borderRadius: 20, opacity: 0.3 }}>
-                <View
-
+              <View key={sub_key} style={{
+                paddingLeft: 10, paddingRight: 10,
+                flexDirection: 'row',
+              }}>
+                {/* <View style={{ height: '100%' }}>
+                  <View style={{ backgroundColor: 'red', borderRadius: 20 }}>
+                    <Text>Card View</Text>
+                  </View>
+                </View> */}
+                <ImageBackground source={require('../assets/bank2.jpg')}
+                  resizeMode='cover'
                   style={{
+                    transform: sub_key == this.state.focusIndex ?
+                      [{ translateX: 100 }, { translateY: 0 }] : [{ translateX: 0 }, { translateY: 0 }],
+                    marginVertical: 8, backgroundColor: yelloBackgrd, borderRadius: 20,
+                  }}
+                  imageStyle={{ borderRadius: 20, opacity: 0.3 }}>
+                  <TouchableOpacity
+                    onPress={() => {
+                      if (this.state.focusIndex == sub_key) {
+                        this.setState({ focusIndex: null });
+                      } else {
+                        this.setState({ focusIndex: sub_key });
+                      };
+                    }}
+                  >
+                    <View
+                      style={{
+                        padding: 20,
+                        width: '100%',
+                        aspectRatio: 1.58,
+                        flexDirection: 'column',
+                        alignItems: 'flex-start',
+                        justifyContent: 'space-between'
+                      }}>
+                      <View style={{ width: '100%', flexDirection: 'row', justifyContent: 'space-between' }}>
+                        <Text style={{ fontFamily: 'MuseoBold', fontWeight: '400', fontSize: 30, color: 'rgba(0,0,0,0.3)' }}>JCBC</Text>
+                        <Image style={{ height: 80, width: 100, resizeMode: 'center' }} source={cardType[sub_element.type]} />
+                      </View>
 
-                    padding: 20,
-                    width: '100%',
-                    aspectRatio: 1.58,
-                    flexDirection: 'column',
-                    alignItems: 'flex-start',
-                    justifyContent: 'space-between'
-                  }}>
-                  <View style={{ width: '100%', flexDirection: 'row', justifyContent: 'space-between' }}>
-                    <Text style={{ fontFamily: 'MuseoBold', fontWeight: '400', fontSize: 30, color: 'rgba(0,0,0,0.3)' }}>JCBC</Text>
-                    <Image style={{ height: 80, width: 100, resizeMode: 'center' }} source={cardType[sub_element.type]} />
-                  </View>
+                      <Text style={{
+                        fontFamily: 'MuseoBold', fontWeight: '400', fontSize: 20
+                      }}>{sub_element.cardnum}</Text>
 
-                  <Text style={{
-                    fontFamily: 'MuseoBold', fontWeight: '400', fontSize: 20
-                  }}>{sub_element.cardnum}</Text>
+                      <View style={{ width: '100%', flexDirection: 'row', justifyContent: 'space-between' }}>
+                        <Text style={{ fontSize: 17 }}>{sub_element.nameoncard}</Text>
 
-                  <View style={{ width: '100%', flexDirection: 'row', justifyContent: 'space-between' }}>
-                    <Text style={{ fontSize: 17 }}>{sub_element.nameoncard}</Text>
-
-                    <View>
-                      <Text>Valid Thru</Text>
-                      <Text>{sub_element.validthru}</Text>
+                        <View>
+                          <Text>Valid Thru</Text>
+                          <Text>{sub_element.validthru}</Text>
+                        </View>
+                      </View>
                     </View>
-                  </View>
-                </View>
-              </ImageBackground>
+                  </TouchableOpacity>
+                </ImageBackground>
+              </View>
             )
           })) : (
               <Text>You have no cards linked to this accounts</Text>

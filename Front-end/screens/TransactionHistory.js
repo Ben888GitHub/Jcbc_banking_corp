@@ -51,7 +51,9 @@ class History extends React.Component {
       currentacc: null,
       dataGrid: []
     };
-  }
+  };
+
+  months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
   componentWillMount = () => {
     this.setState({ currentacc: this.props.navigation.getParam("element") });
@@ -98,7 +100,7 @@ class History extends React.Component {
     return (
       <Container
         style={{
-          // paddingTop: getStatusBarHeight() * 2,
+          paddingTop: getStatusBarHeight() * 2,
           padding: 10
         }}
       >
@@ -226,6 +228,10 @@ class History extends React.Component {
           </Text>
 
           {dataGrid.map((sub_element, sub_key) => {
+            let timestamp = parseInt(sub_element.datestamp);
+            let day = new Date(timestamp);
+            let daystring = day.getDate();
+            let monthString = this.months[day.getMonth()];
             return (
               <Card
                 transparent
@@ -248,20 +254,27 @@ class History extends React.Component {
                   }}
                 >
                   <Text>Bank Transfer</Text>
-                  <Text
-                    style={{
-                      fontFamily: "MuseoBold",
-                      fontWeight: "400",
-                      fontSize: 20
-                    }}
-                  >
-                    <Text>
-                      {sub_element.sourceaccname == current_usr.accname
-                        ? "-"
-                        : "+"}
-                    </Text>{" "}
-                    {sub_element.amount}
-                  </Text>
+                  <View style={{
+                    flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between',
+                    width: '100%'
+                  }}>
+                    <Text
+                      style={{
+                        fontFamily: "MuseoBold",
+                        fontWeight: "400",
+                        fontSize: 20
+                      }}
+                    >
+                      <Text>
+                        {sub_element.sourceaccname == current_usr.accname
+                          ? "-"
+                          : "+"}
+                      </Text>{" SGD "}
+                      {sub_element.amount}
+                    </Text>
+                    <Text>{daystring + ' ' + monthString}</Text>
+                  </View>
+
                 </CardItem>
               </Card>
             );
