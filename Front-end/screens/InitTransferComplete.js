@@ -100,7 +100,7 @@ class InitTransferComplete extends React.Component {
           amount: 24000,
           sender_accname: this.props.currentUser.accname,
           sender_accnum: this.props.currentUser.accnumber,
-          receive_accnum: "875346420020" //todo
+          receive_accnum: this.state.destAccNum //todo
         }
       )
       .then(res => {
