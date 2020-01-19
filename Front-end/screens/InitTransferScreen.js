@@ -10,7 +10,8 @@ import {
   ScrollView,
   Alert,
   KeyboardAvoidingView,
-  Platform, Animated
+  Platform,
+  Animated
 } from "react-native";
 import * as Animatable from "react-native-animatable";
 import {
@@ -89,14 +90,11 @@ class InitTransferScreen extends Component {
   };
 
   componentDidMount = () => {
-    Animated.timing(
-      this.state.fadeAnim,
-      {
-        fromValue: 1,
-        toValue: 1.1,
-        duration: 10000,
-      }
-    ).start();
+    Animated.timing(this.state.fadeAnim, {
+      fromValue: 1,
+      toValue: 1.1,
+      duration: 10000
+    }).start();
   };
 
   accNumberString = aString => {
@@ -118,47 +116,55 @@ class InitTransferScreen extends Component {
   }
 
   _handletransfer = () => {
-    let amountToTransfer;
+    // let amountToTransfer;
     if (this.state.amount === undefined || this.state.amount === NaN) {
       alert("Invalid input");
       return;
-    }
-    try {
-      amountToTransfer = parseInt(this.state.amount);
-      console.log("this is the amount: " + amountToTransfer);
-      console.log(typeof amountToTransfer);
-    } catch {
-      amountToTransfer = this.state.amount;
-      console.log("this is the amount: " + amountToTransfer);
-      console.log(typeof amountToTransfer);
-    }
-    axios
-      .post(
-        "https://ixmhlhrubj.execute-api.ap-southeast-1.amazonaws.com/dev/transfer",
-        {
-          sender_username: this.props.currentUser.accname,
-          source_acc_num: this.props.navigation.state.params.element.accnumber,
-          transfer_amount: amountToTransfer,
-          dest_acc_num: this.state.beneficiaryAccNumber
-        }
-      )
-      .then(res => {
-        console.log(res.statusText);
-        console.log(res.data);
-        console.log(res.status);
-        this.props.navigation.push("EmailOtp");
-      })
-
-      .catch(err => {
-        console.log(this.state.beneficiaryAccNumber);
-        console.log(this.props.navigation.state.params.element.accnumber);
-        console.log(this.props.currentUser.accname);
-        console.log(this.state.amount);
-        console.error(err);
-        console.log(err);
-        alert("Invalid Details!");
+    } else {
+      this.props.navigation.push("GoogleOtp", {
+        sender_username: this.props.currentUser.accname,
+        source_acc_num: this.props.navigation.state.params.element.accnumber,
+        transfer_amount: this.state.amount,
+        dest_acc_num: this.state.beneficiaryAccNumber
       });
-  }
+    }
+    // try {
+    //   amountToTransfer = parseInt(this.state.amount);
+    //   console.log("this is the amount: " + amountToTransfer);
+    //   console.log(typeof amountToTransfer);
+    // } catch {
+    //   amountToTransfer = this.state.amount;
+    //   console.log("this is the amount: " + amountToTransfer);
+    //   console.log(typeof amountToTransfer);
+    // }
+  };
+  // axios
+  //   .post(
+  //     "https://ixmhlhrubj.execute-api.ap-southeast-1.amazonaws.com/dev/transfer",
+  //     {
+  //       sender_username: this.props.currentUser.accname,
+  //       source_acc_num: this.props.navigation.state.params.element.accnumber,
+  //       transfer_amount: amountToTransfer,
+  //       dest_acc_num: this.state.beneficiaryAccNumber
+  //     }
+  //   )
+  //   .then(res => {
+  //     console.log(res.statusText);
+  //     console.log(res.data);
+  //     console.log(res.status);
+  //     this.props.navigation.push("EmailOtp");
+  //   })
+
+  //   .catch(err => {
+  //     console.log(this.state.beneficiaryAccNumber);
+  //     console.log(this.props.navigation.state.params.element.accnumber);
+  //     console.log(this.props.currentUser.accname);
+  //     console.log(this.state.amount);
+  //     console.error(err);
+  //     console.log(err);
+  //     alert("Invalid Details!");
+  //   });
+  // }
 
   setvalue(accnum) {
     this.state.beneficiaryAccNumber = accnum; //set value of destination acc number
@@ -191,8 +197,9 @@ class InitTransferScreen extends Component {
                 borderRadius: 10,
                 transform:
                   index == this.state.indexToHaveBorder &&
-                    this.state.indexToHaveBorder != null
-                    ? [{ scaleX: 1.15 }, { scaleY: 1.15 }] : [{ scaleX: 1 }, { scaleY: 1 }],
+                  this.state.indexToHaveBorder != null
+                    ? [{ scaleX: 1.15 }, { scaleY: 1.15 }]
+                    : [{ scaleX: 1 }, { scaleY: 1 }],
                 borderWidth: 10,
                 borderStyle: null,
                 width: 170,
@@ -290,7 +297,7 @@ class InitTransferScreen extends Component {
                   marginTop: 20
                 }}
               >
-                <TouchableOpacity
+                {/* <TouchableOpacity
                   onPress={() => {
                     this.props.navigation.goBack();
                   }}
@@ -301,7 +308,7 @@ class InitTransferScreen extends Component {
                     size={32}
                     color="white"
                   />
-                </TouchableOpacity>
+                </TouchableOpacity> */}
                 <Title style={{ color: "white", marginLeft: 15, fontSize: 25 }}>
                   Transfer
                 </Title>
@@ -312,9 +319,9 @@ class InitTransferScreen extends Component {
           renderForeground={() => (
             <View style={styles.titleContainer}>
               <TouchableOpacity
-                onPress={() => {
-                  this.props.navigation.goBack();
-                }}
+              // onPress={() => {
+              //   this.props.navigation.goBack();
+              // }}
               >
                 <Text style={styles.imageTitle}>Bank Transfer</Text>
               </TouchableOpacity>
@@ -389,7 +396,7 @@ class InitTransferScreen extends Component {
                   iosIcon={
                     <Icon
                       name="arrow-down"
-                    // style={{ position: "absolute", right: 0 }}
+                      // style={{ position: "absolute", right: 0 }}
                     />
                   }
                   style={{

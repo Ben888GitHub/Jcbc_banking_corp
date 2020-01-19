@@ -96,6 +96,11 @@ class App extends Component {
           alert("Invalid Details");
         }
 
+        if (res.status === 502) {
+          // alert sth about the acc info is invalid.
+          alert("Invalid Details");
+        }
+
         if (res.status === 200) {
           alert("Successful");
           this.props.navigation.push("EmailOtp2");
@@ -104,7 +109,7 @@ class App extends Component {
       .catch(err => {
         console.error(err);
         console.log(err);
-        alert("Invalid Details!");
+        alert("Invalid Details! Request error");
       });
   };
 

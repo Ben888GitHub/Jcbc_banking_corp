@@ -33,12 +33,11 @@ class InitTransferComplete extends React.Component {
     this.state = {
       titleText: "Transfer Complete",
       bankName: "JCBC Saving Account",
-      accountNumber: "(899-678898-009)",
+      accountNumber: "",
       beneficiary: "BENEDICT RYAN",
-      beneficiaryAccNumber: "0000-9118-0000",
       beneficiaryBank: "HSBC",
       date: " ",
-      amount: "10,000",
+      amount: null,
       isChecked: false,
       sendInvoice: ""
     };
@@ -56,6 +55,19 @@ class InitTransferComplete extends React.Component {
     that.setState({
       date:
         date + "/" + month + "/" + year + " " + hours + ":" + min + ":" + sec
+    });
+  }
+
+  componentWillMount() {
+    let username = this.props.navigation.getParam("sender_username");
+    let accountNum = this.props.navigation.getParam("source_acc_num");
+    let transferAmt = this.props.navigation.getParam("transfer_amount");
+    let destAccNum = this.props.navigation.getParam("dest_acc_num");
+
+    this.setState({
+      accountNumber: accountNum,
+      beneficiaryAccNumber: destAccNum,
+      amount: transferAmt
     });
   }
 
@@ -138,17 +150,19 @@ class InitTransferComplete extends React.Component {
                 </Text>
               </Body>
             </CardItem>
-            <CardItem style={{ backgroundColor: "#c13b3e" }}>
+            {/* <CardItem style={{ backgroundColor: "#c13b3e" }}>
               <Body>
                 <Text style={{ color: "#fff" }}>To:</Text>
                 <Text style={{ color: "#fff", fontWeight: "bold" }}>
                   {this.state.beneficiary}
                 </Text>
               </Body>
-            </CardItem>
+            </CardItem> */}
             <CardItem style={{ backgroundColor: "#c13b3e" }}>
               <Body>
-                <Text style={{ color: "#fff" }}>Account Number:</Text>
+                <Text style={{ color: "#fff" }}>
+                  To Destination Account Number:
+                </Text>
                 <Text style={{ color: "#fff", fontWeight: "bold" }}>
                   {this.state.beneficiaryAccNumber}
                 </Text>

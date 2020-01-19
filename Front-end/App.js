@@ -10,8 +10,8 @@ import InitTransferScreen2 from "./screens/InitTransferScreen2";
 import InitTransferConfirmation from "./screens/InitTransferConfirmation";
 import InitTransferComplete from "./screens/InitTransferComplete";
 import Settings from "./screens/settings";
-import emailOtp from "./screens/emailOtp";
-import emailOtp2 from "./screens/emailOtp2";
+import googleOtp from "./screens/googleOtp";
+import googleOtp2 from "./screens/googleOtp2";
 import Otp from "./components/Otp";
 import QRAmount from "./screens/QRAmount";
 import { setCustomText } from "react-native-global-props";
@@ -43,8 +43,8 @@ const AppContainer = createAppContainer(
       TransferComplete: { screen: InitTransferComplete },
       Account: { screen: AccountScreen },
       Settings: { screen: Settings },
-      EmailOtp: { screen: emailOtp },
-      EmailOtp2: { screen: emailOtp2 },
+      GoogleOtp: { screen: googleOtp },
+      GoogleOtp2: { screen: googleOtp2 },
       OTP: { screen: Otp },
       Cards: { screen: CardsScreen },
       AccountDetails: { screen: AccountDetails },

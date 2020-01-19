@@ -78,10 +78,59 @@ class emailOtp extends React.Component {
   //     })
   //     .catch();
   // }
+  componentWillMount() {
+    let username = this.props.navigation.getParam("sender_username");
+    let accountNum = this.props.navigation.getParam("source_acc_num");
+    let transferAmt = this.props.navigation.getParam("transfer_amount");
+    let destAccNum = this.props.navigation.getParam("dest_acc_num");
+    this.setState({
+      amount: transferAmt,
+      sender_username: username,
+      source_acc_num: accountNum,
+      dest_acc_num: destAccNum
+    });
+    console.log(username);
+    console.log(accountNum);
+    console.log(transferAmt);
+    console.log(destAccNum);
+  }
 
-  _getOTP = () => {};
+  //todo
+  _getTransfer = () => {
+    let amountToTransfer;
+    try {
+      amountToTransfer = parseInt(this.state.amount);
+      console.log("this is the amount: " + amountToTransfer);
+      console.log(typeof amountToTransfer);
+    } catch {
+      amountToTransfer = this.state.amount;
+      console.log("this is the amount: " + amountToTransfer);
+      console.log(typeof amountToTransfer);
+    }
+    axios
+      .post(
+        "https://ixmhlhrubj.execute-api.ap-southeast-1.amazonaws.com/dev/transfer",
+        {
+          sender_username: this.props.currentUser.accname, // Change to username
+          source_acc_num: this.props.navigation.state.params.element.accnumber, // Change to accountNum
+          transfer_amount: amountToTransfer, // Change to transferAmt
+          dest_acc_num: this.state.dest_acc_num // Change to destAccNum
+        }
+      )
+      .then(res => {
+        console.log(res.statusText);
+        console.log(res.data);
+        console.log(res.status);
+        this.props.navigation.push("TransferComplete", {
+          sender_username: this.props.currentUser.accname, // Change to username
+          source_acc_num: this.props.navigation.state.params.element.accnumber, // Change to accountNum
+          transfer_amount: amountToTransfer, // Change to transferAmt
+          dest_acc_num: this.state.dest_acc_num // Change to destAccNum
+        });
+      });
+  };
 
-  resendTheOtp = () => {
+  CheckOTP = () => {
     axios
       .post(
         "https://ixmhlhrubj.execute-api.ap-southeast-1.amazonaws.com/dev/check_otp",
@@ -91,16 +140,34 @@ class emailOtp extends React.Component {
         }
       )
       .then(res => {
-        alert("Your OTP has been resent to your Google Authenticator");
-        this.setState({
-          data: res.data,
-          show: true
-        });
-        this.state.showCountdown;
+        if (res.data == false) {
+          console.log(res.data);
+          // this.setState({
+          //   show: false
+          // });
+          alert(
+            "Invalid OTP, Please re-enter the OTP from your Google Authenticator"
+          );
+        } else {
+          console.log(res.data);
+          alert("Successful");
+          this.props.navigation.navigate("TransferComplete", {
+            sender_username: this.props.currentUser.accname, // Change to username
+            source_acc_num: this.state.source_acc_num, // Change to accountNum
+            transfer_amount: this.state.amount, // Change to transferAmt
+            dest_acc_num: this.state.dest_acc_num // Change to destAccNum
+          });
+        }
+        // alert("Please re-enter the OTP from your Google Authenticator");
+        // this.setState({
+        //   data: res.data,
+        //   show: true
+        // });
+        // this.state.showCountdown;
       })
       .catch();
   };
-
+  // todo
   // componentHideAndShow = () => {
   //   this.setState(previousState => ({ content: !previousState.content }));
   // };
@@ -129,9 +196,7 @@ class emailOtp extends React.Component {
     const { showOtpPlaceholder } = this.state;
     const renderer = ({ seconds, completed }) => {
       if (completed) {
-        // Render a completed state
         // set a state to hide the input
-        // return this.props.navigation.navigate("Transfer");
         this.setState({
           show: false
           // sessionTimeout:
@@ -195,57 +260,57 @@ class emailOtp extends React.Component {
         {/* This section is for OTP Input */}
         <View>
           {/* <Otp /> */}
-          {this.state.show ? (
-            <OTPInputView
-              style={{
-                width: "80%",
-                height: 200,
-                alignItems: "center",
-                justifyContent: "center"
-              }}
-              // editable={}
-              pinCount={pin_count}
-              // code={this.state.code} //You can supply this prop or not. The component will be used as a controlled / uncontrolled component respectively.
-              // onCodeChanged = {code => { this.setState({code})}}
-              autoFocusOnLoad
-              codeInputFieldStyle={styles.underlineStyleBase}
-              codeInputHighlightStyle={styles.underlineStyleHighLighted}
-              hideInput={this.ShowHideComponent}
-              onCodeFilled={code => {
-                this.setState({
-                  token: code
-                });
-                // console.log(`Your OTP Pin is ${code}, you are good to go!`);
-                if (code !== this.state.token) {
-                  alert("Invalid Input");
-                  this.setState({
-                    show: false
-                  });
-                  //   // this.props.navigation.navigate("Transfer");
-                } else {
-                  alert("You are good to go");
-                  // this.props.navigation.navigate("TransferComplete");
-                  // this.props.navigation.push("TransferConfirm");
-                }
-              }}
-            />
-          ) : null}
+          {/* {this.state.show ? ( */}
+          <OTPInputView
+            style={{
+              width: "80%",
+              height: 200,
+              alignItems: "center",
+              justifyContent: "center"
+            }}
+            // editable={}
+            pinCount={pin_count}
+            // code={this.state.code} //You can supply this prop or not. The component will be used as a controlled / uncontrolled component respectively.
+            // onCodeChanged = {code => { this.setState({code})}}
+            autoFocusOnLoad
+            codeInputFieldStyle={styles.underlineStyleBase}
+            codeInputHighlightStyle={styles.underlineStyleHighLighted}
+            hideInput={this.ShowHideComponent}
+            onCodeFilled={code => {
+              this.setState({
+                token: code
+              });
+              // console.log(`Your OTP Pin is ${code}, you are good to go!`);
+              // if (code !== this.state.token) {
+              //   alert("Invalid Input");
+              //   this.setState({
+              //     show: false
+              //   });
+              //   // this.props.navigation.navigate("Transfer");
+              // } else {
+              //   alert("You are good to go");
+              //   this._getTransfer();
+              // this.props.navigation.navigate("TransferComplete");
+              // this.props.navigation.push("TransferConfirm");
+              //}
+            }}
+          />
+          {/* ) : null} */}
           <View></View>
           {/* <Text>Hello</Text> */}
-          {this.state.show ? (
-            <Text style={styles.timingStyle}>
-              Time Remaining: {/* </Text>
-            <Text> */}
-              <Countdown date={Date.now() + 15000} renderer={renderer} />{" "}
-            </Text>
-          ) : null}
+          {/* {this.state.show ? ( */}
+          {/* <Text style={styles.timingStyle}> TODO
+              Time Remaining: 
+              <Countdown date={Date.now() + 15000} renderer={renderer} />
+            </Text> */}
+          {/* ) : null} */}
           {/* <Text>Hello</Text> */}
 
-          <Text style={styles.resendCodeStyle}>Didn't receive the OTP?</Text>
+          {/* <Text style={styles.resendCodeStyle}>Didn't receive the OTP?</Text> */}
           {/* <Button transparent> </Button> */}
           <TouchableOpacity
             style={{ marginHorizontal: 55, marginVertical: 15 }}
-            onPress={this.resendTheOtp}
+            onPress={this.CheckOTP}
           >
             <View>
               <Text
@@ -256,7 +321,7 @@ class emailOtp extends React.Component {
               >
                 {" "}
                 <Text></Text>
-                <Text>Resend Code</Text>{" "}
+                <Text>Confirm OTP</Text>{" "}
                 {/* Remember to put onPress here 👆 on TouchableOpacity for redirecting back */}
               </Text>
             </View>

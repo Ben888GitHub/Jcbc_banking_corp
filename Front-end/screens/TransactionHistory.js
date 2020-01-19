@@ -277,11 +277,11 @@ class History extends React.Component {
           }}
         >
           <FooterTab style={{ backgroundColor: "#c13b3e" }}>
-            <Button vertical>
+            <Button vertical onPress={() => navigate("Home")}>
               <Icon name="contact" style={{ color: "white" }} />
               <Text style={{ color: "white" }}>Account</Text>
             </Button>
-            <Button vertical onPress={() => navigate("History")}>
+            <Button vertical>
               <Icon name="list-box" style={{ color: "white" }} />
               <Text style={{ color: "white" }}>History</Text>
             </Button>
@@ -299,12 +299,12 @@ class History extends React.Component {
 }
 
 History.navigationOptions = {
-  // headerTransparent: true,
-  headerStyle: {
-    shadowColor: "transparent",
-    borderBottomWidth: 0,
-    elevation: 0
-  }
+  headerTransparent: true
+  // headerStyle: {
+  //   shadowColor: "transparent",
+  //   borderBottomWidth: 0,
+  //   elevation: 0
+  // }
 };
 
 const style = StyleSheet.create({
