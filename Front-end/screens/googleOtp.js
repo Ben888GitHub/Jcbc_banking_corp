@@ -1,5 +1,13 @@
 import React from "react";
-import { StyleSheet, View, TouchableOpacity, Switch } from "react-native";
+import {
+  StyleSheet,
+  View,
+  TouchableOpacity,
+  Switch,
+  KeyboardAvoidingView,
+  Platform,
+  Keyboard
+} from "react-native";
 import {
   Header,
   Container,
@@ -43,7 +51,7 @@ const mapDispatchToProps = dispatch =>
 
 const fastChunkString = require("fast-chunk-string");
 
-class emailOtp extends React.Component {
+class googleOtp extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -216,49 +224,53 @@ class emailOtp extends React.Component {
 
     return (
       // <View style={styles.container}>
-      <Container style={styles.container2}>
-        {/* <Text style={{fontSize: 60}}>{this.state.pageTitle}</Text> */}
-        <Header span style={styles.headerStyle}>
-          <Left>
-            <Button transparent>
-              <Icon
-                style={{ color: "white", marginLeft: 8 }}
-                name="arrow-back"
-              />
-            </Button>
-          </Left>
-          <Title style={styles.headerTitleStyle}>
-            {this.state.pageTitle}
+      <Container style={styles.container2} onPress={() => Keyboard.dismiss()}>
+        <Content>
+          {/* <Text style={{fontSize: 60}}>{this.state.pageTitle}</Text> */}
+          <Header span style={styles.headerStyle}>
+            <Left>
+              <Button transparent>
+                <Icon
+                  style={{ color: "white", marginLeft: 8 }}
+                  name="arrow-back"
+                />
+              </Button>
+            </Left>
+            <Title style={styles.headerTitleStyle}>
+              {this.state.pageTitle}
 
-            <Icon style={{ color: "white" }} name="lock" />
-          </Title>
-          <Right />
-        </Header>
-        {/* */}
-        <Icon style={styles.userIconStyle} name="key" />
-        <Text
-          style={{
-            fontSize: 28,
-            marginHorizontal: 50,
-            marginVertical: -25,
-            marginLeft: 76
-          }}
-        >
-          Verification Code
-        </Text>
-        <Text></Text>
-        <Text
-          style={{
-            fontSize: 19,
-            marginHorizontal: 30,
-            marginVertical: 50
-          }}
-        >
-          6 Digits OTP has been send to your email
-        </Text>
-        {/* */}
-        {/* This section is for OTP Input */}
-        <View>
+              <Icon style={{ color: "white" }} name="lock" />
+            </Title>
+            <Right />
+          </Header>
+          {/* */}
+          <Icon style={styles.userIconStyle} name="key" />
+          <Text
+            style={{
+              fontSize: 28,
+              marginHorizontal: 50,
+              marginVertical: -25,
+              marginLeft: 76
+            }}
+          >
+            Verification Code
+          </Text>
+          <Text></Text>
+          <Text
+            style={{
+              fontSize: 19,
+              marginHorizontal: 30,
+              marginVertical: 50
+            }}
+          >
+            6 Digits OTP has been send to your email
+          </Text>
+          {/* */}
+          {/* This section is for OTP Input */}
+          {/* <KeyboardAvoidingView
+            behavior={Platform.OS === "ios" ? "padding" : null}
+            style={{ flex: 1 }}
+          > */}
           {/* <Otp /> */}
           {/* {this.state.show ? ( */}
           <OTPInputView
@@ -280,36 +292,16 @@ class emailOtp extends React.Component {
               this.setState({
                 token: code
               });
-              // console.log(`Your OTP Pin is ${code}, you are good to go!`);
-              // if (code !== this.state.token) {
-              //   alert("Invalid Input");
-              //   this.setState({
-              //     show: false
-              //   });
-              //   // this.props.navigation.navigate("Transfer");
-              // } else {
-              //   alert("You are good to go");
-              //   this._getTransfer();
-              // this.props.navigation.navigate("TransferComplete");
-              // this.props.navigation.push("TransferConfirm");
-              //}
             }}
           />
           {/* ) : null} */}
           <View></View>
-          {/* <Text>Hello</Text> */}
-          {/* {this.state.show ? ( */}
-          {/* <Text style={styles.timingStyle}> TODO
-              Time Remaining: 
-              <Countdown date={Date.now() + 15000} renderer={renderer} />
-            </Text> */}
-          {/* ) : null} */}
-          {/* <Text>Hello</Text> */}
-
-          {/* <Text style={styles.resendCodeStyle}>Didn't receive the OTP?</Text> */}
-          {/* <Button transparent> </Button> */}
-          <TouchableOpacity
-            style={{ marginHorizontal: 55, marginVertical: 15 }}
+          <Button
+            style={{
+              marginHorizontal: 130,
+              marginVertical: -40,
+              backgroundColor: "#c13b3e"
+            }}
             onPress={this.CheckOTP}
           >
             <View>
@@ -321,18 +313,19 @@ class emailOtp extends React.Component {
               >
                 {" "}
                 <Text></Text>
-                <Text>Confirm OTP</Text>{" "}
-                {/* Remember to put onPress here 👆 on TouchableOpacity for redirecting back */}
+                <Text style={{ color: "white" }}>Confirm OTP</Text>{" "}
+                {/* Remember to put onPress here 👆 on Button for redirecting back */}
               </Text>
             </View>
-          </TouchableOpacity>
+          </Button>
           {/* </Text> */}
           {/* <Button onPress={this.ShowHideComponent}>
             <Text>Hide/Show Component</Text>
           </Button> */}
-        </View>
+          {/* </KeyboardAvoidingView> */}
 
-        {/* */}
+          {/* */}
+        </Content>
       </Container>
       // </View>
     );
@@ -419,5 +412,5 @@ const styles = StyleSheet.create({
   }
 });
 
-// export default emailOtp;
-export default connect(mapStateToProps, mapDispatchToProps)(emailOtp);
+// export default googleOtp;
+export default connect(mapStateToProps, mapDispatchToProps)(googleOtp);
