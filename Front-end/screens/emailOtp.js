@@ -38,7 +38,8 @@ class emailOtp extends React.Component {
       data: "",
       showOtpPlaceholder: true,
       show: true,
-      sessionTimeout: null
+      sessionTimeout: null,
+      showCountdown: true
     };
   }
 
@@ -74,6 +75,7 @@ class emailOtp extends React.Component {
           data: res.data.otp,
           show: true
         });
+        this.state.showCountdown;
       })
       .catch();
   };
@@ -90,10 +92,18 @@ class emailOtp extends React.Component {
     }
   };
 
+  RunAndStopCountdown = () => {
+    if (this.state.showCountdown == true) {
+      this.setState({ showCountdown: false });
+    } else {
+      this.setState({ showCountdown: true });
+    }
+  };
+
   render() {
     const countdown = ""; //TODO
     const Completionist = () => alert("Session Expired"); // <Text>Session Expired</Text>;
-    const { navigate } = this.props.navigation;
+    // const { navigate } = this.props.navigation;
     const { pin_count } = this.state;
     const { showOtpPlaceholder } = this.state;
     const renderer = ({ seconds, completed }) => {
@@ -190,7 +200,7 @@ class emailOtp extends React.Component {
                   // this.props.navigation.navigate("Transfer");
                 } else {
                   alert("You are good to go");
-                  this.props.navigation.navigate("TransferComplete");
+                  // this.props.navigation.navigate("TransferComplete");
                   // this.props.navigation.push("TransferConfirm");
                 }
               }}
@@ -198,11 +208,14 @@ class emailOtp extends React.Component {
           ) : null}
           <View></View>
           {/* <Text>Hello</Text> */}
-          <Text style={styles.timingStyle}>
-            Time Remaining: {/* </Text>
+          {this.state.show ? (
+            <Text style={styles.timingStyle}>
+              Time Remaining: {/* </Text>
             <Text> */}
-            <Countdown date={Date.now() + 15000} renderer={renderer} />{" "}
-          </Text>
+              <Countdown date={Date.now() + 15000} renderer={renderer} />{" "}
+            </Text>
+          ) : null}
+          {/* <Text>Hello</Text> */}
 
           <Text style={styles.resendCodeStyle}>Didn't receive the OTP?</Text>
           {/* <Button transparent> </Button> */}
