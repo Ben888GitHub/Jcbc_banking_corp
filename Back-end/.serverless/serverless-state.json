@@ -278,7 +278,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/cp3405/dev/1579353124067-2020-01-18T13:12:04.067Z/cp3405.zip"
+                "S3Key": "serverless/cp3405/dev/1579454398990-2020-01-19T17:19:58.990Z/cp3405.zip"
               },
               "FunctionName": "cp3405-dev-authenticate_test",
               "Handler": "s_authenticate_test.handler",
@@ -314,7 +314,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/cp3405/dev/1579353124067-2020-01-18T13:12:04.067Z/cp3405.zip"
+                "S3Key": "serverless/cp3405/dev/1579454398990-2020-01-19T17:19:58.990Z/cp3405.zip"
               },
               "FunctionName": "cp3405-dev-transfer",
               "Handler": "s_transfer.handler",
@@ -350,7 +350,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/cp3405/dev/1579353124067-2020-01-18T13:12:04.067Z/cp3405.zip"
+                "S3Key": "serverless/cp3405/dev/1579454398990-2020-01-19T17:19:58.990Z/cp3405.zip"
               },
               "FunctionName": "cp3405-dev-sendmail",
               "Handler": "s_sendmail.handler",
@@ -386,7 +386,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/cp3405/dev/1579353124067-2020-01-18T13:12:04.067Z/cp3405.zip"
+                "S3Key": "serverless/cp3405/dev/1579454398990-2020-01-19T17:19:58.990Z/cp3405.zip"
               },
               "FunctionName": "cp3405-dev-sendinvoice",
               "Handler": "s_sendinvoice.handler",
@@ -422,7 +422,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/cp3405/dev/1579353124067-2020-01-18T13:12:04.067Z/cp3405.zip"
+                "S3Key": "serverless/cp3405/dev/1579454398990-2020-01-19T17:19:58.990Z/cp3405.zip"
               },
               "FunctionName": "cp3405-dev-get_otp",
               "Handler": "s_get_otp.handler",
@@ -458,7 +458,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/cp3405/dev/1579353124067-2020-01-18T13:12:04.067Z/cp3405.zip"
+                "S3Key": "serverless/cp3405/dev/1579454398990-2020-01-19T17:19:58.990Z/cp3405.zip"
               },
               "FunctionName": "cp3405-dev-check_otp",
               "Handler": "s_check_otp.handler",
@@ -494,7 +494,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/cp3405/dev/1579353124067-2020-01-18T13:12:04.067Z/cp3405.zip"
+                "S3Key": "serverless/cp3405/dev/1579454398990-2020-01-19T17:19:58.990Z/cp3405.zip"
               },
               "FunctionName": "cp3405-dev-wd_groups",
               "Handler": "s_wd_groups.handler",
@@ -1260,7 +1260,7 @@
               "MethodResponses": []
             }
           },
-          "ApiGatewayDeployment1579353113690": {
+          "ApiGatewayDeployment1579454386762": {
             "Type": "AWS::ApiGateway::Deployment",
             "Properties": {
               "RestApiId": {
@@ -1638,7 +1638,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/cp3405/dev/1579353124067-2020-01-18T13:12:04.067Z/custom-resources.zip"
+                "S3Key": "serverless/cp3405/dev/1579454398990-2020-01-19T17:19:58.990Z/custom-resources.zip"
               },
               "FunctionName": "cp3405-dev-custom-resource-apigw-cw-role",
               "Handler": "apiGatewayCloudWatchRole/handler.handler",
@@ -2167,7 +2167,7 @@
     "artifact": "/Users/zwenyan/cp3405-sp53-2019-assignment2-full_stack_beast_-_group-6/Back-end/.serverless/cp3405.zip"
   },
   "package": {
-    "artifactDirectoryName": "serverless/cp3405/dev/1579353124067-2020-01-18T13:12:04.067Z",
+    "artifactDirectoryName": "serverless/cp3405/dev/1579454398990-2020-01-19T17:19:58.990Z",
     "artifact": "cp3405.zip"
   }
 }
