@@ -100,7 +100,7 @@ class InitTransferComplete extends React.Component {
           amount: 24000,
           sender_accname: this.props.currentUser.accname,
           sender_accnum: this.props.currentUser.accnumber,
-          receive_accnum: "875346420020" //todo
+          receive_accnum: "875346420020"
         }
       )
       .then(res => {
@@ -235,7 +235,7 @@ class InitTransferComplete extends React.Component {
           {/* */}
           <View style={{ alignItems: "center", padding: 15 }}>
             <Button
-              onPress={() => navigate("Transfer")}
+              onPress={() => navigate("Transfer2")}
               style={{
                 width: 225,
                 borderRadius: 10,
