@@ -118,7 +118,7 @@ class InitTransferScreen extends Component {
 
   _handletransfer = () => {
     let amountToTransfer;
-    if (this.state.amount === undefined && this.state.amount === NaN) {
+    if (this.state.amount === undefined || this.state.amount === NaN) {
       alert("Invalid input");
       return;
     }

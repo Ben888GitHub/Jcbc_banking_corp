@@ -24,6 +24,24 @@ import axios from "axios";
 // import Otp from "../components/Otp";
 import Countdown from "react-countdown";
 import OTPInputView from "@twotalltotems/react-native-otp-input";
+import { authenticate } from "../reducers/actions";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+
+const mapStateToProps = state => {
+  const { currentUser } = state;
+  return { currentUser };
+};
+
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(
+    {
+      authenticate
+    },
+    dispatch
+  );
+
+const fastChunkString = require("fast-chunk-string");
 
 class emailOtp extends React.Component {
   constructor(props) {
@@ -39,40 +57,43 @@ class emailOtp extends React.Component {
       showOtpPlaceholder: true,
       show: true,
       sessionTimeout: null,
-      showCountdown: true
+      showCountdown: true,
+      token: null
     };
   }
 
-  componentDidMount() {
-    axios
-      .post(
-        "https://ixmhlhrubj.execute-api.ap-southeast-1.amazonaws.com/dev/sendmail",
-        {
-          email: this.state.email
-        }
-      )
-      .then(res => {
-        this.setState({
-          data: res.data.otp
-        });
-      })
-      .catch();
-  }
+  // componentDidMount() {
+  //   axios
+  //     .post(
+  //       "https://ixmhlhrubj.execute-api.ap-southeast-1.amazonaws.com/dev/check_otp",
+  //       {
+  //         secret: this.props.currentUser.secret,
+  //         token: this.state.token
+  //       }
+  //     )
+  //     .then(res => {
+  //       this.setState({
+  //         success: res.data
+  //       });
+  //     })
+  //     .catch();
+  // }
 
   _getOTP = () => {};
 
   resendTheOtp = () => {
     axios
       .post(
-        "https://ixmhlhrubj.execute-api.ap-southeast-1.amazonaws.com/dev/sendmail",
+        "https://ixmhlhrubj.execute-api.ap-southeast-1.amazonaws.com/dev/check_otp",
         {
-          email: this.state.email
+          secret: this.props.currentUser.secret,
+          token: this.state.token
         }
       )
       .then(res => {
-        alert("Your OTP has been resent");
+        alert("Your OTP has been resent to your Google Authenticator");
         this.setState({
-          data: res.data.otp,
+          data: res.data,
           show: true
         });
         this.state.showCountdown;
@@ -172,7 +193,7 @@ class emailOtp extends React.Component {
         </Text>
         {/* */}
         {/* This section is for OTP Input */}
-        <Content>
+        <View>
           {/* <Otp /> */}
           {this.state.show ? (
             <OTPInputView
@@ -191,13 +212,16 @@ class emailOtp extends React.Component {
               codeInputHighlightStyle={styles.underlineStyleHighLighted}
               hideInput={this.ShowHideComponent}
               onCodeFilled={code => {
-                console.log(`Your OTP Pin is ${code}, you are good to go!`);
-                if (code !== this.state.data) {
+                this.setState({
+                  token: code
+                });
+                // console.log(`Your OTP Pin is ${code}, you are good to go!`);
+                if (code !== this.state.token) {
                   alert("Invalid Input");
                   this.setState({
                     show: false
                   });
-                  // this.props.navigation.navigate("Transfer");
+                  //   // this.props.navigation.navigate("Transfer");
                 } else {
                   alert("You are good to go");
                   // this.props.navigation.navigate("TransferComplete");
@@ -241,7 +265,7 @@ class emailOtp extends React.Component {
           {/* <Button onPress={this.ShowHideComponent}>
             <Text>Hide/Show Component</Text>
           </Button> */}
-        </Content>
+        </View>
 
         {/* */}
       </Container>
@@ -330,4 +354,5 @@ const styles = StyleSheet.create({
   }
 });
 
-export default emailOtp;
+// export default emailOtp;
+export default connect(mapStateToProps, mapDispatchToProps)(emailOtp);
