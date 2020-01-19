@@ -98,6 +98,7 @@ async function transfer(transferData) {
 module.exports.transfer = transfer;
 
 let cachedDb = null;
+let cachedDb_transaction = null;
 
 async function connectToDatabase() {
     console.log('=> connecting to database in progress...');
@@ -114,4 +115,18 @@ async function connectToDatabase() {
         });
 };
 
+async function addTransaction() {
+
+    if (cachedDb_transaction) {
+        return Promise.resolve(cachedDb_transaction);
+    }
+
+    return MongoClient.connect(CONNECTION_URL, { useNewUrlParser: true })
+        .then(db => {
+            cachedDb_transaction = db.db(DATABASE_NAME).collection("transactions");
+            return cachedDb_transaction;
+        });
+};
+
 module.exports.connectToDatabase = connectToDatabase;
+module.exports.addTransaction = addTransaction;

@@ -1,10 +1,10 @@
-# service: cp3405
-# org: hungnguy
-# app: cp3405
-
 service: cp3405
-org: zwenyantoe
-app: myapp
+org: hungnguy
+app: cp3405
+
+# service: cp3405
+# org: zwenyantoe
+# app: myapp
 
 provider:
   name: aws
@@ -28,6 +28,13 @@ functions:
     events:
      - http:
          path: transfer
+         method: post
+         cors: true
+  save_transaction:
+    handler: handler.save_transaction
+    events:
+     - http:
+         path: save_transaction
          method: post
          cors: true
   sendmail:
