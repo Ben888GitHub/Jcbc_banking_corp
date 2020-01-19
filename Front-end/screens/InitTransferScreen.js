@@ -10,7 +10,7 @@ import {
   ScrollView,
   Alert,
   KeyboardAvoidingView,
-  Platform
+  Platform, Animated
 } from "react-native";
 import * as Animatable from "react-native-animatable";
 import {
@@ -73,7 +73,8 @@ class InitTransferScreen extends Component {
       showNavTitle: false,
       imageStatus: false,
       isReady: false,
-      indexToHaveBorder: null
+      indexToHaveBorder: null,
+      fadeAnim: new Animated.Value(0)
     };
   }
 
@@ -85,6 +86,17 @@ class InitTransferScreen extends Component {
         color="#fff"
       />
     )
+  };
+
+  componentDidMount = () => {
+    Animated.timing(
+      this.state.fadeAnim,
+      {
+        fromValue: 1,
+        toValue: 1.1,
+        duration: 10000,
+      }
+    ).start();
   };
 
   accNumberString = aString => {
@@ -103,18 +115,7 @@ class InitTransferScreen extends Component {
         data: this.props.navigation.state.params.element.accnumber
       });
     }
-    /*this.setState({
-          selected: value
-        })*/
   }
-  /*
-    onValueChange2(value) {
-      const { navigate } = this.props.navigation;
-      if (value === "Ryan2") {
-        console.log(value);
-        navigate("Transfer3");
-      }
-    }*/
 
   _handletransfer = () => {
     let amountToTransfer;
@@ -145,11 +146,6 @@ class InitTransferScreen extends Component {
         console.log(res.statusText);
         console.log(res.data);
         console.log(res.status);
-        //alert("Ding")
-        /*Toast.show({
-                    text: "Transfer Successful!",
-                    buttonText: "OK"
-                })*/
         this.props.navigation.push("EmailOtp");
       })
 
@@ -162,7 +158,7 @@ class InitTransferScreen extends Component {
         console.log(err);
         alert("Invalid Details!");
       });
-  };
+  }
 
   setvalue(accnum) {
     this.state.beneficiaryAccNumber = accnum; //set value of destination acc number
@@ -170,6 +166,7 @@ class InitTransferScreen extends Component {
     console.log(this.props.navigation.state.params.element.accnumber);
     console.log(this.props.currentUser.accname);
   }
+
   render() {
     //const { navigate } = this.props.navigation; //navigation is always a props
     const TransferAlert = () => {
@@ -192,11 +189,10 @@ class InitTransferScreen extends Component {
               key={index}
               style={{
                 borderRadius: 10,
-                borderColor:
+                transform:
                   index == this.state.indexToHaveBorder &&
-                  this.state.indexToHaveBorder != null
-                    ? "blue"
-                    : "transparent",
+                    this.state.indexToHaveBorder != null
+                    ? [{ scaleX: 1.15 }, { scaleY: 1.15 }] : [{ scaleX: 1 }, { scaleY: 1 }],
                 borderWidth: 10,
                 borderStyle: null,
                 width: 170,
@@ -204,15 +200,6 @@ class InitTransferScreen extends Component {
                 marginTop: marginNum,
                 marginBottom: marginNum,
                 marginLeft: 15,
-                shadowColor: "#000000",
-                shadowOffset: {
-                  width: 2,
-                  height: 4
-                },
-                shadowOpacity: 0.65,
-                shadowRadius: 20,
-                elevation: 5,
-
                 flex: 1,
                 flexDirection: "column",
                 justifyContent: "space-evenly"
@@ -402,7 +389,7 @@ class InitTransferScreen extends Component {
                   iosIcon={
                     <Icon
                       name="arrow-down"
-                      // style={{ position: "absolute", right: 0 }}
+                    // style={{ position: "absolute", right: 0 }}
                     />
                   }
                   style={{
