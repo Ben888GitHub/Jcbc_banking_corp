@@ -37,6 +37,13 @@ functions:
          path: save_transaction
          method: post
          cors: true
+  getTransactions:
+    handler: handler.getTransactions
+    events:
+     - http:
+         path: getTransactions
+         method: get
+         cors: true
   sendmail:
     handler: handler.sendmail
     events:

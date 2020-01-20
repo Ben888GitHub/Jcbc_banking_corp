@@ -1,82 +1,94 @@
-import React from 'react';
-import { View, TouchableOpacity, StyleSheet, ImageBackground, Image, Text, StatusBar, Dimensions, Alert } from 'react-native';
-import { AppLoading } from 'expo';
-import { Container, Content, Card, CardItem, Item, Input } from 'native-base';
-import { authenticate } from '../reducers/actions';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+import React from "react";
+import {
+  View,
+  TouchableOpacity,
+  StyleSheet,
+  ImageBackground,
+  Image,
+  Text,
+  StatusBar,
+  Dimensions,
+  Alert
+} from "react-native";
+import { AppLoading } from "expo";
+import { Container, Content, Card, CardItem, Item, Input } from "native-base";
+import { authenticate } from "../reducers/actions";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 import { RNSlidingButton, SlideDirection } from "rn-sliding-button";
 import axios from "axios";
-const mapStateToProps = (state) => {
-    const { currentUser } = state;
-    return { currentUser };
+const mapStateToProps = state => {
+  const { currentUser } = state;
+  return { currentUser };
 };
 
-const mapDispatchToProps = dispatch => (
-    bindActionCreators({
-        authenticate,
-    }, dispatch)
-);
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(
+    {
+      authenticate
+    },
+    dispatch
+  );
 
-const fastChunkString = require('fast-chunk-string');
+const fastChunkString = require("fast-chunk-string");
 
 class QRAmount extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            isReady: false,
-            dest_acc: null,
-            indexToHaveBorder: null,
-            source_acc: null
-        };
-    }
+  constructor(props) {
+    super(props);
+    this.state = {
+      isReady: false,
+      dest_acc: null,
+      indexToHaveBorder: null,
+      source_acc: null
+    };
+  }
 
-    async componentDidMount() {
-        this.setState({ isReady: true });
-    }
+  async componentDidMount() {
+    this.setState({ isReady: true });
+  }
 
-    componentWillMount = () => {
-        let source = this.props.navigation.getParam('acc');
-        let data = this.props.navigation.getParam('data');
-        //Let source = this.props.navigation.getParam('acc');
-        this.setState({ dest_acc: data });
-        this.setState({ source_acc: source })
-    }
+  componentWillMount = () => {
+    let source = this.props.navigation.getParam("source_acc_num");
+    let data = this.props.navigation.getParam("data");
+    //Let source = this.props.navigation.getParam('acc');
+    this.setState({ dest_acc_num: data });
+    this.setState({ source_acc_num: source });
+  };
 
-    /*setvalue(accnum) {
+  /*setvalue(accnum) {
         this.state.accnum = accnum;
         console.log(accnum);
         console.log(this.props.currentUser.accname);
     }*/
 
-    accNumberString = (aString) => {
-        let arr = fastChunkString(aString, { size: 4, unicodeAware: false });
-        return (arr[0] + " " + arr[1] + " " + arr[2] + " ");
-    }
+  accNumberString = aString => {
+    let arr = fastChunkString(aString, { size: 4, unicodeAware: false });
+    return arr[0] + " " + arr[1] + " " + arr[2] + " ";
+  };
 
-    _handletransfer = () => {
-        const { navigate } = this.props.navigation;
-        console.log(this.props.currentUser.accname);
-        console.log(this.state.source_acc);
-        console.log(this.state.amount);
-        console.log(this.state.dest_acc);
-        //alert(`Dest_accnum: ${this.state.dest_acc} Accnum: ${this.state.source_acc} Accname: ${this.props.currentUser.accname} Amount: ${this.state.amount}`)
-        navigate("GoogleOtp",{
-            sender_username: this.props.currentUser.accname, // Change to username
-            source_acc_num: this.state.source_acc_num, // Change to accountNum
-            transfer_amount: this.state.amount, // Change to transferAmt
-            dest_acc_num: this.state.dest_acc // Change to destAccNum
-        })
-    };
+  _handletransfer = () => {
+    const { navigate } = this.props.navigation;
+    console.log(this.props.currentUser.accname);
+    console.log(this.state.source_acc_num);
+    console.log(this.state.amount);
+    console.log(this.state.dest_acc);
+    //alert(`Dest_accnum: ${this.state.dest_acc} Accnum: ${this.state.source_acc} Accname: ${this.props.currentUser.accname} Amount: ${this.state.amount}`)
+    navigate("GoogleOtp", {
+      sender_username: this.props.currentUser.accname, // Change to username
+      source_acc_num: this.state.source_acc_num, // Change to accountNum
+      transfer_amount: this.state.amount, // Change to transferAmt
+      dest_acc_num: this.state.dest_acc_num // Change to destAccNum
+    });
+  };
 
-    render() {
+  render() {
     console.log(this.props.currentUser);
     const { navigate } = this.props.navigation;
     const screenWidth = Math.round(Dimensions.get("window").width);
     //let acclist = this.props.currentUser.accounts.map((value, key) => {
-            return (
-                <Content>
-                {/*<Text style={{
+    return (
+      <Content>
+        {/*<Text style={{
                 fontFamily: 'MuseoBold',
                 fontSize: 30,
                 fontWeight: '400',
@@ -152,70 +164,70 @@ class QRAmount extends React.Component {
                         </TouchableOpacity>
                             </Card>
                             //))}*/}
-            <Text
-            style={{
-              fontWeight: "bold",
-              marginTop: 20,
-              fontSize: 17,
-              marginLeft: 13,
-              marginBottom: 5
+        <Text
+          style={{
+            fontWeight: "bold",
+            marginTop: 20,
+            fontSize: 17,
+            marginLeft: 13,
+            marginBottom: 5
+          }}
+        >
+          Amount:
+        </Text>
+        <Item
+          regular
+          style={{
+            borderRadius: 5.5,
+            width: screenWidth - 24,
+            marginLeft: 12
+          }}
+        >
+          <Input
+            value={this.state.amount}
+            keyboardType={"numeric"}
+            onFocus={() => {
+              this.setState({ amount: "" });
             }}
-            >
-            Amount:
-            </Text>
-            <Item
-            regular
-            style={{
-              borderRadius: 5.5,
-              width: screenWidth - 24,
-              marginLeft: 12
+            onChangeText={text => {
+              this.setState({ amount: text });
             }}
-            >
-                <Input
-                value={this.state.amount}
-                keyboardType={"numeric"}
-                onFocus={() => {
-                    this.setState({ amount: "" });
+          />
+        </Item>
+        <View style={{ alignItems: "center", padding: 15 }}>
+          <RNSlidingButton
+            style={{
+              width: 240,
+              borderRadius: 10,
+              height: 60,
+              margin: 25,
+              backgroundColor: "#c13b3e"
+            }}
+            height={70}
+            onSlidingSuccess={() => {
+              this._handletransfer();
+            }}
+            successfulSlidePercent={90}
+            slideDirection={SlideDirection.RIGHT}
+          >
+            <View>
+              <Text
+                style={{
+                  fontWeight: "bold",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  marginLeft: 16,
+                  fontSize: 16,
+                  color: "#fff"
                 }}
-                onChangeText={text => {
-                    this.setState({ amount: text });
-                }}
-                />
-            </Item>
-            <View style={{ alignItems: "center", padding: 15 }}>
-            <RNSlidingButton
-              style={{
-                width: 240,
-                borderRadius: 10,
-                height: 60,
-                margin: 25,
-                backgroundColor: "#c13b3e"
-              }}
-              height={70}
-              onSlidingSuccess={() => {
-                this._handletransfer();
-              }}
-              successfulSlidePercent={90}
-              slideDirection={SlideDirection.RIGHT}
-            >
-              <View>
-                <Text
-                  style={{
-                    fontWeight: "bold",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    marginLeft: 16,
-                    fontSize: 16,
-                    color: "#fff"
-                  }}
-                >
-                  Slide To Transfer
-                </Text>
-              </View>
-            </RNSlidingButton>
-          </View>
-        </Content>
-        );
-    }
+              >
+                Slide To Transfer
+              </Text>
+            </View>
+          </RNSlidingButton>
+        </View>
+      </Content>
+    );
+  }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(QRAmount);
