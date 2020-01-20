@@ -79,19 +79,35 @@ class App extends Component {
   }
 
   _handletransfer = () => {
-    if (this.state.username === undefined) {
+    if (
+      this.state.username === undefined ||
+      this.state.username === NaN ||
+      this.state.username === ""
+    ) {
       alert("Invalid input");
       return;
     }
-    if (this.state.amount === undefined) {
+    if (
+      this.state.amount === undefined ||
+      this.state.amount === NaN ||
+      this.state.amount === ""
+    ) {
       alert("Invalid input");
       return;
     }
-    if (this.state.beneficiaryAccNumber === undefined) {
+    if (
+      this.state.beneficiaryAccNumber === undefined ||
+      this.state.beneficiaryAccNumber === NaN ||
+      this.state.beneficiaryAccNumber === ""
+    ) {
       alert("Invalid input");
       return;
     }
-    if (this.state.accountNumber === undefined) {
+    if (
+      this.state.accountNumber === undefined ||
+      this.state.accountNumber === NaN ||
+      this.state.accountNumber === ""
+    ) {
       alert("Invalid input");
       return;
     } else {

@@ -81,14 +81,14 @@ class App extends Component {
             >
               <Text style={styles.settingsFont}>Log Out</Text>
             </CardItem>
-            <CardItem
+            {/* <CardItem
               style={styles.cardStyle}
               header
               button
               onPress={() => alert("add this later.")}
             >
               <Text style={styles.settingsFont}>TODO</Text>
-            </CardItem>
+            </CardItem> */}
           </Card>
 
           <Dialog
@@ -124,20 +124,20 @@ class App extends Component {
             <DialogContent style={{ width: screenWidth - 30 }}>
               {/* <View style={{ flexDirection: "row" }}>
                 <View style={{ flex: 1, marginTop: 10 }}> */}
-                  <Text>Color :</Text>
-                {/* </View>
+              <Text>Color :</Text>
+              {/* </View>
                 <View style={{ flex: 1 }}> */}
-                  <Picker
-                    selectedValue={this.state.color}
-                    style={{ height: 50, width: 130 }}
-                    onValueChange={(itemValue, itemIndex) =>
-                      this.setState({ color: itemValue })
-                    }
-                  >
-                    <Picker.Item label="Black" value="black" />
-                    <Picker.Item label="Red" value="red" />
-                  </Picker>
-                {/* </View>
+              <Picker
+                selectedValue={this.state.color}
+                style={{ height: 50, width: 130 }}
+                onValueChange={(itemValue, itemIndex) =>
+                  this.setState({ color: itemValue })
+                }
+              >
+                <Picker.Item label="Black" value="black" />
+                <Picker.Item label="Red" value="red" />
+              </Picker>
+              {/* </View>
               </View> */}
             </DialogContent>
           </Dialog>
