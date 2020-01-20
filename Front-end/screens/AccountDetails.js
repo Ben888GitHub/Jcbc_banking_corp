@@ -100,7 +100,7 @@ class AccountDetails extends React.Component {
 
     return (
       <Container
-        style={{ paddingTop: getStatusBarHeight() * 2, padding: 10 }}
+        style={{ paddingTop: 70, padding: 10 }}
       >
         <Content>
           <View
@@ -238,9 +238,9 @@ class AccountDetails extends React.Component {
               dialogTitle={
                 <DialogTitle
                   title={currentacc.accname}
-                  //   style={styles.qrtitle}
-                  //   hasTitleBar={false}
-                  //   align="center"
+                //   style={styles.qrtitle}
+                //   hasTitleBar={false}
+                //   align="center"
                 />
               }
               footer={
@@ -257,7 +257,7 @@ class AccountDetails extends React.Component {
               <DialogContent>
                 <View style={styles.qrview}>
                   <Text>{currentacc.accnumber}</Text>
-                  <QRCode value={currentacc.accnumber} size={200} />                  
+                  <QRCode value={currentacc.accnumber} size={200} />
                 </View>
               </DialogContent>
             </Dialog>
@@ -312,7 +312,7 @@ class AccountDetails extends React.Component {
                             name={sub_element.icon}
                             size={56}
                             color={"#cac0b6"}
-                            // color={'#b61731'}
+                          // color={'#b61731'}
                           />
                           <Text
                             style={{
@@ -344,7 +344,7 @@ AccountDetails.navigationOptions = {
   //     borderBottomWidth: 0,
   //     elevation: 0,
   // }
-  //   headerTransparent: true
+  headerTransparent: true
 };
 
 const style = StyleSheet.create({
