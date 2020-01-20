@@ -95,7 +95,7 @@ class App extends Component {
       alert("Invalid input");
       return;
     } else {
-      this.props.navigation.navigate("GoogleOtp2", {
+      this.props.navigation.navigate("GoogleOtp", {
         sender_username: this.props.currentUser.accname,
         source_acc_num: this.state.source_acc_num,
         transfer_amount: this.state.amount,

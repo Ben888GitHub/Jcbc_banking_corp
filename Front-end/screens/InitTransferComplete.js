@@ -85,6 +85,7 @@ class InitTransferComplete extends React.Component {
     let destAccNum = this.props.navigation.getParam("dest_acc_num");
 
     this.setState({
+      accountName: username,
       accountNumber: accountNum,
       beneficiaryAccNumber: destAccNum,
       amount: transferAmt
@@ -97,10 +98,10 @@ class InitTransferComplete extends React.Component {
         "https://ixmhlhrubj.execute-api.ap-southeast-1.amazonaws.com/dev/sendinvoice",
         {
           sender_email: this.props.currentUser.email,
-          amount: 24000,
+          amount: this.state.amount,
           sender_accname: this.props.currentUser.accname,
-          sender_accnum: this.props.currentUser.accnumber,
-          receive_accnum: this.state.destAccNum //todo
+          sender_accnum: this.state.accountNumber,
+          receive_accnum: this.state.beneficiaryAccNumber //todo
         }
       )
       .then(res => {

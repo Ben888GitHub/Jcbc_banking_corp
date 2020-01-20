@@ -263,7 +263,7 @@ class googleOtp extends React.Component {
               marginVertical: 50
             }}
           >
-            6 Digits OTP has been send to your email
+            Enter 6 Digits OTP from your Google Authenticator
           </Text>
           {/* */}
           {/* This section is for OTP Input */}

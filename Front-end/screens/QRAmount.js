@@ -59,7 +59,13 @@ class QRAmount extends React.Component {
         console.log(this.state.source_acc);
         console.log(this.state.amount);
         console.log(this.state.dest_acc);
-        alert(`Dest_accnum: ${this.state.dest_acc} Accnum: ${this.state.source_acc} Accname: ${this.props.currentUser.accname} Amount: ${this.state.amount}`)
+        //alert(`Dest_accnum: ${this.state.dest_acc} Accnum: ${this.state.source_acc} Accname: ${this.props.currentUser.accname} Amount: ${this.state.amount}`)
+        navigate("GoogleOtp",{
+            sender_username: this.props.currentUser.accname, // Change to username
+            source_acc_num: this.state.source_acc_num, // Change to accountNum
+            transfer_amount: this.state.amount, // Change to transferAmt
+            dest_acc_num: this.state.dest_acc // Change to destAccNum
+        })
     };
 
     render() {
