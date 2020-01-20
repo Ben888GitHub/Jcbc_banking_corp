@@ -39,13 +39,13 @@ exports.sendinvoice = (event, context, callback) => {
         to: request_data.sender_email,
         from: 'admin@jcbc.com',
         subject: 'Your transfer invoice for ' + request_data.sender_email,
-        html: `<h1>Here is your transfer invoice.</h1><p style = "font-family: Courier New, Courier, monospace">`
+        html: `<h3>Here is your transfer invoice.</h1><p style = "font-family: Courier New, Courier, monospace">`
           + `<br/><br/> Your email ---------------- ${request_data.sender_email}`
           + `<br/><br/> Amount transfered --------- ${request_data.amount}`
           + `<br/><br/> Sender account name ------- ${request_data.sender_accname}`
           + `<br/><br/> Sender account number ----- ${request_data.sender_accnum}`
-          + `<br/><br/> Reciever account number --- ${request_data.receive_accnum}`
-          + `<br/></p><h1> Thank you for using JCBC banking app. </h1>`
+          + `<br/><br/> Receiver account number --- ${request_data.receive_accnum}`
+          + `<br/><br/></p><h3> Thank you for using JCBC banking app. </h1>`
       };
       await sgMail.send(sender_msg);
       callback(null, {
@@ -118,7 +118,6 @@ exports.check_otp = (event, context, callback) => {
       });
     });
 }
-
 
 exports.authenticate = (event, context, callback) => {
   context.callbackWaitsForEmptyEventLoop = false;
@@ -234,23 +233,6 @@ exports.transfer_test = (event, context, callback) => {
     };
 
     let dest_result = await collection.updateOne(dest_requete, dest_updateContent);
-
-    // let client = await MongoClient.connect(CONNECTION_URL, { useNewUrlParser: true });
-    // let database = client.db(DATABASE_NAME);
-    // let collectionTransactions = database.collection("transactions");
-    // let timeStamp = JSON.stringify(Date.now());
-    // let transactionID = JSON.parse(event.body).sender_username + timeStamp;
-    // let transactionRecord = await collectionTransactions.insertOne({
-    //   transactionID: transactionID,
-    //   sourceaccname: JSON.parse(event.body).sender_username,
-    //   sourceaccnum: JSON.parse(event.body).source_acc_num,
-    //   destinationaccname: "Not Defined",
-    //   destinationaccnum: JSON.parse(event.body).dest_acc_num,
-    //   datestamp: timeStamp,
-    //   sourcecurrency: "SGD",
-    //   destinationcurrency: "SGD",
-    //   amount: JSON.parse(event.body).transfer_amount,
-    // })
     callback(null, {
       statusCode: 200,
       body: JSON.stringify({
