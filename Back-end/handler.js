@@ -119,6 +119,18 @@ exports.check_otp = (event, context, callback) => {
     });
 }
 
+exports.getTransactions = (event, context, callback) => {
+  context.callbackWaitsForEmptyEventLoop = false;
+  functions.addTransaction()
+    .then(async collection => {
+      let data = await collection.find().toArray();
+      callback(null, {
+        statusCode: 200,
+        body: JSON.stringify(data)
+      });
+    });
+}
+
 exports.authenticate = (event, context, callback) => {
   context.callbackWaitsForEmptyEventLoop = false;
   functions.connectToDatabase()
