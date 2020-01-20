@@ -105,7 +105,7 @@ class InitTransferComplete extends React.Component {
         }
       )
       .then(res => {
-        alert("Invoice has been sent to the Recipient's email");
+        alert("Receipt has been sent to the Recipient's email");
         console.log(res.data);
         this.setState({
           sendInvoice: res.data

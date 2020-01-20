@@ -68,10 +68,22 @@
         "LogGroupName": "/aws/lambda/cp3405-dev-transfer"
       }
     },
+    "TransferUnderscoretestLogGroup": {
+      "Type": "AWS::Logs::LogGroup",
+      "Properties": {
+        "LogGroupName": "/aws/lambda/cp3405-dev-transfer_test"
+      }
+    },
     "SaveUnderscoretransactionLogGroup": {
       "Type": "AWS::Logs::LogGroup",
       "Properties": {
         "LogGroupName": "/aws/lambda/cp3405-dev-save_transaction"
+      }
+    },
+    "GetTransactionsLogGroup": {
+      "Type": "AWS::Logs::LogGroup",
+      "Properties": {
+        "LogGroupName": "/aws/lambda/cp3405-dev-getTransactions"
       }
     },
     "SendmailLogGroup": {
@@ -226,7 +238,19 @@
                     },
                     {
                       "Fn::GetAtt": [
+                        "TransferUnderscoretestLogGroup",
+                        "Arn"
+                      ]
+                    },
+                    {
+                      "Fn::GetAtt": [
                         "SaveUnderscoretransactionLogGroup",
+                        "Arn"
+                      ]
+                    },
+                    {
+                      "Fn::GetAtt": [
+                        "GetTransactionsLogGroup",
                         "Arn"
                       ]
                     },
@@ -275,7 +299,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/cp3405/dev/1579498626488-2020-01-20T05:37:06.488Z/cp3405.zip"
+          "S3Key": "serverless/cp3405/dev/1579510111799-2020-01-20T08:48:31.799Z/cp3405.zip"
         },
         "FunctionName": "cp3405-dev-authenticate_test",
         "Handler": "s_authenticate_test.handler",
@@ -294,14 +318,14 @@
         "IamRoleLambdaExecution"
       ]
     },
-    "AuthenticateUnderscoretestLambdaVersionYLsxWL0EABtUuR2uhuoMC47Yk2fi79VbtEVyKnAbJog": {
+    "AuthenticateUnderscoretestLambdaVersionziEHLNpYZ0fHiweoEWvo5ifFWyQ0sZJb1iL8AsYwPc": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "AuthenticateUnderscoretestLambdaFunction"
         },
-        "CodeSha256": "gYTRH9SlnvSO5IDAYPpgjj57p/0m2XHAm60EyeZgt3o="
+        "CodeSha256": "4TAhRsRJfAfpVFmxWHTW10KZBRExlVmJWMzvLQ5UN14="
       }
     },
     "TransferLambdaFunction": {
@@ -311,7 +335,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/cp3405/dev/1579498626488-2020-01-20T05:37:06.488Z/cp3405.zip"
+          "S3Key": "serverless/cp3405/dev/1579510111799-2020-01-20T08:48:31.799Z/cp3405.zip"
         },
         "FunctionName": "cp3405-dev-transfer",
         "Handler": "s_transfer.handler",
@@ -330,14 +354,50 @@
         "IamRoleLambdaExecution"
       ]
     },
-    "TransferLambdaVersionJhsIdB0XwLlVuoKkG2mYzGc2PDq8tmyuh5JFlmZ8": {
+    "TransferLambdaVersionIRVWWL0hfgCHfPo7RSYKuV07SJyfsgqAaDEMzCQM": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "TransferLambdaFunction"
         },
-        "CodeSha256": "gYTRH9SlnvSO5IDAYPpgjj57p/0m2XHAm60EyeZgt3o="
+        "CodeSha256": "4TAhRsRJfAfpVFmxWHTW10KZBRExlVmJWMzvLQ5UN14="
+      }
+    },
+    "TransferUnderscoretestLambdaFunction": {
+      "Type": "AWS::Lambda::Function",
+      "Properties": {
+        "Code": {
+          "S3Bucket": {
+            "Ref": "ServerlessDeploymentBucket"
+          },
+          "S3Key": "serverless/cp3405/dev/1579510111799-2020-01-20T08:48:31.799Z/cp3405.zip"
+        },
+        "FunctionName": "cp3405-dev-transfer_test",
+        "Handler": "s_transfer_test.handler",
+        "MemorySize": 1024,
+        "Role": {
+          "Fn::GetAtt": [
+            "IamRoleLambdaExecution",
+            "Arn"
+          ]
+        },
+        "Runtime": "nodejs10.x",
+        "Timeout": 6
+      },
+      "DependsOn": [
+        "TransferUnderscoretestLogGroup",
+        "IamRoleLambdaExecution"
+      ]
+    },
+    "TransferUnderscoretestLambdaVersion3nCECMmsiYnr6jMzolkhKQK5tSFoWwA73Cs1IbOcRU": {
+      "Type": "AWS::Lambda::Version",
+      "DeletionPolicy": "Retain",
+      "Properties": {
+        "FunctionName": {
+          "Ref": "TransferUnderscoretestLambdaFunction"
+        },
+        "CodeSha256": "4TAhRsRJfAfpVFmxWHTW10KZBRExlVmJWMzvLQ5UN14="
       }
     },
     "SaveUnderscoretransactionLambdaFunction": {
@@ -347,7 +407,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/cp3405/dev/1579498626488-2020-01-20T05:37:06.488Z/cp3405.zip"
+          "S3Key": "serverless/cp3405/dev/1579510111799-2020-01-20T08:48:31.799Z/cp3405.zip"
         },
         "FunctionName": "cp3405-dev-save_transaction",
         "Handler": "s_save_transaction.handler",
@@ -366,14 +426,50 @@
         "IamRoleLambdaExecution"
       ]
     },
-    "SaveUnderscoretransactionLambdaVersionLjOqIUlJqWxhej1LRtEkoCZBnVf7QdeG3EjRLJu64": {
+    "SaveUnderscoretransactionLambdaVersionQu09hUrkaUA4RXvByxAvFj2bVjLZqHpaLSucTEC3E": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "SaveUnderscoretransactionLambdaFunction"
         },
-        "CodeSha256": "gYTRH9SlnvSO5IDAYPpgjj57p/0m2XHAm60EyeZgt3o="
+        "CodeSha256": "4TAhRsRJfAfpVFmxWHTW10KZBRExlVmJWMzvLQ5UN14="
+      }
+    },
+    "GetTransactionsLambdaFunction": {
+      "Type": "AWS::Lambda::Function",
+      "Properties": {
+        "Code": {
+          "S3Bucket": {
+            "Ref": "ServerlessDeploymentBucket"
+          },
+          "S3Key": "serverless/cp3405/dev/1579510111799-2020-01-20T08:48:31.799Z/cp3405.zip"
+        },
+        "FunctionName": "cp3405-dev-getTransactions",
+        "Handler": "s_getTransactions.handler",
+        "MemorySize": 1024,
+        "Role": {
+          "Fn::GetAtt": [
+            "IamRoleLambdaExecution",
+            "Arn"
+          ]
+        },
+        "Runtime": "nodejs10.x",
+        "Timeout": 6
+      },
+      "DependsOn": [
+        "GetTransactionsLogGroup",
+        "IamRoleLambdaExecution"
+      ]
+    },
+    "GetTransactionsLambdaVersionuUsk2kI3qW5IA9Lt1YFVLM6rOlhw3tus3xSEv9BfQpY": {
+      "Type": "AWS::Lambda::Version",
+      "DeletionPolicy": "Retain",
+      "Properties": {
+        "FunctionName": {
+          "Ref": "GetTransactionsLambdaFunction"
+        },
+        "CodeSha256": "4TAhRsRJfAfpVFmxWHTW10KZBRExlVmJWMzvLQ5UN14="
       }
     },
     "SendmailLambdaFunction": {
@@ -383,7 +479,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/cp3405/dev/1579498626488-2020-01-20T05:37:06.488Z/cp3405.zip"
+          "S3Key": "serverless/cp3405/dev/1579510111799-2020-01-20T08:48:31.799Z/cp3405.zip"
         },
         "FunctionName": "cp3405-dev-sendmail",
         "Handler": "s_sendmail.handler",
@@ -402,14 +498,14 @@
         "IamRoleLambdaExecution"
       ]
     },
-    "SendmailLambdaVersionvYVirjd28QfVYvshPu96FdYuG92n84kZ9HHgdDs8RI": {
+    "SendmailLambdaVersionCKpZ21LGQXANuE2k6zBCDgcvSdeZ9RhCp1tU6ZbowU": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "SendmailLambdaFunction"
         },
-        "CodeSha256": "gYTRH9SlnvSO5IDAYPpgjj57p/0m2XHAm60EyeZgt3o="
+        "CodeSha256": "4TAhRsRJfAfpVFmxWHTW10KZBRExlVmJWMzvLQ5UN14="
       }
     },
     "SendinvoiceLambdaFunction": {
@@ -419,7 +515,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/cp3405/dev/1579498626488-2020-01-20T05:37:06.488Z/cp3405.zip"
+          "S3Key": "serverless/cp3405/dev/1579510111799-2020-01-20T08:48:31.799Z/cp3405.zip"
         },
         "FunctionName": "cp3405-dev-sendinvoice",
         "Handler": "s_sendinvoice.handler",
@@ -438,14 +534,14 @@
         "IamRoleLambdaExecution"
       ]
     },
-    "SendinvoiceLambdaVersioncdeZg0FB8EoX0n0vKHoPGGtlP3o2MDoqSTYBm8TVV4Q": {
+    "SendinvoiceLambdaVersion38VHCvKaNrv9ee4v794eGfs8x9MK6kl8sku0uwiZE": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "SendinvoiceLambdaFunction"
         },
-        "CodeSha256": "gYTRH9SlnvSO5IDAYPpgjj57p/0m2XHAm60EyeZgt3o="
+        "CodeSha256": "4TAhRsRJfAfpVFmxWHTW10KZBRExlVmJWMzvLQ5UN14="
       }
     },
     "GetUnderscoreotpLambdaFunction": {
@@ -455,7 +551,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/cp3405/dev/1579498626488-2020-01-20T05:37:06.488Z/cp3405.zip"
+          "S3Key": "serverless/cp3405/dev/1579510111799-2020-01-20T08:48:31.799Z/cp3405.zip"
         },
         "FunctionName": "cp3405-dev-get_otp",
         "Handler": "s_get_otp.handler",
@@ -474,14 +570,14 @@
         "IamRoleLambdaExecution"
       ]
     },
-    "GetUnderscoreotpLambdaVersionhc3SNsrgwiewq6cYYIjc27BC9OwbLsrXocTcuSX4": {
+    "GetUnderscoreotpLambdaVersionCozRDtsy7NKxBusPlv9Qnd5EKCRJsipulKqqcICVg": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "GetUnderscoreotpLambdaFunction"
         },
-        "CodeSha256": "gYTRH9SlnvSO5IDAYPpgjj57p/0m2XHAm60EyeZgt3o="
+        "CodeSha256": "4TAhRsRJfAfpVFmxWHTW10KZBRExlVmJWMzvLQ5UN14="
       }
     },
     "CheckUnderscoreotpLambdaFunction": {
@@ -491,7 +587,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/cp3405/dev/1579498626488-2020-01-20T05:37:06.488Z/cp3405.zip"
+          "S3Key": "serverless/cp3405/dev/1579510111799-2020-01-20T08:48:31.799Z/cp3405.zip"
         },
         "FunctionName": "cp3405-dev-check_otp",
         "Handler": "s_check_otp.handler",
@@ -510,14 +606,14 @@
         "IamRoleLambdaExecution"
       ]
     },
-    "CheckUnderscoreotpLambdaVersionS71I4NtYpwbfstkJmeFIGwPBvWGxqpMpRNB2ndQjo": {
+    "CheckUnderscoreotpLambdaVersion84TyT4sO7Flt1h4rmOkoEWctCGbirotq2hFuQovAE": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "CheckUnderscoreotpLambdaFunction"
         },
-        "CodeSha256": "gYTRH9SlnvSO5IDAYPpgjj57p/0m2XHAm60EyeZgt3o="
+        "CodeSha256": "4TAhRsRJfAfpVFmxWHTW10KZBRExlVmJWMzvLQ5UN14="
       }
     },
     "WdUnderscoregroupsLambdaFunction": {
@@ -527,7 +623,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/cp3405/dev/1579498626488-2020-01-20T05:37:06.488Z/cp3405.zip"
+          "S3Key": "serverless/cp3405/dev/1579510111799-2020-01-20T08:48:31.799Z/cp3405.zip"
         },
         "FunctionName": "cp3405-dev-wd_groups",
         "Handler": "s_wd_groups.handler",
@@ -546,14 +642,14 @@
         "IamRoleLambdaExecution"
       ]
     },
-    "WdUnderscoregroupsLambdaVersionJpJWfRsxQ0DaKHRCGtUVa1jrU9daWTTZcWadq0UZHk": {
+    "WdUnderscoregroupsLambdaVersionXowkDdzXNaUUhTE5KHl5F7dAh5pryDgPZ6tUVQegWo": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "WdUnderscoregroupsLambdaFunction"
         },
-        "CodeSha256": "gYTRH9SlnvSO5IDAYPpgjj57p/0m2XHAm60EyeZgt3o="
+        "CodeSha256": "4TAhRsRJfAfpVFmxWHTW10KZBRExlVmJWMzvLQ5UN14="
       }
     },
     "ApiGatewayRestApi": {
@@ -597,6 +693,21 @@
         }
       }
     },
+    "ApiGatewayResourceTransfertest": {
+      "Type": "AWS::ApiGateway::Resource",
+      "Properties": {
+        "ParentId": {
+          "Fn::GetAtt": [
+            "ApiGatewayRestApi",
+            "RootResourceId"
+          ]
+        },
+        "PathPart": "transfer_test",
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        }
+      }
+    },
     "ApiGatewayResourceSavetransaction": {
       "Type": "AWS::ApiGateway::Resource",
       "Properties": {
@@ -607,6 +718,21 @@
           ]
         },
         "PathPart": "save_transaction",
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        }
+      }
+    },
+    "ApiGatewayResourceGettransactions": {
+      "Type": "AWS::ApiGateway::Resource",
+      "Properties": {
+        "ParentId": {
+          "Fn::GetAtt": [
+            "ApiGatewayRestApi",
+            "RootResourceId"
+          ]
+        },
+        "PathPart": "getTransactions",
         "RestApiId": {
           "Ref": "ApiGatewayRestApi"
         }
@@ -766,6 +892,53 @@
         }
       }
     },
+    "ApiGatewayMethodTransfertestOptions": {
+      "Type": "AWS::ApiGateway::Method",
+      "Properties": {
+        "AuthorizationType": "NONE",
+        "HttpMethod": "OPTIONS",
+        "MethodResponses": [
+          {
+            "StatusCode": "200",
+            "ResponseParameters": {
+              "method.response.header.Access-Control-Allow-Origin": true,
+              "method.response.header.Access-Control-Allow-Headers": true,
+              "method.response.header.Access-Control-Allow-Methods": true,
+              "method.response.header.Access-Control-Allow-Credentials": true
+            },
+            "ResponseModels": {}
+          }
+        ],
+        "RequestParameters": {},
+        "Integration": {
+          "Type": "MOCK",
+          "RequestTemplates": {
+            "application/json": "{statusCode:200}"
+          },
+          "ContentHandling": "CONVERT_TO_TEXT",
+          "IntegrationResponses": [
+            {
+              "StatusCode": "200",
+              "ResponseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'",
+                "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'",
+                "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,POST'",
+                "method.response.header.Access-Control-Allow-Credentials": "'false'"
+              },
+              "ResponseTemplates": {
+                "application/json": "#set($origin = $input.params(\"Origin\"))\n#if($origin == \"\") #set($origin = $input.params(\"origin\")) #end\n#if($origin.matches(\".*\")) #set($context.responseOverride.header.Access-Control-Allow-Origin = $origin) #end"
+              }
+            }
+          ]
+        },
+        "ResourceId": {
+          "Ref": "ApiGatewayResourceTransfertest"
+        },
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        }
+      }
+    },
     "ApiGatewayMethodSavetransactionOptions": {
       "Type": "AWS::ApiGateway::Method",
       "Properties": {
@@ -807,6 +980,53 @@
         },
         "ResourceId": {
           "Ref": "ApiGatewayResourceSavetransaction"
+        },
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        }
+      }
+    },
+    "ApiGatewayMethodGettransactionsOptions": {
+      "Type": "AWS::ApiGateway::Method",
+      "Properties": {
+        "AuthorizationType": "NONE",
+        "HttpMethod": "OPTIONS",
+        "MethodResponses": [
+          {
+            "StatusCode": "200",
+            "ResponseParameters": {
+              "method.response.header.Access-Control-Allow-Origin": true,
+              "method.response.header.Access-Control-Allow-Headers": true,
+              "method.response.header.Access-Control-Allow-Methods": true,
+              "method.response.header.Access-Control-Allow-Credentials": true
+            },
+            "ResponseModels": {}
+          }
+        ],
+        "RequestParameters": {},
+        "Integration": {
+          "Type": "MOCK",
+          "RequestTemplates": {
+            "application/json": "{statusCode:200}"
+          },
+          "ContentHandling": "CONVERT_TO_TEXT",
+          "IntegrationResponses": [
+            {
+              "StatusCode": "200",
+              "ResponseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'",
+                "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'",
+                "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET'",
+                "method.response.header.Access-Control-Allow-Credentials": "'false'"
+              },
+              "ResponseTemplates": {
+                "application/json": "#set($origin = $input.params(\"Origin\"))\n#if($origin == \"\") #set($origin = $input.params(\"origin\")) #end\n#if($origin.matches(\".*\")) #set($context.responseOverride.header.Access-Control-Allow-Origin = $origin) #end"
+              }
+            }
+          ]
+        },
+        "ResourceId": {
+          "Ref": "ApiGatewayResourceGettransactions"
         },
         "RestApiId": {
           "Ref": "ApiGatewayRestApi"
@@ -1137,6 +1357,49 @@
         "MethodResponses": []
       }
     },
+    "ApiGatewayMethodTransfertestPost": {
+      "Type": "AWS::ApiGateway::Method",
+      "Properties": {
+        "HttpMethod": "POST",
+        "RequestParameters": {},
+        "ResourceId": {
+          "Ref": "ApiGatewayResourceTransfertest"
+        },
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        },
+        "ApiKeyRequired": false,
+        "AuthorizationType": "NONE",
+        "Integration": {
+          "IntegrationHttpMethod": "POST",
+          "Type": "AWS_PROXY",
+          "Uri": {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition"
+                },
+                ":apigateway:",
+                {
+                  "Ref": "AWS::Region"
+                },
+                ":lambda:path/2015-03-31/functions/",
+                {
+                  "Fn::GetAtt": [
+                    "TransferUnderscoretestLambdaFunction",
+                    "Arn"
+                  ]
+                },
+                "/invocations"
+              ]
+            ]
+          }
+        },
+        "MethodResponses": []
+      }
+    },
     "ApiGatewayMethodSavetransactionPost": {
       "Type": "AWS::ApiGateway::Method",
       "Properties": {
@@ -1169,6 +1432,49 @@
                 {
                   "Fn::GetAtt": [
                     "SaveUnderscoretransactionLambdaFunction",
+                    "Arn"
+                  ]
+                },
+                "/invocations"
+              ]
+            ]
+          }
+        },
+        "MethodResponses": []
+      }
+    },
+    "ApiGatewayMethodGettransactionsGet": {
+      "Type": "AWS::ApiGateway::Method",
+      "Properties": {
+        "HttpMethod": "GET",
+        "RequestParameters": {},
+        "ResourceId": {
+          "Ref": "ApiGatewayResourceGettransactions"
+        },
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        },
+        "ApiKeyRequired": false,
+        "AuthorizationType": "NONE",
+        "Integration": {
+          "IntegrationHttpMethod": "POST",
+          "Type": "AWS_PROXY",
+          "Uri": {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition"
+                },
+                ":apigateway:",
+                {
+                  "Ref": "AWS::Region"
+                },
+                ":lambda:path/2015-03-31/functions/",
+                {
+                  "Fn::GetAtt": [
+                    "GetTransactionsLambdaFunction",
                     "Arn"
                   ]
                 },
@@ -1398,7 +1704,7 @@
         "MethodResponses": []
       }
     },
-    "ApiGatewayDeployment1579498615631": {
+    "ApiGatewayDeployment1579510102238": {
       "Type": "AWS::ApiGateway::Deployment",
       "Properties": {
         "RestApiId": {
@@ -1409,7 +1715,9 @@
       "DependsOn": [
         "ApiGatewayMethodAuthenticateOptions",
         "ApiGatewayMethodTransferOptions",
+        "ApiGatewayMethodTransfertestOptions",
         "ApiGatewayMethodSavetransactionOptions",
+        "ApiGatewayMethodGettransactionsOptions",
         "ApiGatewayMethodSendmailOptions",
         "ApiGatewayMethodSendinvoiceOptions",
         "ApiGatewayMethodGetotpOptions",
@@ -1417,7 +1725,9 @@
         "ApiGatewayMethodOptions",
         "ApiGatewayMethodAuthenticatePost",
         "ApiGatewayMethodTransferPost",
+        "ApiGatewayMethodTransfertestPost",
         "ApiGatewayMethodSavetransactionPost",
+        "ApiGatewayMethodGettransactionsGet",
         "ApiGatewayMethodSendmailPost",
         "ApiGatewayMethodSendinvoicePost",
         "ApiGatewayMethodGetotpPost",
@@ -1499,12 +1809,86 @@
         }
       }
     },
+    "TransferUnderscoretestLambdaPermissionApiGateway": {
+      "Type": "AWS::Lambda::Permission",
+      "Properties": {
+        "FunctionName": {
+          "Fn::GetAtt": [
+            "TransferUnderscoretestLambdaFunction",
+            "Arn"
+          ]
+        },
+        "Action": "lambda:InvokeFunction",
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": {
+          "Fn::Join": [
+            "",
+            [
+              "arn:",
+              {
+                "Ref": "AWS::Partition"
+              },
+              ":execute-api:",
+              {
+                "Ref": "AWS::Region"
+              },
+              ":",
+              {
+                "Ref": "AWS::AccountId"
+              },
+              ":",
+              {
+                "Ref": "ApiGatewayRestApi"
+              },
+              "/*/*"
+            ]
+          ]
+        }
+      }
+    },
     "SaveUnderscoretransactionLambdaPermissionApiGateway": {
       "Type": "AWS::Lambda::Permission",
       "Properties": {
         "FunctionName": {
           "Fn::GetAtt": [
             "SaveUnderscoretransactionLambdaFunction",
+            "Arn"
+          ]
+        },
+        "Action": "lambda:InvokeFunction",
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": {
+          "Fn::Join": [
+            "",
+            [
+              "arn:",
+              {
+                "Ref": "AWS::Partition"
+              },
+              ":execute-api:",
+              {
+                "Ref": "AWS::Region"
+              },
+              ":",
+              {
+                "Ref": "AWS::AccountId"
+              },
+              ":",
+              {
+                "Ref": "ApiGatewayRestApi"
+              },
+              "/*/*"
+            ]
+          ]
+        }
+      }
+    },
+    "GetTransactionsLambdaPermissionApiGateway": {
+      "Type": "AWS::Lambda::Permission",
+      "Properties": {
+        "FunctionName": {
+          "Fn::GetAtt": [
+            "GetTransactionsLambdaFunction",
             "Arn"
           ]
         },
@@ -1815,7 +2199,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/cp3405/dev/1579498626488-2020-01-20T05:37:06.488Z/custom-resources.zip"
+          "S3Key": "serverless/cp3405/dev/1579510111799-2020-01-20T08:48:31.799Z/custom-resources.zip"
         },
         "FunctionName": "cp3405-dev-custom-resource-apigw-cw-role",
         "Handler": "apiGatewayCloudWatchRole/handler.handler",
@@ -1853,6 +2237,16 @@
         }
       }
     },
+    "CloudWatchLogsSubscriptionFilterTransferUnderscoretestLogGroup": {
+      "Type": "AWS::Logs::SubscriptionFilter",
+      "Properties": {
+        "DestinationArn": "arn:aws:logs:ap-southeast-1:802587217904:destination:62WS4srD6yVmVxyPRV#glJh9sC80m5MjnCSzb#cp3405#dev",
+        "FilterPattern": "?\"REPORT RequestId: \" ?\"SERVERLESS_ENTERPRISE\"",
+        "LogGroupName": {
+          "Ref": "TransferUnderscoretestLogGroup"
+        }
+      }
+    },
     "CloudWatchLogsSubscriptionFilterSaveUnderscoretransactionLogGroup": {
       "Type": "AWS::Logs::SubscriptionFilter",
       "Properties": {
@@ -1860,6 +2254,16 @@
         "FilterPattern": "?\"REPORT RequestId: \" ?\"SERVERLESS_ENTERPRISE\"",
         "LogGroupName": {
           "Ref": "SaveUnderscoretransactionLogGroup"
+        }
+      }
+    },
+    "CloudWatchLogsSubscriptionFilterGetTransactionsLogGroup": {
+      "Type": "AWS::Logs::SubscriptionFilter",
+      "Properties": {
+        "DestinationArn": "arn:aws:logs:ap-southeast-1:802587217904:destination:62WS4srD6yVmVxyPRV#glJh9sC80m5MjnCSzb#cp3405#dev",
+        "FilterPattern": "?\"REPORT RequestId: \" ?\"SERVERLESS_ENTERPRISE\"",
+        "LogGroupName": {
+          "Ref": "GetTransactionsLogGroup"
         }
       }
     },
@@ -1941,49 +2345,61 @@
     "AuthenticateUnderscoretestLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "AuthenticateUnderscoretestLambdaVersionYLsxWL0EABtUuR2uhuoMC47Yk2fi79VbtEVyKnAbJog"
+        "Ref": "AuthenticateUnderscoretestLambdaVersionziEHLNpYZ0fHiweoEWvo5ifFWyQ0sZJb1iL8AsYwPc"
       }
     },
     "TransferLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "TransferLambdaVersionJhsIdB0XwLlVuoKkG2mYzGc2PDq8tmyuh5JFlmZ8"
+        "Ref": "TransferLambdaVersionIRVWWL0hfgCHfPo7RSYKuV07SJyfsgqAaDEMzCQM"
+      }
+    },
+    "TransferUnderscoretestLambdaFunctionQualifiedArn": {
+      "Description": "Current Lambda function version",
+      "Value": {
+        "Ref": "TransferUnderscoretestLambdaVersion3nCECMmsiYnr6jMzolkhKQK5tSFoWwA73Cs1IbOcRU"
       }
     },
     "SaveUnderscoretransactionLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "SaveUnderscoretransactionLambdaVersionLjOqIUlJqWxhej1LRtEkoCZBnVf7QdeG3EjRLJu64"
+        "Ref": "SaveUnderscoretransactionLambdaVersionQu09hUrkaUA4RXvByxAvFj2bVjLZqHpaLSucTEC3E"
+      }
+    },
+    "GetTransactionsLambdaFunctionQualifiedArn": {
+      "Description": "Current Lambda function version",
+      "Value": {
+        "Ref": "GetTransactionsLambdaVersionuUsk2kI3qW5IA9Lt1YFVLM6rOlhw3tus3xSEv9BfQpY"
       }
     },
     "SendmailLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "SendmailLambdaVersionvYVirjd28QfVYvshPu96FdYuG92n84kZ9HHgdDs8RI"
+        "Ref": "SendmailLambdaVersionCKpZ21LGQXANuE2k6zBCDgcvSdeZ9RhCp1tU6ZbowU"
       }
     },
     "SendinvoiceLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "SendinvoiceLambdaVersioncdeZg0FB8EoX0n0vKHoPGGtlP3o2MDoqSTYBm8TVV4Q"
+        "Ref": "SendinvoiceLambdaVersion38VHCvKaNrv9ee4v794eGfs8x9MK6kl8sku0uwiZE"
       }
     },
     "GetUnderscoreotpLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "GetUnderscoreotpLambdaVersionhc3SNsrgwiewq6cYYIjc27BC9OwbLsrXocTcuSX4"
+        "Ref": "GetUnderscoreotpLambdaVersionCozRDtsy7NKxBusPlv9Qnd5EKCRJsipulKqqcICVg"
       }
     },
     "CheckUnderscoreotpLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "CheckUnderscoreotpLambdaVersionS71I4NtYpwbfstkJmeFIGwPBvWGxqpMpRNB2ndQjo"
+        "Ref": "CheckUnderscoreotpLambdaVersion84TyT4sO7Flt1h4rmOkoEWctCGbirotq2hFuQovAE"
       }
     },
     "WdUnderscoregroupsLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "WdUnderscoregroupsLambdaVersionJpJWfRsxQ0DaKHRCGtUVa1jrU9daWTTZcWadq0UZHk"
+        "Ref": "WdUnderscoregroupsLambdaVersionXowkDdzXNaUUhTE5KHl5F7dAh5pryDgPZ6tUVQegWo"
       }
     },
     "ServiceEndpoint": {
