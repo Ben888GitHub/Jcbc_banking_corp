@@ -41,7 +41,7 @@ exports.sendinvoice = (event, context, callback) => {
         subject: 'Your transfer invoice for ' + request_data.sender_email,
         html: `<h3>Here is your transfer invoice.</h1><p style = "font-family: Courier New, Courier, monospace">`
           + `<br/><br/> Your email ---------------- ${request_data.sender_email}`
-          + `<br/><br/> Amount transfered --------- ${request_data.amount}`
+          + `<br/><br/> Amount transfered --------- $${request_data.amount}`
           + `<br/><br/> Sender account name ------- ${request_data.sender_accname}`
           + `<br/><br/> Sender account number ----- ${request_data.sender_accnum}`
           + `<br/><br/> Receiver account number --- ${request_data.receive_accnum}`
