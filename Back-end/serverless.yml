@@ -30,6 +30,15 @@ functions:
          path: transfer
          method: post
          cors: true
+  transfer_test:
+    handler: handler.transfer_test
+    events:
+     - http:
+         path: transfer_test
+         method: post
+         cors: true
+         
+         
   save_transaction:
     handler: handler.save_transaction
     events:

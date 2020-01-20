@@ -38,8 +38,8 @@ exports.sendinvoice = (event, context, callback) => {
       const sender_msg = {
         to: request_data.sender_email,
         from: 'admin@jcbc.com',
-        subject: 'Your transfer invoice for ' + request_data.sender_email,
-        html: `<h3>Here is your transfer invoice.</h1><p style = "font-family: Courier New, Courier, monospace">`
+        subject: 'Your transfer receipt for ' + request_data.sender_email,
+        html: `<h3>Here is your transfer receipt.</h1><p style = "font-family: Courier New, Courier, monospace">`
           + `<br/><br/> Your email ---------------- ${request_data.sender_email}`
           + `<br/><br/> Amount transfered --------- $${request_data.amount}`
           + `<br/><br/> Sender account name ------- ${request_data.sender_accname}`
@@ -295,7 +295,8 @@ exports.transfer = (event, context, callback) => {
         callback(null, {
           statusCode: 500,
           body: JSON.stringify({ errorMessage: 'Destination account is not exist.' })
-        }); s
+        });
+        return;
       }
 
       currentAccList = currentAccount.accounts;
@@ -303,16 +304,17 @@ exports.transfer = (event, context, callback) => {
         if (eachAccount.accnumber === destAccNumber) {
           return eachAccount;
         };
-      })
+      });
 
       if (currentBalance.balance < JSON.parse(event.body).transfer_amount) {
         callback(null, {
           statusCode: 500,
           body: JSON.stringify({ errorMessage: 'Source balance is not sufficient.' })
         });
+        return;
       }
       let dest_updateContent = {
-        $set: { "account.$.balance": currentBalance.balance + JSON.parse(event.body).transfer_amount }
+        $set: { "accounts.$.balance": currentBalance.balance + JSON.parse(event.body).transfer_amount }
       };
 
       let dest_result = await collection.updateOne(dest_requete, dest_updateContent);

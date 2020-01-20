@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "JcbcBankingApp",
+    "name": "JCBC Banking App",
     "slug": "JcbcBankingApp",
     "privacy": "public",
     "sdkVersion": "35.0.0",
@@ -25,6 +25,8 @@
     ],
     "ios": {
       "supportsTablet": true
-    }
+    },
+    "description": "JCBC Banking App for JCU Design Thinking 3 Group 6",
+    "githubUrl": "https://github.com/mvpclub/cp3405-sp53-2019-assignment2-full_stack_beast_-_group-6"
   }
 }
