@@ -88,6 +88,7 @@ class History extends React.Component {
 
   render() {
     let { dataGrid } = this.state;
+    dataGrid.reverse();
     const { navigate } = this.props.navigation; //navigation is always a props
     let { currentacc } = this.state;
     let { current_usr } = this.state;
@@ -232,6 +233,7 @@ class History extends React.Component {
             let day = new Date(timestamp);
             let daystring = day.getDate();
             let monthString = this.months[day.getMonth()];
+            let hourString = day.getHours() + ':' + day.getMinutes();
             return (
               <Card
                 transparent
@@ -272,7 +274,7 @@ class History extends React.Component {
                       </Text>{" SGD "}
                       {sub_element.amount}
                     </Text>
-                    <Text>{daystring + ' ' + monthString}</Text>
+                    <Text>{daystring + ' ' + monthString + ' ' + hourString}</Text>
                   </View>
 
                 </CardItem>
