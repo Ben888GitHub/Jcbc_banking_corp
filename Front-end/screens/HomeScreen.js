@@ -221,7 +221,7 @@ class HomeScreen extends React.Component {
         <Footer
           span
           style={{
-            height: 40,
+            height: 60,
             width: "115%",
             marginHorizontal: -30,
             marginVertical: -10
@@ -232,9 +232,9 @@ class HomeScreen extends React.Component {
               <Icon name="contact" style={{ color: "white" }} />
               <Text style={{ color: "white" }}>Account</Text>
             </Button>
-            <Button vertical onPress={() => navigate("History")}>
-              <Icon name="list-box" style={{ color: "white" }} />
-              <Text style={{ color: "white" }}>History</Text>
+            <Button vertical onPress={() => navigate("Home")}>
+              <Icon name="home" style={{ color: "white" }} />
+              <Text style={{ color: "white" }}>Home</Text>
             </Button>
             {/* <Button vertical active> */}
             <Button vertical onPress={() => navigate("Settings")}>

@@ -100,7 +100,7 @@ class AccountDetails extends React.Component {
 
     return (
       <Container
-        style={{ paddingTop: getStatusBarHeight() * 1.2, padding: 10 }}
+        style={{ paddingTop: getStatusBarHeight() * 2, padding: 10 }}
       >
         <Content>
           <View
@@ -256,8 +256,8 @@ class AccountDetails extends React.Component {
             >
               <DialogContent>
                 <View style={styles.qrview}>
-                  <QRCode value={currentacc.accnumber} size={200} />
                   <Text>{currentacc.accnumber}</Text>
+                  <QRCode value={currentacc.accnumber} size={200} />                  
                 </View>
               </DialogContent>
             </Dialog>
