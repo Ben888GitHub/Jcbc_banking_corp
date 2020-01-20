@@ -53,9 +53,22 @@ class History extends React.Component {
       dataGrid: [],
       initData: null,
     };
-  };
+  }
 
-  months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  months = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec"
+  ];
 
   componentWillMount = () => {
     this.setState({ currentacc: this.props.navigation.getParam("element") });
@@ -240,7 +253,7 @@ class History extends React.Component {
             let day = new Date(timestamp);
             let daystring = day.getDate();
             let monthString = this.months[day.getMonth()];
-            let hourString = day.getHours() + ':' + day.getMinutes();
+            let hourString = day.getHours() + ":" + day.getMinutes();
             return (
               <Card
                 transparent
@@ -263,10 +276,14 @@ class History extends React.Component {
                   }}
                 >
                   <Text>Bank Transfer</Text>
-                  <View style={{
-                    flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between',
-                    width: '100%'
-                  }}>
+                  <View
+                    style={{
+                      flexDirection: "row",
+                      alignItems: "center",
+                      justifyContent: "space-between",
+                      width: "100%"
+                    }}
+                  >
                     <Text
                       style={{
                         fontFamily: "MuseoBold",
@@ -278,13 +295,15 @@ class History extends React.Component {
                         {sub_element.sourceaccname == current_usr.accname
                           ? "-"
                           : "+"}
-                      </Text>{" SGD "}
+                      </Text>
+                      {" SGD "}
                       {sub_element.amount}
                     </Text>
-                    <Text>{daystring + ' ' + monthString + ' ' + hourString}</Text>
+                    <Text>
+                      {daystring + " " + monthString + " " + hourString}
+                    </Text>
                     {/* <Text>{sub_element.datestamp}</Text> */}
                   </View>
-
                 </CardItem>
               </Card>
             );
@@ -304,9 +323,9 @@ class History extends React.Component {
               <Icon name="contact" style={{ color: "white" }} />
               <Text style={{ color: "white" }}>Account</Text>
             </Button>
-            <Button vertical>
-              <Icon name="list-box" style={{ color: "white" }} />
-              <Text style={{ color: "white" }}>History</Text>
+            <Button vertical onPress={() => navigate("Home")}>
+              <Icon name="home" style={{ color: "white" }} />
+              <Text style={{ color: "white" }}>Home</Text>
             </Button>
             {/* <Button vertical active> */}
             <Button vertical onPress={() => navigate("Settings")}>
