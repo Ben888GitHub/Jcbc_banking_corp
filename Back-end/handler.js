@@ -186,74 +186,99 @@ exports.save_transaction = (event, context, callback) => {
 };
 
 exports.transfer_test = (event, context, callback) => {
-
   context.callbackWaitsForEmptyEventLoop = false;
-
-  functions.connectToDatabase().then(async collection => {
-    console.log(JSON.parse(event.body));
-    let source_requete = {
-      $and: [
-        { "accname": JSON.parse(event.body).sender_username },
-        { "accounts.accnumber": JSON.parse(event.body).source_acc_num }
-      ]
-    };
-    let sourceAccNumber = JSON.parse(event.body).source_acc_num;
-
-    let currentAccount = await collection.findOne(source_requete);
-
-    let currentAccList = currentAccount.accounts;
-    var currentBalance = currentAccList.find(function (eachAccount) {
-      if (eachAccount.accnumber === sourceAccNumber) {
-        return eachAccount;
+  functions.connectToDatabase()
+    .then(async collection => {
+      let source_requete = {
+        $and: [
+          { "accname": JSON.parse(event.body).sender_username },
+          { "accounts.accnumber": JSON.parse(event.body).source_acc_num }
+        ]
       };
-    });
+      let source_number = JSON.parse(event.body).source_acc_num;
+      let cash_amount = JSON.parse(event.body).transfer_amount;
+      let destination_number = JSON.parse(event.body).dest_acc_num;
+      let currentAccount = await collection.findOne(source_requete);
 
-    let source_updateContent = {
-      $set: { "accounts.$.balance": currentBalance.balance - JSON.parse(event.body).transfer_amount }
-    };
-    let source_result = await collection.updateOne(source_requete, source_updateContent);
-
-
-    // Manipulating with the destination:
-    let dest_requete = { "accounts.accnumber": JSON.parse(event.body).dest_acc_num };
-
-    let destAccNumber = JSON.parse(event.body).dest_acc_num;
-
-    currentAccount = await collection.findOne(dest_requete);
-    if (!currentAccount) {
-      callback(null, {
-        statusCode: 500,
-        body: JSON.stringify({ errorMessage: 'Destination account is not exist.' })
+      let currentAccList = currentAccount.accounts;
+      var currentBalance = currentAccList.find(function (eachAccount) {
+        if (eachAccount.accnumber === source_number) {
+          return eachAccount;
+        };
       });
-    }
 
-    currentAccList = currentAccount.accounts;
-    currentBalance = currentAccList.find(function (eachAccount) {
-      if (eachAccount.accnumber === destAccNumber) {
-        return eachAccount;
+      let source_updateContent = {
+        $set: { "accounts.$.balance": currentBalance.balance - JSON.parse(event.body).transfer_amount }
       };
-    })
 
-    if (currentBalance.balance < JSON.parse(event.body).transfer_amount) {
-      callback(null, {
-        statusCode: 500,
-        body: JSON.stringify({ errorMessage: 'Source balance is not sufficient.' })
-      });
-    }
-    let dest_updateContent = {
-      $set: { "account.$.balance": currentBalance.balance + JSON.parse(event.body).transfer_amount }
-    };
+      let dest_updateContent = {
+        $set: { "accounts.$.balance": currentBalance.balance + JSON.parse(event.body).transfer_amount }
+      };
 
-    let dest_result = await collection.updateOne(dest_requete, dest_updateContent);
-    callback(null, {
-      statusCode: 200,
-      body: JSON.stringify({
-        // transactionRecord: transactionRecord,
-        subtracting: source_result,
-        adding: dest_result
+      if (currentBalance.balance < cash_amount) {
+        callback(null, {
+          statusCode: 500,
+          body: JSON.stringify({ errorMessage: 'Source balance is not sufficient.' })
+        });
+        return;
+      } else {
+        let source_result = await collection.updateOne(source_requete, source_updateContent);
+        let dest_result = await collection.updateOne(dest_requete, dest_updateContent);
+        callback(null, {
+          statusCode: 200,
+          body: JSON.stringify({
+            transactionRecord: transactionRecord,
+            subtracting: source_result,
+            adding: dest_result
+          })
+
+        })
+      }
+      let dest_requete = { "accounts.accnumber": destination_number };
+      currentAccount = await collection.findOne(dest_requete);
+      if (!currentAccount) {
+        callback(null, {
+          statusCode: 500,
+          body: JSON.stringify({ errorMessage: 'Destination account is not exist.' })
+        });
+        return;
+      } else {
+        currentAccList = currentAccount.accounts;
+        currentBalance = currentAccList.find(function (eachAccount) {
+          if (eachAccount.accnumber === destAccNumber) {
+            return eachAccount;
+          };
+        });
+      }
+      let client = await MongoClient.connect(CONNECTION_URL, { useNewUrlParser: true });
+      let database = client.db(DATABASE_NAME);
+      let collectionTransactions = database.collection("transactions");
+      let timeStamp = JSON.stringify(Date.now());
+      let transactionID = JSON.parse(event.body).sender_username + timeStamp;
+      let transactionRecord = await collectionTransactions.insertOne({
+        transactionID: transactionID,
+        sourceaccname: JSON.parse(event.body).sender_username,
+        sourceaccnum: JSON.parse(event.body).source_acc_num,
+        destinationaccname: "Not Defined",
+        destinationaccnum: JSON.parse(event.body).dest_acc_num,
+        datestamp: timeStamp,
+        sourcecurrency: "SGD",
+        destinationcurrency: "SGD",
+        amount: JSON.parse(event.body).transfer_amount,
       })
-    });
-  });
+      callback(null, {
+        statusCode: 200,
+        body: JSON.stringify({
+          transactionRecord: transactionRecord,
+          subtracting: source_result,
+          adding: dest_result
+        })
+      })
+    })
+    .catch(err => {
+      console.log('=> an error occurred: ', err);
+      callback(err);
+    })
 }
 
 
@@ -261,7 +286,6 @@ exports.transfer = (event, context, callback) => {
   context.callbackWaitsForEmptyEventLoop = false;
   functions.connectToDatabase()
     .then(async collection => {
-      console.log(JSON.parse(event.body));
       let source_requete = {
         $and: [
           { "accname": JSON.parse(event.body).sender_username },

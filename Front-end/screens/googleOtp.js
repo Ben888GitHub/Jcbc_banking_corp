@@ -126,6 +126,7 @@ class googleOtp extends React.Component {
         }
       )
       .then(res => {
+        console.log(1)
         console.log(res.statusText);
         console.log(res.data);
         console.log(res.status);
@@ -135,7 +136,7 @@ class googleOtp extends React.Component {
         else if(res.status === 200 || res.status === "200"){
           console.log(res.status)
           console.log("reach")
-          this.props.navigation.push("TransferComplete", {
+          this.props.navigation.navigate("TransferComplete", {
             sender_username: this.props.currentUser.accname, // Change to username
             source_acc_num: this.props.navigation.state.params.element.accnumber, // Change to accountNum
             transfer_amount: amountToTransfer, // Change to transferAmt
