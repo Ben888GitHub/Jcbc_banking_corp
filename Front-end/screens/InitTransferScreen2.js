@@ -362,7 +362,7 @@ class App extends Component {
           >
             Bank:
           </Text>
-          <Card
+          {/* <Card
             style={{
               margin: 20,
               borderRadius: 5,
@@ -396,7 +396,7 @@ class App extends Component {
               <Picker.Item label="Barclays" value="key4" />
               <Picker.Item label="Bank of America" value="key5" />
             </Picker>
-          </Card>
+          </Card> */}
           {/* NOTE INPUT */}
           <Text
             style={{
