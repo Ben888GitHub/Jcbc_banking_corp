@@ -97,7 +97,7 @@ class InitTransferComplete extends React.Component {
         "https://ixmhlhrubj.execute-api.ap-southeast-1.amazonaws.com/dev/sendinvoice",
         {
           sender_email: this.props.currentUser.email,
-          amount: 24000,
+          amount: this.state,
           sender_accname: this.props.currentUser.accname,
           sender_accnum: this.props.currentUser.accnumber,
           receive_accnum: "875346420020"
