@@ -256,8 +256,8 @@ class AccountDetails extends React.Component {
             >
               <DialogContent>
                 <View style={styles.qrview}>
-                  <QRCode value={currentacc.accnumber} size={200} />
                   <Text>{currentacc.accnumber}</Text>
+                  <QRCode value={currentacc.accnumber} size={200} />
                 </View>
               </DialogContent>
             </Dialog>

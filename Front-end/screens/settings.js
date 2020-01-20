@@ -122,11 +122,11 @@ class App extends Component {
             }
           >
             <DialogContent style={{ width: screenWidth - 30 }}>
-              <View style={{ flexDirection: "row" }}>
-                <View style={{ flex: 1, marginTop: 10 }}>
+              {/* <View style={{ flexDirection: "row" }}>
+                <View style={{ flex: 1, marginTop: 10 }}> */}
                   <Text>Color :</Text>
-                </View>
-                <View style={{ flex: 1 }}>
+                {/* </View>
+                <View style={{ flex: 1 }}> */}
                   <Picker
                     selectedValue={this.state.color}
                     style={{ height: 50, width: 130 }}
@@ -137,20 +137,20 @@ class App extends Component {
                     <Picker.Item label="Black" value="black" />
                     <Picker.Item label="Red" value="red" />
                   </Picker>
-                </View>
-              </View>
+                {/* </View>
+              </View> */}
             </DialogContent>
           </Dialog>
         </View>
-        <Footer span style={{ height: 30, width: "100%" }}>
+        <Footer span style={{ height: 60, width: "100%" }}>
           <FooterTab style={{ backgroundColor: "#c13b3e" }}>
             <Button vertical onPress={() => navigate("Home")}>
               <Icon name="contact" style={{ color: "white" }} />
               <Text style={{ color: "white" }}>Account</Text>
             </Button>
-            <Button vertical>
-              <Icon name="list-box" style={{ color: "white" }} />
-              <Text style={{ color: "white" }}>History</Text>
+            <Button vertical onPress={() => navigate("Home")}>
+              <Icon name="home" style={{ color: "white" }} />
+              <Text style={{ color: "white" }}>Home</Text>
             </Button>
             {/* <Button vertical active> */}
             <Button vertical>

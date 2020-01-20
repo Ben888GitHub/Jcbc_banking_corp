@@ -55,6 +55,7 @@ class QRAmount extends React.Component {
     }
 
     _handletransfer = () => {
+        const { navigate } = this.props.navigation;
         console.log(this.props.currentUser.accname);
         console.log(this.state.source_acc);
         console.log(this.state.amount);
