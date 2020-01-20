@@ -26,6 +26,7 @@ import { bindActionCreators } from "redux";
 import { Ionicons } from "@expo/vector-icons";
 
 import defaultTrans from "../trans";
+import Axios from "axios";
 
 const mapStateToProps = state => {
   const { currentUser } = state;
@@ -49,7 +50,8 @@ class History extends React.Component {
       isReady: false,
       current_usr: this.props.currentUser,
       currentacc: null,
-      dataGrid: []
+      dataGrid: [],
+      initData: null,
     };
   };
 
@@ -57,15 +59,18 @@ class History extends React.Component {
 
   componentWillMount = () => {
     this.setState({ currentacc: this.props.navigation.getParam("element") });
-    this.setState({
-      dataGrid: this.filterMyTransactions(this.state.current_usr)
+    Axios.get('https://ixmhlhrubj.execute-api.ap-southeast-1.amazonaws.com/dev/getTransactions').then((res) => {
+      this.setState({ initData: res.data });
+      this.setState({
+        dataGrid: this.filterMyTransactions(this.state.current_usr)
+      });
     });
   };
 
   filterMyTransactions = acc => {
     let toReturn = [];
     console.log(acc.accname);
-    defaultTrans.forEach(element => {
+    this.state.initData.forEach(element => {
       if (
         element.destinationaccname == acc.accname ||
         element.sourceaccname == acc.accname
@@ -89,7 +94,7 @@ class History extends React.Component {
   render() {
     let { dataGrid } = this.state;
     dataGrid.sort(function (a, b) {
-      return parseInt(a.datestamp) > parseInt(b.datestamp);
+      return parseInt(a.datestamp) < parseInt(b.datestamp);
     });
     const { navigate } = this.props.navigation; //navigation is always a props
     let { currentacc } = this.state;
