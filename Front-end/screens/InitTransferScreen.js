@@ -111,6 +111,7 @@ class InitTransferScreen extends Component {
       });
     } else if (value === "Ryan2") {
       console.log(value);
+      console.log(this.props.navigation.state.params.element.accnumber);
       navigate("Transfer3", {
         data: this.props.navigation.state.params.element.accnumber
       });
