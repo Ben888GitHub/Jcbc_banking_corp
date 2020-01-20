@@ -157,7 +157,7 @@ class HomeScreen extends React.Component {
                         >
                           {key === 0
                             ? "Default Account"
-                            : "Foreign Currency Account"}
+                            : "Saving Account"}
                         </Text>
                         <Text
                           style={{

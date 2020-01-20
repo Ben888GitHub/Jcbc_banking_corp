@@ -88,7 +88,9 @@ class History extends React.Component {
 
   render() {
     let { dataGrid } = this.state;
-    dataGrid.reverse();
+    dataGrid.sort(function (a, b) {
+      return parseInt(a.datestamp) > parseInt(b.datestamp);
+    });
     const { navigate } = this.props.navigation; //navigation is always a props
     let { currentacc } = this.state;
     let { current_usr } = this.state;
@@ -101,7 +103,7 @@ class History extends React.Component {
     return (
       <Container
         style={{
-          paddingTop: getStatusBarHeight() * 2,
+          paddingTop: 70,
           padding: 10
         }}
       >
@@ -275,6 +277,7 @@ class History extends React.Component {
                       {sub_element.amount}
                     </Text>
                     <Text>{daystring + ' ' + monthString + ' ' + hourString}</Text>
+                    {/* <Text>{sub_element.datestamp}</Text> */}
                   </View>
 
                 </CardItem>
