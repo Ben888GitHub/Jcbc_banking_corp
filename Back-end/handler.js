@@ -185,99 +185,36 @@ exports.save_transaction = (event, context, callback) => {
   });
 };
 
-exports.transfer_test = (event, context, callback) => {
-
-  context.callbackWaitsForEmptyEventLoop = false;
-
-  functions.connectToDatabase().then(async collection => {
-    console.log(JSON.parse(event.body));
-    let source_requete = {
-      $and: [
-        { "accname": JSON.parse(event.body).sender_username },
-        { "accounts.accnumber": JSON.parse(event.body).source_acc_num }
-      ]
-    };
-    let sourceAccNumber = JSON.parse(event.body).source_acc_num;
-
-    let currentAccount = await collection.findOne(source_requete);
-
-    let currentAccList = currentAccount.accounts;
-    var currentBalance = currentAccList.find(function (eachAccount) {
-      if (eachAccount.accnumber === sourceAccNumber) {
-        return eachAccount;
-      };
-    });
-
-    let source_updateContent = {
-      $set: { "accounts.$.balance": currentBalance.balance - JSON.parse(event.body).transfer_amount }
-    };
-    let source_result = await collection.updateOne(source_requete, source_updateContent);
-
-
-    // Manipulating with the destination:
-    let dest_requete = { "accounts.accnumber": JSON.parse(event.body).dest_acc_num };
-
-    let destAccNumber = JSON.parse(event.body).dest_acc_num;
-
-    currentAccount = await collection.findOne(dest_requete);
-    if (!currentAccount) {
-      callback(null, {
-        statusCode: 500,
-        body: JSON.stringify({ errorMessage: 'Destination account is not exist.' })
-      });
-    }
-
-    currentAccList = currentAccount.accounts;
-    currentBalance = currentAccList.find(function (eachAccount) {
-      if (eachAccount.accnumber === destAccNumber) {
-        return eachAccount;
-      };
-    })
-
-    if (currentBalance.balance < JSON.parse(event.body).transfer_amount) {
-      callback(null, {
-        statusCode: 500,
-        body: JSON.stringify({ errorMessage: 'Source balance is not sufficient.' })
-      });
-    }
-    let dest_updateContent = {
-      $set: { "account.$.balance": currentBalance.balance + JSON.parse(event.body).transfer_amount }
-    };
-
-    let dest_result = await collection.updateOne(dest_requete, dest_updateContent);
-    callback(null, {
-      statusCode: 200,
-      body: JSON.stringify({
-        // transactionRecord: transactionRecord,
-        subtracting: source_result,
-        adding: dest_result
-      })
-    });
-  });
-}
-
-
 exports.transfer = (event, context, callback) => {
   context.callbackWaitsForEmptyEventLoop = false;
   functions.connectToDatabase()
     .then(async collection => {
       console.log(JSON.parse(event.body));
+
+      // Manipulation with the source:
       let source_requete = {
         $and: [
           { "accname": JSON.parse(event.body).sender_username },
           { "accounts.accnumber": JSON.parse(event.body).source_acc_num }
         ]
       };
-      let sourceAccNumber = JSON.parse(event.body).source_acc_num;
 
       let currentAccount = await collection.findOne(source_requete);
 
       let currentAccList = currentAccount.accounts;
       var currentBalance = currentAccList.find(function (eachAccount) {
-        if (eachAccount.accnumber === sourceAccNumber) {
+        if (eachAccount.accnumber === JSON.parse(event.body).source_acc_num) {
           return eachAccount;
         };
       });
+
+      if (currentBalance.balance < JSON.parse(event.body).transfer_amount) {
+        console.log('Source balance is not sufficient.');
+        return callback(null, {
+          statusCode: 500,
+          body: JSON.stringify({ errorMessage: 'Source balance is not sufficient.' })
+        });
+      };
 
       let source_updateContent = {
         $set: { "accounts.$.balance": currentBalance.balance - JSON.parse(event.body).transfer_amount }
@@ -292,11 +229,10 @@ exports.transfer = (event, context, callback) => {
 
       currentAccount = await collection.findOne(dest_requete);
       if (!currentAccount) {
-        callback(null, {
+        return callback(null, {
           statusCode: 500,
           body: JSON.stringify({ errorMessage: 'Destination account is not exist.' })
         });
-        return;
       }
 
       currentAccList = currentAccount.accounts;
@@ -306,13 +242,6 @@ exports.transfer = (event, context, callback) => {
         };
       });
 
-      if (currentBalance.balance < JSON.parse(event.body).transfer_amount) {
-        callback(null, {
-          statusCode: 500,
-          body: JSON.stringify({ errorMessage: 'Source balance is not sufficient.' })
-        });
-        return;
-      }
       let dest_updateContent = {
         $set: { "accounts.$.balance": currentBalance.balance + JSON.parse(event.body).transfer_amount }
       };

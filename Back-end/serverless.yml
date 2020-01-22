@@ -1,10 +1,10 @@
-# service: cp3405
-# org: hungnguy
-# app: cp3405
-
 service: cp3405
-org: zwenyantoe
-app: myapp
+org: hungnguy
+app: cp3405
+
+# service: cp3405
+# org: zwenyantoe
+# app: myapp
 
 provider:
   name: aws
