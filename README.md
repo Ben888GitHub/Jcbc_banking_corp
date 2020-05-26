@@ -1,6 +1,6 @@
 # JCBC Banking App!
 
-This application was made by group 6 of Design Thinking 3 in SP53 2019! 
+This application was made by group 6 of Design Thinking 3 in SP53 2019!
 
 This is a full stack banking app. The front-end is written in React Native, and the back-end in NodeJS with Serverless. The database we're using is MongoDB.
 
@@ -26,11 +26,11 @@ Ensure everything is working fine by running these three commands:
 
 ## Running on your local machine
 
-To run the project locally on your machine: 
+To run the project locally on your machine:
 
 cd` to the directory you want your project to be in.
 
-Type in `git clone https://github.com/mvpclub/cp3405-sp53-2019-assignment2-full_stack_beast_-_group-6.git` 
+Type in `git clone https://github.com/mvpclub/cp3405-sp53-2019-assignment2-full_stack_beast_-_group-6.git`
 
 After you've cloned the repository, `cd` into the frontend directory by typing `cd Front-end`
 
@@ -40,7 +40,7 @@ After you've cloned the repository, `cd` into the frontend directory by typing `
 
 ---
 
- ## Notes
+## Notes
 
 The current back-end AWS credentials belong to some of the project contributors, so you will not be able to deploy some of the serverless functions as the AWS credentials currently being used are tied to ours. You can copy the code to your own application and deploy them if you are interested.
 
@@ -48,7 +48,7 @@ The current back-end AWS credentials belong to some of the project contributors,
 
 ## Contributors
 
-### Front-end
+### Front-end (React Native)
 
 Benedict Ryan
 
@@ -56,12 +56,12 @@ Winson Tjuatja
 
 Kyaw Phyo Aung
 
-### Back-end
+### Back-end (Node Js Express)
 
 Zwe Nyan Toe
 
 Van Hung Nguyen
 
-### Database
+### Database (Mongo DB)
 
 Kyle Ang
