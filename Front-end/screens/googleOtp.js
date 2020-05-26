@@ -70,22 +70,6 @@ class googleOtp extends React.Component {
     };
   }
 
-  // componentDidMount() {
-  //   axios
-  //     .post(
-  //       "https://ixmhlhrubj.execute-api.ap-southeast-1.amazonaws.com/dev/check_otp",
-  //       {
-  //         secret: this.props.currentUser.secret,
-  //         token: this.state.token
-  //       }
-  //     )
-  //     .then(res => {
-  //       this.setState({
-  //         success: res.data
-  //       });
-  //     })
-  //     .catch();
-  // }
   componentWillMount() {
     let username = this.props.navigation.getParam("sender_username");
     let accountNum = this.props.navigation.getParam("source_acc_num");
@@ -127,16 +111,15 @@ class googleOtp extends React.Component {
         }
       )
       .then(res => {
-        console.log(1)
+        console.log(1);
         console.log(res.statusText);
         console.log(res.data);
         console.log(res.status);
-        if(res.status === 500 || res.status === "500"){
-          alert("Invalid Details")
-        }
-        else if(res.status === 200 || res.status === "200"){
-          console.log(res.status)
-          console.log("reach")
+        if (res.status === 500 || res.status === "500") {
+          alert("Invalid Details");
+        } else if (res.status === 200 || res.status === "200") {
+          console.log(res.status);
+          console.log("reach");
           navigate("TransferComplete", {
             sender_username: this.props.currentUser.accname, // Change to username
             source_acc_num: this.state.source_acc_num, // Change to accountNum
@@ -144,7 +127,6 @@ class googleOtp extends React.Component {
             dest_acc_num: this.state.dest_acc_num // Change to destAccNum
           });
         }
-        
       });
   };
 
@@ -167,23 +149,10 @@ class googleOtp extends React.Component {
             "Invalid OTP, Please re-enter the OTP from your Google Authenticator"
           );
         } else {
-          alert("Successful")
+          alert("Successful");
           console.log(res.data);
           this._getTransfer();
-          
-          /*this.props.navigation.navigate("TransferComplete", {
-            sender_username: this.props.currentUser.accname, // Change to username
-            source_acc_num: this.state.source_acc_num, // Change to accountNum
-            transfer_amount: this.state.amount, // Change to transferAmt
-            dest_acc_num: this.state.dest_acc_num // Change to destAccNum
-          });*/
         }
-        // alert("Please re-enter the OTP from your Google Authenticator");
-        // this.setState({
-        //   data: res.data,
-        //   show: true
-        // });
-        // this.state.showCountdown;
       })
       .catch();
   };

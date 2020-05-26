@@ -43,7 +43,8 @@ class App extends Component {
       bodyText: "JCBC Saving Account",
       underBodyText: "899-678898-009",
       singaporeDollars: 700000,
-      AccountNumberInputValue: " "
+      AccountNumberInputValue: " ",
+      sum: 0
       // username: "",
       // accountNumber: null,
       // amount: null,
@@ -69,6 +70,17 @@ class App extends Component {
       navigate("Transfer3");
     }
   }*/
+
+  componentDidMount() {
+    let sum = 0;
+    this.props.currentUser.accounts.forEach(each => {
+      // this.state.sum += each.balance;
+      sum += each.balance;
+    });
+    this.setState({
+      sum: sum.toLocaleString(navigator.language, { minimumFractionDigits: 2 })
+    });
+  }
 
   componentWillMount() {
     let currentAccount = this.props.navigation.getParam("source");
@@ -162,6 +174,17 @@ class App extends Component {
     //   });
   };
 
+  // toReturnTheBalance = () => {
+  //   let sum = 0;
+  //   this.props.currentUser.accounts.forEach(each => {
+  //     // this.state.sum += each.balance;
+  //     sum += each.balance;
+  //   });
+  //   this.setState({
+  //     sum: sum
+  //   });
+  // };
+
   emailOtpApi = () => {};
   render() {
     const screenWidth = Math.round(Dimensions.get("window").width);
@@ -233,7 +256,8 @@ class App extends Component {
           <View style={{ margin: 13 }}>
             <Text style={{ fontSize: 16 }}>Balance Total:</Text>
             <Text style={styles1.container}>
-              S${this.state.singaporeDollars}
+              {/* S${this.state.singaporeDollars} */}
+              S$ {this.state.sum}
             </Text>
           </View>
 
@@ -352,7 +376,7 @@ class App extends Component {
           </Item>
           {/* */}
           {/* BANK COMPANY PICKER DROPDOWN */}
-          <Text
+          {/* <Text
             style={{
               fontWeight: "bold",
               marginTop: 20,
@@ -361,7 +385,7 @@ class App extends Component {
             }}
           >
             Bank:
-          </Text>
+          </Text> */}
           {/* <Card
             style={{
               margin: 20,

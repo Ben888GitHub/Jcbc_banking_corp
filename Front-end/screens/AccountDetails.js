@@ -99,9 +99,7 @@ class AccountDetails extends React.Component {
     }
 
     return (
-      <Container
-        style={{ paddingTop: 70, padding: 10 }}
-      >
+      <Container style={{ paddingTop: 70, padding: 10 }}>
         <Content>
           <View
             style={{
@@ -210,7 +208,10 @@ class AccountDetails extends React.Component {
                   fontSize: 25
                 }}
               >
-                {currentacc.balance}
+                S${" "}
+                {currentacc.balance.toLocaleString(navigator.language, {
+                  minimumFractionDigits: 2
+                })}
               </Text>
             </View>
 
@@ -238,9 +239,9 @@ class AccountDetails extends React.Component {
               dialogTitle={
                 <DialogTitle
                   title={currentacc.accname}
-                //   style={styles.qrtitle}
-                //   hasTitleBar={false}
-                //   align="center"
+                  //   style={styles.qrtitle}
+                  //   hasTitleBar={false}
+                  //   align="center"
                 />
               }
               footer={
@@ -312,7 +313,7 @@ class AccountDetails extends React.Component {
                             name={sub_element.icon}
                             size={56}
                             color={"#cac0b6"}
-                          // color={'#b61731'}
+                            // color={'#b61731'}
                           />
                           <Text
                             style={{
